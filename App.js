@@ -216,7 +216,7 @@ const WebStack = createStackNavigator({
 });
 
 WebStack.navigationOptions = {
-  tabBarLabel: 'Galleria',
+  tabBarLabel: '(fake) Galleria',
 };
 
 const SettingsStack = createStackNavigator({
