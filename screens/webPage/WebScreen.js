@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, Text, Image } from 'react-native';
 
 import MakeItRain from 'react-native-make-it-rain';

@@ -5,17 +5,15 @@ import { createStackNavigator, createBottomTabNavigator, createAppContainer, cre
 
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-import { Card, Chip} from 'react-native-paper'
-
 import Icons from 'react-native-vector-icons/MaterialIcons'
 
+import LoginScreen from './screens/loginPage/loginScreen';
 import HomeScreen from './screens/homePage/HomeScreen';
 import AssenzeScreen from './screens/assenzePage/AssenzeScreen';
 import WebScreen from './screens/webPage/WebScreen';
+import SettingsScreen from './screens/settingsPage/settingsPage';
 
 export default class App extends React.Component {
-  state = {
-  };
 
   render() {
     return (
@@ -51,147 +49,147 @@ class AuthLoadingScreen extends React.Component {
 
 // **********************************LOGIN***************************************************************
 
-class LoginScreen extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      usr: '',
-      psw: '',
-      data: [],
-    }
-  }
+// class LoginScreen extends React.Component {
+//   constructor(props) {
+//     super(props)
+//     this.state = {
+//       usr: '',
+//       psw: '',
+//       data: [],
+//     }
+//   }
 
-  static navigationOptions = {
-    header: null
-  }
+//   static navigationOptions = {
+//     header: null
+//   }
 
-  buttonCLickListener = async () => {
-    const { usr } = this.state;
-    const { psw } = this.state;
-    if (usr == '' || psw == '') { Alert.alert('Compila entrambi i campi!') }
-    else {
-      try {
-        let formData = new FormData();
-        formData.append('username', usr.toLocaleLowerCase())
-        formData.append('password', psw)
-        const res = await fetch(`http://liloautogestito.ch/API/check_login_liceo.py`, {
-          method: 'POST',
-          body: formData
-        }
-        );
-        const data = await res.json();
-        if (data['login']) {
-          await AsyncStorage.setItem('res', data['ses'])
-            .then(() => this.props.navigation.navigate('Main'))
-        }
-        else {
-          Alert.alert('username o password errati, riprovare')
-        }
-      } catch (error) {
-        Alert.alert(error.toString())
-      }
-    }
-  }
+//   buttonCLickListener = async () => {
+//     const { usr } = this.state;
+//     const { psw } = this.state;
+//     if (usr == '' || psw == '') { Alert.alert('Compila entrambi i campi!') }
+//     else {
+//       try {
+//         let formData = new FormData();
+//         formData.append('username', usr.toLocaleLowerCase())
+//         formData.append('password', psw)
+//         const res = await fetch(`http://liloautogestito.ch/API/check_login_liceo.py`, {
+//           method: 'POST',
+//           body: formData
+//         }
+//         );
+//         const data = await res.json();
+//         if (data['login']) {
+//           await AsyncStorage.setItem('res', data['ses'])
+//             .then(() => this.props.navigation.navigate('Main'))
+//         }
+//         else {
+//           Alert.alert('username o password errati, riprovare')
+//         }
+//       } catch (error) {
+//         Alert.alert(error.toString())
+//       }
+//     }
+//   }
 
-  render() {
-    return (
-      <KeyboardAvoidingView behavior='padding' style={styles.containerLogin}>
-        <View style={styles.logoContainer}>
-          <Image
-            style={styles.Title}
-            source={require('./assets/images/Logo.png')}
-          />
-          <Image
-            style={styles.logo}
-            source={require('./assets/images/Scuola.jpeg')}
-          />
-          <View style={styles.containerFrom}>
-            <TextInput
-              placeholder="username"
-              autoCapitalize="none"
-              style={styles.input}
-              onChangeText={usr => this.setState({ usr })}
-            />
-            <TextInput
-              secureTextEntry
-              placeholder="password"
-              autoCapitalize="none"
-              style={styles.input}
-              onChangeText={psw => this.setState({ psw })}
-            />
-            <TouchableOpacity
-              onPress={this.buttonCLickListener}
-              style={styles.buttonLogin}
-            >
-              <Text style={styles.buttonText}>
-                Login
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={styles.fromContainer}>
-        </View>
-      </KeyboardAvoidingView>
-    );
-  }
-}
+//   render() {
+//     return (
+//       <KeyboardAvoidingView behavior='padding' style={styles.containerLogin}>
+//         <View style={styles.logoContainer}>
+//           <Image
+//             style={styles.Title}
+//             source={require('./assets/images/Logo.png')}
+//           />
+//           <Image
+//             style={styles.logo}
+//             source={require('./assets/images/Scuola.jpeg')}
+//           />
+//           <View style={styles.containerFrom}>
+//             <TextInput
+//               placeholder="username"
+//               autoCapitalize="none"
+//               style={styles.input}
+//               onChangeText={usr => this.setState({ usr })}
+//             />
+//             <TextInput
+//               secureTextEntry
+//               placeholder="password"
+//               autoCapitalize="none"
+//               style={styles.input}
+//               onChangeText={psw => this.setState({ psw })}
+//             />
+//             <TouchableOpacity
+//               onPress={this.buttonCLickListener}
+//               style={styles.buttonLogin}
+//             >
+//               <Text style={styles.buttonText}>
+//                 Login
+//               </Text>
+//             </TouchableOpacity>
+//           </View>
+//         </View>
+//         <View style={styles.fromContainer}>
+//         </View>
+//       </KeyboardAvoidingView>
+//     );
+//   }
+// }
 
 // **********************************SETTINGS***************************************************************
 
-class SettingsScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Impostazioni',
-    headerStyle: {
-      backgroundColor: '#5ea6e5',
-      paddingBottom: 10
-    },
-    headerTitleStyle: { fontSize: 22 },
-    headerTintColor: '#fff'
-  }
+// class SettingsScreen extends React.Component {
+//   static navigationOptions = {
+//     title: 'Impostazioni',
+//     headerStyle: {
+//       backgroundColor: '#5ea6e5',
+//       paddingBottom: 10
+//     },
+//     headerTitleStyle: { fontSize: 22 },
+//     headerTintColor: '#fff'
+//   }
 
-  logout = async () => {
-    await AsyncStorage.clear()
-      .then(() => this.props.navigation.navigate('Login'))
-  }
+//   logout = async () => {
+//     await AsyncStorage.clear()
+//       .then(() => this.props.navigation.navigate('Login'))
+//   }
 
-  render() {
-    return (
-      <View style={styles.containerSettings}>
-      <Image
-      style={styles.image} 
-      source={{uri:  'http://liloautogestito.ch/API/pic/impostazioni.png' + "#" + `${Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)}`}} 
-      />
-        <Chip icon="error" onPress={() => Linking.openURL('mailto:root@liloautogestito.ch')} >root@liloautogestito.ch</Chip>
-        <View style={styles.bottoniContainer}>
-          <TouchableOpacity
-            onPress={() => Linking.openURL('http://liloautogestito.ch/API/files/termini_e_condizioni.html')}
-            style={styles.buttonTermini}
-          >
-            <Text style={styles.buttonText}>
-              Termini e Condizioni
-          </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => Alert.alert('Coming soon (Liam è lento)')}
-            style={styles.buttonBirra}
-          >
-            <Text style={styles.buttonText}>
-              Offrici una birra
-      </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={this.logout}
-            style={styles.buttonLogout}
-          >
-            <Text style={styles.buttonText}>
-              Logout
-      </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    )
-  }
-}
+//   render() {
+//     return (
+//       <View style={styles.containerSettings}>
+//         <Image
+//           style={styles.image}
+//           source={{ uri: 'http://liloautogestito.ch/API/pic/impostazioni.png' + "#" + `${Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)}` }}
+//         />
+//         <Chip icon="error" onPress={() => Linking.openURL('mailto:root@liloautogestito.ch')} >root@liloautogestito.ch</Chip>
+//         <View style={styles.bottoniContainer}>
+//           <TouchableOpacity
+//             onPress={() => Linking.openURL('http://liloautogestito.ch/API/files/termini_e_condizioni.html')}
+//             style={styles.buttonTermini}
+//           >
+//             <Text style={styles.buttonText}>
+//               Termini e Condizioni
+//           </Text>
+//           </TouchableOpacity>
+//           <TouchableOpacity
+//             onPress={() => Alert.alert('Coming soon (Liam è lento)')}
+//             style={styles.buttonBirra}
+//           >
+//             <Text style={styles.buttonText}>
+//               Offrici una birra
+//       </Text>
+//           </TouchableOpacity>
+//           <TouchableOpacity
+//             onPress={this.logout}
+//             style={styles.buttonLogout}
+//           >
+//             <Text style={styles.buttonText}>
+//               Logout
+//       </Text>
+//           </TouchableOpacity>
+//         </View>
+//       </View>
+//     )
+//   }
+// }
 
 //***********************************************************NAVIGAZIONE*************************************************************************************
 
@@ -270,7 +268,7 @@ const Screen = createAppContainer(createSwitchNavigator({
   Main: TabNav,
 },
   {
-    initialRouteName: 'Auth'
+    initialRouteName: 'Login'
   }));
 
 const styles = StyleSheet.create({
@@ -325,7 +323,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF'
   },
   // **********************************SETTINGS***************************************************************
-  image:{
+  image: {
     marginTop: hp('2%'),
     marginBottom: hp('1%'),
     width: wp('80%'),
