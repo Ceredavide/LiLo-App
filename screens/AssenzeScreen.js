@@ -1,17 +1,17 @@
-import React from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, SectionList } from 'react-native';
-import AssenzeList from './AssenzeList'
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import AssenzeList from "../components/assenze/AssenzeList";
 
 export default class AssenzeScreen extends React.Component {
   static navigationOptions = {
-    title: 'Assenze',
+    title: "Assenze",
     headerStyle: {
-      backgroundColor: '#5ea6e5',
+      backgroundColor: "#5ea6e5",
       paddingBottom: 10
     },
     headerTitleStyle: { fontSize: 25 },
-    headerTintColor: '#fff'
-  }
+    headerTintColor: "#fff"
+  };
   render() {
     return (
       <View style={styles.container}>
@@ -24,8 +24,7 @@ export default class AssenzeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
-    backgroundColor: '#FFF',
+    flexDirection: "column",
+    backgroundColor: "#FFF"
   }
 });
-
