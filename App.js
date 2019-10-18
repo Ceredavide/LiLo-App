@@ -41,7 +41,7 @@ const Screen = createAppContainer(
       Main: TabNav
     },
     {
-      initialRouteName: "Auth"
+      initialRouteName: "Login"
     }
   )
 );
