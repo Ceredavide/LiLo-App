@@ -5,7 +5,7 @@ import { createAppContainer, createSwitchNavigator } from "react-navigation";
 
 import TabNav from "./navigation/TabNav";
 
-import LoginScreen from "./screens/loginPage/loginScreen";
+import LoginScreen from "./screens/LoginScreen";
 
 export default class App extends React.Component {
   render() {

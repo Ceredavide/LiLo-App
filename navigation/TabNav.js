@@ -2,7 +2,7 @@ import React from "react";
 
 import { createBottomTabNavigator } from "react-navigation";
 
-import Icon from "react-native-vector-icons/MaterialIcons";
+import { MaterialIcons } from '@expo/vector-icons';
 
 import HomeStack from "../navigation/stacks/HomeStack";
 import AssenzeStack from "../navigation/stacks/AssenzeStack";
@@ -25,12 +25,12 @@ const TabNav = createBottomTabNavigator(
           iconName = "home";
         } else if (routeName === "Assenze") {
           iconName = "people";
-        } else if (routeName === "Web") {
-          iconName = "collections";
+        } else if (routeName === "Autogestite") {
+          iconName = "casino";
         } else if (routeName === "Settings") {
           iconName = "settings";
         }
-        return <Icon name={iconName} size={25} color={tintColor} />;
+        return <MaterialIcons name={iconName} size={25} color={tintColor} />;
       }
     }),
     tabBarOptions: {

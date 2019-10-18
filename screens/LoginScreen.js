@@ -8,7 +8,7 @@ import {
   TextInput
 } from "react-native";
 
-import LoginButton from "./loginButton";
+import LoginButton from "../components/login/LoginButton";
 
 const LoginScreen = ({ navigation }) => {
   const [user, setUser] = useState("");
@@ -19,11 +19,11 @@ const LoginScreen = ({ navigation }) => {
       <View style={styles.logoContainer}>
         <Image
           style={styles.Title}
-          source={require("../../assets/images/Logo.png")}
+          source={require("../assets/images/Logo.png")}
         />
         <Image
           style={styles.logo}
-          source={require("../../assets/images/Scuola.jpeg")}
+          source={require("../assets/images/Scuola.jpeg")}
         />
         <View style={styles.containerFrom}>
           <TextInput
