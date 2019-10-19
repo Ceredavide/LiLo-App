@@ -3,7 +3,7 @@ import { createStackNavigator } from "react-navigation";
 import AutogestiteScreen from "../../screens/AutogestiteScreen";
 
 const AutogestiteStack = createStackNavigator({
-    Home: AutogestiteScreen
+    Autogestite: AutogestiteScreen
   });
   
   AutogestiteStack.navigationOptions = {

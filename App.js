@@ -4,12 +4,21 @@ import { AsyncStorage, ImageBackground } from "react-native";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 
 import TabNav from "./navigation/TabNav";
-
 import LoginScreen from "./screens/LoginScreen";
+
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import rootReducer from "./reducers/rootReducer";
+
+const store = createStore(rootReducer);
 
 export default class App extends React.Component {
   render() {
-    return <Screen />;
+    return (
+      <Provider store={store}>
+        <Screen />
+      </Provider>
+    );
   }
 }
 
@@ -41,7 +50,7 @@ const Screen = createAppContainer(
       Main: TabNav
     },
     {
-      initialRouteName: "Login"
+      initialRouteName: "Auth"
     }
   )
 );

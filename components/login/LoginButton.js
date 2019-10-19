@@ -1,17 +1,21 @@
-import React, { useState } from "react";
-
+import React from "react";
 import {
   StyleSheet,
   TouchableOpacity,
   Text,
-  ActivityIndicator,
+  ActivityIndicator
 } from "react-native";
+
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from "react-native-responsive-screen";
 
 const LoginButton = ({ handleSubmit, loading }) => {
   return (
     <TouchableOpacity style={styles.buttonLogin} onPress={handleSubmit}>
       {loading ? (
-        <ActivityIndicator />
+        <ActivityIndicator color="white"/>
       ) : (
         <Text style={styles.buttonText}>Login</Text>
       )}
@@ -21,10 +25,12 @@ const LoginButton = ({ handleSubmit, loading }) => {
 
 const styles = StyleSheet.create({
   buttonLogin: {
-    width: 320,
-    marginTop: 20,
-    paddingVertical: 15,
-    backgroundColor: "#2980b9"
+    marginTop: hp("4%"),
+    height: hp("6%"),
+    width: wp("40%"),
+    borderRadius: 17,
+    backgroundColor: "#009fff",
+    justifyContent: "center"
   },
   buttonText: {
     textAlign: "center",

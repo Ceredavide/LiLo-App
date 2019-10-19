@@ -12,17 +12,15 @@ import LoginCard from "../components/login/LoginCard";
 const LoginScreen = ({ navigation }) => {
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.containerLogin}>
-      <View style={styles.logoContainer}>
-        <Image
-          style={styles.imgLogo}
-          source={require("../assets/images/Logo.png")}
-        />
-        <Image
-          style={styles.imgScuola}
-          source={require("../assets/images/Scuola.jpeg")}
-        />
-        <LoginCard navigation={navigation}/>
-      </View>
+      {/* <Image
+        style={styles.imgLogo}
+        source={require("../assets/images/Logo.png")}
+      /> */}
+      <Image
+        style={styles.imgScuola}
+        source={require("../assets/images/Scuola.jpeg")}
+      />
+      <LoginCard navigation={navigation} />
     </KeyboardAvoidingView>
   );
 };
@@ -30,7 +28,9 @@ const LoginScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   containerLogin: {
     flex: 1,
-    backgroundColor: "#3498db"
+    backgroundColor: "#009fff",
+    alignItems: "center",
+    justifyContent: "center"
   },
   imgLogo: {
     height: 130,
@@ -41,11 +41,6 @@ const styles = StyleSheet.create({
     height: hp("13%"),
     width: wp("85%"),
     marginBottom: 10
-  },
-  logoContainer: {
-    alignItems: "center",
-    flexGrow: 1,
-    justifyContent: "center"
   }
 });
 
