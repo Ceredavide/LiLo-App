@@ -2,12 +2,19 @@ import { createStackNavigator } from "react-navigation";
 
 import AssenzeScreen from "../../screens/AssenzeScreen";
 
-const AssenzeStack = createStackNavigator({
+const AssenzeStack = createStackNavigator(
+  {
     Assenze: AssenzeScreen
-  });
-  
-  AssenzeStack.navigationOptions = {
-    tabBarLabel: "Assenze"
-  };
+  },
+  {
+    defaultNavigationOptions: {
+      header: null
+    }
+  }
+);
+
+AssenzeStack.navigationOptions = {
+  tabBarLabel: "Assenze"
+};
 
 export default AssenzeStack;

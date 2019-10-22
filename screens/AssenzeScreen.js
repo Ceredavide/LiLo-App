@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
+  SafeAreaView,
+  StatusBar,
   View,
   Text,
   SectionList,
@@ -8,6 +10,12 @@ import {
   AsyncStorage
 } from "react-native";
 
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from "react-native-responsive-screen";
+
+import TabHeader from "../components/TabHeader";
 import Header from "../components/assenze/Header";
 import Item from "../components/assenze/Item";
 
@@ -44,17 +52,15 @@ const AssenzeScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      {loading ? (
-        <ActivityIndicator />
-      ) : data === "" ? (
-        <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-        >
+    <SafeAreaView style={styles.container}>
+      <StatusBar backgroundColor="#F1F5F9" barStyle="light-content" />
+      <TabHeader title="Assenze" />
+      <View style={styles.containerList}>
+        {loading ? (
+          <ActivityIndicator />
+        ) : data === "" ? (
           <Text>Non sono previste assenze</Text>
-        </View>
-      ) : (
-        <View style={{ flex: 1, paddingTop: 15 }}>
+        ) : (
           <SectionList
             refreshing={loading}
             onRefresh={() => setState({ loading: true })}
@@ -71,9 +77,9 @@ const AssenzeScreen = () => {
             sections={data}
             keyExtractor={(item, index) => item + index}
           />
-        </View>
-      )}
-    </View>
+        )}
+      </View>
+    </SafeAreaView>
   );
 };
 
@@ -81,7 +87,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    backgroundColor: "#FFF"
+    backgroundColor: "#009fff"
+  },
+  containerList: {
+    flex: 1,
+    padding: 5,
+    width: wp("100%"),
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#F1F5F9"
   }
 });
 

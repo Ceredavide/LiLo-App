@@ -6,27 +6,23 @@ import {
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 
-const Header = ({title}) => {
+const TabHeader = ({ title }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.giorno}>{title}</Text>
+      <Text style={styles.text}>{title}</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    height: hp("7%"),
-    paddingTop: hp("3%"),
-    paddingLeft: wp("3%"),
-    borderRadius: 5,
-    backgroundColor: "#F1F5F9"
+      height: hp("8%"),
+      marginLeft: wp("10%")
   },
-  giorno: {
-    color: "#009fff",
-    fontWeight: "bold",
-    fontSize: hp("3%")
-  },
+  text: {
+    color: "#FFF",
+    fontSize: hp("5%")
+  }
 });
 
-export default Header;
+export default TabHeader;
