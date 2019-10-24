@@ -1,6 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, FlatList, ActivityIndicator } from "react-native";
-import { Card, Paragraph } from "react-native-paper";
+import {
+  StyleSheet,
+  SafeAreaView,
+  View,
+  FlatList,
+  ActivityIndicator
+} from "react-native";
+
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from "react-native-responsive-screen";
+
+import TabHeader from "../components/TabHeader";
+import Card from "../components/home/Card";
 
 const HomeScreen = () => {
   const [state, setState] = useState({ data: {}, loading: true });
@@ -24,56 +37,46 @@ const HomeScreen = () => {
     fetchComunicazioni("http://liloautogestito.ch/API/comunicazioni_static.py");
   }, [loading]);
 
-  if (loading) {
-    return (
-      <View style={{ alignItems: "center", justifyContent: "center", flex: 1 }}>
-        <ActivityIndicator />
-      </View>
-    );
-  } else {
-    return (
-      <FlatList
-        data={data}
-        keyExtractor={item => item.titolo}
-        refreshing={loading}
-        onRefresh={() => setState({ loading: true })}
-        renderItem={({ item }) => (
-          <View style={styles.container}>
-            <Card>
-              <Card.Title title={item.titolo} titleStyle={styles.title} />
-              <Card.Cover
-                source={{
-                  uri:
-                    item.img +
-                    "#" +
-                    `${Math.random()
-                      .toString(36)
-                      .substring(2, 15) +
-                      Math.random()
-                        .toString(36)
-                        .substring(2, 15)}`
-                }}
-                style={styles.image}
+  return (
+    <SafeAreaView style={styles.container}>
+      <TabHeader title="Home" />
+      <View style={styles.containerList}>
+        {loading ? (
+          <ActivityIndicator />
+        ) : (
+          <FlatList
+            data={data}
+            keyExtractor={item => item.titolo}
+            refreshing={loading}
+            onRefresh={() => setState({ loading: true })}
+            renderItem={({ item }) => (
+              <Card
+                titolo={item.titolo}
+                img={item.img}
+                comunicazione={item.comunicazione}
               />
-              <Card.Content style={{ marginTop: 10 }}>
-                <Paragraph>{item.comunicazione}</Paragraph>
-              </Card.Content>
-            </Card>
-          </View>
+            )}
+          />
         )}
-      />
-    );
-  }
+      </View>
+    </SafeAreaView>
+  );
 };
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20
+    flex: 1,
+    backgroundColor: "#009fff"
   },
-  title: {
-    textAlign: "center"
+  containerList: {
+    flex: 1,
+    padding: 5,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#F1F5F9"
   },
-  image: {}
 });
 
 export default HomeScreen;

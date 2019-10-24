@@ -59,7 +59,7 @@ const AssenzeScreen = () => {
         {loading ? (
           <ActivityIndicator />
         ) : data === "" ? (
-          <Text>Non sono previste assenze</Text>
+          <Text style={styles.noAssenze}>Non sono previste assenze</Text>
         ) : (
           <SectionList
             refreshing={loading}
@@ -86,18 +86,19 @@ const AssenzeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "column",
     backgroundColor: "#009fff"
   },
   containerList: {
     flex: 1,
     padding: 5,
-    width: wp("100%"),
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#F1F5F9"
+  },
+  noAssenze: {
+    fontSize: hp("3%")
   }
 });
 

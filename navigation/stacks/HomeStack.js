@@ -2,9 +2,16 @@ import { createStackNavigator } from "react-navigation";
 
 import HomeScreen from "../../screens/HomeScreen";
 
-const HomeStack = createStackNavigator({
-  Home: HomeScreen
-});
+const HomeStack = createStackNavigator(
+  {
+    Home: HomeScreen
+  },
+  {
+    defaultNavigationOptions: {
+      header: null
+    }
+  }
+);
 
 HomeStack.navigationOptions = {
   tabBarLabel: "Home"

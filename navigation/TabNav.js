@@ -38,12 +38,13 @@ const TabNav = createBottomTabNavigator(
             break;
           }
         }
-        return <MaterialIcons name={iconName} size={25} color={tintColor} />;
+        return <MaterialIcons name={iconName} size={30} color={tintColor} />;
       }
     }),
     tabBarOptions: {
-      activeTintColor: "#5ea6e5",
-      inactiveTintColor: "gray"
+      activeTintColor: "#009fff",
+      inactiveTintColor: "gray",
+      showLabel: false
     }
   }
 );
