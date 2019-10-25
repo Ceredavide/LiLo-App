@@ -11,14 +11,14 @@ import ChartProposte from "../components/autogestite/ChartProposte";
 import UltimeProposte from "../components/autogestite/UltimeProposte";
 import ButtonProposta from "../components/autogestite/ButtonProposta";
 
-const AutogestiteScreen = () => {
+const AutogestiteScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <TabHeader title="Autogestite" />
       <View style={styles.containerList}>
         <ChartProposte />
         <UltimeProposte />
-        <ButtonProposta />
+        <ButtonProposta navigation={navigation} />
       </View>
     </SafeAreaView>
   );

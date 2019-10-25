@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, ScrollView, View, Text } from "react-native";
 
 import {
   widthPercentageToDP as wp,
@@ -8,9 +8,11 @@ import {
 
 const UltimeProposte = () => {
   return (
-    <View style={styles.container}>
-      <Text>Qui ci saranno le ultime proposte</Text>
-    </View>
+    <ScrollView style={styles.container}>
+      <View style={{ marginTop: hp("10%"), alignItems: "center" }}>
+        <Text>Qui ci saranno le ultime proposte</Text>
+      </View>
+    </ScrollView>
   );
 };
 
@@ -21,8 +23,6 @@ const styles = StyleSheet.create({
     width: wp("95%"),
     backgroundColor: "white",
     borderRadius: 20,
-    alignItems:"center",
-    justifyContent: "center",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.18,
     shadowRadius: 1.0,
 
-    elevation: 1 
+    elevation: 1
   }
 });
 

@@ -1,10 +1,12 @@
 import { createStackNavigator } from "react-navigation";
 
 import AutogestiteScreen from "../../screens/AutogestiteScreen";
+import PropostaScreen from "../../screens/PropostaScreen";
 
 const AutogestiteStack = createStackNavigator(
   {
-    Autogestite: AutogestiteScreen
+    Autogestite: AutogestiteScreen,
+    Proposta: PropostaScreen
   },
   {
     defaultNavigationOptions: {
