@@ -6,10 +6,13 @@ import {
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 
-const ButtonProposta = ({navigation}) => {
+const MyButton = ({ action, text, color }) => {
   return (
-    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Proposta")}>
-      <Text style={styles.text}>Proponi un'attività</Text>
+    <TouchableOpacity
+      style={{ ...styles.button, backgroundColor: color }}
+      onPress={() => action()}
+    >
+      <Text style={styles.text}>{text}</Text>
     </TouchableOpacity>
   );
 };
@@ -39,4 +42,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ButtonProposta;
+export default MyButton;

@@ -1,24 +1,27 @@
 import React from "react";
 import { StyleSheet, SafeAreaView, View } from "react-native";
 
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp
-} from "react-native-responsive-screen";
-
 import TabHeader from "../components/TabHeader";
 import ChartProposte from "../components/autogestite/ChartProposte";
 import UltimeProposte from "../components/autogestite/UltimeProposte";
-import ButtonProposta from "../components/autogestite/ButtonProposta";
+import MyButton from "../components/MyButton";
 
 const AutogestiteScreen = ({ navigation }) => {
+  goToProposta = () => {
+    navigation.navigate("Proposta");
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <TabHeader title="Autogestite" />
       <View style={styles.containerList}>
         <ChartProposte />
         <UltimeProposte />
-        <ButtonProposta navigation={navigation} />
+        <MyButton
+          action={goToProposta}
+          text="Proponi un'attività"
+          color="#009fff"
+        />
       </View>
     </SafeAreaView>
   );
