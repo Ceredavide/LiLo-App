@@ -1,16 +1,24 @@
-import React from "react";
-import { StyleSheet, SafeAreaView, View } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, SafeAreaView, ScrollView } from "react-native";
 
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
-import { Formik } from "formik";
+
+import FormProposta from "../components/proposta/FormProposta";
+import TabHeader from "../components/TabHeader";
+
 
 const PropostaScreen = ({ navigation }) => {
+  const [proposta, setProposta] = useState({});
+
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.card}></View>
+      <TabHeader title="Proposta" />
+      <ScrollView style={styles.card}>
+        <FormProposta setProposta={setProposta} />
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -19,14 +27,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#009fff"
-    ,justifyContent: "center",
-    alignItems: "center"
   },
   card: {
-    backgroundColor: "white",
-    height: hp("70%"),
-    width: wp("95%"),
-    borderRadius: 20,
+    flex: 1,
+    padding: 5,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    alignItems: "center",
+    backgroundColor: "#F1F5F9",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -36,8 +44,7 @@ const styles = StyleSheet.create({
     shadowRadius: 1.0,
 
     elevation: 1
-  },
-  button: {}
+  }
 });
 
 export default PropostaScreen;

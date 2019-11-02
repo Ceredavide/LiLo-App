@@ -44,7 +44,8 @@ const LoginCard = ({ navigation }) => {
   handleResponse = async response => {
     const data = await response.json();
     if (data["login"]) {
-      await AsyncStorage.setItem("res", data["ses"]).then(() => {
+      await AsyncStorage.setItem("res", data["ses"])
+      .then(() => {
         setLoading(false);
         navigation.navigate("Main");
       });
@@ -107,7 +108,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     height: hp("8%"),
-    width: wp("80%"),
+    width: wp("80%")
   }
 });
 
