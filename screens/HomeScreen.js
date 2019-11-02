@@ -6,6 +6,7 @@ import {
   FlatList,
   ActivityIndicator
 } from "react-native";
+import { useSelector, useDspatch } from "react-redux";
 
 import {
   widthPercentageToDP as wp,
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#F1F5F9"
-  },
+  }
 });
 
 export default HomeScreen;

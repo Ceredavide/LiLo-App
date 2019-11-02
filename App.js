@@ -1,12 +1,24 @@
 import React from "react";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import ReduxThunk from "redux-thunk";
 
-import Screen from './navigation/Screen'
+import proposteReducer from "./store/reducers/proposte";
 
-export default class App extends React.Component {
-  render() {
-    return (
-        <Screen />
-    );
-  }
-}
+import Screen from "./navigation/Screen";
 
+const rootReducer = combineReducers({
+  proposte: proposteReducer
+});
+
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
+
+const App = () => {
+  return (
+    <Provider store={store}>
+      <Screen />
+    </Provider>
+  );
+};
+
+export default App;
