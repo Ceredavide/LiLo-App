@@ -28,7 +28,7 @@ const LoginCard = ({ navigation }) => {
       formData.append("username", user.toLocaleLowerCase());
       formData.append("password", password);
       const response = await fetch(
-        `http://liloautogestito.ch/API/check_login_liceo.py`,
+        "http://liloautogestito.ch/API/check_login_liceo.py",
         {
           method: "POST",
           body: formData

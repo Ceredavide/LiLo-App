@@ -6,37 +6,27 @@ import {
   FlatList,
   ActivityIndicator
 } from "react-native";
-import { useSelector, useDspatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp
-} from "react-native-responsive-screen";
+import { fetchComunicazioni } from "../store/actions/comunicazioni";
 
 import TabHeader from "../components/TabHeader";
 import Card from "../components/home/Card";
 
 const HomeScreen = () => {
-  const [state, setState] = useState({ data: {}, loading: true });
-  const { loading, data } = state;
+  const [loading, setLoading] = useState(false);
+  const data = useSelector(state => state.comunicazioni.comunicazioni);
+  const dispatch = useDispatch();
 
-  fetchComunicazioni = url => {
-    fetch(url)
-      .then(res => res.json())
-      .then(resJson => {
-        setState({
-          data: resJson,
-          loading: false
-        });
-      })
-      .catch(error => {
-        console.log(error);
-      });
+  const loadComunicazioni = async () => {
+    setLoading(true);
+    await dispatch(fetchComunicazioni());
+    setLoading(false);
   };
 
   useEffect(() => {
-    fetchComunicazioni("http://liloautogestito.ch/API/comunicazioni_static.py");
-  }, [loading]);
+    loadComunicazioni();
+  }, [dispatch]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -47,9 +37,9 @@ const HomeScreen = () => {
         ) : (
           <FlatList
             data={data}
-            keyExtractor={item => item.titolo}
+            keyExtractor={item => item.id}
             refreshing={loading}
-            onRefresh={() => setState({ loading: true })}
+            onRefresh={() => loadComunicazioni()}
             renderItem={({ item }) => (
               <Card
                 titolo={item.titolo}

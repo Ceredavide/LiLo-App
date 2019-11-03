@@ -8,10 +8,13 @@ export const fetchComunicazioni = () => {
       "https://lilo-back-end.firebaseio.com/comunicazioni.json"
     );
     const resData = await response.json();
+    console.log("funziona!")
+    console.log(resData);
     dispatch({
       type: FETCH_COMUNICAZIONI,
-      comunicazioni: resData
+      comunicazioniData: resData
     });
+    console.log("bella!")
   };
 };
 

@@ -12,7 +12,7 @@ const comunicazioniReducer = (state = initialState, action) => {
     case FETCH_COMUNICAZIONI:
       return {
         ...state,
-        comunicazioni: [...comunicazioni, comunicazione]
+        comunicazioni: [...comunicazioni, comunicazioniData]
       };
     case ADD_COMUNICAZIONE:
       return {
@@ -23,3 +23,5 @@ const comunicazioniReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export default comunicazioniReducer;
