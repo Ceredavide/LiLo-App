@@ -8,16 +8,22 @@ import {
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
-import { fetchComunicazioni } from "../store/actions/comunicazioni";
+import {
+  fetchComunicazioni,
+  reloadComunicazioni
+} from "../store/actions/comunicazioni";
 
-import TabHeader from "../components/TabHeader";
 import Card from "../components/home/Card";
 import IconButton from "../components/IconButton";
 
-const HomeScreen = ({ navigation }) => {
-  const [loading, setLoading] = useState(false);
+const HomeScreen = () => {
+  const [loading, setLoading] = useState(true);
   const data = useSelector(state => state.comunicazioni.comunicazioni);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    loadComunicazioni();
+  }, [dispatch]);
 
   const loadComunicazioni = async () => {
     setLoading(true);
@@ -25,48 +31,38 @@ const HomeScreen = ({ navigation }) => {
     setLoading(false);
   };
 
-  useEffect(() => {
-    loadComunicazioni();
-  }, [dispatch]);
+  const reloadData = async () => {
+    setLoading(true);
+    await dispatch(reloadComunicazioni());
+    setLoading(false);
+  };
 
   return (
-    <SafeAreaView style={styles.container}>
-      {/* <View style={{ flexDirection: "row" }}>
-        <TabHeader title="Home" />
-        <IconButton
-          name="edit"
-          action={() => navigation.navigate("Comunicazioni")}
+    <View style={styles.container}>
+      {loading ? (
+        <ActivityIndicator />
+      ) : (
+        <FlatList
+          data={data}
+          keyExtractor={item => item.id}
+          refreshing={loading}
+          onRefresh={() => reloadData()}
+          showsVertcialScrollIndicator={false}
+          renderItem={({ item }) => (
+            <Card
+              titolo={item.titolo}
+              img={item.img}
+              comunicazione={item.comunicazione}
+            />
+          )}
         />
-      </View> */}
-      <View style={styles.containerList}>
-        {loading ? (
-          <ActivityIndicator />
-        ) : (
-          <FlatList
-            data={data}
-            keyExtractor={item => item.id}
-            refreshing={loading}
-            onRefresh={() => loadComunicazioni()}
-            renderItem={({ item }) => (
-              <Card
-                titolo={item.titolo}
-                img={item.img}
-                comunicazione={item.comunicazione}
-              />
-            )}
-          />
-        )}
-      </View>
-    </SafeAreaView>
+      )}
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#009fff"
-  },
-  containerList: {
     flex: 1,
     padding: 5,
     // borderTopLeftRadius: 20,

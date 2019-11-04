@@ -62,6 +62,7 @@ const AssenzeScreen = () => {
           <SectionList
             refreshing={loading}
             onRefresh={() => setState({ loading: true })}
+            showsVerticalScrollIndicator={false}
             renderSectionHeader={({ section: { title } }) => (
               <Header title={title} />
             )}
