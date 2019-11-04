@@ -1,26 +1,25 @@
 import React from "react";
-import { createStore, combineReducers, applyMiddleware } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import ReduxThunk from "redux-thunk";
-
-import proposteReducer from "./store/reducers/proposte";
-import comunicazioniReducer from "./store/reducers/comunicazioni"
+import * as Font from "expo-font";
 
 import Screen from "./navigation/Screen";
-
-const rootReducer = combineReducers({
-  proposte: proposteReducer,
-  comunicazioni: comunicazioniReducer
-});
+import rootReducer from "./store/rootReducer";
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
-const App = () => {
-  return (
-    <Provider store={store}>
-      <Screen />
-    </Provider>
-  );
-};
-
-export default App;
+export default class App extends React.Component {
+  componentDidMount() {
+    Font.loadAsync({
+      'open-sans-light': require('./assets/fonts/OpenSans-Light.ttf'),
+    });
+  }
+  render() {
+    return (
+      <Provider store={store}>
+        <Screen />
+      </Provider>
+    );
+  }
+}
