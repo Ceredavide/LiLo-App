@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   SafeAreaView,
-  StatusBar,
   View,
   Text,
   SectionList,
@@ -53,7 +52,6 @@ const AssenzeScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar backgroundColor="#F1F5F9" barStyle="light-content" />
       <TabHeader title="Assenze" />
       <View style={styles.containerList}>
         {loading ? (
