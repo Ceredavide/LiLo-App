@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, SafeAreaView, ScrollView } from "react-native";
 
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp
-} from "react-native-responsive-screen";
-
 import FormProposta from "../components/proposta/FormProposta";
 import TabHeader from "../components/TabHeader";
 
