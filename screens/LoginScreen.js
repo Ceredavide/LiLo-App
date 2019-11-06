@@ -18,7 +18,7 @@ const LoginScreen = ({ navigation }) => {
       /> */}
       <Image
         style={styles.imgScuola}
-        source={require("../assets/images/Scuola.jpeg")}
+        source={require("../assets/images/scuola.jpeg")}
       />
       <LoginCard navigation={navigation} />
     </KeyboardAvoidingView>

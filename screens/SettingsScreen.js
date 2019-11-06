@@ -36,7 +36,7 @@ const SettingsScreen = ({ navigation }) => {
         <View style={styles.containerImage}>
           <Image
             style={styles.image}
-            source={require("../assets/images/Logo.png")}
+            source={require("../assets/images/logo.png")}
           />
         </View>
         <Chip
