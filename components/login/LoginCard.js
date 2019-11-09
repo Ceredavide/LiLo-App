@@ -7,6 +7,7 @@ import {
 } from "react-native-responsive-screen";
 import { Formik } from "formik";
 import { TextInput } from "react-native-paper";
+import * as firebase from "firebase";
 
 import LoginButton from "./LoginButton";
 
@@ -14,46 +15,58 @@ const LoginCard = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
 
   tryLogin = ({ user, password }) => {
-    if (user == "" || password == "") {
-      Alert.alert("Compila entrambi i campi!");
-    } else {
-      setLoading(true);
-      fetchLogin(user, password);
-    }
-  };
-
-  fetchLogin = async (user, password) => {
-    try {
-      let formData = new FormData();
-      formData.append("username", user.toLocaleLowerCase());
-      formData.append("password", password);
-      const response = await fetch(
-        "http://liloautogestito.ch/API/check_login_liceo.py",
-        {
-          method: "POST",
-          body: formData
+    setLoading(true);
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(user, password)
+      .then(
+        () => {
+          setLoading(false);
+        },
+        error => {
+          Alert.alert(error.message);
         }
       );
-      handleResponse(response);
-    } catch (error) {
-      setLoading(false);
-      Alert.alert(error.toString());
-    }
+    // if (user == "" || password == "") {
+    //   Alert.alert("Compila entrambi i campi!");
+    // } else {
+    //   setLoading(true);
+    //   fetchLogin(user, password);
+    // }
   };
 
-  handleResponse = async response => {
-    const data = await response.json();
-    if (data["login"]) {
-      await AsyncStorage.setItem("res", data["ses"])
-      .then(() => {
-        setLoading(false);
-        navigation.navigate("Main");
-      });
-    } else {
-      setLoading(false);
-      Alert.alert("username o password errati, riprovare");
-    }
-  };
+  // fetchLogin = async (user, password) => {
+  //   try {
+  //     let formData = new FormData();
+  //     formData.append("username", user.toLocaleLowerCase());
+  //     formData.append("password", password);
+  //     const response = await fetch(
+  //       "http://liloautogestito.ch/API/check_login_liceo.py",
+  //       {
+  //         method: "POST",
+  //         body: formData
+  //       }
+  //     );
+  //     handleResponse(response);
+  //   } catch (error) {
+  //     setLoading(false);
+  //     Alert.alert(error.toString());
+  //   }
+  // };
+
+  // handleResponse = async response => {
+  //   const data = await response.json();
+  //   if (data["login"]) {
+  //     await AsyncStorage.setItem("res", data["ses"])
+  //     .then(() => {
+  //       setLoading(false);
+  //       navigation.navigate("Main");
+  //     });
+  //   } else {
+  //     setLoading(false);
+  //     Alert.alert("username o password errati, riprovare");
+  //   }
+  // };
 
   return (
     <Formik
