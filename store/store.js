@@ -9,4 +9,6 @@ const rootReducer = combineReducers({
   comunicazioni: comunicazioniReducer
 });
 
-export const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
+
+export default store;
