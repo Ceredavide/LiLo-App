@@ -13,7 +13,9 @@ const LoadingScreen = ({ handleEnd }) => {
         require("../assets/images/scuola.jpeg")
       ]),
       Font.loadAsync({
-        "open-sans-light": require("../assets/fonts/OpenSans-Light.ttf")
+        "open-sans-light": require("../assets/fonts/OpenSans-Light.ttf"),
+        "open-sans-regular": require("../assets/fonts/OpenSans-Regular.ttf"),
+        "open-sans-bold": require("../assets/fonts/OpenSans-Bold.ttf")
       })
     ]);
   };
