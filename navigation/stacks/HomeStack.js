@@ -1,7 +1,7 @@
 import { createStackNavigator } from "react-navigation";
 
-import HomeScreen from "../../screens/HomeScreen";
-import ComunicazioniScreen from "../../screens/ComunicazioniScreen";
+import HomeScreen from "../../screens/Home";
+import ComunicazioniScreen from "../../screens/Comunicazioni";
 
 import {
   widthPercentageToDP as wp,

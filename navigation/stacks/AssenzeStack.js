@@ -1,6 +1,6 @@
 import { createStackNavigator } from "react-navigation";
 
-import AssenzeScreen from "../../screens/AssenzeScreen";
+import AssenzeScreen from "../../screens/Assenze";
 
 const AssenzeStack = createStackNavigator(
   {

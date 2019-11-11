@@ -1,6 +1,6 @@
 import React from "react";
 
-import { createBottomTabNavigator } from "react-navigation";
+import { createBottomTabNavigator, createAppContainer } from "react-navigation";
 
 import { MaterialIcons } from "@expo/vector-icons";
 
@@ -48,5 +48,6 @@ const TabNav = createBottomTabNavigator(
     }
   }
 );
+const MainTabNavigator = createAppContainer(TabNav);
 
-export default TabNav;
+export default MainTabNavigator;

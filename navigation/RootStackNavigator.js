@@ -1,18 +1,16 @@
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 
-import TabNav from './MainTabNavigator'
-import LoginScreen from '../screens/LoginScreen'
-import LoadingScreen from '../screens/LoadingScreen'
+import MainTabNavigator from "./MainTabNavigator";
+import LoginScreen from "../screens/Login";
 
 const Screen = createAppContainer(
   createSwitchNavigator(
     {
-      Loading: LoadingScreen,
       Login: LoginScreen,
-      Main: TabNav
+      Main: MainTabNavigator
     },
     {
-      initialRouteName: "Loading"
+      initialRouteName: "Login"
     }
   )
 );
