@@ -9,7 +9,7 @@ import {
 const Item = ({ nome, descrizione }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.nome}>{nome}</Text>
+      <Text style={styles.nome}>{nome}:</Text>
       <Text style={styles.descrizione}>{descrizione}</Text>
     </View>
   );
@@ -32,11 +32,12 @@ const styles = StyleSheet.create({
     elevation: 1
   },
   nome: {
-    fontWeight: "bold",
+    fontFamily: "open-sans-bold",
     fontSize: 18,
     marginBottom: 5
   },
   descrizione: {
+    fontFamily: "open-sans-regular",
     fontSize: 16
   }
 });

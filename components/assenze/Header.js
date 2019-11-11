@@ -23,8 +23,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#F1F5F9"
   },
   giorno: {
+    fontFamily: "open-sans-bold",
     color: "#009fff",
-    fontWeight: "bold",
     fontSize: hp("3%")
   },
 });
