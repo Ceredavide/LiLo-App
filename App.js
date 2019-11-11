@@ -1,4 +1,5 @@
 import React from "react";
+import { AsyncStorage, StatusBar } from "react-native";
 import { Provider } from "react-redux";
 import store from "./store/store";
 
@@ -25,9 +26,10 @@ export default class App extends React.Component {
     firebase.auth().onAuthStateChanged(this.onAuthStateChanged);
   }
 
-  onAuthStateChanged = user => {
+  onAuthStateChanged = async user => {
     this.setState({ isAuthenticationReady: true });
     this.setState({ isAuthenticated: !!user });
+    await AsyncStorage.setItem("email", user.email);
   };
 
   firebaseConfig = {
@@ -59,12 +61,11 @@ export default class App extends React.Component {
         (!isLoadingComplete || !isAuthenticationReady) &&
         !skipLoadingScreen
       ) {
-        return (
-          <LoadingScreen handleEnd={this.handleEnd} />
-        );
+        return <LoadingScreen handleEnd={this.handleEnd} />;
       } else {
         return (
           <Provider store={store}>
+            <StatusBar backgroundColor="#009fff" barStyle="light-content" />
             {isAuthenticated ? <MainTabNavigator /> : <RootStackNavigator />}
           </Provider>
         );
