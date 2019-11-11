@@ -1,23 +1,14 @@
 import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  SafeAreaView,
-  View,
-  FlatList,
-  ActivityIndicator
-} from "react-native";
+import { StyleSheet, View, FlatList, ActivityIndicator } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
-import {
-  fetchComunicazioni,
-  reloadComunicazioni
-} from "../store/actions/comunicazioni";
+import { fetchComunicazioni } from "../store/actions/comunicazioni";
 
 import Card from "../components/home/Card";
 import IconButton from "../components/IconButton";
 
 const HomeScreen = () => {
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const data = useSelector(state => state.comunicazioni.comunicazioni);
   const dispatch = useDispatch();
 
@@ -26,27 +17,21 @@ const HomeScreen = () => {
   }, [dispatch]);
 
   const loadComunicazioni = async () => {
-    setLoading(true);
+    setIsLoading(true);
     await dispatch(fetchComunicazioni());
-    setLoading(false);
-  };
-
-  const reloadData = async () => {
-    setLoading(true);
-    await dispatch(reloadComunicazioni());
-    setLoading(false);
+    setIsLoading(false);
   };
 
   return (
     <View style={styles.container}>
-      {loading ? (
+      {isLoading ? (
         <ActivityIndicator />
       ) : (
         <FlatList
           data={data}
           keyExtractor={item => item.id}
-          refreshing={loading}
-          onRefresh={() => reloadData()}
+          refreshing={isLoading}
+          onRefresh={() => loadComunicazioni()}
           showsVertcialScrollIndicator={false}
           renderItem={({ item }) => (
             <Card

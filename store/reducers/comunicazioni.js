@@ -1,30 +1,18 @@
-import {
-  ADD_COMUNICAZIONE,
-  RELOAD_COMUNICAZIONI,
-  FETCH_COMUNICAZIONI
-} from "../actions/comunicazioni";
-
 const initialState = {
   comunicazioni: []
 };
 
 const comunicazioniReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_COMUNICAZIONI:
-      const newArray = [...state.comunicazioni, action.comunicazioniData]
-      return {
-        ...state,
-        comunicazioni: newArray
-      };
-    case RELOAD_COMUNICAZIONI:
+    case "FETCH_COMUNICAZIONI_SUCCESS":
       return {
         ...state,
         comunicazioni: action.comunicazioniData
-      }
-    case ADD_COMUNICAZIONE:
+      };
+    case "FETCH_COMUNICAZIONI_ERROR":
       return {
         ...state,
-        comunicazioni: state.comunicazioni.push(comunicazioneData)
+        comunicazioni: "error"
       };
     default:
       return state;
