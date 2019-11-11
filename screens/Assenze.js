@@ -5,9 +5,11 @@ import {
   View,
   Text,
   SectionList,
-  ActivityIndicator,
-  AsyncStorage
+  ActivityIndicator
 } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
+
+import { fetchAssenze } from "../store/actions/assenze";
 
 import {
   widthPercentageToDP as wp,
@@ -19,49 +21,33 @@ import Header from "../components/assenze/Header";
 import Item from "../components/assenze/Item";
 
 const AssenzeScreen = () => {
-  const [state, setState] = useState({ data: {}, loading: true });
-  const { data, loading } = state;
+  const [isLoading, setIsLoading] = useState(false);
+  const assenze = useSelector(state => state.assenze.assenze);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchAssenze();
-  }, [loading]);
+    loadAssenze();
+  }, [dispatch]);
 
-  fetchAssenze = async () => {
-    let cookie = await AsyncStorage.getItem("res");
-    fetch(`http://liloautogestito.ch/API/assenze_docenti.py?ses=${cookie}`)
-      .then(res => res.json())
-      .then(resJson => handleResponse(resJson))
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
-  handleResponse = res => {
-    if (res.toString() === "") {
-      setState({
-        data: "",
-        loading: false
-      });
-    } else {
-      setState({
-        data: res,
-        loading: false
-      });
-    }
+  const loadAssenze = async () => {
+    setIsLoading(true);
+    await dispatch(fetchAssenze());
+    setIsLoading(false);
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <TabHeader title="Assenze" />
       <View style={styles.containerList}>
-        {loading ? (
+        {isLoading ? (
           <ActivityIndicator />
-        ) : data === "" ? (
+        ) : assenze === "" ? (
           <Text style={styles.noAssenze}>Non sono previste assenze</Text>
         ) : (
           <SectionList
-            refreshing={loading}
-            onRefresh={() => setState({ loading: true })}
+            refreshing={isLoading}
+            onRefresh={() => loadAssenze()}
             showsVerticalScrollIndicator={false}
             renderSectionHeader={({ section: { title } }) => (
               <Header title={title} />
@@ -73,7 +59,7 @@ const AssenzeScreen = () => {
                 descrizione={item.description}
               />
             )}
-            sections={data}
+            sections={assenze}
             keyExtractor={(item, index) => item + index}
           />
         )}
