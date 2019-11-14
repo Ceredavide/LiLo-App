@@ -1,13 +1,8 @@
 import React from "react";
 
-import {
-  StyleSheet,
-  SafeAreaView,
-  View,
-  Image,
-  AsyncStorage,
-  Linking
-} from "react-native";
+import { StyleSheet, View, Image, AsyncStorage, Linking } from "react-native";
+
+import * as firebase from "firebase";
 
 import {
   widthPercentageToDP as wp,
@@ -15,7 +10,6 @@ import {
 } from "react-native-responsive-screen";
 import { Chip } from "react-native-paper";
 
-import TabHeader from "../components/TabHeader";
 import MyButton from "../components/MyButton";
 
 const SettingsScreen = ({ navigation }) => {
@@ -30,9 +24,8 @@ const SettingsScreen = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <TabHeader title="Impostazioni" />
-      <View style={styles.containerSettings}>
+    <View style={styles.container}>
+      <View style={styles.cardContainer}>
         <View style={styles.containerImage}>
           <Image
             style={styles.image}
@@ -51,10 +44,10 @@ const SettingsScreen = ({ navigation }) => {
             text="Termini e condizioni"
             color="#1ed15a"
           />
-          <MyButton action={handleLogout} text="Logout" color="#e65054" />
+          <MyButton action={() => firebase.auth().signOut()} text="Logout" color="#e65054" />
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -62,6 +55,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#009fff"
+  },
+  cardContainer: {
+    flex: 1,
+    padding: 5,
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+    alignItems: "center",
+    backgroundColor: "#F1F5F9"
   },
   image: {
     width: wp("70%"),
@@ -72,13 +73,13 @@ const styles = StyleSheet.create({
       height: 2
     },
     shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    shadowRadius: 3.84
   },
   containerImage: {
     backgroundColor: "white",
     borderRadius: 20,
     padding: wp("3%"),
-    marginTop:hp("3%"),
+    marginTop: hp("3%"),
     marginBottom: hp("5%")
   },
   containerSettings: {
