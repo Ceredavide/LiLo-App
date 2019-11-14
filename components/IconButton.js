@@ -7,7 +7,7 @@ import { AntDesign } from "@expo/vector-icons";
 const IconButton = ({ name, action, color, style }) => {
   return (
     <TouchableOpacity onPress={action} style={style}>
-      <AntDesign name={name} size={hp("4%")} color={color} />
+      <AntDesign name={name} size={hp("3%")} color={color} />
     </TouchableOpacity>
   );
 };
