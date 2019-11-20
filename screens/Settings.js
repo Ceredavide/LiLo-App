@@ -12,9 +12,9 @@ import { Chip } from "react-native-paper";
 
 import MyButton from "../components/MyButton";
 
-const SettingsScreen = ({ navigation }) => {
+const SettingsScreen = () => {
   handleLogout = async () => {
-    await AsyncStorage.clear().then(() => navigation.navigate("Login"));
+    await AsyncStorage.clear().then(() => firebase.auth().signOut());
   };
 
   handleTermini = () => {
@@ -44,7 +44,11 @@ const SettingsScreen = ({ navigation }) => {
             text="Termini e condizioni"
             color="#1ed15a"
           />
-          <MyButton action={() => firebase.auth().signOut()} text="Logout" color="#e65054" />
+          <MyButton
+            action={() => handleLogout()}
+            text="Logout"
+            color="#e65054"
+          />
         </View>
       </View>
     </View>
