@@ -37,7 +37,8 @@ const styles = StyleSheet.create({
     elevation: 1
   },
   text: {
-    fontSize: hp("3%"),
+    fontSize: hp("2.5%"),
+    fontFamily: "open-sans-regular",
     color: "white"
   }
 });
