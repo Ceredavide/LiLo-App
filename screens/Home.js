@@ -4,6 +4,7 @@ import {
   View,
   FlatList,
   ActivityIndicator,
+  TouchableOpacity,
   AsyncStorage
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
@@ -20,18 +21,12 @@ const HomeScreen = ({ navigation }) => {
 
   useEffect(() => {
     loadComunicazioni();
-    loadEmail();
   }, [dispatch]);
 
   const loadComunicazioni = async () => {
     setIsLoading(true);
     await dispatch(fetchComunicazioni());
     setIsLoading(false);
-  };
-
-  loadEmail = async () => {
-    const email = await AsyncStorage.getItem("email");
-    navigation.setParams({ email: email });
   };
 
   return (
@@ -59,23 +54,6 @@ const HomeScreen = ({ navigation }) => {
     </View>
   );
 };
-
-HomeScreen.navigationOptions = ({ navigation }) => ({
-  title: "Home",
-  headerRightContainerStyle: {
-    paddingRight: 20
-  },
-  headerRight: () => {
-    const { email } = navigation.state.params;
-    email === "ceredavide@live.it" || email === "" ? (
-      <IconButton
-        name="edit"
-        color="white"
-        action={() => navigation.navigate("Comunicazioni")}
-      />
-    ) : null;
-  }
-});
 
 const styles = StyleSheet.create({
   container: {
