@@ -5,10 +5,12 @@ import store from "./store/store";
 
 import * as firebase from "firebase";
 
-import RootStackNavigator from "./navigation/RootStackNavigator";
+import LoginStack from "./navigation/stacks/Login";
 import MainTabNavigator from "./navigation/MainTabNavigator";
 
 import LoadingScreen from "./screens/Loading";
+
+import { Studenti } from "./LiLoData";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -29,7 +31,10 @@ export default class App extends React.Component {
   onAuthStateChanged = async user => {
     this.setState({ isAuthenticationReady: true });
     this.setState({ isAuthenticated: !!user });
-    await AsyncStorage.setItem("email", user.email);
+    const studenteIndex = Studenti.findIndex(
+      studente => studente.email === user.email
+    );
+    await AsyncStorage.setItem("Id", studenteIndex.toString());
   };
 
   firebaseConfig = {
@@ -66,7 +71,7 @@ export default class App extends React.Component {
         return (
           <Provider store={store}>
             <StatusBar backgroundColor="#009fff" barStyle="light-content" />
-            {isAuthenticated ? <MainTabNavigator /> : <RootStackNavigator />}
+            {isAuthenticated ? <MainTabNavigator /> : <LoginStack />}
           </Provider>
         );
       }
