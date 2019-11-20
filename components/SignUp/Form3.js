@@ -1,11 +1,7 @@
 import React from "react";
-import { StyleSheet, View, Image } from "react-native";
+import { View, Image } from "react-native";
 
-import { ProgressStep } from "react-native-progress-steps";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp
-} from "react-native-responsive-screen";
+import styles from "../../styles/signUp/Forms"
 
 const Form3 = () => {
   return (
@@ -17,21 +13,5 @@ const Form3 = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  form: {
-    alignItems: "center"
-  },
-  textInput: {
-    height: hp("5%"),
-    width: wp("70%"),
-    padding: wp("3%"),
-    fontSize: hp("2%"),
-    marginBottom: hp("5%"),
-    fontFamily: "open-sans-regular",
-    borderBottomWidth: 1.5,
-    borderBottomColor: "#009fff"
-  }
-});
 
 export default Form3;
