@@ -3,7 +3,7 @@ import { createStackNavigator } from "react-navigation";
 import HomeScreen from "../../screens/Home";
 import ComunicazioniScreen from "../../screens/Comunicazioni";
 
-import { heightPercentageToDP as hp } from "react-native-responsive-screen";
+import HeaderStyle from "../../styles/navigation/Header"
 
 const HomeStack = createStackNavigator(
   {
@@ -11,22 +11,13 @@ const HomeStack = createStackNavigator(
     Comunicazioni: ComunicazioniScreen
   },
   {
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: "#009fff",
-        height: hp("8%"),
-        height: hp("8%"),
-        borderBottomWidth: 0
-      },
-      headerTintColor: "#fff",
-      headerTitleStyle: {
-        fontFamily: "open-sans-regular",
-        fontWeight: "bold",
-        fontSize: hp("5%")
-      }
-    }
+    defaultNavigationOptions: HeaderStyle
   }
 );
+
+HomeScreen.navigationOptions = {
+  title: "Home"
+}
 
 ComunicazioniScreen.navigationOptions = {
   title: "Comunicazioni"
