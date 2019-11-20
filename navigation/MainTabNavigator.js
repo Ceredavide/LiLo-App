@@ -4,10 +4,10 @@ import { createBottomTabNavigator, createAppContainer } from "react-navigation";
 
 import { MaterialIcons } from "@expo/vector-icons";
 
-import HomeStack from "./stacks/HomeStack";
-import AssenzeStack from "./stacks/AssenzeStack";
-import AutogestiteStack from "./stacks/AutogestiteStack";
-import SettingsStack from "./stacks/SettingsStack";
+import HomeStack from "./stacks/Home";
+import AssenzeStack from "./stacks/Assenze";
+import AutogestiteStack from "./stacks/Autogestite";
+import SettingsStack from "./stacks/Settings";
 
 const TabNav = createBottomTabNavigator(
   {
