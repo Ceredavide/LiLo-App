@@ -10,7 +10,8 @@ import MainTabNavigator from "./navigation/MainTabNavigator";
 
 import LoadingScreen from "./screens/Loading";
 
-import { Studenti } from "./LiLoData";
+import firebaseConfig from "./data/firebase"
+import { Studenti } from "./data/studenti";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -23,7 +24,7 @@ export default class App extends React.Component {
 
     // Inizializza firebase...
     if (!firebase.apps.length) {
-      firebase.initializeApp(this.firebaseConfig);
+      firebase.initializeApp(firebaseConfig);
     }
     firebase.auth().onAuthStateChanged(this.onAuthStateChanged);
   }
@@ -35,17 +36,6 @@ export default class App extends React.Component {
       studente => studente.email === user.email
     );
     await AsyncStorage.setItem("Id", studenteIndex.toString());
-  };
-
-  firebaseConfig = {
-    apiKey: "AIzaSyAQZBcKGLp16ql7RJLdMw02DnVdMg4KLrY",
-    authDomain: "lilo-back-end.firebaseapp.com",
-    databaseURL: "https://lilo-back-end.firebaseio.com",
-    projectId: "lilo-back-end",
-    storageBucket: "lilo-back-end.appspot.com",
-    messagingSenderId: "817716562877",
-    appId: "1:817716562877:web:3d8c0dec82770e484260d4",
-    measurementId: "G-8QDQT7ZFVH"
   };
 
   handleEnd = () => {
