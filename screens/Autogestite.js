@@ -1,7 +1,6 @@
 import React from "react";
-import { StyleSheet, SafeAreaView, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
-import TabHeader from "../components/TabHeader";
 import ChartProposte from "../components/autogestite/ChartProposte";
 import UltimeProposte from "../components/autogestite/UltimeProposte";
 import MyButton from "../components/MyButton";
@@ -12,9 +11,8 @@ const AutogestiteScreen = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <TabHeader title="Autogestite" />
-      <View style={styles.containerList}>
+    <View style={styles.container}>
+      <View style={styles.cardContainer}>
         <ChartProposte />
         <UltimeProposte />
         <MyButton
@@ -23,7 +21,7 @@ const AutogestiteScreen = ({ navigation }) => {
           color="#009fff"
         />
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -32,11 +30,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#009fff"
   },
-  containerList: {
+  cardContainer: {
     flex: 1,
     padding: 5,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
     alignItems: "center",
     backgroundColor: "#F1F5F9"
   }
