@@ -1,6 +1,6 @@
 import React from "react";
-
 import { StyleSheet, View, Image, AsyncStorage, Linking } from "react-native";
+import { useDispatch } from "react-redux";
 
 import * as firebase from "firebase";
 
@@ -12,9 +12,14 @@ import { Chip } from "react-native-paper";
 
 import MyButton from "../components/MyButton";
 
+import * as actionTypes from "../store/actions/actionTypes";
+
 const SettingsScreen = () => {
+  const dispatch = useDispatch();
+
   handleLogout = async () => {
     await AsyncStorage.clear().then(() => firebase.auth().signOut());
+    dispatch({ type: actionTypes.DELETE_USER_CREDENTIALS });
   };
 
   handleTermini = () => {
