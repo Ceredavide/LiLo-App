@@ -1,24 +1,14 @@
 import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  SafeAreaView,
-  View,
-  Text,
-  SectionList,
-  ActivityIndicator
-} from "react-native";
+import { StyleSheet, View, SectionList, ActivityIndicator } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
 import { fetchAssenze } from "../store/actions/assenze";
 
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp
-} from "react-native-responsive-screen";
+import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 
-import TabHeader from "../components/TabHeader";
 import Header from "../components/assenze/Header";
 import Item from "../components/assenze/Item";
+import NoAssenze from "../components/assenze/NoAssenze";
 
 const AssenzeScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -37,13 +27,12 @@ const AssenzeScreen = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <TabHeader title="Assenze" />
-      <View style={styles.containerList}>
+    <View style={styles.container}>
+      <View style={styles.cardContainer}>
         {isLoading ? (
           <ActivityIndicator />
         ) : assenze === "" ? (
-          <Text style={styles.noAssenze}>Non sono previste assenze</Text>
+          <NoAssenze isLoading={isLoading} loadAssenze={loadAssenze} />
         ) : (
           <SectionList
             refreshing={isLoading}
@@ -64,7 +53,7 @@ const AssenzeScreen = () => {
           />
         )}
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -73,11 +62,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#009fff"
   },
-  containerList: {
+  cardContainer: {
     flex: 1,
-    padding: 5,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    paddingTop: hp("2%"),
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#F1F5F9"
