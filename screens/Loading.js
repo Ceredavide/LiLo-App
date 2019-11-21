@@ -10,15 +10,15 @@ const LoadingScreen = ({ handleEnd }) => {
       Asset.loadAsync([
         require("../assets/images/icon.png"),
         require("../assets/images/logo.png"),
-        require("../assets/images/background.png"),
         require("../assets/images/scuola.jpeg"),
-        require("../assets/images/login_successfull.jpg")
+        require("../assets/images/login_successfull.jpg"),
       ]),
       Font.loadAsync({
         "open-sans-light": require("../assets/fonts/OpenSans-Light.ttf"),
         "open-sans-regular": require("../assets/fonts/OpenSans-Regular.ttf"),
         "open-sans-bold": require("../assets/fonts/OpenSans-Bold.ttf"),
-        "playfair-regular": require("../assets/fonts/PlayfairDisplay-Regular.ttf")
+        "playfair-regular": require("../assets/fonts/PlayfairDisplay-Regular.ttf"),
+        "robot-bold": require("../assets/fonts/Roboto-Bold.ttf")
       })
     ]);
   };
