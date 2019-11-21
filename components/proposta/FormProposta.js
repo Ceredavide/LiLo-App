@@ -1,6 +1,9 @@
 import React from "react";
 import { StyleSheet, View, Text, TextInput } from "react-native";
 
+import firebase from "firebase";
+import "@firebase/firestore";
+
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
@@ -10,14 +13,33 @@ import { Formik } from "formik";
 import MyButton from "../MyButton";
 
 const FormProposta = () => {
+  const postProposta = (nome, descrizione, richieste) => {
+    const db = firebase.firestore();
+    db.collection("proposte")
+      .add({
+        nome: nome,
+        descrizione: descrizione,
+        richieste: richieste,
+        numeroPartecipantiMax: 30
+      })
+      .then(docRef => {
+        console.log("Document written with ID: ", docRef.id);
+      })
+      .catch(error => {
+        console.log("Error adding document: ", error);
+      });
+  };
+
   return (
     <Formik
       initialValues={{ nome: "", descrizione: "", richieste: "" }}
-      onSubmit={values => console.log(values)}
+      onSubmit={values =>
+        postProposta(values.nome, values.descrizione, values.richieste)
+      }
     >
       {props => (
         <View style={styles.container}>
-          <Text style={styles.text}>Nome Proposta:</Text>
+          <Text style={styles.text}>Nome Attività:</Text>
           <TextInput
             style={styles.textInput}
             onChangeText={props.handleChange("nome")}
@@ -33,7 +55,7 @@ const FormProposta = () => {
           />
           <Text style={styles.text}>Richieste Particolari:</Text>
           <TextInput
-            style={{...styles.textInput, marginBottom: hp("4%")}}
+            style={{ ...styles.textInput, marginBottom: hp("4%") }}
             onChangeText={props.handleChange("richieste")}
             value={props.values.richieste}
           />
