@@ -1,26 +1,25 @@
 import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  View,
-  FlatList,
-  ActivityIndicator,
-  TouchableOpacity,
-  AsyncStorage
-} from "react-native";
+import { StyleSheet, View, FlatList, ActivityIndicator } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
+import * as firebase from "firebase";
+
+import { saveUser } from "../store/actions/user";
 import { fetchComunicazioni } from "../store/actions/comunicazioni";
 
 import Card from "../components/home/Card";
-import IconButton from "../components/IconButton";
+import FloatingButton from "../components/home/FloatingButton";
 
 const HomeScreen = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(true);
   const data = useSelector(state => state.comunicazioni.comunicazioni);
   const dispatch = useDispatch();
 
+  const userEmail = firebase.auth().currentUser.email;
+
   useEffect(() => {
     loadComunicazioni();
+    dispatch(saveUser(userEmail));
   }, [dispatch]);
 
   const loadComunicazioni = async () => {
@@ -35,20 +34,31 @@ const HomeScreen = ({ navigation }) => {
         {isLoading ? (
           <ActivityIndicator />
         ) : (
-          <FlatList
-            data={data}
-            keyExtractor={item => item.id}
-            refreshing={isLoading}
-            onRefresh={() => loadComunicazioni()}
-            showsVertcialScrollIndicator={false}
-            renderItem={({ item }) => (
-              <Card
-                titolo={item.titolo}
-                img={item.img}
-                comunicazione={item.comunicazione}
+          <View>
+            <FlatList
+              data={data}
+              keyExtractor={item => item.id}
+              refreshing={isLoading}
+              onRefresh={() => loadComunicazioni()}
+              showsVertcialScrollIndicator={false}
+              renderItem={({ item }) => (
+                <Card
+                  titolo={item.titolo}
+                  img={item.img}
+                  comunicazione={item.comunicazione}
+                />
+              )}
+            />
+            {userEmail === "ceredavide@live.it" ||
+            userEmail === "andrixmelone01@gmail.com" ||
+            userEmail === "samuele.meschini@outlook.it" ? (
+              <FloatingButton
+                name="edit"
+                action={() => navigation.navigate("Comunicazioni")}
+                color="white"
               />
-            )}
-          />
+            ) : null}
+          </View>
         )}
       </View>
     </View>
