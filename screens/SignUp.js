@@ -1,7 +1,7 @@
 import React from "react";
 import { ScrollView } from "react-native";
 
-import Stepper from "../components/SignUp/Stepper";
+import Stepper from "../components/signUp/Stepper";
 
 const SignUp = () => {
   return (
