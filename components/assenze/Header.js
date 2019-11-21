@@ -17,7 +17,7 @@ const Header = ({title}) => {
 const styles = StyleSheet.create({
   container: {
     height: hp("7%"),
-    paddingTop: hp("3%"),
+    paddingTop: hp("2%"),
     paddingLeft: wp("3%"),
     borderRadius: 5,
     backgroundColor: "#F1F5F9"
