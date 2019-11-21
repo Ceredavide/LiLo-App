@@ -13,7 +13,7 @@ import Form1 from "./Form1";
 import Form2 from "./Form2";
 import Form3 from "./Form3";
 
-import { Studenti } from "../../LiLoData";
+import { Studenti } from "../../data/studenti";
 
 const Stepper = () => {
   const [error, setError] = useState(false);
@@ -72,7 +72,7 @@ const Stepper = () => {
       }}
       onSubmit={values => trySignUp(values.email, values.password)}
     >
-      {({ values, handleChange, handleSubmit, setFieldValue }) => (
+      {({ values, handleChange, setFieldValue }) => (
         <View style={styles.stepper}>
           <ProgressSteps
             progressBarColor="#009fff"
