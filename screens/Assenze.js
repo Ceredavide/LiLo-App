@@ -11,20 +11,13 @@ import Item from "../components/assenze/Item";
 import NoAssenze from "../components/assenze/NoAssenze";
 
 const AssenzeScreen = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const isLoading = useSelector(state => state.assenze.loading);
   const assenze = useSelector(state => state.assenze.assenze);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
-    loadAssenze();
+    dispatch(fetchAssenze());
   }, [dispatch]);
-
-  const loadAssenze = async () => {
-    setIsLoading(true);
-    await dispatch(fetchAssenze());
-    setIsLoading(false);
-  };
 
   return (
     <View style={styles.container}>
@@ -32,11 +25,14 @@ const AssenzeScreen = () => {
         {isLoading ? (
           <ActivityIndicator />
         ) : assenze === "" ? (
-          <NoAssenze isLoading={isLoading} loadAssenze={loadAssenze} />
+          <NoAssenze
+            isLoading={isLoading}
+            loadAssenze={() => dispatch(fetchAssenze())}
+          />
         ) : (
           <SectionList
             refreshing={isLoading}
-            onRefresh={() => loadAssenze()}
+            onRefresh={() => dispatch(fetchAssenze())}
             showsVerticalScrollIndicator={false}
             renderSectionHeader={({ section: { title } }) => (
               <Header title={title} />

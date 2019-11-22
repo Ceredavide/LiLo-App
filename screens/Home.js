@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, View, FlatList, ActivityIndicator } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -11,22 +11,16 @@ import Card from "../components/home/Card";
 import FloatingButton from "../components/home/FloatingButton";
 
 const HomeScreen = ({ navigation }) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const isLoading = useSelector(state => state.comunicazioni.loading);
   const data = useSelector(state => state.comunicazioni.comunicazioni);
   const dispatch = useDispatch();
 
   const userEmail = firebase.auth().currentUser.email;
 
   useEffect(() => {
-    loadComunicazioni();
+    dispatch(fetchComunicazioni());
     dispatch(saveUser(userEmail));
   }, [dispatch]);
-
-  const loadComunicazioni = async () => {
-    setIsLoading(true);
-    await dispatch(fetchComunicazioni());
-    setIsLoading(false);
-  };
 
   return (
     <View style={styles.container}>
@@ -39,7 +33,7 @@ const HomeScreen = ({ navigation }) => {
               data={data}
               keyExtractor={item => item.id}
               refreshing={isLoading}
-              onRefresh={() => loadComunicazioni()}
+              onRefresh={() => dispatch(fetchComunicazioni())}
               showsVertcialScrollIndicator={false}
               renderItem={({ item }) => (
                 <Card
