@@ -1,8 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text, TextInput } from "react-native";
-
-import firebase from "firebase";
-import "@firebase/firestore";
+import { useSelector, useDispatch } from "react-redux";
 
 import {
   widthPercentageToDP as wp,
@@ -10,32 +8,24 @@ import {
 } from "react-native-responsive-screen";
 import { Formik } from "formik";
 
-import MyButton from "../MyButton";
+import { postProposta } from "../../store/actions/proposte";
 
-const FormProposta = () => {
-  const postProposta = (nome, descrizione, richieste) => {
-    const db = firebase.firestore();
-    db.collection("proposte")
-      .add({
-        nome: nome,
-        descrizione: descrizione,
-        richieste: richieste,
-        numeroPartecipantiMax: 30
-      })
-      .then(docRef => {
-        console.log("Document written with ID: ", docRef.id);
-      })
-      .catch(error => {
-        console.log("Error adding document: ", error);
-      });
-  };
+import LoadingButton from "../LoadingButton";
+
+const Form = () => {
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
+  const isLoading = useSelector(state => state.proposte.loading);
 
   return (
     <Formik
-      initialValues={{ nome: "", descrizione: "", richieste: "" }}
-      onSubmit={values =>
-        postProposta(values.nome, values.descrizione, values.richieste)
-      }
+      initialValues={{
+        nomeProposta: "",
+        descrizione: "",
+        richieste: "",
+        numeroPartecipanti: ""
+      }}
+      onSubmit={values => dispatch(postProposta(values, user))}
     >
       {props => (
         <View style={styles.container}>
@@ -59,7 +49,12 @@ const FormProposta = () => {
             onChangeText={props.handleChange("richieste")}
             value={props.values.richieste}
           />
-          <MyButton action={props.handleSubmit} text="Invia" color="#1ed15a" />
+          <LoadingButton
+            handleSubmit={props.handleSubmit}
+            loading={isLoading}
+            text="Invia"
+            color="#1ed15a"
+          />
         </View>
       )}
     </Formik>
@@ -112,4 +107,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default FormProposta;
+export default Form;
