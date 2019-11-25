@@ -1,55 +1,77 @@
 import * as actionTypes from "./actionTypes";
 
+import firebase from "firebase";
+import "@firebase/firestore";
+import "@firebase/storage";
+
 export const fetchComunicazioni = () => {
+  const newArray = [];
   return async dispatch => {
     dispatch({ type: actionTypes.FETCH_COMUNICAZIONI_START });
-    try {
-      const response = await fetch(
-        "http://liloautogestito.ch/API/comunicazioni_static.py"
+    firebase
+      .firestore()
+      .collection("comunicazioni")
+      .get()
+      .then(comunicazioni => {
+        comunicazioni.forEach(comunicazione => {
+          firebase
+            .storage()
+            .ref(comunicazione.data().immagine)
+            .getDownloadURL()
+            .then(imageUrl => {
+              newArray.push({ ...comunicazione.data(), immagine: imageUrl });
+            })
+            .then(() =>
+              dispatch({
+                type: actionTypes.FETCH_COMUNICAZIONI_SUCCESS,
+                payload: newArray
+              })
+            );
+        });
+      })
+      .catch(error =>
+        dispatch({
+          type: actionTypes.FETCH_COMUNICAZIONI_ERROR,
+          payload: error
+        })
       );
-      const resData = await response.json();
-      dispatch({
-        type: actionTypes.FETCH_COMUNICAZIONI_SUCCESS,
-        comunicazioniData: resData
-      });
-    } catch (error) {
-      dispatch({
-        type: actionTypes.FETCH_COMUNICAZIONI_ERROR,
-        error: error
-      });
-    }
   };
 };
 
-// export const addComunicazione = comunicazione => {
-//   return async dispatch => {
-//     const response = await fetch(
-//       "https://lilo-back-end.firebaseio.com/comunicazioni.json",
-//       {
-//         method: "POST",
-//         headers: {
-//           "Content-type": "Application/json"
-//         },
-//         body: JSON.stringify(comunicazione)
-//       }
-//     );
-//     const resData = await response.json();
-//     console.log(resData);
-//     dispatch({
-//       type: ADD_COMUNICAZIONE,
-//       comunicazioneData: {
-//         id: resData.name,
-//         comunicazione
-//       }
-//     });
-//   };
-// };
-
-// export const deleteComunicazione = () => {
-//   return dispatch => {
-//     dispatch({
-//       type: DELETE_COMUNICAZIONE,
-//       cid: comunicazioneId
-//     });
-//   };
-// };
+export const postComunicazione = values => {
+  const { titolo, sottotitolo, testo, image } = values;
+  return async dispatch => {
+    dispatch({ type: actionTypes.POST_COMUNICAZIONE_START });
+    const db = firebase.firestore();
+    const response = await fetch(image);
+    const blob = await response.blob();
+    const imageRef = "comunicazioni/" + titolo.toLowerCase();
+    firebase
+      .storage()
+      .ref()
+      .child(imageRef)
+      .put(blob)
+      .then(() =>
+        db
+          .collection("comunicazioni")
+          .add({
+            titolo: titolo,
+            sottotitolo: sottotitolo,
+            testo: testo,
+            immagine: imageRef
+          })
+          .then(docRef => {
+            dispatch({
+              type: actionTypes.POST_COMUNICAZIONE_SUCCESS,
+              payload: docRef
+            });
+          })
+          .catch(error => {
+            dispatch({
+              type: actionTypes.POST_COMUNICAZIONE_ERROR,
+              payload: error
+            });
+          })
+      );
+  };
+};
