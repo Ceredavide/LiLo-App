@@ -31,12 +31,10 @@ const SettingsScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.cardContainer}>
-        <View style={styles.containerImage}>
-          <Image
-            style={styles.image}
-            source={require("../assets/images/logo.png")}
-          />
-        </View>
+        <Image
+          style={styles.image}
+          source={require("../assets/images/student-hat.png")}
+        />
         <Chip
           icon="error"
           onPress={() => Linking.openURL("mailto:root@liloautogestito.ch")}
@@ -63,7 +61,7 @@ const SettingsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#009fff"
+    backgroundColor: "#009fff",
   },
   cardContainer: {
     flex: 1,
@@ -71,39 +69,17 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     alignItems: "center",
+    justifyContent: "space-around",
     backgroundColor: "#F1F5F9"
   },
   image: {
     width: wp("70%"),
     height: wp("70%"),
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84
-  },
-  containerImage: {
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: wp("3%"),
-    marginTop: hp("3%"),
-    marginBottom: hp("5%")
-  },
-  containerSettings: {
-    flex: 1,
-    alignItems: "center",
-    margin: 5
+    borderRadius: 20
   },
   bottoniContainer: {
     marginBottom: hp("5%")
   },
-  email: {
-    textAlign: "center",
-    marginLeft: wp("13%"),
-    fontSize: hp("2%")
-  }
 });
 
 export default SettingsScreen;
