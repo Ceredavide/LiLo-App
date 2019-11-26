@@ -26,7 +26,6 @@ const ImagePickerExample = ({ image, setFieldValue }) => {
     });
 
     if (!result.cancelled) {
-      console.log(result)
       setFieldValue("image", result.uri);
     }
   };
