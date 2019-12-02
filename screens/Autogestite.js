@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
+import { useDispatch } from "react-redux";
 
 import ChartProposte from "../components/autogestite/ChartProposte";
 import UltimeProposte from "../components/autogestite/UltimeProposte";
 import MyButton from "../components/MyButton";
 
+import { fetchProposte } from "../store/actions/proposte";
+
 const AutogestiteScreen = ({ navigation }) => {
-  goToProposta = () => {
-    navigation.navigate("Proposta");
-  };
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchProposte());
+  });
 
   return (
     <View style={styles.container}>
@@ -16,7 +21,7 @@ const AutogestiteScreen = ({ navigation }) => {
         <ChartProposte />
         <UltimeProposte />
         <MyButton
-          action={goToProposta}
+          action={() => navigation.navigate("Proposta")}
           text="Proponi un'attività"
           color="#009fff"
         />
