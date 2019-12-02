@@ -5,6 +5,7 @@ import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import HomeScreen from "../../screens/Home";
 import ComunicazioneScreen from "../../screens/Comunicazione";
 import ComunicazioniScreen from "../../screens/Comunicazioni";
+import NewComunicazioneScreen from "../../screens/NewComunicazione";
 
 import HeaderStyle from "../../styles/navigation/Header";
 
@@ -12,7 +13,8 @@ const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
     Comunicazione: ComunicazioneScreen,
-    Comunicazioni: ComunicazioniScreen
+    Comunicazioni: ComunicazioniScreen,
+    NewComunicazione: NewComunicazioneScreen
   },
   {
     mode: "modal",
@@ -27,7 +29,17 @@ HomeScreen.navigationOptions = {
 ComunicazioniScreen.navigationOptions = {
   title: "Comunicazioni",
   headerTitleStyle: {
-    fontFamily: "playfair-regular",
+    fontFamily: "futura-bold",
+    fontWeight: "bold",
+    fontSize: hp("3%"),
+    marginBottom: hp("1%")
+  }
+};
+
+NewComunicazioneScreen.navigationOptions = {
+  title: "Nuova Comunicazione",
+  headerTitleStyle: {
+    fontFamily: "futura-bold",
     fontWeight: "bold",
     fontSize: hp("3%"),
     marginBottom: hp("1%")
