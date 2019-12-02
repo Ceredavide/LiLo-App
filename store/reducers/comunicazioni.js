@@ -32,13 +32,11 @@ const comunicazioniReducer = (state = initialState, action) => {
         loading: true
       };
     case "POST_COMUNICAZIONE_SUCCESS":
-      console.log("porcoddio funziona");
       return {
         ...state,
         loading: false
       };
     case "POST_COMUNICAZIONE_ERROR":
-      console.log(action.payload);
       return {
         ...state,
         loading: false

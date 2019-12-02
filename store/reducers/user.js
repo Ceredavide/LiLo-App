@@ -10,7 +10,6 @@ const initialState = {
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case "SAVE_USER_CREDENTIALS":
-      console.log("sto salvando l'user")
       const { id, nome, cognome, classe, email } = action.payload;
       const isAdmin =
         email === "andrixmelone01@gmail.com" ||
@@ -25,7 +24,6 @@ const userReducer = (state = initialState, action) => {
         isAdmin: isAdmin
       };
     case "DELETE_USER_CREDENTIALS":
-      console.log("sto eliminando l'user")
       return {
         ...state,
         id: "",
