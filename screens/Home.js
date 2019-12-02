@@ -12,7 +12,7 @@ import FloatingButton from "../components/home/FloatingButton";
 
 const HomeScreen = ({ navigation }) => {
   const isLoading = useSelector(state => state.comunicazioni.loading);
-  const data = useSelector(state => state.comunicazioni.comunicazioni);
+  const comunicazioni = useSelector(state => state.comunicazioni.comunicazioni);
   const dispatch = useDispatch();
 
   const userEmail = firebase.auth().currentUser.email;
@@ -30,16 +30,17 @@ const HomeScreen = ({ navigation }) => {
         ) : (
           <View>
             <FlatList
-              data={data}
+              data={comunicazioni}
               keyExtractor={item => item.id}
               refreshing={isLoading}
               onRefresh={() => dispatch(fetchComunicazioni())}
-              showsVertcialScrollIndicator={false}
+              showsVerticalScrollIndicator={false}
               renderItem={({ item }) => (
                 <Card
                   titolo={item.titolo}
-                  img={item.img}
-                  comunicazione={item.comunicazione}
+                  img={item.immagine}
+                  sottotitolo={item.sottotitolo}
+                  paragrafo={item.testo}
                 />
               )}
             />
@@ -66,9 +67,8 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     flex: 1,
-    padding: 5,
-    borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#F1F5F9"
