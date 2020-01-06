@@ -1,26 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, FlatList, ActivityIndicator } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
 
-import * as firebase from "firebase";
-
-import { saveUser } from "../store/actions/user";
-import { fetchComunicazioni } from "../store/actions/comunicazioni";
+import fetchComunicazioni from "../services/fetchComunicazioni"
 
 import Card from "../components/home/Card";
 import FloatingButton from "../components/home/FloatingButton";
 
 const HomeScreen = ({ navigation }) => {
-  const isLoading = useSelector(state => state.comunicazioni.loading);
-  const comunicazioni = useSelector(state => state.comunicazioni.comunicazioni);
-  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false)
+  const [comunicazioni, setComunicazioni] = useState([])
+  const [userEmail, setUserEmail] = useState("")
 
-  const userEmail = firebase.auth().currentUser.email;
+  handleLoading = async() => {
+    setIsLoading(true)
+    const { comunicazioni, userEmail } = await fetchComunicazioni()
+    setComunicazioni(comunicazioni)
+    setUserEmail(userEmail)
+    setIsLoading(false)
+  }
 
   useEffect(() => {
-    dispatch(fetchComunicazioni());
-    dispatch(saveUser(userEmail));
-  }, [dispatch]);
+    handleLoading()
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -28,33 +29,33 @@ const HomeScreen = ({ navigation }) => {
         {isLoading ? (
           <ActivityIndicator />
         ) : (
-          <View>
-            <FlatList
-              data={comunicazioni}
-              keyExtractor={item => item.id}
-              refreshing={isLoading}
-              onRefresh={() => dispatch(fetchComunicazioni())}
-              showsVerticalScrollIndicator={false}
-              renderItem={({ item }) => (
-                <Card
-                  titolo={item.titolo}
-                  img={item.immagine}
-                  sottotitolo={item.sottotitolo}
-                  paragrafo={item.testo}
-                />
-              )}
-            />
-            {userEmail === "ceredavide@live.it" ||
-            userEmail === "andrixmelone01@gmail.com" ||
-            userEmail === "samuele.meschini@outlook.it" ? (
-              <FloatingButton
-                name="edit"
-                action={() => navigation.navigate("Comunicazioni")}
-                color="white"
+            <View>
+              <FlatList
+                data={comunicazioni}
+                keyExtractor={item => item._id}
+                refreshing={isLoading}
+                onRefresh={() => handleLoading()}
+                showsVerticalScrollIndicator={false}
+                renderItem={({ item }) => (
+                  <Card
+                    titolo={item.titolo}
+                    img={item.immagine}
+                    sottotitolo={item.sottotitolo}
+                    paragrafo={item.testo}
+                  />
+                )}
               />
-            ) : null}
-          </View>
-        )}
+              {userEmail === "ceredavide@live.it" ||
+                userEmail === "andrixmelone01@gmail.com" ||
+                userEmail === "samuele.meschini@outlook.it" ? (
+                  <FloatingButton
+                    name="edit"
+                    action={() => navigation.navigate("Comunicazioni")}
+                    color="white"
+                  />
+                ) : null}
+            </View>
+          )}
       </View>
     </View>
   );
