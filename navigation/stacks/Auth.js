@@ -1,11 +1,11 @@
-import { createAppContainer, createStackNavigator } from "react-navigation";
+import { createStackNavigator } from "react-navigation";
 
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 
 import LoginScreen from "../../screens/Login";
 import SignUpScreen from "../../screens/SignUp";
 
-const LoginStack = createStackNavigator(
+ export default AuthStack = createStackNavigator(
   {
     Login: LoginScreen,
     SignUp: SignUpScreen
@@ -37,5 +37,3 @@ LoginScreen.navigationOptions = {
 SignUpScreen.navigationOptions = {
   title: "Nuovo Account"
 }
-
-export default screen = createAppContainer(LoginStack);
