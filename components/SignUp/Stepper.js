@@ -6,8 +6,8 @@ import {
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 import { Formik } from "formik";
+import axios from "axios";
 import { ProgressSteps, ProgressStep } from "react-native-progress-steps";
-import * as firebase from "firebase";
 
 import Form1 from "./Form1";
 import Form2 from "./Form2";
@@ -51,13 +51,12 @@ const Stepper = () => {
     }
   };
 
-  createUser = (email, password) => {
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .catch(error => {
-        Alert.alert(error.message);
-      });
+  createUser = async (email, password) => {
+    const response = await axios.post("https://cere.dev/users", {
+      email: email,
+      password: password
+    });
+    console.log(response);
   };
 
   return (
