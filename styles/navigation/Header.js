@@ -8,11 +8,11 @@ export default styles = StyleSheet.create({
     height: hp("8%"),
     borderBottomWidth: 0
   },
-  headerTintColor: "#fff",
   headerTitleStyle: {
-    fontFamily: "playfair-regular",
+    color: "white",
+    fontFamily: "futura-bold",
     fontWeight: "bold",
-    fontSize: hp("5%"),
+    fontSize: hp("5.5%"),
     marginBottom: hp("1%")
   }
 });
