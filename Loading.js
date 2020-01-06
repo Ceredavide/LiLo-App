@@ -1,11 +1,16 @@
-import React from "react";
-import { Alert } from "react-native";
+import React, { useState } from "react";
+import { AsyncStorage, Alert } from "react-native";
 import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
 import * as Font from "expo-font";
 
-const LoadingScreen = ({ handleEnd }) => {
-  loadResourcesAsync = async () => {
+const LoadingScreen = ({ navigation }) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const loadResourcesAsync = async () => {
+    const user = await AsyncStorage.getItem("user")
+    if (user !== null) {
+      setIsAuthenticated(true)
+    }
     return Promise.all([
       Asset.loadAsync([
         require("./assets/images/icon.png"),
@@ -19,20 +24,20 @@ const LoadingScreen = ({ handleEnd }) => {
         "open-sans-regular": require("./assets/fonts/OpenSans-Regular.ttf"),
         "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
         "robot-bold": require("./assets/fonts/Roboto-Bold.ttf"),
-        "futura-medium" : require("./assets/fonts/Futura-medium.ttf"),
+        "futura-medium": require("./assets/fonts/Futura-medium.ttf"),
         "futura-bold": require("./assets/fonts/Futura-Bold.ttf"),
-        "futura-book" : require("./assets/fonts/Futura-Book.ttf")
+        "futura-book": require("./assets/fonts/Futura-Book.ttf")
       })
     ]);
   };
 
-  handleLoadingError = error => {
+  const handleLoadingError = error => {
     console.log(error),
       Alert.alert("Qualcosa è andato storto, faresti meglio a riavviare l'app");
   };
 
-  handleFinishLoading = () => {
-    handleEnd();
+  const handleFinishLoading = () => {
+    navigation.navigate(isAuthenticated ? "App" : "Auth")
   };
 
   return (
