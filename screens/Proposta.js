@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View, ScrollView } from "react-native";
 
-import FormProposta from "../components/proposta/FormProposta";
+import FormProposta from "../components/proposta/Form";
 
 const PropostaScreen = ({ navigation }) => {
   return (
@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
     padding: 5,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
-    alignItems: "center",
     backgroundColor: "#F1F5F9",
     shadowColor: "#000",
     shadowOffset: {
