@@ -1,27 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, View, SectionList, ActivityIndicator } from "react-native";
+import { useSelector, useDispatch } from "react-redux"
 
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 
-import fetchAssenze from "../services/fetchAssenze"
+import { fetchAssenze } from "../store/actions/assenze"
 
 import Header from "../components/assenze/Header";
 import Item from "../components/assenze/Item";
 import NoAssenze from "../components/assenze/NoAssenze";
 
 const AssenzeScreen = () => {
-  const [isLoading, setIsLoading] = useState(false)
-  const [assenze, setAssenze] = useState([])
-
-  const handleLoading = async () => {
-    setIsLoading(true)
-    const assenze = await fetchAssenze()
-    setAssenze(assenze)
-    setIsLoading(false)
-  }
+  const dispatch = useDispatch()
+  const isLoading = useSelector(state => state.assenze.isLoading)
+  const assenze = useSelector(state => state.assenze.assenze)
 
   useEffect(() => {
-    handleLoading()
+    dispatch(fetchAssenze())
   }, []);
 
   return (
@@ -32,12 +27,12 @@ const AssenzeScreen = () => {
         ) : assenze === "" ? (
           <NoAssenze
             isLoading={isLoading}
-            loadAssenze={() => handleLoading()}
+            loadAssenze={() => dispatch(fetchAssenze())}
           />
         ) : (
               <SectionList
                 refreshing={isLoading}
-                onRefresh={() => handleLoading()}
+                onRefresh={() => dispatch(fetchAssenze())}
                 showsVerticalScrollIndicator={false}
                 renderSectionHeader={({ section: { title } }) => (
                   <Header title={title} />
