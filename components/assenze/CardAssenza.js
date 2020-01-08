@@ -6,7 +6,7 @@ import {
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 
-const Item = ({ nome, descrizione }) => {
+const CardAssenza = ({ nome, descrizione }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.nome}>{nome}:</Text>
@@ -42,4 +42,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Item;
+export default CardAssenza;
