@@ -1,20 +1,15 @@
-import { createAppContainer, createSwitchNavigator } from "react-navigation";
+import React from "react"
+import { Provider } from "react-redux"
 
-import AuthStack from "./navigation/stacks/Auth";
-import MainTabNavigator from "./navigation/MainTabNavigator";
+import MainNavigator from "./navigation/MainNavigator"
+import store from "./store/store"
 
-import LoadingScreen from "./Loading";
+const App = () => {
+    return (
+        <Provider store={store}>
+            <MainNavigator />
+        </Provider>
+    )
+}
 
-
-export default App = createAppContainer(
-  createSwitchNavigator(
-    {
-      AuthLoading: LoadingScreen,
-      App: MainTabNavigator,
-      Auth: AuthStack,
-    },
-    {
-      initialRouteName: 'AuthLoading',
-    }
-  )
-);
+export default App;
