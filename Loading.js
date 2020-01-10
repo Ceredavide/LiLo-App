@@ -1,15 +1,21 @@
 import React, { useState } from "react";
 import { AsyncStorage, Alert } from "react-native";
+import { useDispatch } from "react-redux"
+
 import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
 import * as Font from "expo-font";
 
+import { SAVE_USER_CREDENTIALS } from "./store/actionTypes"
+
 const LoadingScreen = ({ navigation }) => {
+  const dispatch = useDispatch()
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const loadResourcesAsync = async () => {
     const user = await AsyncStorage.getItem("user")
     if (user !== null) {
       setIsAuthenticated(true)
+      dispatch({ type: SAVE_USER_CREDENTIALS, user: (await JSON.parse(user)).user })
     }
     return Promise.all([
       Asset.loadAsync([
