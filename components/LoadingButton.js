@@ -28,6 +28,7 @@ const LoadingButton = ({ text, handleSubmit, loading, color }) => {
 
 const styles = StyleSheet.create({
   buttonLogin: {
+    alignSelf: "center",
     marginTop: hp("4%"),
     height: hp("6%"),
     width: wp("60%"),
