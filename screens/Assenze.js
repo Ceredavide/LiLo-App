@@ -7,7 +7,7 @@ import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import { fetchAssenze } from "../store/actions/assenze"
 
 import Header from "../components/assenze/Header";
-import Item from "../components/assenze/Item";
+import CardAssenza from "../components/assenze/CardAssenza";
 import NoAssenze from "../components/assenze/NoAssenze";
 
 const AssenzeScreen = () => {
@@ -38,7 +38,7 @@ const AssenzeScreen = () => {
                   <Header title={title} />
                 )}
                 renderItem={({ item, index }) => (
-                  <Item
+                  <CardAssenza
                     key={index}
                     nome={item.name}
                     descrizione={item.description}
