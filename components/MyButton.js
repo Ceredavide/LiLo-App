@@ -19,6 +19,7 @@ const MyButton = ({ action, text, color }) => {
 
 const styles = StyleSheet.create({
   button: {
+    alignSelf: "center",
     marginTop: hp("1%"),
     height: hp("6%"),
     width: wp("55%"),
