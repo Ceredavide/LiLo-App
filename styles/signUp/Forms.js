@@ -7,7 +7,7 @@ import {
 
 export default styles = StyleSheet.create({
   form: {
-    alignItems: "center"
+    alignSelf: "center"
   },
   textInput: {
     height: hp("5%"),
