@@ -8,6 +8,7 @@ import {
 import { Chip } from "react-native-paper";
 
 import MyButton from "../components/MyButton";
+import UserInfo from "../components/settings/UserInfo"
 
 const SettingsScreen = ({ navigation }) => {
 
@@ -29,11 +30,13 @@ const SettingsScreen = ({ navigation }) => {
           source={require("../assets/images/student-hat.png")}
         />
         <Chip
+        style={{marginTop: 10}}
           icon="error"
           onPress={() => Linking.openURL("mailto:root@liloautogestito.ch")}
         >
           root@liloautogestito.ch
         </Chip>
+        <UserInfo />
         <View style={styles.bottoniContainer}>
           <MyButton
             action={handleTermini}
