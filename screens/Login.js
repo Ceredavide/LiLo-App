@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, StatusBar, Image, Text } from "react-native";
+import { StyleSheet, TouchableWithoutFeedback, Keyboard, View, StatusBar, Image, Text } from "react-native";
 
 import {
   widthPercentageToDP as wp,
@@ -11,28 +11,25 @@ import TouchableText from "../components/TouchableText";
 
 const LoginScreen = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <StatusBar backgroundColor="white" barStyle="dark-content" />
-      <Text style={styles.text}>LiLo App</Text>
-      <Image
-        style={styles.image}
-        source={require("../assets/images/scuola.jpeg")}
-      />
-      <FormLogin />
-      <View style={styles.buttons}>
-        <Text style={styles.textFooter}>Non hai ancora un account?</Text>
-        <TouchableText
-          action={() => navigation.navigate("SignUp")}
-          text="Registrati"
-          textStyle={{
-            fontSize: 20,
-            color: "#009fff",
-            fontFamily: "open-sans-regular",
-            textDecorationLine: "underline"
-          }}
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.container}>
+        <StatusBar backgroundColor="white" barStyle="dark-content" />
+        <Text style={styles.text}>LiLo App</Text>
+        <Image
+          style={styles.image}
+          source={require("../assets/images/scuola.jpeg")}
         />
+        <FormLogin navigation={navigation} />
+        <View style={styles.buttons}>
+          <Text style={styles.textFooter}>Non hai ancora un account?</Text>
+          <TouchableText
+            action={() => navigation.navigate("SignUp")}
+            text="Registrati"
+            textStyle={styles.signUp}
+          />
+        </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -67,6 +64,12 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: "center",
     paddingBottom: hp("5%")
+  },
+  signUp: {
+    fontSize: 20,
+    color: "#009fff",
+    fontFamily: "open-sans-regular",
+    textDecorationLine: "underline"
   },
   textFooter: {
     fontFamily: "open-sans-regular"

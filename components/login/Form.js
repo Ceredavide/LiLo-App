@@ -1,40 +1,31 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Alert, TextInput } from "react-native";
+import { StyleSheet, View, TextInput } from "react-native";
 
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 import { Formik } from "formik";
-import * as firebase from "firebase";
 import { AntDesign } from "@expo/vector-icons";
+
+import tryLogin from "../../services/tryLogin"
 
 import TouchableText from "../TouchableText";
 import LoadingButton from "../LoadingButton";
 
-const Form = () => {
+const Form = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
 
-  tryLogin = ({ user, password }) => {
+  handleLogin = async ({ email, password }) => {
     setLoading(true);
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(user, password)
-      .then(
-        () => {
-          setLoading(false);
-        },
-        error => {
-          setLoading(false);
-          Alert.alert(error.message);
-        }
-      );
+    tryLogin(email, password, navigation)
+    setLoading(false)
   };
 
   return (
     <Formik
-      initialValues={{ user: "", password: "" }}
-      onSubmit={values => tryLogin(values)}
+      initialValues={{ email: "", password: "" }}
+      onSubmit={values => handleLogin(values)}
     >
       {props => (
         <View style={styles.form}>
@@ -46,11 +37,12 @@ const Form = () => {
               style={styles.icon}
             />
             <TextInput
-              autoCapitalize={false}
+              autoCapitalize="none"
               placeholder="e-mail"
+              keyboardType="email-address"
               style={styles.textInput}
-              onChangeText={props.handleChange("user")}
-              value={props.values.user}
+              onChangeText={props.handleChange("email")}
+              value={props.values.email}
               returnKeyType="next"
             />
           </View>
@@ -70,8 +62,9 @@ const Form = () => {
               returnKeyType="next"
             />
           </View>
+          {/* Bottone password dimenticata */}
           <TouchableText
-            action={() => Alert.alert("banfo")}
+            action={() => setModalVisible(true)}
             text="Password dimenticata?"
             textStyle={styles.forgotPassword}
           />
@@ -92,7 +85,7 @@ const styles = StyleSheet.create({
     height: hp("45%"),
     alignItems: "center",
     justifyContent: "center",
-    marginHorizontal: wp("5%"),
+    marginHorizontal: wp("5%")
   },
   containerTextInput: {
     marginTop: hp("5%"),
@@ -106,7 +99,7 @@ const styles = StyleSheet.create({
   textInput: {
     height: hp("5%"),
     width: wp("70%"),
-    padding: wp("3%"),
+    paddingLeft: wp("3%"),
     fontSize: hp("2%"),
     fontFamily: "open-sans-regular",
     borderBottomWidth: 1.5,
