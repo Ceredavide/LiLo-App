@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { StyleSheet, View, TextInput } from "react-native";
+import { useDispatch } from "react-redux"
+
+import { SAVE_USER_CREDENTIALS } from "../../store/actionTypes"
 
 import {
   widthPercentageToDP as wp,
@@ -14,11 +17,15 @@ import TouchableText from "../TouchableText";
 import LoadingButton from "../LoadingButton";
 
 const Form = ({ navigation }) => {
+  const dispatch = useDispatch()
   const [loading, setLoading] = useState(false);
 
   handleLogin = async ({ email, password }) => {
     setLoading(true);
-    tryLogin(email, password, navigation)
+    const user = await tryLogin(email, password, navigation)
+    if (user) {
+      dispatch({ type: SAVE_USER_CREDENTIALS, user: user })
+    }
     setLoading(false)
   };
 
