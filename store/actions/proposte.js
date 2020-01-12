@@ -1,4 +1,5 @@
 import * as actionTypes from "../actionTypes";
+import { AsyncStorage } from "react-native"
 import axios from "axios";
 
 export const fetchProposte = () => {
