@@ -1,31 +1,33 @@
 import React, { useEffect } from "react";
-import { StyleSheet, View } from "react-native";
-import { useDispatch } from "react-redux";
+import { StyleSheet, View, ScrollView } from "react-native";
+import { useSelector, useDispatch } from "react-redux"
+
+import { fetchProposte } from "../store/actions/proposte"
 
 import ChartProposte from "../components/autogestite/ChartProposte";
 import UltimeProposte from "../components/autogestite/UltimeProposte";
 import MyButton from "../components/MyButton";
 
-import { fetchProposte } from "../store/actions/proposte";
-
 const AutogestiteScreen = ({ navigation }) => {
-  const dispatch = useDispatch();
-
+  const dispatch = useDispatch()
+  const isLoading = useSelector(state => state.proposte.loadingList)
+  const proposte = useSelector(state => state.proposte.proposte)
+  
   useEffect(() => {
-    dispatch(fetchProposte());
-  });
+    dispatch(fetchProposte())
+  }, []);
 
   return (
     <View style={styles.container}>
-      <View style={styles.cardContainer}>
-        <ChartProposte />
-        <UltimeProposte />
+      <ScrollView style={styles.cardContainer}>
         <MyButton
           action={() => navigation.navigate("Proposta")}
           text="Proponi un'attività"
           color="#009fff"
         />
-      </View>
+        <ChartProposte isLoading={isLoading} proposte={proposte} />
+        <UltimeProposte isLoading={isLoading} proposte={proposte} />
+      </ScrollView>
     </View>
   );
 };
@@ -40,7 +42,6 @@ const styles = StyleSheet.create({
     padding: 5,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
-    alignItems: "center",
     backgroundColor: "#F1F5F9"
   }
 });
