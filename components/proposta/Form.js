@@ -1,61 +1,74 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, View, Text, TextInput } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
 
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 import { Formik } from "formik";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-import { postProposta } from "../../store/actions/proposte";
+import postProposta from "../../services/postProposta"
 
 import LoadingButton from "../LoadingButton";
 
 const Form = () => {
-  const dispatch = useDispatch();
-  const user = useSelector(state => state.user);
-  const isLoading = useSelector(state => state.proposte.loading);
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleProposta = async ({ nome, descrizione, richieste, numeroPartecipanti }) => {
+    setIsLoading(true)
+    postProposta(nome, descrizione, numeroPartecipanti, richieste)
+      .then(() => { setIsLoading(false)})
+  }
 
   return (
     <Formik
       initialValues={{
-        nomeProposta: "",
+        nome: "",
         descrizione: "",
         richieste: "",
         numeroPartecipanti: ""
       }}
-      onSubmit={values => dispatch(postProposta(values, user))}
+      onSubmit={(values) => handleProposta(values)}
     >
       {props => (
-        <View style={styles.container}>
-          <Text style={styles.text}>Nome Attività:</Text>
-          <TextInput
-            style={styles.textInput}
-            onChangeText={props.handleChange("nome")}
-            value={props.values.nome}
-          />
-          <Text style={styles.text}>Descrizione:</Text>
-          <TextInput
-            style={styles.textArea}
-            onChangeText={props.handleChange("descrizione")}
-            value={props.values.descrizione}
-            multiline={true}
-            numberOfLines={4}
-          />
-          <Text style={styles.text}>Richieste Particolari:</Text>
-          <TextInput
-            style={{ ...styles.textInput, marginBottom: hp("4%") }}
-            onChangeText={props.handleChange("richieste")}
-            value={props.values.richieste}
-          />
-          <LoadingButton
-            handleSubmit={props.handleSubmit}
-            loading={isLoading}
-            text="Invia"
-            color="#1ed15a"
-          />
-        </View>
+        <KeyboardAwareScrollView extraScrollHeight={hp("8%")} showsVerticalScrollIndicator={false}>
+          <View style={styles.container}>
+            <Text style={styles.text}>Nome Attività:</Text>
+            <TextInput
+              style={styles.textInput}
+              onChangeText={props.handleChange("nome")}
+              value={props.values.nome}
+            />
+            <Text style={styles.text}>Descrizione:</Text>
+            <TextInput
+              style={styles.textArea}
+              onChangeText={props.handleChange("descrizione")}
+              value={props.values.descrizione}
+              multiline={true}
+              numberOfLines={4}
+            />
+            <Text style={styles.text}>Numero Partecipanti:</Text>
+            <TextInput
+              style={{ ...styles.textInput }}
+              onChangeText={props.handleChange("numeroPartecipanti")}
+              value={props.values.numeroPartecipanti}
+              keyboardType="numeric"
+            />
+            <Text style={styles.text}>Richieste Particolari:</Text>
+            <TextInput
+              style={{ ...styles.textInput, marginBottom: hp("4%") }}
+              onChangeText={props.handleChange("richieste")}
+              value={props.values.richieste}
+            />
+            <LoadingButton
+              handleSubmit={props.handleSubmit}
+              loading={isLoading}
+              text="Invia"
+              color="#1ed15a"
+            />
+          </View>
+        </KeyboardAwareScrollView>
       )}
     </Formik>
   );
@@ -64,7 +77,7 @@ const Form = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center"
+    paddingBottom: hp("5%")
   },
   text: {
     alignSelf: "flex-start",
@@ -74,6 +87,7 @@ const styles = StyleSheet.create({
     marginBottom: hp("1%")
   },
   textInput: {
+    alignSelf: "center",
     height: hp("8%"),
     width: wp("80%"),
     padding: wp("3%"),
@@ -86,10 +100,10 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.2,
     shadowRadius: 1.41,
-
     elevation: 2
   },
   textArea: {
+    alignSelf: "center",
     height: hp("20%"),
     width: wp("80%"),
     padding: wp("3%"),
@@ -102,7 +116,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.2,
     shadowRadius: 1.41,
-
     elevation: 2
   }
 });
