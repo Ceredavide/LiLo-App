@@ -11,8 +11,7 @@ import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 
 const NoAssenze = ({ isLoading, loadAssenze }) => {
   return (
-    <ScrollView style={styles.container}>
-      <RefreshControl refreshing={isLoading} onRefresh={() => loadAssenze()} />
+    <ScrollView style={styles.container} refreshControl={<RefreshControl refreshing={isLoading} onRefresh={() => loadAssenze()} />}>
       <View style={styles.card}>
         <Text style={styles.emoji}>🤷🏻‍♂️</Text>
         <Text style={styles.text}>Non sono previste assenze</Text>
@@ -23,10 +22,10 @@ const NoAssenze = ({ isLoading, loadAssenze }) => {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
+    alignSelf: "center",
   },
   card: {
-      marginTop: hp("20%"),
+    marginTop: hp("20%"),
     alignItems: "center",
     justifyContent: "center"
   },
