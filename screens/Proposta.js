@@ -6,8 +6,8 @@ import FormProposta from "../components/proposta/Form";
 const PropostaScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.card}>
-        <FormProposta />
+      <ScrollView style={styles.card} showsVerticalScrollIndicator={false}>
+        <FormProposta navigation={navigation} />
       </ScrollView>
     </View>
   );
@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
 
     elevation: 1
   },
-  iconButton: {}
 });
 
 export default PropostaScreen;
