@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, TextInput } from "react-native";
+import { useSelector, useDispatch } from "react-redux"
 
 import {
   widthPercentageToDP as wp,
@@ -8,18 +9,13 @@ import {
 import { Formik } from "formik";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-import postProposta from "../../services/postProposta"
+import { postProposta } from "../../store/actions/proposte"
 
 import LoadingButton from "../LoadingButton";
 
-const Form = () => {
-  const [isLoading, setIsLoading] = useState(false)
-
-  const handleProposta = async ({ nome, descrizione, richieste, numeroPartecipanti }) => {
-    setIsLoading(true)
-    postProposta(nome, descrizione, numeroPartecipanti, richieste)
-      .then(() => { setIsLoading(false)})
-  }
+const Form = ({ navigation }) => {
+  const dispatch = useDispatch()
+  const isLoading = useSelector(state => state.proposte.loadingPost)
 
   return (
     <Formik
@@ -27,9 +23,9 @@ const Form = () => {
         nome: "",
         descrizione: "",
         richieste: "",
-        numeroPartecipanti: ""
+        numeroPartecipantiMax: ""
       }}
-      onSubmit={(values) => handleProposta(values)}
+      onSubmit={(values) => dispatch(postProposta(values, navigation))}
     >
       {props => (
         <KeyboardAwareScrollView extraScrollHeight={hp("8%")} showsVerticalScrollIndicator={false}>
@@ -51,8 +47,8 @@ const Form = () => {
             <Text style={styles.text}>Numero Partecipanti:</Text>
             <TextInput
               style={{ ...styles.textInput }}
-              onChangeText={props.handleChange("numeroPartecipanti")}
-              value={props.values.numeroPartecipanti}
+              onChangeText={props.handleChange("numeroPartecipantiMax")}
+              value={props.values.numeroPartecipantiMax}
               keyboardType="numeric"
             />
             <Text style={styles.text}>Richieste Particolari:</Text>

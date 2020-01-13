@@ -14,24 +14,27 @@ const proposteReducer = (state = initialState, action) => {
     case actionTypes.FETCH_PROPOSTE_SUCCESS: {
       return {
         ...state,
-        proposteList: action.proposte,
+        proposte: action.proposte,
         loadingList: false
       };
     }
-    case actionTypes.POST_PROPOSTA_ERROR: {
+    case actionTypes.FETCH_PROPOSTE_ERROR: {
       return {
         ...state,
         loadingList: false
       };
     }
-    case "POST_PROPOSTA_START": {
+    case actionTypes.POST_PROPOSTA_START: {
       return { ...state, loadingPost: true };
     }
-    case "POST_PROPOSTA_SUCCESS": {
-      return { ...state, loadingPost: false };
+    case actionTypes.POST_PROPOSTA_SUCCESS: {
+      return {
+        ...state,
+        proposte: [...state.proposte, action.proposta],
+        loadingPost: false
+      };
     }
-    case "POST_PROPOSTA_ERROR": {
-      console.log(action.payload);
+    case actionTypes.POST_PROPOSTA_ERROR: {
       return { ...state, loadingPost: false };
     }
     default:
