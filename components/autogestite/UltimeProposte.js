@@ -1,38 +1,45 @@
 import React from "react";
-import { StyleSheet, ScrollView, View, Text } from "react-native";
+import { StyleSheet, ScrollView, View, Text, ActivityIndicator, FlatList } from "react-native";
+import { useSelector } from "react-redux"
 
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 
+import CardProposta from "./CardProposta"
+
 const UltimeProposte = () => {
-  return (
-    <ScrollView style={styles.container}>
-      <View style={{ marginTop: hp("10%"), alignItems: "center" }}>
-        <Text>Qui ci saranno le ultime proposte</Text>
-      </View>
-    </ScrollView>
-  );
+  const isLoading = useSelector(state => state.proposte.loadingList)
+  const proposte = useSelector(state => state.proposte.proposte)
+
+  if (isLoading) {
+    return <View style={styles.loadingContainer}>
+      <ActivityIndicator />
+    </View>
+  } else {
+    return <FlatList
+      data={proposte}
+      keyExtractor={item => item._id}
+      renderItem={({ item }) =>
+        <CardProposta isLoading={isLoading} proposta={item} />
+      }
+    />
+  }
 };
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: hp("2%"),
+    flex: 1,
     height: hp("40%"),
     width: wp("95%"),
-    backgroundColor: "white",
-    borderRadius: 20,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1
-    },
-    shadowOpacity: 0.18,
-    shadowRadius: 1.0,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignSelf: "center"
+  },
 
-    elevation: 1
-  }
 });
 
 export default UltimeProposte;
