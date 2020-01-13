@@ -1,26 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, FlatList, ActivityIndicator } from "react-native";
+import { useSelector, useDispatch } from "react-redux"
 
-import fetchComunicazioni from "../services/fetchComunicazioni"
+import { fetchComunicazioni } from "../store/actions/comunicazioni"
 
 import Card from "../components/home/Card";
 import FloatingButton from "../components/home/FloatingButton";
 
 const HomeScreen = ({ navigation }) => {
+  const dispatch = useDispatch()
+  const isAdmin = useSelector(state => state.user.isAdmin)
+  const comunicazioni = useSelector(state => state.comunicazioni.comunicazioni)
   const [isLoading, setIsLoading] = useState(false)
-  const [comunicazioni, setComunicazioni] = useState([])
-  const [userEmail, setUserEmail] = useState("")
+  const [isRefreshing, setIsRefreshing] = useState(false)
 
-  handleLoading = async() => {
-    setIsLoading(true)
-    const { comunicazioni, userEmail } = await fetchComunicazioni()
-    setComunicazioni(comunicazioni)
-    setUserEmail(userEmail)
-    setIsLoading(false)
+  handleRefresh = () => {
+    setIsRefreshing(true)
+    dispatch(fetchComunicazioni())
+      .then(() => setIsRefreshing(false))
   }
 
   useEffect(() => {
-    handleLoading()
+    setIsLoading(true)
+    dispatch(fetchComunicazioni())
+      .then(() => setIsLoading(false))
   }, []);
 
   return (
@@ -33,8 +36,8 @@ const HomeScreen = ({ navigation }) => {
               <FlatList
                 data={comunicazioni}
                 keyExtractor={item => item._id}
-                refreshing={isLoading}
-                onRefresh={() => handleLoading()}
+                refreshing={isRefreshing}
+                onRefresh={() => handleRefresh()}
                 showsVerticalScrollIndicator={false}
                 renderItem={({ item }) => (
                   <Card
@@ -45,15 +48,13 @@ const HomeScreen = ({ navigation }) => {
                   />
                 )}
               />
-              {userEmail === "ceredavide@live.it" ||
-                userEmail === "andrixmelone01@gmail.com" ||
-                userEmail === "samuele.meschini@outlook.it" ? (
-                  <FloatingButton
-                    name="edit"
-                    action={() => navigation.navigate("Comunicazioni")}
-                    color="white"
-                  />
-                ) : null}
+              {isAdmin ? (
+                <FloatingButton
+                  name="edit"
+                  action={() => navigation.navigate("Comunicazioni", { comunicazioni: comunicazioni })}
+                  color="white"
+                />
+              ) : null}
             </View>
           )}
       </View>
