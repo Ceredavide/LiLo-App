@@ -13,7 +13,7 @@ const LoadingScreen = ({ navigation }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const loadResourcesAsync = async () => {
     const user = await AsyncStorage.getItem("user")
-    if (user !== null) {
+    if (!!user) {
       setIsAuthenticated(true)
       dispatch({ type: SAVE_USER_CREDENTIALS, user: (await JSON.parse(user)).user })
     }
