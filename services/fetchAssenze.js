@@ -1,3 +1,5 @@
+//TODO: le assenze dovrebbero agire sotto services, redux è esagerato
+
 import axios from "axios";
 
 export default fetchAssenze = async () => {
