@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, SectionList, ActivityIndicator } from "react-native";
 import { useSelector, useDispatch } from "react-redux"
 
@@ -12,11 +12,20 @@ import NoAssenze from "../components/assenze/NoAssenze";
 
 const AssenzeScreen = () => {
   const dispatch = useDispatch()
-  const isLoading = useSelector(state => state.assenze.isLoading)
   const assenze = useSelector(state => state.assenze.assenze)
+  const [isLoading, setIsLoading] = useState(false)
+  const [isRefreshing, setIsRefreshing] = useState(false)
+
+  handleRefresh = () => {
+    setIsRefreshing(true)
+    dispatch(fetchAssenze())
+    setIsRefreshing(false)
+  }
 
   useEffect(() => {
+    setIsLoading(true)
     dispatch(fetchAssenze())
+      .then(() => setIsLoading(false))
   }, []);
 
   return (
@@ -27,12 +36,12 @@ const AssenzeScreen = () => {
         ) : assenze === "" ? (
           <NoAssenze
             isLoading={isLoading}
-            loadAssenze={() => dispatch(fetchAssenze())}
+            loadAssenze={() => handleRefresh()}
           />
         ) : (
               <SectionList
-                refreshing={isLoading}
-                onRefresh={() => dispatch(fetchAssenze())}
+                refreshing={isRefreshing}
+                onRefresh={() => handleRefresh()}
                 showsVerticalScrollIndicator={false}
                 renderSectionHeader={({ section: { title } }) => (
                   <Header title={title} />
