@@ -1,23 +1,36 @@
-import React from "react";
-import { StyleSheet, View, TextInput } from "react-native";
-import { useDispatch } from "react-redux";
+import React, { useState } from "react";
+import { StyleSheet, ScrollView, TextInput } from "react-native";
 
 import { Formik } from "formik";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from "react-native-responsive-screen";
+
+import postComunicazione from "../services/postComunicazione"
 
 import ImagePicker from "../components/newComunicazione/ImagePicker";
+import LoadingButton from "../components/LoadingButton"
 import MyButton from "../components/MyButton";
 
-import { postComunicazione } from "../store/actions/comunicazioni";
-
 const NewComunicazioneScreen = () => {
-  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handlePost = async ({ titolo, sottotitolo, paragrafo, image }) => {
+    setIsLoading(true)
+    postComunicazione(titolo, sottotitolo, paragrafo, image)
+      .then(() => setIsLoading(false))
+  }
+
   return (
     <Formik
-      initialValues={{ titolo: "", sottotitolo: "", testo: "", image: null }}
-      onSubmit={values => dispatch(postComunicazione(values))}
+      initialValues={{ titolo: "", sottotitolo: "", paragrafo: "", image: null }}
+      onSubmit={values => handlePost(values)}
     >
       {({ values, handleChange, setFieldValue, handleSubmit }) => (
-        <View style={styles.form}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={styles.form}>
           <TextInput
             placeholder="Titolo"
             style={styles.textInput}
@@ -33,15 +46,17 @@ const NewComunicazioneScreen = () => {
             returnKeyType="next"
           />
           <TextInput
-            placeholder="Testo"
-            style={styles.textInput}
-            onChangeText={handleChange("testo")}
-            value={values.testo}
+            placeholder="Paragrafo"
+            multiline={true}
+            numberOfLines={5}
+            style={styles.textArea}
+            onChangeText={handleChange("paragrafo")}
+            value={values.paragrafo}
             returnKeyType="next"
           />
           <ImagePicker image={values.image} setFieldValue={setFieldValue} />
-          <MyButton action={() => handleSubmit()} text="avanti" color="red" />
-        </View>
+          <LoadingButton text="avanti" color="red" loading={isLoading} handleSubmit={() => handleSubmit()} />
+        </ScrollView>
       )}
     </Formik>
   );
@@ -50,7 +65,30 @@ const NewComunicazioneScreen = () => {
 const styles = StyleSheet.create({
   form: {
     flex: 1,
-    alignItems: "center"
+    //alignItems: "center",
+    //margin: hp("8%")
+  },
+  textInput: {
+    height: hp("5%"),
+    width: wp("70%"),
+    paddingLeft: wp("3%"),
+    fontSize: hp("2%"),
+    marginBottom: hp("5%"),
+    fontFamily: "open-sans-regular",
+    borderBottomWidth: 1.5,
+    borderBottomColor: "#009fff"
+  },
+  textArea: {
+    height: hp("20%"),
+    width: wp("70%"),
+    paddingLeft: wp("3%"),
+    fontSize: hp("2%"),
+    marginTop: hp("3%"),
+    marginBottom: hp("5%"),
+    fontFamily: "open-sans-regular",
+    borderWidth: 1.5,
+    borderRadius: 20,
+    borderColor: "#009fff"
   }
 });
 
