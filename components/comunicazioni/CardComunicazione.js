@@ -1,19 +1,23 @@
 import React from "react"
 import { StyleSheet, View, Text, Button } from "react-native"
+import { useDispatch } from "react-redux"
 
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 
-const CardComunicazione = ({ titolo, sottotitolo }) => {
+import { deleteComunicazione } from "../../store/actions/comunicazioni"
+
+const CardComunicazione = ({ id, titolo, sottotitolo, immagine }) => {
+    const dispatch = useDispatch()
     return (
         <View style={styles.card}>
             <Text style={styles.title}>{titolo}</Text>
             <Text style={styles.paragraph}>{sottotitolo}</Text>
             <View style={styles.buttonContainer}>
-                <Button title="elimina" onPress={() => console.log("bella")} color="red" />
-                <Button title="modifica" onPress={() => console.log("bella")} color="#F2AA3E" />
+                <Button title="elimina" onPress={() => dispatch(deleteComunicazione(id, immagine))} color="red" />
+                <Button title="modifica" onPress={() => alert("coming soon")} color="#F2AA3E" />
             </View>
         </View>
     )
@@ -47,7 +51,7 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         marginTop: hp("2%"),
-        flexDirection: "row", 
+        flexDirection: "row",
         justifyContent: "space-around"
     }
 })
