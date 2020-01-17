@@ -1,33 +1,47 @@
+import * as actionTypes from "../actionTypes"
+
 const initialState = {
-  comunicazioni: []
+  comunicazioni: [],
+  isLoadingPost: false
 };
 
 const comunicazioniReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "FETCH_COMUNICAZIONI_START":
+    case actionTypes.FETCH_COMUNICAZIONI_START:
       return {
         ...state,
       };
-    case "FETCH_COMUNICAZIONI_SUCCESS":
+    case actionTypes.FETCH_COMUNICAZIONI_SUCCESS:
+      console.log(action.comunicazioni)
       return {
         ...state,
         comunicazioni: action.comunicazioni
       };
-    case "FETCH_COMUNICAZIONI_ERROR":
+    case actionTypes.FETCH_COMUNICAZIONI_ERROR:
       return {
         ...state,
       };
-    case "POST_COMUNICAZIONE_START":
+    case actionTypes.POST_COMUNICAZIONE_START:
       return {
         ...state,
+        isLoadingPost: true
       };
-    case "POST_COMUNICAZIONE_SUCCESS":
+    case actionTypes.POST_COMUNICAZIONE_SUCCESS:
       return {
         ...state,
+        comunicazioni: [...state.comunicazioni, action.comunicazione],
+        isLoadingPost: false
       };
-    case "POST_COMUNICAZIONE_ERROR":
+    case actionTypes.POST_COMUNICAZIONE_ERROR:
       return {
         ...state,
+        isLoadingPost: false
+      };
+    case actionTypes.REMOVE_ONE_COMUNICAZIONE:
+      const newComunicazioni = state.comunicazioni.filter(item => item._id !== action.id)
+      return {
+        ...state,
+        comunicazioni: newComunicazioni
       };
     default:
       return state;
