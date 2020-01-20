@@ -12,20 +12,31 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { postProposta } from "../../store/actions/proposte"
 
 import LoadingButton from "../LoadingButton";
+import ErrorText from "../../components/ErrorText"
+import validateProposta from "../../services/validateProposta"
 
 const Form = ({ navigation }) => {
+  const [errors, setErrors] = useState({})
   const dispatch = useDispatch()
   const isLoading = useSelector(state => state.proposte.loadingPost)
+
+  const handleSubmit = values => {
+    const errors = validateProposta(values)
+    if (Object.entries(errors).length === 0) {
+      dispatch(postProposta(values, navigation))
+    }
+    setErrors(errors)
+  }
 
   return (
     <Formik
       initialValues={{
-        nome: "",
-        descrizione: "",
-        richieste: "",
-        numeroPartecipantiMax: ""
+        nome: null,
+        descrizione: null,
+        numeroPartecipantiMax: null,
+        richieste: null
       }}
-      onSubmit={(values) => dispatch(postProposta(values, navigation))}
+      onSubmit={values => handleSubmit(values)}
     >
       {props => (
         <KeyboardAwareScrollView extraScrollHeight={hp("8%")} showsVerticalScrollIndicator={false}>
@@ -36,6 +47,7 @@ const Form = ({ navigation }) => {
               onChangeText={props.handleChange("nome")}
               value={props.values.nome}
             />
+            <ErrorText error={errors.nome} />
             <Text style={styles.text}>Descrizione:</Text>
             <TextInput
               style={styles.textArea}
@@ -44,6 +56,7 @@ const Form = ({ navigation }) => {
               multiline={true}
               numberOfLines={4}
             />
+            <ErrorText error={errors.descrizione} />
             <Text style={styles.text}>Numero Partecipanti:</Text>
             <TextInput
               style={{ ...styles.textInput }}
@@ -51,6 +64,7 @@ const Form = ({ navigation }) => {
               value={props.values.numeroPartecipantiMax}
               keyboardType="numeric"
             />
+            <ErrorText error={errors.numeroPartecipantiMax} />
             <Text style={styles.text}>Richieste Particolari:</Text>
             <TextInput
               style={{ ...styles.textInput, marginBottom: hp("4%") }}
@@ -73,14 +87,13 @@ const Form = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop:hp("3%"),
     paddingBottom: hp("5%")
   },
   text: {
     alignSelf: "flex-start",
     fontSize: hp("3%"),
-    marginTop: hp("3%"),
     marginLeft: wp("5%"),
-    marginBottom: hp("1%")
   },
   textInput: {
     alignSelf: "center",
@@ -102,7 +115,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     height: hp("20%"),
     width: wp("80%"),
-    padding: wp("3%"),
+    padding: wp("5%"),
     backgroundColor: "white",
     borderRadius: 10,
     shadowColor: "#000",

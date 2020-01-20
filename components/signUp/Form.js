@@ -1,12 +1,13 @@
 import React from "react";
-import { View, TextInput } from "react-native";
+import { TextInput } from "react-native";
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import LoadingButton from "../LoadingButton"
+import ErrorText from "../ErrorText"
 import styles from "../../styles/signUp/Forms";
 
-const Form = ({ values, handleChange, setFieldValue, handleSubmit, isLoading }) => {
+const Form = ({ values, handleChange, setFieldValue, handleSubmit, isLoading, errors }) => {
   return (
     <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={styles.form}>
       <TextInput
@@ -16,6 +17,7 @@ const Form = ({ values, handleChange, setFieldValue, handleSubmit, isLoading }) 
         value={values.nome}
         returnKeyType="next"
       />
+      <ErrorText error={errors.nome} />
       <TextInput
         placeholder="Cognome"
         style={styles.textInput}
@@ -23,6 +25,7 @@ const Form = ({ values, handleChange, setFieldValue, handleSubmit, isLoading }) 
         value={values.cognome}
         returnKeyType="next"
       />
+      <ErrorText error={errors.cognome} />
       <TextInput
         placeholder="Classe"
         style={styles.textInput}
@@ -33,6 +36,7 @@ const Form = ({ values, handleChange, setFieldValue, handleSubmit, isLoading }) 
         value={values.classe}
         returnKeyType="next"
       />
+      <ErrorText error={errors.classe} />
       <TextInput
         placeholder="Email"
         keyboardType="email-address"
@@ -42,6 +46,7 @@ const Form = ({ values, handleChange, setFieldValue, handleSubmit, isLoading }) 
         value={values.email}
         returnKeyType="next"
       />
+      <ErrorText error={errors.email} />
       <TextInput
         placeholder="Password"
         secureTextEntry={true}
@@ -50,6 +55,7 @@ const Form = ({ values, handleChange, setFieldValue, handleSubmit, isLoading }) 
         value={values.password}
         returnKeyType="next"
       />
+      <ErrorText error={errors.password} />
       <TextInput
         placeholder="Conferma la password"
         secureTextEntry={true}
@@ -58,6 +64,7 @@ const Form = ({ values, handleChange, setFieldValue, handleSubmit, isLoading }) 
         value={values.confirmPassword}
         returnKeyType="next"
       />
+      <ErrorText error={errors.confirmPassword} />
       <LoadingButton handleSubmit={() => handleSubmit()} loading={isLoading} color={"green"} text="Invia" />
     </KeyboardAwareScrollView>
   );
