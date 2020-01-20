@@ -11,17 +11,17 @@ import {
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 
-const LoadingButton = ({ text, handleSubmit, loading, color }) => {
+const LoadingButton = ({ text, handleSubmit, loading, color, style = {} }) => {
   return (
     <TouchableOpacity
-      style={{ ...styles.buttonLogin, backgroundColor: color }}
+      style={{ ...style, ...styles.buttonLogin, backgroundColor: color }}
       onPress={() => handleSubmit()}
     >
       {loading ? (
         <ActivityIndicator color="white" />
       ) : (
-        <Text style={styles.buttonText}>{text}</Text>
-      )}
+          <Text style={styles.buttonText}>{text}</Text>
+        )}
     </TouchableOpacity>
   );
 };
