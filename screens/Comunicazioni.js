@@ -1,13 +1,23 @@
 import React from "react";
-import { StyleSheet, SafeAreaView, View, Text } from "react-native";
+import { StyleSheet, View } from "react-native";
+import {useSelector} from "react-redux"
+
+import ListComunicazioni from "../components/comunicazioni/ListComunicazioni";
+import MyButton from "../components/MyButton";
 
 const ComunicazioniScreen = ({ navigation }) => {
+  const comunicazioni = useSelector(state => state.comunicazioni.comunicazioni)
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.containerList}>
-        <Text>Bella Mateeeeeee</Text>
+        <MyButton
+          action={() => navigation.navigate("NewComunicazione")}
+          text="Nuova Comunicazione"
+          color="#1ed15a"
+        />
+        <ListComunicazioni comunicazioni={comunicazioni} />
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -22,7 +32,6 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     alignItems: "center",
-    justifyContent: "center",
     backgroundColor: "#F1F5F9"
   }
 });
