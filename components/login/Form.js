@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { StyleSheet, View, TextInput } from "react-native";
 import { useDispatch } from "react-redux"
 
-import { SAVE_USER_CREDENTIALS } from "../../store/actionTypes"
-
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
@@ -12,6 +10,8 @@ import { Formik } from "formik";
 import { AntDesign } from "@expo/vector-icons";
 
 import tryLogin from "../../services/tryLogin"
+
+import { SAVE_USER_CREDENTIALS } from "../../store/actionTypes"
 
 import TouchableText from "../TouchableText";
 import LoadingButton from "../LoadingButton";
@@ -22,10 +22,11 @@ const Form = ({ navigation }) => {
 
   handleLogin = async ({ email, password }) => {
     setLoading(true);
-    const user = await tryLogin(email, password, navigation)
-    if (user) {
-      dispatch({ type: SAVE_USER_CREDENTIALS, user: user })
-    }
+    tryLogin(email, password, navigation).then(user => {
+      if (!!user) {
+        dispatch({ type: SAVE_USER_CREDENTIALS, user: user })
+      }
+    })
     setLoading(false)
   };
 
