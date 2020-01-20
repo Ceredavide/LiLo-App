@@ -1,5 +1,7 @@
 import * as actionTypes from "../actionTypes"
 
+import { Alert } from "react-native"
+
 const initialState = {
   comunicazioni: [],
   isLoadingPost: false
@@ -12,7 +14,6 @@ const comunicazioniReducer = (state = initialState, action) => {
         ...state,
       };
     case actionTypes.FETCH_COMUNICAZIONI_SUCCESS:
-      console.log(action.comunicazioni)
       return {
         ...state,
         comunicazioni: action.comunicazioni
@@ -27,6 +28,7 @@ const comunicazioniReducer = (state = initialState, action) => {
         isLoadingPost: true
       };
     case actionTypes.POST_COMUNICAZIONE_SUCCESS:
+      Alert.alert("Comunicazione inviata con successo!")
       return {
         ...state,
         comunicazioni: [...state.comunicazioni, action.comunicazione],
