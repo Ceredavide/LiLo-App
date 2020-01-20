@@ -1,27 +1,24 @@
 import React, { useState } from "react";
-import { Alert } from "react-native"
 
 import { Formik } from "formik";
 
 import Form from "../components/signUp/Form"
 
 import createUser from "../services/createUser"
+import validateSignUp from "../services/validateSignUp"
 
 const SignUp = ({ navigation }) => {
+  const [errors, setErrors] = useState({})
   const [isLoading, setIsLoading] = useState(false)
 
-  const habndleUserCreation = (user, navigation) => {
-    if (user.password != user.confirmPassword) {
-      Alert.alert("Le password che hai inserito sono diverse tra di loro")
-    }
-    else if (user.nome == "" || user.congnome == "" || user.classe == "" || user.email == "" || user.password == "" || user.confirmPassword == "") {
-      Alert.alert("Compila tutti i campi!")
-    }
-    else {
+  const handleSubmit = (values, navigation) => {
+    const errors = validateSignUp(values)
+    if (Object.entries(errors).length === 0) {
       setIsLoading(true)
-      createUser(user, navigation)
+      createUser(values, navigation)
       setIsLoading(false)
     }
+    setErrors(errors)
   }
 
   return (
@@ -34,10 +31,11 @@ const SignUp = ({ navigation }) => {
         password: "",
         confirmPassword: ""
       }}
-      onSubmit={values => habndleUserCreation(values, navigation)}
+      onSubmit={values => handleSubmit(values, navigation)}
     >
       {({ values, handleChange, setFieldValue, handleSubmit }) => (
         <Form
+          errors={errors}
           values={values}
           handleChange={handleChange}
           setFieldValue={setFieldValue}
