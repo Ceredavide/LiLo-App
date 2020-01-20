@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Button, Image, View } from "react-native";
+import { Button, Image, View, StyleSheet } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import Constants from "expo-constants";
 import * as Permissions from "expo-permissions";
 
-const ImagePickerExample = ({ image, setFieldValue }) => {
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from "react-native-responsive-screen";
+
+const ImagePickerExample = ({ setFieldValue }) => {
   const [imgUri, setImgUri] = useState("mamacita")
   useEffect(() => {
     getPermissionAsync();
@@ -14,7 +19,7 @@ const ImagePickerExample = ({ image, setFieldValue }) => {
     if (Constants.platform.ios) {
       const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
       if (status !== "granted") {
-        alert("Sorry, we need camera roll permissions to make this work!");
+        alert("Devi accettare i permessi per accedere alla tua fotocamera per poter caricare delle foto.");
       }
     }
   };
@@ -33,16 +38,43 @@ const ImagePickerExample = ({ image, setFieldValue }) => {
   };
 
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+    <View style={styles.container}>
       <Button title="Seleziona un'immagine" onPress={_pickImage} />
       {
         <Image
           source={{ uri: imgUri }}
-          style={{ width: 200, height: 200 }}
+          style={styles.image}
         />
       }
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  constainer: {
+    flex: 1,
+    marginTop: hp("5%"),
+    alignSelf: "center",
+    width: wp("80%"),
+    height: hp("35%"),
+    justifyContent: "center",
+    borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    elevation: 2
+  },
+  image: {
+    marginTop: hp("3%"),
+    alignSelf: "center",
+    backgroundColor: "white",
+    width: wp("80%"),
+    height: hp("35%")
+  }
+})
 
 export default ImagePickerExample;
