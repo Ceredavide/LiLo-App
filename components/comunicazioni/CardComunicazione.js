@@ -1,5 +1,5 @@
 import React from "react"
-import { StyleSheet, View, Text, Button } from "react-native"
+import { StyleSheet, View, Alert, Text, Button } from "react-native"
 import { useDispatch } from "react-redux"
 
 import {
@@ -14,10 +14,29 @@ const CardComunicazione = ({ id, titolo, sottotitolo, immagine }) => {
     return (
         <View style={styles.card}>
             <Text style={styles.title}>{titolo}</Text>
-            <Text style={styles.paragraph}>{sottotitolo}</Text>
+            <Text style={styles.subititle}>{sottotitolo}</Text>
             <View style={styles.buttonContainer}>
-                <Button title="elimina" onPress={() => dispatch(deleteComunicazione(id, immagine))} color="red" />
-                <Button title="modifica" onPress={() => alert("coming soon")} color="#F2AA3E" />
+                <Button
+                    title="elimina"
+                    color="red"
+                    onPress={() => Alert.alert(
+                        'Attenzione:',
+                        'Sei sicuro di voler cancellare la comunicazione?',
+                        [
+                            {
+                                text: 'Annulla',
+                                onPress: () => { },
+                                style: 'cancel',
+                            },
+                            {
+                                text: 'Sì',
+                                onPress: () => dispatch(deleteComunicazione(id, immagine))
+                            },
+                        ],
+                    )
+                    } />
+                {/* TODO: Aggiungere opzione modifica assenza */}
+                {/* <Button title="modifica" onPress={() => alert("coming soon")} color="#F2AA3E" /> */}
             </View>
         </View>
     )
@@ -45,7 +64,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         marginBottom: 5
     },
-    paragraph: {
+    subititle: {
         fontFamily: "open-sans-regular",
         fontSize: 16
     },
