@@ -39,7 +39,7 @@ export const postProposta = ({ nome, descrizione, numeroPartecipantiMax, richies
                 nome: user.user.nome,
                 cognome: user.user.cognome,
                 classe: user.user.classe
-            },
+            }
         }
         axios.post("https://cere.dev/proposte", data, {
             headers: {
@@ -55,7 +55,7 @@ export const postProposta = ({ nome, descrizione, numeroPartecipantiMax, richies
             dispatch({ type: actionTypes.POST_PROPOSTA_ERROR })
             // TODO: Gestire meglio gli errori
             Alert.alert(error.response.data.message)
+
         })
     }
-
 }

@@ -14,7 +14,6 @@ export default styles = StyleSheet.create({
     width: wp("70%"),
     paddingLeft: wp("3%"),
     fontSize: hp("2%"),
-    marginBottom: hp("5%"),
     fontFamily: "open-sans-regular",
     borderBottomWidth: 1.5,
     borderBottomColor: "#009fff"
