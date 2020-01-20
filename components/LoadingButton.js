@@ -11,7 +11,7 @@ import {
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 
-const LoadingButton = ({ text, handleSubmit, loading, color, style = {} }) => {
+const LoadingButton = ({ text, handleSubmit, loading, color, style = null }) => {
   return (
     <TouchableOpacity
       style={{ ...style, ...styles.buttonLogin, backgroundColor: color }}
