@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, ScrollView, TextInput } from "react-native";
+import { useDispatch, useSelector } from "react-redux"
 
 import { Formik } from "formik";
 import {
@@ -7,25 +8,31 @@ import {
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 
-import postComunicazione from "../services/postComunicazione"
+import { postComunicazione } from "../store/actions/comunicazioni"
 
 import ImagePicker from "../components/newComunicazione/ImagePicker";
 import LoadingButton from "../components/LoadingButton"
-import MyButton from "../components/MyButton";
+import ErrorText from "../components/ErrorText"
 
-const NewComunicazioneScreen = () => {
-  const [isLoading, setIsLoading] = useState(false)
+import validateComunicazione from "../services/validateComunicazione"
 
-  const handlePost = async ({ titolo, sottotitolo, paragrafo, image }) => {
-    setIsLoading(true)
-    postComunicazione(titolo, sottotitolo, paragrafo, image)
-      .then(() => setIsLoading(false))
+const NewComunicazioneScreen = ({ navigation }) => {
+  const [errors, setErrors] = useState({})
+  const dispatch = useDispatch()
+  const isLoading = useSelector(state => state.comunicazioni.isLoadingPost)
+
+  const handleSubmit = values => {
+    const errors = validateComunicazione(values)
+    if (Object.entries(errors).length === 0) {
+      dispatch(postComunicazione(values, navigation))
+    }
+    setErrors(errors)
   }
 
   return (
     <Formik
-      initialValues={{ titolo: "", sottotitolo: "", paragrafo: "", image: null }}
-      onSubmit={values => handlePost(values)}
+      initialValues={{ titolo: null, sottotitolo: null, paragrafo: null, image: null }}
+      onSubmit={values => handleSubmit(values)}
     >
       {({ values, handleChange, setFieldValue, handleSubmit }) => (
         <ScrollView
@@ -33,11 +40,12 @@ const NewComunicazioneScreen = () => {
           style={styles.form}>
           <TextInput
             placeholder="Titolo"
-            style={styles.textInput}
+            style={{ ...styles.textInput, marginTop: hp("5%"), }}
             onChangeText={handleChange("titolo")}
             value={values.titolo}
             returnKeyType="next"
           />
+          <ErrorText error={errors.titolo} />
           <TextInput
             placeholder="Sottotitolo"
             style={styles.textInput}
@@ -45,6 +53,7 @@ const NewComunicazioneScreen = () => {
             value={values.sottotitolo}
             returnKeyType="next"
           />
+          <ErrorText error={errors.sottotitolo} />
           <TextInput
             placeholder="Paragrafo"
             multiline={true}
@@ -54,8 +63,16 @@ const NewComunicazioneScreen = () => {
             value={values.paragrafo}
             returnKeyType="next"
           />
+          <ErrorText error={errors.paragrafo} />
           <ImagePicker image={values.image} setFieldValue={setFieldValue} />
-          <LoadingButton text="avanti" color="red" loading={isLoading} handleSubmit={() => handleSubmit()} />
+          <ErrorText error={errors.image} />
+          <LoadingButton
+            text="avanti"
+            color="red"
+            loading={isLoading}
+            handleSubmit={() => handleSubmit()}
+            style={{ marginBottom: hp("5%") }}
+          />
         </ScrollView>
       )}
     </Formik>
@@ -65,30 +82,40 @@ const NewComunicazioneScreen = () => {
 const styles = StyleSheet.create({
   form: {
     flex: 1,
-    //alignItems: "center",
-    //margin: hp("8%")
+    width: wp("100%"),
+    backgroundColor: "#F1F5F9",
   },
   textInput: {
-    height: hp("5%"),
-    width: wp("70%"),
-    paddingLeft: wp("3%"),
-    fontSize: hp("2%"),
-    marginBottom: hp("5%"),
-    fontFamily: "open-sans-regular",
-    borderBottomWidth: 1.5,
-    borderBottomColor: "#009fff"
+    alignSelf: "center",
+    height: hp("8%"),
+    width: wp("80%"),
+    padding: wp("3%"),
+    backgroundColor: "white",
+    borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    elevation: 2
   },
   textArea: {
+    alignSelf: "center",
     height: hp("20%"),
-    width: wp("70%"),
-    paddingLeft: wp("3%"),
-    fontSize: hp("2%"),
-    marginTop: hp("3%"),
-    marginBottom: hp("5%"),
-    fontFamily: "open-sans-regular",
-    borderWidth: 1.5,
-    borderRadius: 20,
-    borderColor: "#009fff"
+    width: wp("80%"),
+    padding: wp("3%"),
+    backgroundColor: "white",
+    borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    elevation: 2
   }
 });
 
