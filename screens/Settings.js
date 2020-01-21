@@ -24,31 +24,29 @@ const SettingsScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.cardContainer}>
-        <Image
-          style={styles.image}
-          source={require("../assets/images/student-hat.png")}
-        />
-        <Chip
-        style={{marginTop: 10}}
-          icon="error"
-          onPress={() => Linking.openURL("mailto:root@liloautogestito.ch")}
-        >
-          root@liloautogestito.ch
+      <Image
+        style={styles.image}
+        source={require("../assets/images/student-hat.png")}
+      />
+      <Chip
+        style={{ marginTop: 10 }}
+        icon="error"
+        onPress={() => Linking.openURL("mailto:davide@tivent.ch")}
+      >
+        contatto in caso di problemi
         </Chip>
-        <UserInfo />
-        <View style={styles.bottoniContainer}>
-          <MyButton
-            action={handleTermini}
-            text="Termini e condizioni"
-            color="#1ed15a"
-          />
-          <MyButton
-            action={() => handleLogout()}
-            text="Logout"
-            color="#e65054"
-          />
-        </View>
+      <UserInfo />
+      <View style={styles.bottoniContainer}>
+        <MyButton
+          action={handleTermini}
+          text="Termini e condizioni"
+          color="#1ed15a"
+        />
+        <MyButton
+          action={() => handleLogout()}
+          text="Logout"
+          color="#e65054"
+        />
       </View>
     </View>
   );
@@ -57,13 +55,8 @@ const SettingsScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#009fff",
-  },
-  cardContainer: {
-    flex: 1,
     padding: 5,
-    borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
+    paddingTop: hp("4%"),
     alignItems: "center",
     justifyContent: "space-around",
     backgroundColor: "#F1F5F9"
