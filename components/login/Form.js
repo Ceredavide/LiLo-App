@@ -13,7 +13,6 @@ import tryLogin from "../../services/tryLogin"
 
 import { SAVE_USER_CREDENTIALS } from "../../store/actionTypes"
 
-import TouchableText from "../TouchableText";
 import LoadingButton from "../LoadingButton";
 
 const Form = ({ navigation }) => {
@@ -26,8 +25,9 @@ const Form = ({ navigation }) => {
       if (!!user) {
         dispatch({ type: SAVE_USER_CREDENTIALS, user: user })
       }
+      setLoading(false)
     })
-    setLoading(false)
+
   };
 
   return (
@@ -54,7 +54,7 @@ const Form = ({ navigation }) => {
               returnKeyType="next"
             />
           </View>
-          <View style={styles.containerTextInput}>
+          <View style={{ ...styles.containerTextInput, marginBottom: hp("10%"), }}>
             <AntDesign
               name="lock"
               size={32}
@@ -71,11 +71,6 @@ const Form = ({ navigation }) => {
             />
           </View>
           {/* Bottone password dimenticata */}
-          <TouchableText
-            action={() => setModalVisible(true)}
-            text="Password dimenticata?"
-            textStyle={styles.forgotPassword}
-          />
           <LoadingButton
             text="Login"
             color="#009fff"
