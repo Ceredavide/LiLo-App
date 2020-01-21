@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
     paddingBottom: hp("5%")
   },
   text: {
+    marginBottom: hp("1%"),
     alignSelf: "flex-start",
     fontSize: hp("3%"),
     marginLeft: wp("5%"),
