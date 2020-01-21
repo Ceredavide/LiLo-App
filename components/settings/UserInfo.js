@@ -9,7 +9,6 @@ import {
 
 const UserInfo = () => {
     const user = useSelector(state => state.user)
-    console.log(user)
     return (
         <View style={styles.container}>
             <Text style={styles.text}>Hai effettuato l'accesso come</Text>
