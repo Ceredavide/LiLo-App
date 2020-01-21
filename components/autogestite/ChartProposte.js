@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, ActivityIndicator } from "react-native";
+import React from "react";
+import { StyleSheet, View, ActivityIndicator } from "react-native";
+import { useSelector } from "react-redux"
 
-import { PieChart } from "react-native-chart-kit";
+import { BarChart } from "react-native-chart-kit";
 
 import {
   widthPercentageToDP as wp,
@@ -9,65 +10,50 @@ import {
 } from "react-native-responsive-screen";
 
 const ChartProposte = () => {
-  const data = [
-    {
-      name: "Seoul",
-      population: 21500000,
-      color: "rgba(131, 167, 234, 1)",
-      legendFontColor: "#7F7F7F",
-      legendFontSize: 15
-    },
-    {
-      name: "Toronto",
-      population: 2800000,
-      color: "#F00",
-      legendFontColor: "#7F7F7F",
-      legendFontSize: 15
-    },
-    {
-      name: "Beijing",
-      population: 527612,
-      color: "yellow",
-      legendFontColor: "#7F7F7F",
-      legendFontSize: 15
-    },
-    {
-      name: "New York",
-      population: 8538000,
-      color: "green",
-      legendFontColor: "#7F7F7F",
-      legendFontSize: 15
-    },
-    {
-      name: "Moscow",
-      population: 11920000,
-      color: "rgb(0, 0, 255)",
-      legendFontColor: "#7F7F7F",
-      legendFontSize: 15
-    }
-  ];
+  const isLoading = useSelector(state => state.proposte.loadingList)
+  const labels = useSelector(state => state.proposte.classiArray)
+  const chartData = useSelector(state => state.proposte.numeriArray)
+
+
+  const data = {
+    labels: labels,
+    datasets: [
+      {
+        data: chartData
+      }
+    ]
+  };
 
   return (
-    <PieChart
-      style={styles.chart}
-      data={data}
-      width={wp("95%")}
-      height={hp("25%")}
-      chartConfig={{
-        backgroundColor: "#ff3e03",
-        backgroundGradientFrom: "#ff3e03",
-        backgroundGradientTo: "#ff3e03",
-        color: (opacity = 1) => `rgba(${0}, ${0}, ${0}, ${opacity})`
-      }}
-      accessor="legendFontSize"
-      backgroundColor="white"
-      paddingLeft={15}
-    />
-  );
+    <View style={styles.container}>
+      {isLoading ? <ActivityIndicator />
+        : <BarChart
+          style={styles.chart}
+          data={data}
+          width={wp("95%")}
+          height={hp("25%")}
+          chartConfig={{
+            backgroundColor: '#ffffff',
+            backgroundGradientFrom: '#ffffff',
+            backgroundGradientTo: '#ffffff',
+            color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`
+          }}
+        />}
+    </View>
+  )
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: hp("1%"),
+    backgroundColor: "white",
+    justifyContent: "center",
+    width: wp("95%"),
+    height: hp("25%")
+  },
   chart: {
+    alignSelf: "center",
     marginTop: hp("1%"),
     borderRadius: 20,
     shadowColor: "#000",
