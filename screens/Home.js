@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, FlatList, ActivityIndicator } from "react-native";
+import { StyleSheet, View, FlatList, TouchableOpacity, ActivityIndicator } from "react-native";
 import { useSelector, useDispatch } from "react-redux"
 
 import { fetchComunicazioni } from "../store/actions/comunicazioni"
@@ -28,36 +28,37 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.cardContainer}>
-        {isLoading ? (
-          <ActivityIndicator />
-        ) : (
-            <View>
-              <FlatList
-                data={comunicazioni}
-                keyExtractor={item => item._id}
-                refreshing={isRefreshing}
-                onRefresh={() => handleRefresh()}
-                showsVerticalScrollIndicator={false}
-                renderItem={({ item }) => (
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
+          <View>
+            <FlatList
+              data={comunicazioni}
+              keyExtractor={item => item._id}
+              refreshing={isRefreshing}
+              onRefresh={() => handleRefresh()}
+              showsVerticalScrollIndicator={false}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("Comunicazione", { comunicazione: item })}
+                >
                   <Card
                     titolo={item.titolo}
-                    img={item.immagine}
+                    immagine={item.immagine}
                     sottotitolo={item.sottotitolo}
-                    paragrafo={item.testo}
                   />
-                )}
+                </TouchableOpacity>
+              )}
+            />
+            {isAdmin ? (
+              <FloatingButton
+                name="edit"
+                action={() => navigation.navigate("Comunicazioni")}
+                color="white"
               />
-              {isAdmin ? (
-                <FloatingButton
-                  name="edit"
-                  action={() => navigation.navigate("Comunicazioni", { comunicazioni: comunicazioni })}
-                  color="white"
-                />
-              ) : null}
-            </View>
-          )}
-      </View>
+            ) : null}
+          </View>
+        )}
     </View>
   );
 };
@@ -65,12 +66,6 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#009fff"
-  },
-  cardContainer: {
-    flex: 1,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#F1F5F9"
