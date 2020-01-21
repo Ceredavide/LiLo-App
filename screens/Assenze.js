@@ -30,34 +30,32 @@ const AssenzeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.cardContainer}>
-        {isLoading ? (
-          <ActivityIndicator />
-        ) : assenze === "" ? (
-          <NoAssenze
-            isLoading={isLoading}
-            loadAssenze={() => handleRefresh()}
-          />
-        ) : (
-              <SectionList
-                refreshing={isRefreshing}
-                onRefresh={() => handleRefresh()}
-                showsVerticalScrollIndicator={false}
-                renderSectionHeader={({ section: { title } }) => (
-                  <Header title={title} />
-                )}
-                renderItem={({ item, index }) => (
-                  <CardAssenza
-                    key={index}
-                    nome={item.name}
-                    descrizione={item.description}
-                  />
-                )}
-                sections={assenze}
-                keyExtractor={(item, index) => item + index}
-              />
-            )}
-      </View>
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : assenze === "" ? (
+        <NoAssenze
+          isLoading={isLoading}
+          loadAssenze={() => handleRefresh()}
+        />
+      ) : (
+            <SectionList
+              refreshing={isRefreshing}
+              onRefresh={() => handleRefresh()}
+              showsVerticalScrollIndicator={false}
+              renderSectionHeader={({ section: { title } }) => (
+                <Header title={title} />
+              )}
+              renderItem={({ item, index }) => (
+                <CardAssenza
+                  key={index}
+                  nome={item.name}
+                  descrizione={item.description}
+                />
+              )}
+              sections={assenze}
+              keyExtractor={(item, index) => item + index}
+            />
+          )}
     </View>
   );
 };
@@ -65,13 +63,7 @@ const AssenzeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#009fff"
-  },
-  cardContainer: {
-    flex: 1,
     paddingTop: hp("2%"),
-    borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#F1F5F9"
