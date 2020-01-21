@@ -29,7 +29,8 @@ const ImagePickerExample = ({ setFieldValue }) => {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       base64: true,
       aspect: [16, 9],
-      quality: 1
+      quality: 1,
+      allowsEditing: true
     });
     if (!result.cancelled) {
       setFieldValue("image", result.base64);
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
     marginTop: hp("5%"),
     alignSelf: "center",
     width: wp("80%"),
-    height: hp("35%"),
+    height: hp("30%"),
     justifyContent: "center",
     borderRadius: 10,
     shadowColor: "#000",
