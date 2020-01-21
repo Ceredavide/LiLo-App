@@ -1,5 +1,7 @@
 import * as actionTypes from "../actionTypes"
 
+import handleError from "../../services/handleError"
+
 const initialState = {
   assenze: []
 };
@@ -23,6 +25,7 @@ const assenzeReducer = (state = initialState, action) => {
         };
       }
     case actionTypes.FETCH_ASSENZE_ERROR:
+      handleError(action.error)
       return {
         ...state,
       };
