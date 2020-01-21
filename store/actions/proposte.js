@@ -14,7 +14,7 @@ export const fetchProposte = () => {
             })
             dispatch({
                 type: actionTypes.FETCH_PROPOSTE_SUCCESS,
-                proposte: proposte.data.data
+                proposte: proposte.data
             });
         } catch (error) {
             dispatch({
@@ -33,13 +33,7 @@ export const postProposta = ({ nome, descrizione, numeroPartecipantiMax, richies
             nome: nome,
             descrizione: descrizione,
             numeroPartecipantiMax: numeroPartecipantiMax,
-            richieste: richieste,
-            studente: {
-                _id: user.user._id,
-                nome: user.user.nome,
-                cognome: user.user.cognome,
-                classe: user.user.classe
-            }
+            richieste: richieste
         }
         axios.post("https://cere.dev/proposte", data, {
             headers: {
@@ -52,10 +46,10 @@ export const postProposta = ({ nome, descrizione, numeroPartecipantiMax, richies
                 navigation.goBack()
             }
         }).catch(error => {
-            dispatch({ type: actionTypes.POST_PROPOSTA_ERROR })
-            // TODO: Gestire meglio gli errori
-            Alert.alert(error.response.data.message)
-
+            dispatch({
+                type: actionTypes.POST_PROPOSTA_ERROR,
+                error: error
+            })
         })
     }
 }
