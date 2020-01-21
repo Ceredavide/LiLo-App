@@ -17,7 +17,6 @@ const HomeStack = createStackNavigator(
     NewComunicazione: NewComunicazioneScreen
   },
   {
-    mode: "modal",
     defaultNavigationOptions: HeaderStyle
   }
 );
@@ -26,12 +25,22 @@ HomeScreen.navigationOptions = {
   title: "Home"
 };
 
+ComunicazioneScreen.navigationOptions = {
+  title: "Comunicazione",
+  headerTitleStyle: {
+    fontFamily: "System",
+    color: "white",
+    fontSize: 28,
+    marginBottom: hp("1%")
+  }
+}
+
 ComunicazioniScreen.navigationOptions = {
   title: "Comunicazioni",
   headerTitleStyle: {
-    fontFamily: "futura-bold",
-    fontWeight: "bold",
-    fontSize: hp("3%"),
+    fontFamily: "System",
+    color: "white",
+    fontSize: 28,
     marginBottom: hp("1%")
   }
 };
@@ -39,9 +48,9 @@ ComunicazioniScreen.navigationOptions = {
 NewComunicazioneScreen.navigationOptions = {
   title: "Nuova Comunicazione",
   headerTitleStyle: {
-    fontFamily: "futura-bold",
-    fontWeight: "bold",
-    fontSize: hp("3%"),
+    fontFamily: "System",
+    color: "white",
+    fontSize: 18,
     marginBottom: hp("1%")
   }
 };
