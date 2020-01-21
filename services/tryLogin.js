@@ -1,6 +1,8 @@
 import axios from "axios";
 import { AsyncStorage, Alert } from "react-native";
 
+import handleError from "../services/handleError"
+
 export default tryLogin = async (email, password, navigation) => {
     try {
         response = await axios.post("https://cere.dev/authentication", {
@@ -12,10 +14,12 @@ export default tryLogin = async (email, password, navigation) => {
         await AsyncStorage.setItem("user", JSON.stringify(response.data))
         navigation.navigate("App")
     } catch (error) {
-        if (error.response.status == 401) {
-            Alert.alert("username o password errati")
+        if (error.response.status === "401") {
+            Alert.alert("email o password errati, riprovare.")
+        } else {
+            handleError(error)
         }
         user = null
     }
-    return user;
+    return user
 }
