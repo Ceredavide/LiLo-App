@@ -23,6 +23,7 @@ const userReducer = (state = initialState, action) => {
         nome: nome,
         cognome: cognome,
         classe: classe,
+        email: email,
         isAdmin: isAdmin
       };
     case actionTypes.DELETE_USER_CREDENTIALS:
