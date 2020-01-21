@@ -1,48 +1,58 @@
-import React, { useEffect } from "react";
-import { StyleSheet, View, ScrollView } from "react-native";
-import { useSelector, useDispatch } from "react-redux"
+import React, { useState, useEffect } from "react";
+import { StyleSheet, View, ScrollView, RefreshControl, Text } from "react-native";
+import { useDispatch } from "react-redux"
+
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from "react-native-responsive-screen";
 
 import { fetchProposte } from "../store/actions/proposte"
 
 import ChartProposte from "../components/autogestite/ChartProposte";
 import UltimeProposte from "../components/autogestite/UltimeProposte";
-import MyButton from "../components/MyButton";
 
-const AutogestiteScreen = ({ navigation }) => {
+const AutogestiteScreen = () => {
   const dispatch = useDispatch()
-  const isLoading = useSelector(state => state.proposte.loadingList)
-  const proposte = useSelector(state => state.proposte.proposte)
-  
+  const [isRefreshing, setIsRefreshing] = useState(false)
+
+  handleRefresh = () => {
+    setIsRefreshing(true)
+    dispatch(fetchProposte())
+    setIsRefreshing(false)
+  }
+
   useEffect(() => {
     dispatch(fetchProposte())
   }, []);
 
   return (
-    <View style={styles.container}>
-      <ScrollView style={styles.cardContainer}>
-        <MyButton
-          action={() => navigation.navigate("Proposta")}
-          text="Proponi un'attività"
-          color="#009fff"
-        />
-        <ChartProposte isLoading={isLoading} proposte={proposte} />
-        <UltimeProposte isLoading={isLoading} proposte={proposte} />
-      </ScrollView>
-    </View>
+    <ScrollView
+      style={styles.container}
+      showsVerticalScrollIndicator={false}
+      refreshControl={<RefreshControl
+        refreshing={isRefreshing}
+        onRefresh={() => handleRefresh()}
+      />}>
+      <Text style={styles.title}>Classi con maggiori proposte:</Text>
+      <ChartProposte />
+      <Text style={styles.title}>Ultime attività proposte:</Text>
+      <UltimeProposte />
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#009fff"
-  },
-  cardContainer: {
-    flex: 1,
     padding: 5,
-    borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
     backgroundColor: "#F1F5F9"
+  },
+  title: {
+    marginTop: hp("2%"),
+    fontSize: hp("2.5%"),
+    fontFamily: "open-sans-regular",
+    paddingLeft: wp("3%")
   }
 });
 
