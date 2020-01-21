@@ -16,7 +16,7 @@ const SignUp = ({ navigation }) => {
     if (Object.entries(errors).length === 0) {
       setIsLoading(true)
       createUser(values, navigation)
-      setIsLoading(false)
+        .then(status => setIsLoading(status))
     }
     setErrors(errors)
   }
