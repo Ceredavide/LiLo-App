@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, View, Image, Text } from "react-native";
+import { StyleSheet, View, Image, Text } from "react-native";
 
 import {
   widthPercentageToDP as wp,
@@ -10,22 +10,20 @@ import LoadableImage from "./LoadableImage"
 
 const HomeCard = ({ immagine, titolo, sottotitolo }) => {
   return (
-    <TouchableOpacity style={styles.card}>
-      <View style={styles.container}>
-        <LoadableImage immagine={immagine} />
-        <View style={styles.containerText}>
-          <Text style={styles.title}>{titolo}</Text>
-          <Text style={styles.subtitle}>{sottotitolo}</Text>
-        </View>
+    <View style={styles.container}>
+      <LoadableImage immagine={immagine} />
+      <View style={styles.containerText}>
+        <Text style={styles.title}>{titolo}</Text>
+        <Text style={styles.subtitle}>{sottotitolo}</Text>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   card: {
-    marginTop: hp("3%"),
     width: wp("92%"),
+    marginTop: hp("1.5%"),
     flex: 1,
     alignItems: "center",
     flexDirection: "row",
@@ -42,7 +40,21 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    flexDirection: "row"
+    flexDirection: "row",
+    width: wp("92%"),
+    marginTop: hp("1.5%"),
+    alignItems: "center",
+    flexDirection: "row",
+    borderRadius: 20,
+    backgroundColor: "#FFF",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.20,
+    shadowRadius: 1.41,
+    elevation: 2,
   },
   containerText: {
     marginTop: wp("4%"),
