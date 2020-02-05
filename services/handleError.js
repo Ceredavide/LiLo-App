@@ -1,6 +1,6 @@
 import { Alert } from "react-native"
 
-export default hadnleError = error => {
+export default handleError = error => {
     if (error.response) {
         /*
          * The request was made and the server responded with a
