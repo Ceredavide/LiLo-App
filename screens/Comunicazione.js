@@ -74,7 +74,8 @@ const styles = StyleSheet.create({
         fontSize: hp("2.5%")
     },
     containerParagraph: {
-        marginTop: hp("2%"),
+        paddingTop: hp("3%"),
+        paddingBottom: hp("5%"),
         width: wp("85%"),
         alignSelf: "center",
     },
