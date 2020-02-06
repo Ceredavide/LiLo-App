@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontFamily: "open-sans-regular",
-    padding: wp("2%"),
+    width: wp("55%")
   }
 });
 
