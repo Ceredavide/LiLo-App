@@ -8,7 +8,7 @@ import {
 
 const CardAssenza = ({ nome, descrizione }) => {
   return (
-    <View style={styles.container}>
+    <View style={styles.card}>
       <Text style={styles.nome}>{nome}:</Text>
       <Text style={styles.descrizione}>{descrizione}</Text>
     </View>
@@ -16,9 +16,9 @@ const CardAssenza = ({ nome, descrizione }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  card: {
     margin: wp("2%"),
-    padding: 10,
+    padding: hp("1%"),
     borderRadius: 10,
     backgroundColor: "#FFF",
     shadowColor: "#000",

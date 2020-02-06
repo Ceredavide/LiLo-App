@@ -1,32 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, SectionList, ActivityIndicator } from "react-native";
-import { useSelector, useDispatch } from "react-redux"
 
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
-
-import { fetchAssenze } from "../store/actions/assenze"
 
 import Header from "../components/assenze/Header";
 import CardAssenza from "../components/assenze/CardAssenza";
 import NoAssenze from "../components/assenze/NoAssenze";
 
+import fetchAssenze from "../services/fetchAssenze"
+
 const AssenzeScreen = () => {
-  const dispatch = useDispatch()
-  const assenze = useSelector(state => state.assenze.assenze)
-  const [isLoading, setIsLoading] = useState(false)
+  const [assenze, setAssenze] = useState([])
+  const [isLoading, setIsloading] = useState(false)
   const [isRefreshing, setIsRefreshing] = useState(false)
 
-  handleRefresh = () => {
+  const handleFetch = async () => {
+    setIsloading(true)
+    setAssenze(await fetchAssenze())
+    setIsloading(false)
+  }
+
+  const handleRefresh = async () => {
     setIsRefreshing(true)
-    dispatch(fetchAssenze())
+    setAssenze(await fetchAssenze())
     setIsRefreshing(false)
   }
 
   useEffect(() => {
-    setIsLoading(true)
-    dispatch(fetchAssenze())
-      .then(() => setIsLoading(false))
-  }, []);
+    handleFetch()
+  }, [])
 
   return (
     <View style={styles.container}>
@@ -63,7 +65,6 @@ const AssenzeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: hp("2%"),
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#F1F5F9"
