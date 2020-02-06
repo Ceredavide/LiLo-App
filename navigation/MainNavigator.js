@@ -2,7 +2,6 @@ import { createAppContainer, createSwitchNavigator } from "react-navigation";
 
 import AuthStack from "./stacks/Auth";
 import TabNavigator from "./TabNavigator";
-
 import LoadingScreen from "../Loading";
 
 
