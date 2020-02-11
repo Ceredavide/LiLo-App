@@ -32,6 +32,9 @@ ComunicazioneScreen.navigationOptions = {
     color: "white",
     fontSize: 28,
     marginBottom: hp("1%")
+  },
+  headerBackTitleStyle: {
+    color: "white"
   }
 }
 
