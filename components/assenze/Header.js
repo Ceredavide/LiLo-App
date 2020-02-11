@@ -9,23 +9,23 @@ import {
 const Header = ({title}) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.giorno}>{title}</Text>
+      <Text style={styles.title}>{title}</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    height: hp("7%"),
-    paddingTop: hp("2%"),
+    height: hp("6%"),
+    paddingTop: hp("1.5%"),
     paddingLeft: wp("3%"),
     borderRadius: 5,
     backgroundColor: "#F1F5F9"
   },
-  giorno: {
+  title: {
     fontFamily: "open-sans-bold",
     color: "#009fff",
-    fontSize: hp("3%")
+    fontSize: hp("3.2%")
   },
 });
 
