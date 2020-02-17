@@ -2,6 +2,8 @@ import * as actionTypes from "../actionTypes";
 import { AsyncStorage } from "react-native"
 import axios from "axios";
 
+import handleError from "../../services/handleError"
+
 export const fetchComunicazioni = () => {
     return async dispatch => {
         dispatch({ type: actionTypes.FETCH_COMUNICAZIONI_START });
@@ -68,8 +70,6 @@ export const postComunicazione = ({ titolo, sottotitolo, paragrafo, image }, nav
 };
 
 export const deleteComunicazione = (id, immagine) => {
-    console.log(id)
-    console.log(immagine)
     return async dispatch => {
         const user = await JSON.parse(await AsyncStorage.getItem("user"))
         axios.delete(`https://cere.dev/uploads/${immagine}`)
@@ -81,26 +81,7 @@ export const deleteComunicazione = (id, immagine) => {
                 })
                 dispatch({ type: actionTypes.REMOVE_ONE_COMUNICAZIONE, id: id })
             }).catch(error => {
-                if (error.response) {
-                    /*
-                     * The request was made and the server responded with a
-                     * status code that falls out of the range of 2xx
-                     */
-                    console.log(error.response.data);
-                    console.log(error.response.status);
-                    console.log(error.response.headers);
-                } else if (error.request) {
-                    /*
-                     * The request was made but no response was received, `error.request`
-                     * is an instance of XMLHttpRequest in the browser and an instance
-                     * of http.ClientRequest in Node.js
-                     */
-                    console.log(error.request);
-                } else {
-                    // Something happened in setting up the request and triggered an Error
-                    console.log('Error', error.message);
-                }
-                console.log(error);
+                handleError(error)
             })
     }
 }
