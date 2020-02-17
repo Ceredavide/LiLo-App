@@ -14,7 +14,7 @@ export default tryLogin = async (email, password, navigation) => {
         await AsyncStorage.setItem("user", JSON.stringify(response.data))
         navigation.navigate("App")
     } catch (error) {
-        if (error.response.status === "401") {
+        if (error.response.status === 401) {
             Alert.alert("email o password errati, riprovare.")
         } else {
             handleError(error)
