@@ -19,7 +19,7 @@
     "expo-image-picker": "~7.0.0",
     "expo-linear-gradient": "~7.0.0",
     "font": "0.0.4",
-    "formik": "^1.5.8",
+    "formik": "^2.1.4",
     "react": "16.8.3",
     "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
     "react-native-chart-kit": "^3.13.0",
