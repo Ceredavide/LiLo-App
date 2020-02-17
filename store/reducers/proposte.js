@@ -6,6 +6,7 @@ const initialState = {
   loadingList: false,
   loadingPost: false,
   proposte: [],
+  nProposte: "",
   classiArray: [],
   numeriArray: []
 };
@@ -17,14 +18,17 @@ const proposteReducer = (state = initialState, action) => {
     }
     case actionTypes.FETCH_PROPOSTE_SUCCESS: {
       const { data, classi } = action.proposte
+      const nProposte = data.length
       const arrClassi = []
       const arrNumeri = []
       classi.sort((a, b) => { return b.n - a.n });
       const newClassi = classi.splice(0, 5)
       newClassi.forEach(classe => { arrClassi.push(classe.classe); arrNumeri.push(classe.n) })
+      const proposte = data.splice(0, 10)
       return {
         ...state,
-        proposte: data,
+        proposte: proposte,
+        nProposte: nProposte,
         classiArray: arrClassi,
         numeriArray: arrNumeri,
         loadingList: false
@@ -44,6 +48,7 @@ const proposteReducer = (state = initialState, action) => {
       return {
         ...state,
         proposte: [...state.proposte, action.proposta],
+        nProposte: state.nProposte + 1,
         loadingPost: false
       };
     }

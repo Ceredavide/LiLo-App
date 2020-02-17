@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, ScrollView, RefreshControl, Text } from "react-native";
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 import {
   widthPercentageToDP as wp,
@@ -16,6 +16,8 @@ const AutogestiteScreen = () => {
   const dispatch = useDispatch()
   const [isRefreshing, setIsRefreshing] = useState(false)
 
+  const nProposte = useSelector(state => state.proposte.nProposte)
+
   handleRefresh = () => {
     setIsRefreshing(true)
     dispatch(fetchProposte())
@@ -28,12 +30,16 @@ const AutogestiteScreen = () => {
 
   return (
     <ScrollView
-      style={styles.container}
+      style={styles.screen}
       showsVerticalScrollIndicator={false}
       refreshControl={<RefreshControl
         refreshing={isRefreshing}
         onRefresh={() => handleRefresh()}
       />}>
+      <View style={styles.numberContainer}>
+        <Text style={styles.title}>Numero di proposte fatte:</Text>
+        <Text style={styles.number}>{nProposte}</Text>
+      </View>
       <Text style={styles.title}>Classi con maggiori proposte:</Text>
       <ChartProposte />
       <Text style={styles.title}>Ultime attività proposte:</Text>
@@ -43,7 +49,7 @@ const AutogestiteScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  screen: {
     flex: 1,
     padding: 5,
     backgroundColor: "#F1F5F9"
@@ -52,7 +58,19 @@ const styles = StyleSheet.create({
     marginTop: hp("2%"),
     fontSize: hp("2.5%"),
     fontFamily: "open-sans-regular",
-    paddingLeft: wp("3%")
+    paddingLeft: wp("3%"),
+  },
+  number: {
+    marginTop: hp("2%"),
+    fontSize: hp("3%"),
+    fontFamily: "open-sans-regular",
+    paddingLeft: wp("3%"),
+    color: "#009fff"
+  },
+  numberContainer: {
+    marginBottom: 5,
+    flexDirection: "row",
+    alignItems: "center"
   }
 });
 
