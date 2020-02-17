@@ -14,16 +14,20 @@ const HomeScreen = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isRefreshing, setIsRefreshing] = useState(false)
 
-  handleRefresh = () => {
+  const handleFetch = async () => {
+    setIsLoading(true)
+    dispatch(fetchComunicazioni())
+    setIsLoading(false)
+  }
+
+  handleRefresh = async () => {
     setIsRefreshing(true)
     dispatch(fetchComunicazioni())
-      .then(() => setIsRefreshing(false))
+    setIsRefreshing(false)
   }
 
   useEffect(() => {
-    setIsLoading(true)
-    dispatch(fetchComunicazioni())
-      .then(() => setIsLoading(false))
+    handleFetch()
   }, []);
 
   return (
