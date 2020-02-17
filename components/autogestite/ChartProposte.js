@@ -47,7 +47,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: hp("1%"),
-    backgroundColor: "white",
     justifyContent: "center",
     width: wp("95%"),
     height: hp("25%")
