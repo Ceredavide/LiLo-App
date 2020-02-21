@@ -15,7 +15,7 @@ const LoadingButton = ({ text, handleSubmit, loading, color, style = null }) => 
   return (
     <TouchableOpacity
       style={{ ...style, ...styles.buttonLogin, backgroundColor: color }}
-      onPress={() => handleSubmit()}
+      onPress={handleSubmit}
     >
       {loading ? (
         <ActivityIndicator color="white" />

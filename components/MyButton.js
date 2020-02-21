@@ -10,7 +10,7 @@ const MyButton = ({ action, text, color }) => {
   return (
     <TouchableOpacity
       style={{ ...styles.button, backgroundColor: color }}
-      onPress={() => action()}
+      onPress={action}
     >
       <Text style={styles.text}>{text}</Text>
     </TouchableOpacity>

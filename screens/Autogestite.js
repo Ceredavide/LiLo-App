@@ -34,7 +34,7 @@ const AutogestiteScreen = () => {
       showsVerticalScrollIndicator={false}
       refreshControl={<RefreshControl
         refreshing={isRefreshing}
-        onRefresh={() => handleRefresh()}
+        onRefresh={handleRefresh}
       />}>
       <View style={styles.numberContainer}>
         <Text style={styles.title}>Numero di proposte fatte:</Text>

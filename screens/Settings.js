@@ -44,7 +44,7 @@ const SettingsScreen = ({ navigation }) => {
           color="#1ed15a"
         />
         <MyButton
-          action={() => handleLogout()}
+          action={handleLogout}
           text="Logout"
           color="#e65054"
         />

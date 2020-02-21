@@ -37,12 +37,12 @@ const AssenzeScreen = () => {
       ) : assenze === "" ? (
         <NoAssenze
           isLoading={isLoading}
-          loadAssenze={() => handleRefresh()}
+          loadAssenze={handleRefresh}
         />
       ) : (
             <SectionList
               refreshing={isRefreshing}
-              onRefresh={() => handleRefresh()}
+              onRefresh={handleRefresh}
               showsVerticalScrollIndicator={false}
               renderSectionHeader={({ section: { title } }) => (
                 <Header title={title} />
