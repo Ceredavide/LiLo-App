@@ -31,9 +31,9 @@ const HomeScreen = ({ navigation }) => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={styles.screen}>
       {isLoading ? (
-        <ActivityIndicator />
+        <ActivityIndicator style={{ flex: 1 }} />
       ) : (
           <View>
             <FlatList
@@ -68,7 +68,7 @@ const HomeScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  screen: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",

@@ -39,7 +39,7 @@ const NewComunicazioneScreen = ({ navigation }) => {
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
-      style={styles.form}>
+      style={styles.screen}>
       <TextInput
         placeholder="Titolo"
         style={{ ...styles.textInput, marginTop: hp("5%"), }}
@@ -80,7 +80,7 @@ const NewComunicazioneScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  form: {
+  screen: {
     flex: 1,
     width: wp("100%"),
     backgroundColor: "#F1F5F9",

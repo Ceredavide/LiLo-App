@@ -12,7 +12,7 @@ import TouchableText from "../components/TouchableText";
 const LoginScreen = ({ navigation }) => {
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={styles.container}>
+      <View style={styles.screen}>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Text style={styles.text}>LiLo App</Text>
         <Image
@@ -34,7 +34,7 @@ const LoginScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  screen: {
     flex: 1
   },
   header: {
