@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, ScrollView, TextInput } from "react-native";
 import { useDispatch, useSelector } from "react-redux"
 
-import { Formik } from "formik";
+import { useFormik } from "formik";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
@@ -21,7 +21,7 @@ const NewComunicazioneScreen = ({ navigation }) => {
   const dispatch = useDispatch()
   const isLoading = useSelector(state => state.comunicazioni.isLoadingPost)
 
-  const handleSubmit = values => {
+  const tryPostComunicazione = values => {
     const errors = validateComunicazione(values)
     if (Object.entries(errors).length === 0) {
       dispatch(postComunicazione(values, navigation))
@@ -29,53 +29,53 @@ const NewComunicazioneScreen = ({ navigation }) => {
     setErrors(errors)
   }
 
+  const formikNuovaComunicazione = useFormik({
+    initialValues: { titolo: null, sottotitolo: null, paragrafo: null, image: null },
+    onSubmit: tryPostComunicazione
+  })
+
+  const { values, handleChange, setFieldValue, handleSubmit } = formikNuovaComunicazione
+
   return (
-    <Formik
-      initialValues={{ titolo: null, sottotitolo: null, paragrafo: null, image: null }}
-      onSubmit={values => handleSubmit(values)}
-    >
-      {({ values, handleChange, setFieldValue, handleSubmit }) => (
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          style={styles.form}>
-          <TextInput
-            placeholder="Titolo"
-            style={{ ...styles.textInput, marginTop: hp("5%"), }}
-            onChangeText={handleChange("titolo")}
-            value={values.titolo}
-            returnKeyType="next"
-          />
-          <ErrorText error={errors.titolo} />
-          <TextInput
-            placeholder="Sottotitolo"
-            style={styles.textInput}
-            onChangeText={handleChange("sottotitolo")}
-            value={values.sottotitolo}
-            returnKeyType="next"
-          />
-          <ErrorText error={errors.sottotitolo} />
-          <TextInput
-            placeholder="Paragrafo"
-            multiline={true}
-            numberOfLines={5}
-            style={styles.textArea}
-            onChangeText={handleChange("paragrafo")}
-            value={values.paragrafo}
-            returnKeyType="next"
-          />
-          <ErrorText error={errors.paragrafo} />
-          <ImagePicker image={values.image} setFieldValue={setFieldValue} />
-          <ErrorText error={errors.image} />
-          <LoadingButton
-            text="avanti"
-            color="red"
-            loading={isLoading}
-            handleSubmit={() => handleSubmit()}
-            style={{ marginBottom: hp("5%") }}
-          />
-        </ScrollView>
-      )}
-    </Formik>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      style={styles.form}>
+      <TextInput
+        placeholder="Titolo"
+        style={{ ...styles.textInput, marginTop: hp("5%"), }}
+        onChangeText={handleChange("titolo")}
+        value={values.titolo}
+        returnKeyType="next"
+      />
+      <ErrorText error={errors.titolo} />
+      <TextInput
+        placeholder="Sottotitolo"
+        style={styles.textInput}
+        onChangeText={handleChange("sottotitolo")}
+        value={values.sottotitolo}
+        returnKeyType="next"
+      />
+      <ErrorText error={errors.sottotitolo} />
+      <TextInput
+        placeholder="Paragrafo"
+        multiline={true}
+        numberOfLines={5}
+        style={styles.textArea}
+        onChangeText={handleChange("paragrafo")}
+        value={values.paragrafo}
+        returnKeyType="next"
+      />
+      <ErrorText error={errors.paragrafo} />
+      <ImagePicker image={values.image} setFieldValue={setFieldValue} />
+      <ErrorText error={errors.image} />
+      <LoadingButton
+        text="avanti"
+        color="red"
+        loading={isLoading}
+        handleSubmit={() => handleSubmit()}
+        style={{ marginBottom: hp("5%") }}
+      />
+    </ScrollView>
   );
 };
 
