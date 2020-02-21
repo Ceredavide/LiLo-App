@@ -13,7 +13,8 @@ import UserInfo from "../components/settings/UserInfo"
 const SettingsScreen = ({ navigation }) => {
 
   handleLogout = async () => {
-    AsyncStorage.removeItem("user").then(() => navigation.navigate("Auth"))
+    await AsyncStorage.removeItem("user")
+    navigation.navigate("Auth")
   };
 
   handleTermini = () => {
@@ -31,7 +32,7 @@ const SettingsScreen = ({ navigation }) => {
       <Chip
         style={{ marginTop: 10 }}
         icon="error"
-        onPress={() => Linking.openURL("mailto:davide@tivent.ch")}
+        onPress={() => Linking.openURL("mailto:ceredavide@live.it")}
       >
         contatto in caso di problemi
         </Chip>
