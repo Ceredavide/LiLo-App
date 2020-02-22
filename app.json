@@ -3,7 +3,7 @@
     "name": "LiLo",
     "slug": "lilo_definitivo",
     "privacy": "public",
-    "sdkVersion": "35.0.0",
+    "sdkVersion": "36.0.0",
     "ios": {
       "bundleIdentifier": "com.ceredavide.liloapp"
     },
