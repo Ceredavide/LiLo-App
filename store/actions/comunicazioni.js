@@ -9,14 +9,14 @@ export const fetchComunicazioni = () => {
         dispatch({ type: actionTypes.FETCH_COMUNICAZIONI_START });
         try {
             const user = await JSON.parse(await AsyncStorage.getItem("user"))
-            const comunicazioni = await axios.get("https://cere.dev/comunicazioni", {
+            const response = await axios.get("https://cere.dev/comunicazioni", {
                 headers: {
                     Authorization: "Bearer " + user.accessToken
                 }
             })
             dispatch({
                 type: actionTypes.FETCH_COMUNICAZIONI_SUCCESS,
-                comunicazioni: comunicazioni.data.data
+                comunicazioni: response.data.data
             });
         } catch (error) {
             dispatch({
