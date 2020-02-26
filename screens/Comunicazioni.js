@@ -8,9 +8,9 @@ import CardComunicazione from "../components/comunicazioni/CardComunicazione"
 const ComunicazioniScreen = ({ navigation }) => {
   const comunicazioni = useSelector(state => state.comunicazioni.comunicazioni)
   return (
-    <View style={styles.container}>
+    <View style={styles.screen}>
       <MyButton
-        action={() => navigation.navigate("NewComunicazione")}
+        action={() => navigation.navigate("Nuova Comunicazione")}
         text="Nuova Comunicazione"
         color="#1ed15a"
       />
@@ -31,7 +31,7 @@ const ComunicazioniScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  screen: {
     flex: 1,
     padding: 5,
     alignItems: "center",
