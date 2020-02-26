@@ -5,7 +5,11 @@
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "ios": {
-      "bundleIdentifier": "com.ceredavide.liloapp"
+      "bundleIdentifier": "com.ceredavide.liloapp",
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to take photos that can be used to be attached on an article that can be posted with the app.",
+        "NSPhotoLibraryUsageDescription": "This app uses the photos in the library to attach them on an article that can be posted with the app"
+      }
     },
     "android": {
       "package": "com.ceredavide.liloapp",
@@ -22,13 +26,8 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "platforms": [
-      "android",
-      "ios"
-    ],
+    "assetBundlePatterns": ["**/*"],
+    "platforms": ["android", "ios"],
     "description": "liam sucks"
   }
 }
