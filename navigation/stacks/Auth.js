@@ -13,7 +13,7 @@ const AuthStack = () => {
   return (
     <Navigator>
       <Screen name="Login" component={LoginScreen} options={loginOptions}/>
-      <Screen name="SignUp" component={SignUpScreen} options={headerStyle} />
+      <Screen name="SignUp" component={SignUpScreen} options={{...headerStyle, ...signUpOptions}} />
     </Navigator>
   )
 }
@@ -22,37 +22,11 @@ const loginOptions = {
   headerShown: false
 }
 
+const signUpOptions = {
+  title: "Nuovo Account",
+  headerTitleStyle: {
+    fontSize: 35
+  }
+}
+
 export default AuthStack
-
-//  export default AuthStack = createStackNavigator(
-//   {
-//     Login: LoginScreen,
-//     SignUp: SignUpScreen
-//   },
-//   {
-//     initialRouteName: "Login",
-//     defaultNavigationOptions: {
-//       headerBackTitle: "Indietro",
-//       headerStyle: {
-//         backgroundColor: "#009fff",
-//         height: hp("8%"),
-//         borderBottomWidth: 0
-//       },
-//       headerTintColor: "#fff",
-//       headerTitleStyle: {
-//         fontFamily: "open-sans-regular",
-//         fontWeight: "bold",
-//         fontSize: hp("3%"),
-//         marginBottom: hp("1%")
-//       }
-//     }
-//   }
-// );
-
-// LoginScreen.navigationOptions = {
-//   header: null
-// };
-
-// SignUpScreen.navigationOptions = {
-//   title: "Nuovo Account"
-// }
