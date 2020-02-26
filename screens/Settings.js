@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Image, AsyncStorage, Linking } from "react-native";
+import { useDispatch, useSelector } from "react-redux"
 
 import {
   widthPercentageToDP as wp,
@@ -10,14 +11,16 @@ import { Chip } from "react-native-paper";
 import MyButton from "../components/MyButton";
 import UserInfo from "../components/settings/UserInfo"
 
-const SettingsScreen = ({ navigation }) => {
+const SettingsScreen = () => {
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.user)
 
-  handleLogout = async () => {
+  const handleLogout = async () => {
+    dispatch({ type: "DELETE_USER_CREDENTIALS" })
     await AsyncStorage.removeItem("user")
-    navigation.navigate("Auth")
   };
 
-  handleTermini = () => {
+  const handleTermini = () => {
     Linking.openURL(
       "http://liloautogestito.ch/API/files/termini_e_condizioni.html"
     );
@@ -36,7 +39,7 @@ const SettingsScreen = ({ navigation }) => {
       >
         contatto in caso di problemi
         </Chip>
-      <UserInfo />
+      <UserInfo user={user}/>
       <View style={styles.bottoniContainer}>
         <MyButton
           action={handleTermini}

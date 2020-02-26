@@ -6,9 +6,8 @@ const initialState = {
   cognome: "",
   classe: "",
   email: "",
-  isAdmin: ""
-};
-
+  isAdmin: "",
+}
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SAVE_USER_CREDENTIALS:
@@ -24,12 +23,13 @@ const userReducer = (state = initialState, action) => {
         cognome: cognome,
         classe: classe,
         email: email,
-        isAdmin: isAdmin
+        isAdmin: isAdmin,
       };
     case actionTypes.DELETE_USER_CREDENTIALS:
+      console.log("bella")
       return {
         ...state,
-        initialState
+        ...initialState
       };
     default:
       return state;

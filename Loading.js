@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { AsyncStorage, Alert } from "react-native";
 import { useDispatch } from "react-redux"
 
@@ -8,13 +8,12 @@ import * as Font from "expo-font";
 
 import { SAVE_USER_CREDENTIALS } from "./store/actionTypes"
 
-const LoadingScreen = ({ setIsLoading, setIsAuthenticated }) => {
+const LoadingScreen = ({ setIsLoading }) => {
   const dispatch = useDispatch()
 
   const loadResourcesAsync = async () => {
     const user = await AsyncStorage.getItem("user")
     if (!!user) {
-      setIsAuthenticated(true)
       dispatch({ type: SAVE_USER_CREDENTIALS, user: (await JSON.parse(user)).user })
     }
     return Promise.all([
