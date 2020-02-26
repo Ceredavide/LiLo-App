@@ -8,15 +8,14 @@ import {
 } from "react-native-responsive-screen";
 
 import CardProposta from "./CardProposta"
+import ProposteHolder from "./ProposteHolder"
 
 const UltimeProposte = () => {
   const isLoading = useSelector(state => state.proposte.loadingList)
   const proposte = useSelector(state => state.proposte.proposte)
 
   if (isLoading) {
-    return <View style={styles.loadingContainer}>
-      <ActivityIndicator />
-    </View>
+    return <ProposteHolder />
   } else {
     return <FlatList
       data={proposte}

@@ -42,6 +42,7 @@ const AutogestiteScreen = () => {
       </View>
       <Text style={styles.title}>Classi con maggiori proposte:</Text>
       <ChartProposte />
+      {/* TODO Mettere titoli in componenti */}
       <Text style={styles.title}>Ultime attività proposte:</Text>
       <UltimeProposte />
     </ScrollView>

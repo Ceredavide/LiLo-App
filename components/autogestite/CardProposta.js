@@ -17,7 +17,8 @@ const CardProposte = ({ proposta }) => {
 
 const styles = StyleSheet.create({
     card: {
-        margin: wp("2%"),
+        marginTop: hp("2%"),
+        marginHorizontal: wp("3%"),
         padding: 10,
         borderRadius: 10,
         backgroundColor: "#FFF",
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
 
         elevation: 1
     },
-    title:{
+    title: {
         fontFamily: "open-sans-bold",
         fontSize: 16,
         marginBottom: 5
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
     descrizione: {
         fontFamily: "open-sans-regular",
         fontSize: 12
-      }
+    }
 })
 
 export default CardProposte
