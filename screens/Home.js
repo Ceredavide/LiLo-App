@@ -40,17 +40,13 @@ const HomeScreen = ({ navigation }) => {
               data={comunicazioni}
               keyExtractor={item => item._id}
               refreshing={isRefreshing}
-              onRefresh={() => handleRefresh()}
+              onRefresh={handleRefresh}
               showsVerticalScrollIndicator={false}
               renderItem={({ item }) => (
-                <TouchableOpacity
+                < TouchableOpacity
                   onPress={() => navigation.navigate("Comunicazione", { comunicazione: item })}
                 >
-                  <Card
-                    titolo={item.titolo}
-                    immagine={item.immagine}
-                    sottotitolo={item.sottotitolo}
-                  />
+                  <Card comunicazione={item} />
                 </TouchableOpacity>
               )}
             />
