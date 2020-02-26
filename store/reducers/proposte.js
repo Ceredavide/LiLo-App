@@ -21,8 +21,10 @@ const proposteReducer = (state = initialState, action) => {
       const nProposte = data.length
       const arrClassi = []
       const arrNumeri = []
+      // metto le classi in ordine decrescente
       classi.sort((a, b) => { return b.n - a.n });
       const newClassi = classi.splice(0, 5)
+      // assegno ad ogni classe i suoi conteggi
       newClassi.forEach(classe => { arrClassi.push(classe.classe); arrNumeri.push(classe.n) })
       const proposte = data.splice(0, 10)
       return {
