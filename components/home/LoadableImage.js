@@ -30,8 +30,8 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         alignItems: "center",
         justifyContent: "center",
-        height: hp("12%"),
-        width: hp("12%"),
+        height: hp("10%"),
+        width: hp("10%"),
         margin: wp("4%"),
         borderRadius: 20,
         backgroundColor: "#F2F2F2"
