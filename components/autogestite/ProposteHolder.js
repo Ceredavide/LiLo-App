@@ -8,7 +8,7 @@ import {
 
 import { Placeholder, PlaceholderLine, ShineOverlay } from "rn-placeholder"
 
-const Holder = () => {
+const CardPropostaHolder = () => {
     return (
         <View style={styles.container}>
             <Placeholder Animation={ShineOverlay}>
@@ -22,7 +22,7 @@ const Holder = () => {
 
 const ProposteHolder = () => {
     const array = new Array(5).fill({})
-    return (array.map((e, i) => { return <Holder key={i} /> }))
+    return (array.map((e, i) => { return <CardPropostaHolder key={i} /> }))
 
 }
 
