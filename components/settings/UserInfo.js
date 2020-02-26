@@ -1,17 +1,15 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native"
-import { useSelector } from "react-redux"
 
 import {
     heightPercentageToDP as hp
-  } from "react-native-responsive-screen";
+} from "react-native-responsive-screen";
 
-const UserInfo = () => {
-    const user = useSelector(state => state.user)
+const UserInfo = ({ user = {} }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.text}>Hai effettuato l'accesso come</Text>
-            <Text style={styles.text}>{user.nome} {user.cognome}, classe: {user.classe}</Text>
+            <Text style={styles.text}>{user.nome || ""} {user.cognome || ""}, classe: {user.classe || ""}</Text>
         </View>
     )
 }
@@ -22,7 +20,7 @@ const styles = StyleSheet.create({
         paddingTop: hp("5%"),
         alignItems: "center"
     },
-    text:{
+    text: {
         fontSize: hp("2%"),
         fontFamily: "open-sans-regular"
     }
