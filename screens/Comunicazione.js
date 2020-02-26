@@ -8,9 +8,11 @@ import {
 
 import axios from "axios"
 
-const Comunicazione = ({ navigation }) => {
+const Comunicazione = ({ route }) => {
+    const {comunicazione} = route.params
+    const { titolo, sottotitolo, paragrafo, immagine } = comunicazione
     const [image, setImage] = useState(null)
-    const { titolo, sottotitolo, paragrafo, immagine } = navigation.getParam("comunicazione")
+
 
     useEffect(() => {
         axios.get(`https://cere.dev/uploads/${immagine}`)
