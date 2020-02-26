@@ -6,7 +6,7 @@ import {
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 
-const MyButton = ({ action, text, color }) => {
+const MyButton = ({ action, text, color}) => {
   return (
     <TouchableOpacity
       style={{ ...styles.button, backgroundColor: color }}
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginTop: hp("1%"),
     height: hp("6%"),
-    width: wp("55%"),
+    width: wp("60%"),
     borderRadius: 20,
     alignItems: "center",
     justifyContent: "center",
