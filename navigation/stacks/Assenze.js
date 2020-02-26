@@ -1,24 +1,18 @@
-import { createStackNavigator } from "react-navigation";
+import React from "react"
+import { createStackNavigator } from "@react-navigation/stack";
 
 import AssenzeScreen from "../../screens/Assenze";
 
-import HeaderStyle from "../../styles/navigation/Header";
+import headerStyle from "../../styles/navigation/Header";
 
-const AssenzeStack = createStackNavigator(
-  {
-    Assenze: AssenzeScreen
-  },
-  {
-    defaultNavigationOptions: HeaderStyle
-  }
-);
+const { Navigator, Screen } = createStackNavigator()
 
-AssenzeScreen.navigationOptions = {
-  title: "Assenze"
-};
-
-AssenzeStack.navigationOptions = {
-  tabBarLabel: "Assenze"
-};
+const AssenzeStack = () => {
+  return (
+    <Navigator screenOptions={headerStyle}>
+      <Screen name="Assenze" component={AssenzeScreen} />
+    </Navigator>
+  )
+}
 
 export default AssenzeStack;

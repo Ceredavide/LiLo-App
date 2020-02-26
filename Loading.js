@@ -8,9 +8,9 @@ import * as Font from "expo-font";
 
 import { SAVE_USER_CREDENTIALS } from "./store/actionTypes"
 
-const LoadingScreen = ({ navigation }) => {
+const LoadingScreen = ({ setIsLoading, setIsAuthenticated }) => {
   const dispatch = useDispatch()
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+
   const loadResourcesAsync = async () => {
     const user = await AsyncStorage.getItem("user")
     if (!!user) {
@@ -22,7 +22,6 @@ const LoadingScreen = ({ navigation }) => {
         require("./assets/images/icon.png"),
         require("./assets/images/logo.png"),
         require("./assets/images/scuola.jpeg"),
-        require("./assets/images/login_successfull.jpg"),
         require("./assets/images/student-hat.png")
       ]),
       Font.loadAsync({
@@ -43,7 +42,7 @@ const LoadingScreen = ({ navigation }) => {
   };
 
   const handleFinishLoading = () => {
-    navigation.navigate(isAuthenticated ? "App" : "Auth")
+    setIsLoading(false)
   };
 
   return (

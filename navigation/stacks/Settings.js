@@ -1,24 +1,18 @@
-import { createStackNavigator } from "react-navigation";
+import React from "react"
+import { createStackNavigator } from "@react-navigation/stack";
 
 import SettingsScreen from "../../screens/Settings";
 
-import HeaderStyle from "../../styles/navigation/Header";
+import headerStyle from "../../styles/navigation/Header";
 
-const SettingsStack = createStackNavigator(
-  {
-    Settings: SettingsScreen
-  },
-  {
-    defaultNavigationOptions: HeaderStyle
-  }
-);
+const { Navigator, Screen } = createStackNavigator()
 
-SettingsScreen.navigationOptions = {
-  title: "Impostazioni"
-};
-
-SettingsStack.navigationOptions = {
-  tabBarLabel: "Impostazioni"
-};
+const SettingsStack = () => {
+  return (
+    <Navigator screenOptions={headerStyle}>
+      <Screen name="Impostazioni" component={SettingsScreen} />
+    </Navigator>
+  )
+}
 
 export default SettingsStack;

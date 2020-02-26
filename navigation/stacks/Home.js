@@ -1,4 +1,6 @@
-import { createStackNavigator } from "react-navigation";
+import React from "react"
+
+import { createStackNavigator } from "@react-navigation/stack";
 
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 
@@ -7,59 +9,31 @@ import ComunicazioneScreen from "../../screens/Comunicazione";
 import ComunicazioniScreen from "../../screens/Comunicazioni";
 import NewComunicazioneScreen from "../../screens/NewComunicazione";
 
-import HeaderStyle from "../../styles/navigation/Header";
+import headerStyle from "../../styles/navigation/Header";
 
-const HomeStack = createStackNavigator(
-  {
-    Home: HomeScreen,
-    Comunicazione: ComunicazioneScreen,
-    Comunicazioni: ComunicazioniScreen,
-    NewComunicazione: NewComunicazioneScreen
-  },
-  {
-    defaultNavigationOptions: HeaderStyle
-  }
-);
+const { Navigator, Screen } = createStackNavigator()
 
-HomeScreen.navigationOptions = {
-  title: "Home"
-};
+const HomeStack = () => {
+  return (
+    <Navigator screenOptions={headerStyle}>
+      <Screen name="Home" component={HomeScreen} />
+      <Screen name="Comunicazione" component={ComunicazioneScreen} options={comunicazioniOptions} />
+      <Screen name="Comunicazioni" component={ComunicazioniScreen} options={comunicazioniOptions} />
+      <Screen name="Nuova Comunicazione" component={NewComunicazioneScreen} options={newComunicazioneOptions} />
+    </Navigator>
+  )
+}
 
-ComunicazioneScreen.navigationOptions = {
-  title: "Comunicazione",
+const comunicazioniOptions = {
   headerTitleStyle: {
-    fontFamily: "System",
-    color: "white",
-    fontSize: 28,
-    marginBottom: hp("1%")
-  },
-  headerBackTitleStyle: {
-    color: "white"
+    fontSize: hp("3.7%"),
   }
 }
 
-ComunicazioniScreen.navigationOptions = {
-  title: "Comunicazioni",
+const newComunicazioneOptions = {
   headerTitleStyle: {
-    fontFamily: "System",
-    color: "white",
-    fontSize: 28,
-    marginBottom: hp("1%")
+    fontSize: hp("2.7%")
   }
-};
-
-NewComunicazioneScreen.navigationOptions = {
-  title: "Nuova Comunicazione",
-  headerTitleStyle: {
-    fontFamily: "System",
-    color: "white",
-    fontSize: 18,
-    marginBottom: hp("1%")
-  }
-};
-
-HomeStack.navigationOptions = {
-  tabBarLabel: "Home"
-};
+}
 
 export default HomeStack;
