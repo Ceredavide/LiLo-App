@@ -27,6 +27,29 @@ export const fetchComunicazioni = () => {
     };
 };
 
+export const refreshComunicazioni = () => {
+    return async dispatch => {
+        dispatch({ type: actionTypes.REFRESH_COMUNICAZIONI_START });
+        try {
+            const user = await JSON.parse(await AsyncStorage.getItem("user"))
+            const response = await axios.get("https://cere.dev/comunicazioni", {
+                headers: {
+                    Authorization: "Bearer " + user.accessToken
+                }
+            })
+            dispatch({
+                type: actionTypes.REFRESH_COMUNICAZIONI_SUCCESS,
+                comunicazioni: response.data.data
+            });
+        } catch (error) {
+            dispatch({
+                type: actionTypes.REFRESH_COMUNICAZIONI_ERROR,
+                error: error
+            });
+        }
+    };
+}
+
 export const postComunicazione = ({ titolo, sottotitolo, paragrafo, image }, navigation) => {
     return async dispatch => {
         const user = await JSON.parse(await AsyncStorage.getItem("user"))

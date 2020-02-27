@@ -1,46 +1,33 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, FlatList, TouchableOpacity, ActivityIndicator } from "react-native";
+import { StyleSheet, View, FlatList, TouchableOpacity } from "react-native";
 import { useSelector, useDispatch } from "react-redux"
 
-import { fetchComunicazioni } from "../store/actions/comunicazioni"
+import { fetchComunicazioni, refreshComunicazioni } from "../store/actions/comunicazioni"
 
 import Card from "../components/home/Card";
 import FloatingButton from "../components/home/FloatingButton";
+import ComunicazioniHolder from "../components/home/ComunicazioniHolder"
 
 const HomeScreen = ({ navigation }) => {
   const dispatch = useDispatch()
   const isAdmin = useSelector(state => state.user.isAdmin)
-  const comunicazioni = useSelector(state => state.comunicazioni.comunicazioni)
-  const [isLoading, setIsLoading] = useState(false)
-  const [isRefreshing, setIsRefreshing] = useState(false)
-
-  const handleFetch = async () => {
-    setIsLoading(true)
-    dispatch(fetchComunicazioni())
-    setIsLoading(false)
-  }
-
-  handleRefresh = async () => {
-    setIsRefreshing(true)
-    dispatch(fetchComunicazioni())
-    setIsRefreshing(false)
-  }
-
+  const { comunicazioni, isLoading, isRefreshing } = useSelector(state => state.comunicazioni)
+  
   useEffect(() => {
-    handleFetch()
+    dispatch(fetchComunicazioni())
   }, []);
 
   return (
     <View style={styles.screen}>
       {isLoading ? (
-        <ActivityIndicator style={{ flex: 1 }} />
+        <ComunicazioniHolder />
       ) : (
           <View>
             <FlatList
               data={comunicazioni}
               keyExtractor={item => item._id}
               refreshing={isRefreshing}
-              onRefresh={handleRefresh}
+              onRefresh={() => dispatch(refreshComunicazioni())}
               showsVerticalScrollIndicator={false}
               renderItem={({ item }) => (
                 < TouchableOpacity

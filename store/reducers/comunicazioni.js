@@ -2,8 +2,12 @@ import * as actionTypes from "../actionTypes"
 
 import { Alert } from "react-native"
 
+import handleError from "../../services/handleError"
+
 const initialState = {
   comunicazioni: [],
+  isLoading: false,
+  isRefreshing: false,
   isLoadingPost: false
 };
 
@@ -12,16 +16,37 @@ const comunicazioniReducer = (state = initialState, action) => {
     case actionTypes.FETCH_COMUNICAZIONI_START:
       return {
         ...state,
+        isLoading: true
       };
     case actionTypes.FETCH_COMUNICAZIONI_SUCCESS:
       return {
         ...state,
-        comunicazioni: action.comunicazioni
+        comunicazioni: action.comunicazioni,
+        isLoading: false
       };
     case actionTypes.FETCH_COMUNICAZIONI_ERROR:
+      handleError(action.error)
       return {
         ...state,
+        isLoading: false
       };
+    case actionTypes.REFRESH_COMUNICAZIONI_START:
+      return {
+        ...state,
+        isRefreshing: true,
+      }
+    case actionTypes.REFRESH_COMUNICAZIONI_SUCCESS:
+      return {
+        ...state,
+        isRefreshing: false,
+        comunicazioni: action.comunicazioni
+      }
+    case actionTypes.REFRESH_COMUNICAZIONI_ERROR:
+      handleError(action.error)
+      return {
+        ...state,
+        isRefreshing: false
+      }
     case actionTypes.POST_COMUNICAZIONE_START:
       return {
         ...state,
@@ -35,6 +60,7 @@ const comunicazioniReducer = (state = initialState, action) => {
         isLoadingPost: false
       };
     case actionTypes.POST_COMUNICAZIONE_ERROR:
+      handleError(action.error)
       return {
         ...state,
         isLoadingPost: false
