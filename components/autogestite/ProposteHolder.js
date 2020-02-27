@@ -23,7 +23,6 @@ const CardPropostaHolder = () => {
 const ProposteHolder = () => {
     const array = new Array(5).fill({})
     return (array.map((e, i) => { return <CardPropostaHolder key={i} /> }))
-
 }
 
 const styles = StyleSheet.create({
