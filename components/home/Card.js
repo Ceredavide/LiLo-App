@@ -47,7 +47,8 @@ const styles = StyleSheet.create({
   containerText: {
     marginTop: wp("4%"),
     marginBottom: wp("4%"),
-    marginRight: wp("4%")
+    marginRight: wp("4%"),
+    width: wp("50%")
   },
   title: {
     fontFamily: "open-sans-bold",
