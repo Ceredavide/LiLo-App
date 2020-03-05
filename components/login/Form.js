@@ -9,7 +9,7 @@ import {
 import { useFormik } from "formik";
 import { AntDesign } from "@expo/vector-icons";
 
-import tryLogin from "../../services/tryLogin"
+import tryLogin from "../../utils/tryLogin"
 
 import { SAVE_USER_CREDENTIALS } from "../../store/actionTypes"
 

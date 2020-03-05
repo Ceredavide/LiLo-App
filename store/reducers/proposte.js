@@ -1,6 +1,6 @@
 import * as actionTypes from "../actionTypes"
 
-import handleError from "../../services/handleError"
+import handleError from "../../utils/handleError"
 
 const initialState = {
   loadingList: false,

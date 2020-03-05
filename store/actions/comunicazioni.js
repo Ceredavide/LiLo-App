@@ -2,7 +2,7 @@ import * as actionTypes from "../actionTypes";
 import { AsyncStorage } from "react-native"
 import axios from "axios";
 
-import handleError from "../../services/handleError"
+import handleError from "../../utils/handleError"
 
 export const fetchComunicazioni = () => {
     return async dispatch => {

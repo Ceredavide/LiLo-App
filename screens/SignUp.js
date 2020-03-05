@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { StyleSheet, TextInput, Text } from "react-native";
 
-import { Formik, useFormik } from "formik";
+import { useFormik } from "formik";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import LoadingButton from "../components/LoadingButton"
 import ErrorText from "../components/ErrorText"
 import styles from "../styles/signUp/Forms";
 
-import createUser from "../services/createUser"
-import validateSignUp from "../services/validateSignUp"
+import createUser from "../utils/createUser"
+import validateSignUp from "../utils/validateSignUp"
 
 const SignUp = ({ navigation }) => {
   const [errors, setErrors] = useState({})

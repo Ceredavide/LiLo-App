@@ -13,7 +13,8 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 import LoadingButton from "../components/LoadingButton"
 import ErrorText from "../components/ErrorText"
-import validateProposta from "../services/validateProposta"
+
+import validateProposta from "../utils/validateProposta"
 
 const PropostaScreen = ({ navigation }) => {
   const [errors, setErrors] = useState({})

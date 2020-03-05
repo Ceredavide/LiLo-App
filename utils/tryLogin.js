@@ -1,7 +1,7 @@
 import axios from "axios";
 import { AsyncStorage, Alert } from "react-native";
 
-import handleError from "../services/handleError"
+import handleError from "./handleError"
 
 export default tryLogin = async (email, password) => {
     try {

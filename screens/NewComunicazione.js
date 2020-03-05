@@ -14,7 +14,7 @@ import ImagePicker from "../components/newComunicazione/ImagePicker";
 import LoadingButton from "../components/LoadingButton"
 import ErrorText from "../components/ErrorText"
 
-import validateComunicazione from "../services/validateComunicazione"
+import validateComunicazione from "../utils/validateComunicazione"
 
 const NewComunicazioneScreen = ({ navigation }) => {
   const [errors, setErrors] = useState({})

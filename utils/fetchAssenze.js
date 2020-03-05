@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import handleError from "../services/handleError"
+import handleError from "./handleError"
 
 export default fetchAssenze = async () => {
     let assenze = []

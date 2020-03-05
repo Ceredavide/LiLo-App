@@ -2,7 +2,7 @@ import * as actionTypes from "../actionTypes"
 
 import { Alert } from "react-native"
 
-import handleError from "../../services/handleError"
+import handleError from "../../utils/handleError"
 
 const initialState = {
   comunicazioni: [],
