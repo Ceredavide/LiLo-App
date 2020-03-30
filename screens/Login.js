@@ -7,27 +7,25 @@ import {
 } from "react-native-responsive-screen";
 
 import FormLogin from "../components/login/Form";
-import TouchableText from "../components/TouchableText";
+import TouchableText from "../components/shared/TouchableText";
 
 const LoginScreen = ({ navigation }) => {
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={styles.screen}>
-        <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Text style={styles.text}>LiLo App</Text>
-        <Image
-          style={styles.image}
-          source={require("../assets/images/scuola.jpeg")}
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} style={styles.screen}>
+      <StatusBar backgroundColor="white" barStyle="dark-content" />
+      <Text style={styles.title}>LiLo App</Text>
+      <Image
+        style={styles.image}
+        source={require("../assets/images/scuola.jpeg")}
+      />
+      <FormLogin />
+      <View style={styles.buttons}>
+        <Text style={styles.textFooter}>Non hai ancora un account?</Text>
+        <TouchableText
+          action={() => navigation.navigate("SignUp")}
+          text="Registrati"
+          textStyle={styles.signUp}
         />
-        <FormLogin navigation={navigation} />
-        <View style={styles.buttons}>
-          <Text style={styles.textFooter}>Non hai ancora un account?</Text>
-          <TouchableText
-            action={() => navigation.navigate("SignUp")}
-            text="Registrati"
-            textStyle={styles.signUp}
-          />
-        </View>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -45,7 +43,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 25,
     borderBottomRightRadius: 25
   },
-  text: {
+  title: {
     fontSize: hp("7%"),
     alignSelf: "center",
     color: "#009fff",
