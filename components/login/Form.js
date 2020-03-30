@@ -13,15 +13,15 @@ import tryLogin from "../../utils/tryLogin"
 
 import { SAVE_USER_CREDENTIALS } from "../../store/actionTypes"
 
-import LoadingButton from "../LoadingButton";
+import LoadingButton from "../shared/LoadingButton";
 
-const Form = ({ navigation }) => {
+const Form = () => {
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(false);
 
   handleLogin = async ({ email, password }) => {
     setLoading(true);
-    const user = await tryLogin(email, password, navigation)
+    const user = await tryLogin(email, password)
     if (!!user) {
       dispatch({ type: SAVE_USER_CREDENTIALS, user: user })
     }
