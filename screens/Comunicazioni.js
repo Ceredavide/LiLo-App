@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View, FlatList } from "react-native";
 import { useSelector } from "react-redux"
 
-import MyButton from "../components/MyButton";
+import MyButton from "../components/shared/MyButton";
 import CardComunicazione from "../components/comunicazioni/CardComunicazione"
 
 const ComunicazioniScreen = ({ navigation }) => {

@@ -6,7 +6,7 @@ import PropostaScreen from "../../screens/Proposta";
 
 import headerstyle from "../../styles/navigation/Header";
 
-import TouchableIcon from "../../components/TouchableIcon"
+import TouchableIcon from "../../components/shared/TouchableIcon"
 
 const { Navigator, Screen } = createStackNavigator()
 
