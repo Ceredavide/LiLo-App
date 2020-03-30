@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, SectionList, ActivityIndicator } from "react-native";
+import { SectionList, ActivityIndicator } from "react-native";
 
-import { heightPercentageToDP as hp } from "react-native-responsive-screen";
-
+import Screen from "../components/shared/Screen"
 import Header from "../components/assenze/Header";
 import CardAssenza from "../components/assenze/CardAssenza";
 import NoAssenze from "../components/assenze/NoAssenze";
@@ -31,7 +30,7 @@ const AssenzeScreen = () => {
   }, [])
 
   return (
-    <View style={styles.screen}>
+    <Screen>
       {isLoading ? (
         <ActivityIndicator />
       ) : assenze === "" ? (
@@ -58,20 +57,8 @@ const AssenzeScreen = () => {
               keyExtractor={(item, index) => item + index}
             />
           )}
-    </View>
+    </Screen>
   );
 };
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#F1F5F9"
-  },
-  noAssenze: {
-    fontSize: hp("3%")
-  }
-});
 
 export default AssenzeScreen;
