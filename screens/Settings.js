@@ -8,7 +8,8 @@ import {
 } from "react-native-responsive-screen";
 import { Chip } from "react-native-paper";
 
-import MyButton from "../components/MyButton";
+import Screen from "../components/shared/Screen"
+import MyButton from "../components/shared/MyButton";
 import UserInfo from "../components/settings/UserInfo"
 
 const SettingsScreen = () => {
@@ -27,7 +28,7 @@ const SettingsScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <Screen style={styles.screen}>
       <Image
         style={styles.image}
         source={require("../assets/images/student-hat.png")}
@@ -52,18 +53,14 @@ const SettingsScreen = () => {
           color="#e65054"
         />
       </View>
-    </View>
+    </Screen>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 5,
-    paddingTop: hp("4%"),
+  screen: {
     alignItems: "center",
     justifyContent: "space-around",
-    backgroundColor: "#F1F5F9"
   },
   image: {
     width: wp("70%"),

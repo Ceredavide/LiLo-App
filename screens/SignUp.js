@@ -4,8 +4,8 @@ import { StyleSheet, TextInput, Text } from "react-native";
 import { useFormik } from "formik";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-import LoadingButton from "../components/LoadingButton"
-import ErrorText from "../components/ErrorText"
+import LoadingButton from "../components/shared/LoadingButton"
+import ErrorText from "../components/shared/ErrorText"
 import styles from "../styles/signUp/Forms";
 
 import createUser from "../utils/createUser"

@@ -11,8 +11,8 @@ import {
 import { postComunicazione } from "../store/actions/comunicazioni"
 
 import ImagePicker from "../components/newComunicazione/ImagePicker";
-import LoadingButton from "../components/LoadingButton"
-import ErrorText from "../components/ErrorText"
+import LoadingButton from "../components/shared/LoadingButton"
+import ErrorText from "../components/shared/ErrorText"
 
 import validateComunicazione from "../utils/validateComunicazione"
 
