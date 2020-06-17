@@ -23,6 +23,8 @@
     "expo-asset": "~8.0.0",
     "expo-image-picker": "~8.0.1",
     "expo-linear-gradient": "~8.0.0",
+    "expo-secure-store": "~8.0.0",
+    "expo-splash-screen": "^0.2.3",
     "font": "0.0.4",
     "formik": "^2.1.4",
     "react": "16.9.0",
