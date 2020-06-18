@@ -13,14 +13,11 @@ export default function useCachedResources() {
   // Load any resources or data that we need prior to rendering the app
   useEffect(() => {
     async function loadResourcesAndDataAsync() {
-      // Load user credentials if the client accessed the app
-      const cachedUser = await SecureStore.getItemAsync("user")
-      setUser(cachedUser)
-      console.log(user)
-
       try {
         SplashScreen.preventAutoHideAsync();
-
+        // Load user data
+        const cachedUser = await SecureStore.getItemAsync("user")
+        setUser(cachedUser)
         // Load assets
         await Asset.loadAsync([
           require("../assets/images/icon.png"),
