@@ -1,5 +1,6 @@
 import axios from "axios";
-import { AsyncStorage, Alert } from "react-native";
+import {  Alert } from "react-native";
+import * as SecureStore from 'expo-secure-store';
 
 import handleError from "./handleError"
 
@@ -11,7 +12,7 @@ export default tryLogin = async (email, password) => {
             strategy: "local"
         })
         user = response.data.user
-        await AsyncStorage.setItem("user", JSON.stringify(response.data))
+        await SecureStore.setItemAsync("user", JSON.stringify(response.data))
     } catch (error) {
         if (error.response.status === 401) {
             Alert.alert("email o password errati, riprovare.")

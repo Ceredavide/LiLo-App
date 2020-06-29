@@ -1,5 +1,5 @@
 import * as actionTypes from "../actionTypes";
-import { AsyncStorage } from "react-native"
+import * as SecureStore from 'expo-secure-store';
 import axios from "axios";
 
 import handleError from "../../utils/handleError"
@@ -8,7 +8,7 @@ export const fetchComunicazioni = () => {
     return async dispatch => {
         dispatch({ type: actionTypes.FETCH_COMUNICAZIONI_START });
         try {
-            const user = await JSON.parse(await AsyncStorage.getItem("user"))
+            const user = await JSON.parse(await SecureStore.getItemAsync("user"))
             const response = await axios.get("https://cere.dev/comunicazioni", {
                 headers: {
                     Authorization: "Bearer " + user.accessToken
@@ -31,7 +31,7 @@ export const refreshComunicazioni = () => {
     return async dispatch => {
         dispatch({ type: actionTypes.REFRESH_COMUNICAZIONI_START });
         try {
-            const user = await JSON.parse(await AsyncStorage.getItem("user"))
+            const user = await JSON.parse(await SecureStore.getItemAsync("user"))
             const response = await axios.get("https://cere.dev/comunicazioni", {
                 headers: {
                     Authorization: "Bearer " + user.accessToken
@@ -52,7 +52,7 @@ export const refreshComunicazioni = () => {
 
 export const postComunicazione = ({ titolo, sottotitolo, paragrafo, image }, navigation) => {
     return async dispatch => {
-        const user = await JSON.parse(await AsyncStorage.getItem("user"))
+        const user = await JSON.parse(await SecureStore.getItemAsync("user"))
         dispatch({ type: actionTypes.POST_COMUNICAZIONE_START });
         const data = { "uri": "data:image/jpeg;base64," + image }
         axios.post("https://cere.dev/uploads", data, {
@@ -94,7 +94,7 @@ export const postComunicazione = ({ titolo, sottotitolo, paragrafo, image }, nav
 
 export const deleteComunicazione = (id, immagine) => {
     return async dispatch => {
-        const user = await JSON.parse(await AsyncStorage.getItem("user"))
+        const user = await JSON.parse(await SecureStore.getItemAsync("user"))
         axios.delete(`https://cere.dev/uploads/${immagine}`)
             .then(() => {
                 axios.delete(`https://cere.dev/comunicazioni/${id}`, {

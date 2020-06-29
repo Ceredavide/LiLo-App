@@ -1,12 +1,13 @@
 import * as actionTypes from "../actionTypes";
-import { AsyncStorage, Alert } from "react-native"
+import { Alert } from "react-native"
+import * as SecureStore from 'expo-secure-store';
 import axios from "axios";
 
 export const fetchProposte = () => {
     return async dispatch => {
         dispatch({ type: actionTypes.FETCH_PROPOSTE_START });
         try {
-            const user = await JSON.parse(await AsyncStorage.getItem("user"))
+            const user = await JSON.parse(await SecureStore.getItemAsync("user"))
             const proposte = await axios.get("https://cere.dev/proposte", {
                 headers: {
                     Authorization: "Bearer " + user.accessToken
@@ -27,7 +28,7 @@ export const fetchProposte = () => {
 
 export const postProposta = ({ nome, descrizione, numeroPartecipantiMax, richieste }, navigation) => {
     return async dispatch => {
-        const user = await JSON.parse(await AsyncStorage.getItem("user"))
+        const user = await JSON.parse(await SecureStore.getItemAsync("user"))
         dispatch({ type: actionTypes.POST_PROPOSTA_START });
         const data = {
             nome: nome,
