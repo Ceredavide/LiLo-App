@@ -11,10 +11,9 @@ const initialState = {
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SAVE_USER_CREDENTIALS:
-      const { _id, nome, cognome, classe, email } = action.user;
+      const { _id, nome, cognome, classe, email } = action.user.user;
       const isAdmin =
         email === "andrixmelone01@gmail.com" ||
-        email === "samuele.meschini@outlook.it" ||
         email === "ceredavide@live.it";
       return {
         ...state,
@@ -26,7 +25,6 @@ const userReducer = (state = initialState, action) => {
         isAdmin: isAdmin,
       };
     case actionTypes.DELETE_USER_CREDENTIALS:
-      console.log("bella")
       return {
         ...state,
         ...initialState
