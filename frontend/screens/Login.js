@@ -12,20 +12,22 @@ import TouchableText from "../components/shared/TouchableText";
 const LoginScreen = ({ navigation }) => {
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} style={styles.screen}>
-      <StatusBar backgroundColor="white" barStyle="dark-content" />
-      <Text style={styles.title}>LiLo App</Text>
-      <Image
-        style={styles.image}
-        source={require("../assets/images/scuola.jpeg")}
-      />
-      <FormLogin />
-      <View style={styles.buttons}>
-        <Text style={styles.textFooter}>Non hai ancora un account?</Text>
-        <TouchableText
-          action={() => navigation.navigate("SignUp")}
-          text="Registrati"
-          textStyle={styles.signUp}
+      <View style={{flex: 1}}>
+        <StatusBar backgroundColor="white" barStyle="dark-content" />
+        <Text style={styles.title}>LiLo App</Text>
+        <Image
+          style={styles.image}
+          source={require("../assets/images/scuola.jpeg")}
         />
+        <FormLogin />
+        <View style={styles.buttons}>
+          <Text style={styles.textFooter}>Non hai ancora un account?</Text>
+          <TouchableText
+            action={() => navigation.navigate("SignUp")}
+            text="Registrati"
+            textStyle={styles.signUp}
+          />
+        </View>
       </View>
     </TouchableWithoutFeedback>
   );

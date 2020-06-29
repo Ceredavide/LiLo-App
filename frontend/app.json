@@ -3,7 +3,6 @@
     "name": "LiLo",
     "slug": "lilo_definitivo",
     "privacy": "public",
-    "sdkVersion": "36.0.0",
     "ios": {
       "bundleIdentifier": "com.ceredavide.liloapp",
       "infoPlist": {
@@ -26,8 +25,13 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
-    "platforms": ["android", "ios"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "platforms": [
+      "android",
+      "ios"
+    ],
     "description": "liam sucks"
   }
 }

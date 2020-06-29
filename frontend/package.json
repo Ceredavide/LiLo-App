@@ -45,7 +45,8 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "rn-placeholder": "^3.0.0",
-    "webpack": "^4.41.6"
+    "webpack": "^4.41.6",
+    "lottie-react-native": "~2.6.1"
   },
   "devDependencies": {
     "babel-preset-expo": "^8.0.0",
