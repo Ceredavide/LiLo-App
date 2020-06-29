@@ -1,0 +1,22 @@
+{
+  "name": "lilo-backend",
+  "version": "1.0.0",
+  "description": "Backend app LiLo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ceredavide/LiLo-App.git"
+  },
+  "author": "Davide Ceresa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ceredavide/LiLo-App/issues"
+  },
+  "homepage": "https://github.com/Ceredavide/LiLo-App#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
