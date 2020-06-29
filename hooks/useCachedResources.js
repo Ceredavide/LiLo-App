@@ -17,7 +17,15 @@ export default function useCachedResources() {
         SplashScreen.preventAutoHideAsync();
         // Load user data
         const cachedUser = await SecureStore.getItemAsync("user")
-        setUser(cachedUser)
+
+        if (cachedUser !== null) {
+          const parsedUser = await JSON.parse(cachedUser)
+          setUser(parsedUser)
+        }
+        else {
+          setUser(cachedUser)
+        }
+
         // Load assets
         await Asset.loadAsync([
           require("../assets/images/icon.png"),
