@@ -1,33 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { SectionList, ActivityIndicator } from "react-native";
+
+import useAssenze from "../hooks/useAssenze"
 
 import Screen from "../components/shared/Screen"
 import Header from "../components/assenze/Header";
 import CardAssenza from "../components/assenze/CardAssenza";
 import NoAssenze from "../components/assenze/NoAssenze";
 
-import fetchAssenze from "../utils/fetchAssenze"
-
 const AssenzeScreen = () => {
-  const [assenze, setAssenze] = useState([])
-  const [isLoading, setIsloading] = useState(false)
-  const [isRefreshing, setIsRefreshing] = useState(false)
 
-  const handleFetch = async () => {
-    setIsloading(true)
-    setAssenze(await fetchAssenze())
-    setIsloading(false)
-  }
-
-  const handleRefresh = async () => {
-    setIsRefreshing(true)
-    setAssenze(await fetchAssenze())
-    setIsRefreshing(false)
-  }
-
-  useEffect(() => {
-    handleFetch()
-  }, [])
+  const {
+    assenze,
+    isLoading,
+    isRefreshing,
+    handleRefresh
+  } = useAssenze()
 
   return (
     <Screen>
@@ -38,25 +26,28 @@ const AssenzeScreen = () => {
           isLoading={isLoading}
           loadAssenze={handleRefresh}
         />
-      ) : (
-            <SectionList
-              refreshing={isRefreshing}
-              onRefresh={handleRefresh}
-              showsVerticalScrollIndicator={false}
-              renderSectionHeader={({ section: { title } }) => (
-                <Header title={title} />
-              )}
-              renderItem={({ item, index }) => (
-                <CardAssenza
-                  key={index}
-                  nome={item.name}
-                  descrizione={item.description}
-                />
-              )}
-              sections={assenze}
-              keyExtractor={(item, index) => item + index}
-            />
-          )}
+      ) : assenze === "error" ? <NoAssenze
+        isLoading={isLoading}
+        loadAssenze={handleRefresh}
+      /> : (
+              <SectionList
+                refreshing={isRefreshing}
+                onRefresh={handleRefresh}
+                showsVerticalScrollIndicator={false}
+                renderSectionHeader={({ section: { title } }) => (
+                  <Header title={title} />
+                )}
+                renderItem={({ item, index }) => (
+                  <CardAssenza
+                    key={index}
+                    nome={item.name}
+                    descrizione={item.description}
+                  />
+                )}
+                sections={assenze}
+                keyExtractor={(item, index) => item + index}
+              />
+            )}
     </Screen>
   );
 };
