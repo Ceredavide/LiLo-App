@@ -9,6 +9,7 @@ const errorHandler = require("./controllers/error")
 // importazioni routes api
 const comunicazioniRouter = require("./routes/comunicazioni")
 const proposteRouter = require("./routes/proposte")
+const usersRouter = require("./routes/user")
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(bodyParser.json())
 // utilizzo API routes 
 app.use('/api/comunicazioni', comunicazioniRouter)
 app.use('/api/proposte', proposteRouter)
+app.use('/api/users', usersRouter)
 
 // route chiamata se si prova ad andare in un url senza routes
 app.use((req, res, next) => {
