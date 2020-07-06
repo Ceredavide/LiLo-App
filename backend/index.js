@@ -1,5 +1,6 @@
 const express = require("express")
 const bodyParser = require("body-parser")
+const mongoose = require("mongoose")
 
 const HttpError = require("./models/http-error")
 
@@ -11,6 +12,7 @@ const comunicazioniRouter = require("./routes/comunicazioni")
 const proposteRouter = require("./routes/proposte")
 const usersRouter = require("./routes/user")
 
+// richiamo express
 const app = express();
 
 // utilizzo parser che fa in modo che le risposte siano JSON
@@ -29,4 +31,6 @@ app.use((req, res, next) => {
 // utilizzo gestore errori
 app.use(errorHandler)
 
-app.listen(5000)
+mongoose.connect("mongodb://localhost:27017/ProvaLiLo", { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => app.listen(5000))
+    .catch(err => console.log(err))
