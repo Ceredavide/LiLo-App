@@ -8,7 +8,8 @@ const comunicazioneSchema = new Schema({
     paragrafo: { type: String, required: true },
     immagine: { type: String, required: true },
     creator: { type: String, required: true },
-    data: { type: Date, default: Date.now },
+}, {
+    timestamps: true
 })
 
 
