@@ -1,17 +1,19 @@
-const { v4: uuid } = require("uuid")
 const HttpError = require("../models/http-error")
 
 const Comunicazione = require("../models/Comunicazione")
 
-const DUMMY_DATA = [
-    { id: 1, messaggio: "bella mate" },
-    { id: 2, messaggio: "bella mary" },
-    { id: 4, messaggio: "bella morad" },
-    { id: 6, messaggio: "bella che noia" },
-]
+const getComunicazioni = async (req, res, next) => {
 
-const getComunicazioni = (req, res, next) => {
-    res.json(DUMMY_DATA)
+    let comunicazioni
+
+    try {
+        comunicazioni = await Comunicazione.find()
+    } catch (err) {
+        return next(new HttpError("Errore nel reperire la lista delle comunicazioni, riprovare.", 500))
+    }
+
+    res.status(200).json({ comunicazioni: comunicazioni.map(item => item.toObject({ getters: true })) })
+
 }
 
 const getComunicazioniById = async (req, res, next) => {
@@ -21,19 +23,17 @@ const getComunicazioniById = async (req, res, next) => {
     let comunicazione;
 
     try {
-        comunicazione = Comunicazione.findById(id)
+        comunicazione = await Comunicazione.findById(id)
     } catch (err) {
         return next(new HttpError("Errore nella ricerca della comunicazione, riprovare.", 500))
     }
 
-    if (!comunicazione) {
+    if (!comunicazione || comunicazione.length === 0) {
         return next(new HttpError("Ct non hai trovato nessuna comunicazione", 404))
     }
 
-    res.json({ comunicazione: comunicazione.toObject({ getters: true }) })
+    res.status(200).json({ comunicazione: comunicazione.toObject({ getters: true }) })
 }
-
-// const getComunicazioniByTagId = async
 
 const createComunicazione = async (req, res, next) => {
     const { titolo, sottotitolo, paragrafo, immagine, creator } = req.body
