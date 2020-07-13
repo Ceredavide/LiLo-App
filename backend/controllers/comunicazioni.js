@@ -1,7 +1,12 @@
+const mongoose = require("mongoose")
+
 const HttpError = require("../models/http-error")
-
 const Comunicazione = require("../models/Comunicazione")
+const User = require("../models/User")
 
+//
+//GET
+//
 const getComunicazioni = async (req, res, next) => {
 
     let comunicazioni
@@ -35,8 +40,24 @@ const getComunicazioniById = async (req, res, next) => {
     res.status(200).json({ comunicazione: comunicazione.toObject({ getters: true }) })
 }
 
+//
+//POST
+//
 const createComunicazione = async (req, res, next) => {
+
     const { titolo, sottotitolo, paragrafo, immagine, creator } = req.body
+
+    let user;
+
+    try {
+        user = await User.findById(creator)
+    } catch (err) {
+        return next(new HttpError("Id utente non valido, riprovare.", 500))
+    }
+
+    if (!user) {
+        return next(new HttpError("Id utente non valido, riprovare."))
+    }
 
     const createdComunicazione = new Comunicazione({
         titolo,
@@ -46,14 +67,24 @@ const createComunicazione = async (req, res, next) => {
         creator,
     })
     try {
-        await createdComunicazione.save();
+        const sess = await mongoose.startSession();
+        sess.startTransaction();
+        await createdComunicazione.save({ session: sess });
+        user.comunicaziones.push(createdComunicazione);
+        await user.save({ session: sess })
+        await sess.commitTransaction()
+
     } catch (err) {
+        console.log(err)
         return next(new HttpError("Errore nel salvataggio della comunicazione, riprovare.", 500))
     }
 
     res.status(201).json({ comunicazione: createdComunicazione })
 }
 
+//
+//PATCH
+//
 const updateComunicazione = async (req, res, next) => {
     const id = req.params.id
 
@@ -83,6 +114,9 @@ const updateComunicazione = async (req, res, next) => {
     res.status(200).json({ comunicazione: comunicazione.toObject({ getters: true }) })
 }
 
+//
+//DELETE
+//
 const deleteComunicazione = async (req, res, next) => {
     const id = req.params.id
 
