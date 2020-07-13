@@ -1,6 +1,4 @@
-const { v4: uuid } = require("uuid")
 const User = require("../models/User")
-
 const HttpError = require("../models/http-error")
 
 const getUsers = async (req, res, next) => {
@@ -38,12 +36,15 @@ const signup = async (req, res, next) => {
         cognome,
         classe,
         email,
-        password
+        password,
+        proposte: [],
+        comunicazioni: []
     })
 
     try {
         await newUser.save()
     } catch (err) {
+        console.log(err)
         return next(new HttpError("Registrazione fallita, riprova più tardi.", 500))
     }
 
