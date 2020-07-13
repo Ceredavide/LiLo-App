@@ -7,7 +7,7 @@ const propostaSchema = new Schema({
     descrizione: { type: String, required: true },
     numeroPartecipantiMax: { type: Number, required: true, min: 5, max: 200 },
     richieste: { type: String, default: "" },
-    studente: { type: String, required: true }
+    creator: { type: moongose.Types.ObjectId, required: true, ref: "User" },
 }, {
     timestamps: true
 })

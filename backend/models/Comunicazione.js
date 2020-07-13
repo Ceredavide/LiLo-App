@@ -7,7 +7,7 @@ const comunicazioneSchema = new Schema({
     sottotitolo: { type: String, required: true },
     paragrafo: { type: String, required: true },
     immagine: { type: String, required: true },
-    creator: { type: String, required: true },
+    creator: { type: moongose.Types.ObjectId, required: true, ref: "User" },
 }, {
     timestamps: true
 })
