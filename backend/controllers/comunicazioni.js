@@ -1,5 +1,3 @@
-const mongoose = require("mongoose")
-
 const HttpError = require("../models/http-error")
 const Comunicazione = require("../models/Comunicazione")
 const User = require("../models/User")
@@ -18,7 +16,6 @@ const getComunicazioni = async (req, res, next) => {
     }
 
     res.status(200).json({ comunicazioni: comunicazioni.map(item => item.toObject({ getters: true })) })
-
 }
 
 const getComunicazioniById = async (req, res, next) => {
@@ -66,16 +63,10 @@ const createComunicazione = async (req, res, next) => {
         immagine,
         creator,
     })
-    try {
-        const sess = await mongoose.startSession();
-        sess.startTransaction();
-        await createdComunicazione.save({ session: sess });
-        user.comunicaziones.push(createdComunicazione);
-        await user.save({ session: sess })
-        await sess.commitTransaction()
 
+    try {
+        await createdComunicazione.save();
     } catch (err) {
-        console.log(err)
         return next(new HttpError("Errore nel salvataggio della comunicazione, riprovare.", 500))
     }
 
