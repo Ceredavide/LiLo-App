@@ -38,7 +38,6 @@ const signup = async (req, res, next) => {
         email,
         password,
         proposte: [],
-        comunicazioni: []
     })
 
     try {
