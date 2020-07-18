@@ -9,10 +9,7 @@ const userSchema = new Schema({
     classe: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true, minlength: 6 },
-    proposte: [{
-        id: { type: mongoose.Types.ObjectId, required: true, ref: "Proposta" },
-        nome: { type: String, required: true }
-    }]
+    proposte: [{ type: mongoose.Types.ObjectId, required: true, ref: "Proposta" }]
 }, {
     timestamps: true
 })
