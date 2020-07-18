@@ -1,8 +1,8 @@
 const express = require("express")
 
-const proposteConstroller = require("../controllers/proposte")
+const proposteController = require("../controllers/proposte")
 
-const { getProposte, getPropostaById, createProposta } = proposteConstroller
+const { getProposte, getPropostaById, createProposta } = proposteController
 
 const router = express.Router();
 
