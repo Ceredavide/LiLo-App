@@ -38,6 +38,9 @@ const getPropostaById = async (req, res, next) => {
     res.status(200).json({ proposta: proposta.toObject({ getters: true }) })
 }
 
+//
+//POST
+//
 const createProposta = async (req, res, next) => {
 
     const {
@@ -71,7 +74,7 @@ const createProposta = async (req, res, next) => {
         const sess = await mongoose.startSession();
         sess.startTransaction();
         await createdProposta.save({ session: sess });
-        user.comunicazioni.push(createdProposta);
+        user.proposte.push(createdProposta);
         await user.save({ session: sess })
         await sess.commitTransaction()
     } catch (err) {
