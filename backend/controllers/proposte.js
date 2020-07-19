@@ -84,7 +84,40 @@ const createProposta = async (req, res, next) => {
     res.status(201).json({ proposta: createdProposta })
 }
 
+//
+//DELETE
+//
+const deleteProposta = async (req, res, next) => {
+    const id = req.params.id
+
+    let proposta
+
+    try {
+        proposta = await Proposta.findById(id).populate("creator")
+    } catch (err) {
+        return next(new HttpError("Errore nella eliminazione della proposta, riprovare.", 500))
+    }
+
+    if (!proposta) {
+        return next(new HttpError("Non è stata trovata nessuna proposta con questo Id.", 404))
+    }
+
+    try {
+        const sess = await mongoose.startSession();
+        sess.startTransaction();
+        await proposta.remove({ sesssion: sess });
+        proposta.creator.proposte.pull(proposta);
+        await proposta.creator.save({ session: sess })
+        await sess.commitTransaction()
+    } catch (err) {
+        return next(new HttpError("Errore nella eliminazione della proposta, riprovare.", 500))
+    }
+
+    res.status(200).json({ id: proposta.toObject({ getters: true }).id })
+}
+
 
 exports.getProposte = getProposte
 exports.getPropostaById = getPropostaById
 exports.createProposta = createProposta
+exports.deleteProposta = deleteProposta
