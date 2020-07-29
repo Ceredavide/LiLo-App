@@ -2,6 +2,8 @@ const express = require("express")
 
 const comunicazioniController = require("../controllers/comunicazioni");
 
+const fileUpload = require("../middleware/file-upload")
+
 const {
     getComunicazioni,
     getComunicazioniById,
@@ -16,7 +18,7 @@ router.get('/', getComunicazioni);
 
 router.get('/:id', getComunicazioniById)
 
-router.post('/', createComunicazione)
+router.post('/', fileUpload.single("image"), createComunicazione)
 
 router.patch('/:id', updateComunicazione)
 
