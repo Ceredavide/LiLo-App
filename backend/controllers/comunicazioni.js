@@ -1,3 +1,5 @@
+const fs = require("fs")
+
 const HttpError = require("../models/http-error")
 const Comunicazione = require("../models/Comunicazione")
 const User = require("../models/User")
@@ -42,7 +44,7 @@ const getComunicazioniById = async (req, res, next) => {
 //
 const createComunicazione = async (req, res, next) => {
 
-    const { titolo, sottotitolo, paragrafo, immagine, creator } = req.body
+    const { titolo, sottotitolo, paragrafo, creator } = req.body
 
     let user;
 
@@ -60,7 +62,7 @@ const createComunicazione = async (req, res, next) => {
         titolo,
         sottotitolo,
         paragrafo,
-        immagine,
+        immagine: req.file.path,
         creator,
     })
 
@@ -77,6 +79,7 @@ const createComunicazione = async (req, res, next) => {
 //PATCH
 //
 const updateComunicazione = async (req, res, next) => {
+
     const id = req.params.id
 
     const {
@@ -119,11 +122,15 @@ const deleteComunicazione = async (req, res, next) => {
         return next(new HttpError("Errore nella eliminazione della comunicazione, riprovare.", 500))
     }
 
+    const imagePath = comunicazione.immagine
+
     try {
         await comunicazione.remove()
     } catch (err) {
         return next(new HttpError("Errore nella eliminazione della comunicazione, riprovare.", 500))
     }
+
+    fs.unlink(imagePath, err => console.log(err))
 
     res.status(200).json({ id: comunicazione.toObject({ getters: true }).id })
 }
