@@ -1,4 +1,5 @@
 const express = require("express")
+const path = require("path")
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose")
 
@@ -12,11 +13,26 @@ const comunicazioniRouter = require("./routes/comunicazioni")
 const proposteRouter = require("./routes/proposte")
 const usersRouter = require("./routes/user")
 
-// richiamo express
+// inizializzo app
 const app = express();
 
 // utilizzo parser che fa in modo che le risposte siano JSON
 app.use(bodyParser.json())
+
+// rende disponibile l'accesso statico alle immagini
+app.use('uploads/images', express.static(path.join("uploads", "images")))
+
+//
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    );
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
+
+    next()
+})
 
 // utilizzo API routes 
 app.use('/api/comunicazioni', comunicazioniRouter)
