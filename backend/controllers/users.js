@@ -1,3 +1,6 @@
+const bcrypt = require("bcryptjs")
+const jwt = require('jsonwebtoken');
+
 const User = require("../models/User")
 const HttpError = require("../models/http-error")
 
@@ -31,23 +34,38 @@ const signup = async (req, res, next) => {
         return next(new HttpError("É già presente un utente con la e-mail inserita.", 422))
     }
 
+    let hashedPassword;
+
+    try {
+        hashedPassword = await bcrypt.hash(password, 12)
+    } catch (err) {
+        return next(new HttpError("Registrazione fallita, riprova più tardi.", 500))
+    }
+
     const newUser = new User({
         nome,
         cognome,
         classe,
         email,
-        password,
+        password: hashedPassword,
         proposte: [],
     })
 
     try {
         await newUser.save()
     } catch (err) {
-        console.log(err)
         return next(new HttpError("Registrazione fallita, riprova più tardi.", 500))
     }
 
-    res.status(200).json({ user: newUser.toObject({ getters: true }) })
+    let token;
+
+    try {
+        token = await jwt.sign({ id: newUser.id }, "Y4rb1i@&r4#r", { expiresIn: "310d" })
+    } catch (err) {
+        return next(new HttpError("Registrazione fallita, riprova più tardi.", 500))
+    }
+
+    res.status(201).json({ user: newUser.toObject({ getters: true }), token: token })
 }
 
 const login = async (req, res, next) => {
@@ -64,11 +82,30 @@ const login = async (req, res, next) => {
     if (!existingUser) {
         return next(new HttpError("User not found.", 401))
     }
-    if (existingUser.password !== password) {
+
+    let isValidPassword;
+
+    try {
+        isValidPassword = await bcrypt.compare(password, existingUser.password)
+    } catch (err) {
+        return next(new HttpError("Login fallito, riprova più tardi.", 500))
+    }
+
+    if (!isValidPassword) {
         return next(new HttpError("Wrong password, try again.", 401))
     }
 
-    res.status(200).json({ message: "Succesfully logged in!" })
+    delete existingUser.password
+
+    let token;
+
+    try {
+        token = await jwt.sign({ id: newUser.id }, "Y4rb1i@&r4#r", { expiresIn: "310d" })
+    } catch (err) {
+        return next(new HttpError("Registrazione fallita, riprova più tardi.", 500))
+    }
+
+    res.status(200).json({ user: existingUser.toObject({ getters: true }), token: token })
 }
 
 exports.getUsers = getUsers;
