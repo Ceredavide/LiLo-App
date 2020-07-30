@@ -53,7 +53,7 @@ const createComunicazione = async (req, res, next) => {
     let user;
 
     try {
-        user = await User.findById(creator)
+        user = await User.findById(userId)
     } catch (err) {
         return next(new HttpError("Id utente non valido, riprovare.", 500))
     }
