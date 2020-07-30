@@ -4,6 +4,8 @@ const HttpError = require("../models/http-error")
 const Comunicazione = require("../models/Comunicazione")
 const User = require("../models/User")
 
+//TODO: Aggoiungere ruoli per modifica e eliminazione comunicazioni
+
 //
 //GET
 //
@@ -44,7 +46,9 @@ const getComunicazioniById = async (req, res, next) => {
 //
 const createComunicazione = async (req, res, next) => {
 
-    const { titolo, sottotitolo, paragrafo, creator } = req.body
+    const { userId } = req.userData
+
+    const { titolo, sottotitolo, paragrafo } = req.body
 
     let user;
 
@@ -63,7 +67,7 @@ const createComunicazione = async (req, res, next) => {
         sottotitolo,
         paragrafo,
         immagine: req.file.path,
-        creator,
+        creator: userId,
     })
 
     try {
