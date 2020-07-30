@@ -4,18 +4,18 @@ const jwt = require('jsonwebtoken');
 const User = require("../models/User")
 const HttpError = require("../models/http-error")
 
-const getUsers = async (req, res, next) => {
+// const getUsers = async (req, res, next) => {
 
-    let users
+//     let users
 
-    try {
-        users = await User.find({}, '-password')
-    } catch (err) {
-        return next(new HttpError("Qualcosa è andato storto, riprova più tardi."))
-    }
+//     try {
+//         users = await User.find({}, '-password')
+//     } catch (err) {
+//         return next(new HttpError("Qualcosa è andato storto, riprova più tardi."))
+//     }
 
-    res.status(200).json({ users: users.map(user => user.toObject({ getters: true })) })
-}
+//     res.status(200).json({ users: users.map(user => user.toObject({ getters: true })) })
+// }
 
 const signup = async (req, res, next) => {
 
@@ -100,7 +100,7 @@ const login = async (req, res, next) => {
     let token;
 
     try {
-        token = await jwt.sign({ id: newUser.id }, "Y4rb1i@&r4#r", { expiresIn: "310d" })
+        token = await jwt.sign({ id: existingUser.id }, "Y4rb1i@&r4#r", { expiresIn: "310d" })
     } catch (err) {
         return next(new HttpError("Registrazione fallita, riprova più tardi.", 500))
     }
@@ -108,6 +108,6 @@ const login = async (req, res, next) => {
     res.status(200).json({ user: existingUser.toObject({ getters: true }), token: token })
 }
 
-exports.getUsers = getUsers;
+// exports.getUsers = getUsers;
 exports.signup = signup;
 exports.login = login;
