@@ -43,12 +43,14 @@ const getPropostaById = async (req, res, next) => {
 //
 const createProposta = async (req, res, next) => {
 
+    const { userId } = req.userData
+
     const {
         nome,
         descrizione,
         numeroPartecipantiMax,
-        richieste,
-        creator } = req.body
+        richieste
+    } = req.body
 
     let user;
 
@@ -67,7 +69,7 @@ const createProposta = async (req, res, next) => {
         descrizione,
         numeroPartecipantiMax,
         richieste,
-        creator
+        creator: userId
     })
 
     try {
@@ -85,10 +87,53 @@ const createProposta = async (req, res, next) => {
 }
 
 //
+//PATCH
+//
+const updateProposta = async (req, res, next) => {
+
+    const id = req.params.id
+
+    const { userId } = req.userData
+
+    const {
+        nome,
+        descrizione,
+        numeroPartecipantiMax,
+        richieste
+    } = req.body
+
+    let proposta;
+
+    try {
+        proposta = await Proposta.findById(id)
+    } catch (err) {
+        return next(new HttpError("Errore nella modifica della comunicazione, riprovare.", 500))
+    }
+
+    if (userId !== proposta.creator.toString()) {
+        return next(new HttpError("Non essendo il creatore della proposta, non puoi modificarla.", 401))
+    }
+
+    proposta.nome = nome
+    proposta.descrizione = descrizione
+    proposta.numeroPartecipantiMax = numeroPartecipantiMax
+    proposta.richieste = richieste
+
+    try {
+        await proposta.save()
+    } catch (err) {
+        return next(new HttpError("Errore nel salvataggio della comunicazione modificata.", 500))
+    }
+}
+
+//
 //DELETE
 //
 const deleteProposta = async (req, res, next) => {
+
     const id = req.params.id
+
+    const { userId } = req.userData
 
     let proposta
 
@@ -100,6 +145,10 @@ const deleteProposta = async (req, res, next) => {
 
     if (!proposta) {
         return next(new HttpError("Non è stata trovata nessuna proposta con questo Id.", 404))
+    }
+
+    if (userId !== proposta.creator.id) {
+        return next(new HttpError("Non essendo il creatore della proposta, non puoi eliminarla.", 401))
     }
 
     try {
@@ -120,4 +169,5 @@ const deleteProposta = async (req, res, next) => {
 exports.getProposte = getProposte
 exports.getPropostaById = getPropostaById
 exports.createProposta = createProposta
+exports.updateProposta = updateProposta
 exports.deleteProposta = deleteProposta
