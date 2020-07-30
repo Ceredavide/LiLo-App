@@ -2,6 +2,7 @@ const express = require("express")
 
 const comunicazioniController = require("../controllers/comunicazioni");
 
+const checkAuth = require("../middlewares/auth-check")
 const fileUpload = require("../middleware/file-upload")
 
 const {
@@ -13,6 +14,8 @@ const {
 } = comunicazioniController
 
 const router = express.Router();
+
+router.use(checkAuth)
 
 router.get('/', getComunicazioni);
 
