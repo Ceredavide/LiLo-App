@@ -17,12 +17,12 @@ const usersRouter = require("./routes/user")
 const app = express();
 
 // utilizzo parser che fa in modo che le risposte siano JSON
-app.use(bodyParser.json())
+app.use(bodyParser.json({limit: '50mb'}))
 
 // rende disponibile l'accesso statico alle immagini
 app.use('uploads/images', express.static(path.join("uploads", "images")))
 
-//
+// settato header response
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader(
@@ -51,7 +51,8 @@ mongoose.connect("mongodb://localhost:27017/ProvaLiLo",
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        useCreateIndex: true
+        useCreateIndex: true,
+        replicaSet: "rs"
     })
     .then(() => app.listen(5000))
     .catch(err => console.log(err))
