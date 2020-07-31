@@ -24,10 +24,10 @@ const useAssenze = () => {
     }
 
     return {
-        assenze: assenze,
-        isLoading: isLoading,
-        isRefreshing: isRefreshing,
-        handleRefresh: handleRefresh
+        assenze,
+        isLoading,
+        isRefreshing,
+        handleRefresh
     }
 
 }
