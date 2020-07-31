@@ -3,7 +3,7 @@ const express = require("express")
 const comunicazioniController = require("../controllers/comunicazioni");
 
 const checkAuth = require("../middlewares/auth-check")
-const fileUpload = require("../middleware/file-upload")
+const fileUpload = require("../middlewares/file-upload")
 
 const {
     getComunicazioni,
