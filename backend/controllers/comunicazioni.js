@@ -4,7 +4,7 @@ const HttpError = require("../models/http-error")
 const Comunicazione = require("../models/Comunicazione")
 const User = require("../models/User")
 
-//TODO: Aggoiungere ruoli per modifica e eliminazione comunicazioni
+//TODO: Aggiungere ruoli per modifica e eliminazione comunicazioni
 
 //
 //GET
@@ -55,11 +55,12 @@ const createComunicazione = async (req, res, next) => {
     try {
         user = await User.findById(userId)
     } catch (err) {
+        console.log(err)
         return next(new HttpError("Id utente non valido, riprovare.", 500))
     }
 
     if (!user) {
-        return next(new HttpError("Id utente non valido, riprovare."))
+        return next(new HttpError("Id utente non valido, riprovare.", 500))
     }
 
     const createdComunicazione = new Comunicazione({
@@ -89,7 +90,8 @@ const updateComunicazione = async (req, res, next) => {
     const {
         titolo,
         sottotitolo,
-        paragrafo } = req.body
+        paragrafo
+    } = req.body
 
     let comunicazione;
 
@@ -141,6 +143,9 @@ const deleteComunicazione = async (req, res, next) => {
 
 exports.getComunicazioni = getComunicazioni
 exports.getComunicazioniById = getComunicazioniById
+
 exports.createComunicazione = createComunicazione
+
 exports.updateComunicazione = updateComunicazione
+
 exports.deleteComunicazione = deleteComunicazione
