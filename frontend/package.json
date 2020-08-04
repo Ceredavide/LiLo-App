@@ -27,6 +27,7 @@
     "expo-splash-screen": "^0.2.3",
     "font": "0.0.4",
     "formik": "^2.1.4",
+    "lottie-react-native": "~2.6.1",
     "react": "16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.1.tar.gz",
     "react-native-chart-kit": "^3.13.0",
@@ -45,8 +46,7 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "rn-placeholder": "^3.0.0",
-    "webpack": "^4.41.6",
-    "lottie-react-native": "~2.6.1"
+    "webpack": "^4.41.6"
   },
   "devDependencies": {
     "babel-preset-expo": "^8.0.0",
