@@ -31,7 +31,8 @@ export default function useCachedResources() {
           require("../assets/images/icon.png"),
           require("../assets/images/logo.png"),
           require("../assets/images/scuola.jpeg"),
-          require("../assets/images/student-hat.png")
+          require("../assets/images/student-hat.png"),
+          require("../assets/images/wallpaper.png")
         ]),
           // Load fonts
           await Font.loadAsync({
