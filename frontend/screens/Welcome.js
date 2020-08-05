@@ -1,12 +1,15 @@
 import React from "react"
 import { StyleSheet, SafeAreaView, StatusBar, View, Text, ImageBackground, Image } from "react-native"
 
+
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 
-const Welcome = () => {
+import IconButton from "../components/shared/IconButton"
+
+const Welcome = ({ navigation }) => {
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "#FFF" }}>
             <StatusBar barStyle="dark-content" />
@@ -17,6 +20,21 @@ const Welcome = () => {
                         style={styles.image}
                         source={require("../assets/images/scuola.jpeg")}
                     />
+                    <View style={styles.containerButtons}>
+                        <IconButton
+                            action={() => navigation.navigate("Login")}
+                            text="Login"
+                            primaryColor="#FFF"
+                            backgroundColor="#EFC4BD"
+                        />
+                        <IconButton
+                            action={() => navigation.navigate("SignUp")}
+                            text="Registrati"
+                            iconName=""
+                            primaryColor="#FFF"
+                            backgroundColor="#EFC4BD"
+                        />
+                    </View>
                 </View>
             </ImageBackground>
         </SafeAreaView>
@@ -32,7 +50,7 @@ const styles = StyleSheet.create({
     },
     card: {
         height: hp("45%"),
-        width: wp("90%"),
+        width: wp("85%"),
         backgroundColor: "#002C85",
         // 002C85
         // EFC4BD
@@ -51,8 +69,8 @@ const styles = StyleSheet.create({
         paddingTop: hp("2%"),
         fontSize: hp("5.5%"),
         alignSelf: "center",
-        color: "#FFF",
-        fontFamily: "open-sans-regular"
+        color: "#EFC4BD",
+        fontFamily: "open-sans-bold"
     },
     image: {
         height: hp("10%"),
@@ -60,6 +78,11 @@ const styles = StyleSheet.create({
         marginTop: hp("3%"),
         alignSelf: "center"
     },
+    containerButtons: {
+        paddingTop: hp("2%"),
+        flex: 1,
+        justifyContent: "space-evenly"
+    }
 })
 
 export default Welcome
