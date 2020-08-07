@@ -7,16 +7,10 @@ import {
 
 export default styles = StyleSheet.create({
   form: {
-    flex: 1,
-    paddingTop: hp("3%")
+    flex: 1
   },
   textInput: {
-    height: hp("5%"),
-    width: wp("70%"),
-    alignSelf: "center",
-    fontSize: hp("2%"),
-    fontFamily: "open-sans-regular",
-    borderBottomWidth: 1.5,
-    borderBottomColor: "#009fff"
+    width: wp("65%"),
+    alignSelf: "center"
   }
 });
