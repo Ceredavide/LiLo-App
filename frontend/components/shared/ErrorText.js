@@ -6,23 +6,17 @@ import {
     heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 
-const ErrorText = ({ error, style = null }) => {
-    if (error === null) {
-        return null
-    }
-    else {
-        return <Text style={{ ...styles.errorText, ...style }}>
-            {error}
-        </Text>
-
-    }
+const ErrorText = ({ error, touched = false, style = null }) => {
+    return <Text style={{ ...styles.errorText, ...style }}>
+        {touched ? error : null}
+    </Text>
 }
 
 const styles = StyleSheet.create({
     errorText: {
         textAlign: "center",
         width: wp("75%"),
-        marginTop: hp("1%"),
+        marginTop: hp("0.5%"),
         marginBottom: hp("2%"),
         fontFamily: "open-sans-regular",
         color: "red",
