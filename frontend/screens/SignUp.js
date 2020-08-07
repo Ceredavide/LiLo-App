@@ -1,106 +1,105 @@
-import React, { useState } from "react";
-import { StyleSheet, TextInput, Text } from "react-native";
+import React from "react";
+import { StyleSheet, Text, Group } from "react-native";
+import { TextInput } from "react-native-paper"
 
-import { useFormik } from "formik";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import LoadingButton from "../components/shared/LoadingButton"
 import ErrorText from "../components/shared/ErrorText"
 import styles from "../styles/signUp/Forms";
 
-import createUser from "../utils/createUser"
-import validateSignUp from "../utils/validateSignUp"
+import useSignUp from "../hooks/useSignUp";
 
 const SignUp = ({ navigation }) => {
-  const [errors, setErrors] = useState({})
-  const [isLoading, setIsLoading] = useState(false)
 
-  const tryCreateUser = async (values, navigation) => {
-    const errors = validateSignUp(values)
-    //Controlla se ci sono errori, se è tutto ok crea l'utente
-    if (Object.entries(errors).length === 0) {
-      setIsLoading(true)
-      await createUser(values, navigation)
-      setIsLoading(false)
-    }
-    setErrors(errors)
-  }
+  const { isLoading, formikSignUp } = useSignUp(navigation)
 
-  const initialValues = {
-    nome: "",
-    cognome: "",
-    classe: "",
-    email: "",
-    password: "",
-    confirmPassword: ""
-  }
+  const { values, handleChange, handleBlur, handleSubmit, setFieldValue, errors, touched } = formikSignUp
 
-  const formikSignUp = useFormik({
-    initialValues: initialValues,
-    onSubmit: () => tryCreateUser(values, navigation)
-  })
-
-  const { values, handleChange, handleSubmit, setFieldValue } = formikSignUp
+  const formTheme = { colors: { primary: 'green', placeholder: 'blue' } }
 
   return (
     <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={styles.form}>
       <TextInput
-        placeholder="Nome"
+        label="Nome"
+        error={errors.nome && touched.nome}
+        mode="outlined"
+        theme={formTheme}
         style={{ ...styles.textInput, marginTop: 15 }}
         onChangeText={handleChange("nome")}
+        onBlur={handleBlur("nome")}
         value={values.nome}
         returnKeyType="next"
       />
-      <ErrorText error={errors.nome} />
+      <ErrorText error={errors.nome} touched={touched.nome} />
       <TextInput
-        placeholder="Cognome"
+        label="Cognome"
+        error={errors.cognome && touched.cognome}
+        mode="outlined"
+        theme={formTheme}
         style={styles.textInput}
         onChangeText={handleChange("cognome")}
+        onBlur={handleBlur("cognome")}
         value={values.cognome}
         returnKeyType="next"
       />
-      <ErrorText error={errors.cognome} />
+      <ErrorText error={errors.cognome} touched={touched.cognome} />
       <TextInput
-        placeholder="Classe"
+        label="Classe"
+        error={errors.classe && touched.classe}
+        mode="outlined"
+        theme={formTheme}
         style={styles.textInput}
         onChangeText={value => {
           value = value.replace(/\s+/g, "").toUpperCase();
           setFieldValue("classe", value);
         }}
+        onBlur={handleBlur("classe")}
         value={values.classe}
         returnKeyType="next"
       />
-      <ErrorText error={errors.classe} />
+      <ErrorText error={errors.classe} touched={touched.classe} />
       <TextInput
-        placeholder="Email"
+        label="Email"
         keyboardType="email-address"
-        autoCapitalize="none"
+        error={errors.email && touched.email}
+        mode="outlined"
+        theme={formTheme}
         style={styles.textInput}
         onChangeText={handleChange("email")}
+        onBlur={handleBlur("email")}
         value={values.email}
         returnKeyType="next"
       />
       <Text style={myStyles.emailText}>Inserire la Email inserita nella iscrizione al Liceo</Text>
-      <ErrorText error={errors.email} />
+      <ErrorText error={errors.email} touched={touched.email} />
       <TextInput
-        placeholder="Password"
+        label="Password"
         secureTextEntry={true}
+        error={errors.password && touched.password}
+        mode="outlined"
+        theme={formTheme}
         style={styles.textInput}
         onChangeText={handleChange("password")}
+        onBlur={handleBlur("password")}
         value={values.password}
         returnKeyType="next"
       />
-      <ErrorText error={errors.password} />
+      <ErrorText error={errors.password} touched={touched.password} />
       <TextInput
-        placeholder="Conferma la password"
+        label="Conferma la password"
         secureTextEntry={true}
+        error={errors.confirmPassword && touched.confirmPassword}
+        mode="outlined"
+        theme={formTheme}
         style={styles.textInput}
         onChangeText={handleChange("confirmPassword")}
+        onBlur={handleBlur("confirmPassword")}
         value={values.confirmPassword}
         returnKeyType="next"
       />
-      <ErrorText error={errors.confirmPassword} />
-      <LoadingButton handleSubmit={() => handleSubmit()} loading={isLoading} color={"green"} text="Invia" />
+      <ErrorText error={errors.confirmPassword} touched={touched.confirmPassword} />
+      <LoadingButton handleSubmit={handleSubmit} loading={isLoading} color={errors ? "red" : "green"} text="Invia" />
     </KeyboardAwareScrollView>
   );
 };
