@@ -1,6 +1,8 @@
 import React from "react";
-import { StyleSheet, View, Image, AsyncStorage, Linking } from "react-native";
+import { StyleSheet, View, Image, Linking } from "react-native";
 import { useDispatch, useSelector } from "react-redux"
+
+import * as SecureStore from 'expo-secure-store';
 
 import {
   widthPercentageToDP as wp,
@@ -18,7 +20,7 @@ const SettingsScreen = () => {
 
   const handleLogout = async () => {
     dispatch({ type: "DELETE_USER_CREDENTIALS" })
-    await AsyncStorage.removeItem("user")
+    await SecureStore.deleteItemAsync("user")
   };
 
   const handleTermini = () => {
