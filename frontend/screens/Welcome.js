@@ -12,7 +12,7 @@ import IconButton from "../components/shared/IconButton"
 const Welcome = ({ navigation }) => {
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "#FFF" }}>
-            <StatusBar barStyle="dark-content" />
+            <StatusBar barStyle="dark-content" backgroundColor="black"/>
             <ImageBackground source={require("../assets/images/wallpaper.png")} style={styles.screen}>
                 <View style={styles.card}>
                     <Text style={styles.title}>LiLo App</Text>
@@ -30,7 +30,6 @@ const Welcome = ({ navigation }) => {
                         <IconButton
                             action={() => navigation.navigate("SignUp")}
                             text="Registrati"
-                            iconName=""
                             primaryColor="#FFF"
                             backgroundColor="#EFC4BD"
                         />
