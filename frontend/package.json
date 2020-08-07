@@ -46,7 +46,8 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "rn-placeholder": "^3.0.0",
-    "webpack": "^4.41.6"
+    "webpack": "^4.41.6",
+    "yup": "^0.29.3"
   },
   "devDependencies": {
     "babel-preset-expo": "^8.0.0",
