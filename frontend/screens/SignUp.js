@@ -1,14 +1,19 @@
 import React from "react";
 import { StyleSheet, Text } from "react-native";
 
+import {
+  widthPercentageToDP as wp
+} from "react-native-responsive-screen";
+
 import { TextInput } from "react-native-paper"
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import LoadingButton from "../components/shared/LoadingButton"
 import ErrorText from "../components/shared/ErrorText"
-import styles from "../styles/signUp/Forms";
 
 import useSignUp from "../hooks/useSignUp";
+
+import Colors from "../constants/colors"
 
 const SignUp = ({ navigation }) => {
 
@@ -16,7 +21,7 @@ const SignUp = ({ navigation }) => {
 
   const { values, handleChange, handleBlur, handleSubmit, setFieldValue, errors, touched } = formikSignUp
 
-  const formTheme = { colors: { primary: 'green', placeholder: 'blue' } }
+  const formTheme = { colors: { text: Colors.white, primary: Colors.secondary, placeholder: Colors.white, background: Colors.main } }
 
   return (
     <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={styles.form}>
@@ -71,8 +76,11 @@ const SignUp = ({ navigation }) => {
         value={values.email}
         returnKeyType="next"
       />
-      <Text style={myStyles.emailText}>Inserire la Email inserita nella iscrizione al Liceo</Text>
-      <ErrorText error={errors.email} touched={touched.email} />
+      {
+        errors.email && touched.email ?
+          <ErrorText error={errors.email} touched={touched.email} /> :
+          <Text style={styles.emailText}>Quella inserita nella iscrizione al Liceo</Text>
+      }
       <TextInput
         label="Password"
         secureTextEntry={true}
@@ -104,9 +112,19 @@ const SignUp = ({ navigation }) => {
   );
 };
 
-const myStyles = StyleSheet.create({
+const styles = StyleSheet.create({
+  form: {
+    flex: 1,
+    backgroundColor: Colors.main
+  },
+  textInput: {
+    width: wp("65%"),
+    alignSelf: "center",
+    color: Colors.white
+  },
   emailText: {
     marginTop: 2,
+    marginBottom: 10,
     fontSize: 12,
     alignSelf: "center",
     color: "grey"
