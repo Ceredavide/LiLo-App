@@ -1,7 +1,7 @@
 import React from "react";
-import { StyleSheet, Text, Group } from "react-native";
-import { TextInput } from "react-native-paper"
+import { StyleSheet, Text } from "react-native";
 
+import { TextInput } from "react-native-paper"
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import LoadingButton from "../components/shared/LoadingButton"
@@ -99,7 +99,7 @@ const SignUp = ({ navigation }) => {
         returnKeyType="next"
       />
       <ErrorText error={errors.confirmPassword} touched={touched.confirmPassword} />
-      <LoadingButton handleSubmit={handleSubmit} loading={isLoading} color={errors ? "red" : "green"} text="Invia" />
+      <LoadingButton handleSubmit={handleSubmit} loading={isLoading} color={Object.entries(errors).length === 0 ? "green" : "red"} text="Invia" />
     </KeyboardAwareScrollView>
   );
 };
