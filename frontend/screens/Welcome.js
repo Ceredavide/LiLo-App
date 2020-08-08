@@ -9,9 +9,11 @@ import {
 
 import IconButton from "../components/shared/IconButton"
 
+import Colors from "../constants/colors"
+
 const Welcome = ({ navigation }) => {
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: "#FFF" }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: Colors.white }}>
             <StatusBar barStyle="dark-content" backgroundColor="black"/>
             <ImageBackground source={require("../assets/images/wallpaper.png")} style={styles.screen}>
                 <View style={styles.card}>
@@ -24,14 +26,14 @@ const Welcome = ({ navigation }) => {
                         <IconButton
                             action={() => navigation.navigate("Login")}
                             text="Login"
-                            primaryColor="#FFF"
-                            backgroundColor="#EFC4BD"
+                            primaryColor={Colors.white}
+                            backgroundColor={Colors.secondary}
                         />
                         <IconButton
                             action={() => navigation.navigate("SignUp")}
                             text="Registrati"
-                            primaryColor="#FFF"
-                            backgroundColor="#EFC4BD"
+                            primaryColor={Colors.white}
+                            backgroundColor={Colors.secondary}
                         />
                     </View>
                 </View>
@@ -50,11 +52,9 @@ const styles = StyleSheet.create({
     card: {
         height: hp("45%"),
         width: wp("85%"),
-        backgroundColor: "#002C85",
-        // 002C85
-        // EFC4BD
+        backgroundColor: Colors.main,
         borderRadius: 40,
-        shadowColor: "#FFF",
+        shadowColor: Colors.white,
         shadowOffset: {
             width: 0,
             height: 7,
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
         paddingTop: hp("2%"),
         fontSize: hp("5.5%"),
         alignSelf: "center",
-        color: "#EFC4BD",
+        color: Colors.secondary,
         fontFamily: "open-sans-bold"
     },
     image: {
