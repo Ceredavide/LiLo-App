@@ -2,7 +2,7 @@ import React from "react"
 
 import { createStackNavigator } from "@react-navigation/stack";
 
-import headerStyle from "../../styles/navigation/Header"
+import Header from "../../components/headers/Auth"
 
 import WelcomeScreen from "../../screens/Welcome"
 import LoginScreen from "../../screens/Login";
@@ -12,27 +12,20 @@ const { Navigator, Screen } = createStackNavigator()
 
 const AuthStack = () => {
   return (
-    <Navigator>
+    <Navigator screenOptions={screenOptions} headerMode="screen">
       <Screen name="Welcome" component={WelcomeScreen} options={welcomeOptions} />
-      <Screen name="Login" component={LoginScreen} options={loginOptions} />
-      <Screen name="SignUp" component={SignUpScreen} options={{ ...headerStyle, ...signUpOptions }} />
+      <Screen name="Login" component={LoginScreen}/>
+      <Screen name="SignUp" component={SignUpScreen} />
     </Navigator>
   )
 }
 
+const screenOptions = {
+  header: props => <Header {...props} />
+}
+
 const welcomeOptions = {
   headerShown: false
-}
-
-const loginOptions = {
-  headerShown: false
-}
-
-const signUpOptions = {
-  title: "Nuovo Account",
-  headerTitleStyle: {
-    fontSize: 35
-  }
 }
 
 export default AuthStack
