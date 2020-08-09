@@ -22,9 +22,6 @@ export default function useCachedResources() {
           const parsedUser = await JSON.parse(cachedUser)
           setUser(parsedUser)
         }
-        else {
-          setUser(cachedUser)
-        }
 
         // Load assets
         await Asset.loadAsync([
@@ -32,7 +29,8 @@ export default function useCachedResources() {
           require("../assets/images/logo.png"),
           require("../assets/images/scuola.jpeg"),
           require("../assets/images/student-hat.png"),
-          require("../assets/images/wallpaper.png")
+          require("../assets/images/wallpaper.png"),
+          require("../assets/images/login-illustration.png")
         ]),
           // Load fonts
           await Font.loadAsync({
@@ -47,6 +45,7 @@ export default function useCachedResources() {
       } catch (e) {
         // We might want to provide this error information to an error reporting service
         console.warn(e);
+        console.log(e)
       } finally {
         setLoadingComplete(true);
         SplashScreen.hideAsync();
