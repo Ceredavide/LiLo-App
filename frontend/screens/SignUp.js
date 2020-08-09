@@ -107,7 +107,13 @@ const SignUp = ({ navigation }) => {
         returnKeyType="next"
       />
       <ErrorText error={errors.confirmPassword} touched={touched.confirmPassword} />
-      <LoadingButton handleSubmit={handleSubmit} loading={isLoading} color={Object.entries(errors).length === 0 ? "green" : "red"} text="Invia" />
+      <LoadingButton
+        handleSubmit={handleSubmit}
+        loading={isLoading}
+        color={Object.entries(errors).length === 0 ? "green" : "red"}
+        text="Invia" 
+        style={{marginBottom: 30}}
+        />
     </KeyboardAwareScrollView>
   );
 };
@@ -115,7 +121,8 @@ const SignUp = ({ navigation }) => {
 const styles = StyleSheet.create({
   form: {
     flex: 1,
-    backgroundColor: Colors.main
+    backgroundColor: Colors.main,
+    paddingBottom: 10
   },
   textInput: {
     width: wp("65%"),
