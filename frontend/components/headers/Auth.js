@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
         marginLeft: wp("5%")
     },
     title: {
+        fontFamily: "open-sans-regular",
         fontSize: hp("4.5%"),
         marginTop: -hp("2%"),
         color: Colors.secondary
