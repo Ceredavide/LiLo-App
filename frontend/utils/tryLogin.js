@@ -6,7 +6,7 @@ import handleError from "./handleError"
 
 export default tryLogin = async (email, password) => {
     try {
-        response = await axios.post("https://cere.dev/authentication", {
+        const response = await axios.post("https://cere.dev/authentication", {
             email: email,
             password: password,
             strategy: "local"
