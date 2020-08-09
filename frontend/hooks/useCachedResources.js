@@ -15,6 +15,7 @@ export default function useCachedResources() {
     async function loadResourcesAndDataAsync() {
       try {
         SplashScreen.preventAutoHideAsync();
+        
         // Load user data
         const cachedUser = await SecureStore.getItemAsync("user")
 
@@ -36,11 +37,7 @@ export default function useCachedResources() {
           await Font.loadAsync({
             "open-sans-light": require("../assets/fonts/OpenSans-Light.ttf"),
             "open-sans-regular": require("../assets/fonts/OpenSans-Regular.ttf"),
-            "open-sans-bold": require("../assets/fonts/OpenSans-Bold.ttf"),
-            "robot-bold": require("../assets/fonts/Roboto-Bold.ttf"),
-            "futura-medium": require("../assets/fonts/Futura-medium.ttf"),
-            "futura-bold": require("../assets/fonts/Futura-Bold.ttf"),
-            "futura-book": require("../assets/fonts/Futura-Book.ttf")
+            "open-sans-bold": require("../assets/fonts/OpenSans-Bold.ttf")
           })
       } catch (e) {
         // We might want to provide this error information to an error reporting service
