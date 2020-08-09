@@ -10,8 +10,9 @@ const initialState = {
 }
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
+    
     case actionTypes.SAVE_USER_CREDENTIALS:
-      const { _id, nome, cognome, classe, email } = action.user.user;
+      const { _id, nome, cognome, classe, email } = action.user;
       const isAdmin =
         email === "andrixmelone01@gmail.com" ||
         email === "ceredavide@live.it";
@@ -24,11 +25,12 @@ const userReducer = (state = initialState, action) => {
         email: email,
         isAdmin: isAdmin,
       };
+
     case actionTypes.DELETE_USER_CREDENTIALS:
       return {
-        ...state,
         ...initialState
       };
+
     default:
       return state;
   }
