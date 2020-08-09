@@ -14,8 +14,8 @@ const AuthStack = () => {
   return (
     <Navigator screenOptions={screenOptions} headerMode="screen">
       <Screen name="Welcome" component={WelcomeScreen} options={welcomeOptions} />
-      <Screen name="Login" component={LoginScreen}/>
-      <Screen name="SignUp" component={SignUpScreen} />
+      <Screen name="Login" component={LoginScreen} options={LogInOptions}/>
+      <Screen name="SignUp" component={SignUpScreen} options={SignUpOptions}/>
     </Navigator>
   )
 }
@@ -26,6 +26,14 @@ const screenOptions = {
 
 const welcomeOptions = {
   headerShown: false
+}
+
+const LogInOptions = {
+  title: "Login"
+}
+
+const SignUpOptions = {
+  title: "Registrazione"
 }
 
 export default AuthStack
