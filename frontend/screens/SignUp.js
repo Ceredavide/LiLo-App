@@ -110,10 +110,10 @@ const SignUp = ({ navigation }) => {
       <LoadingButton
         handleSubmit={handleSubmit}
         loading={isLoading}
-        color={Object.entries(errors).length === 0 ? "green" : "red"}
-        text="Invia" 
-        style={{marginBottom: 30}}
-        />
+        color={Object.entries(errors).length === 0 ? Colors.green : Colors.red}
+        text="Invia"
+        style={{ marginBottom: 30 }}
+      />
     </KeyboardAwareScrollView>
   );
 };
