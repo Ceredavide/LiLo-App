@@ -14,7 +14,7 @@ import Colors from "../constants/colors"
 const Welcome = ({ navigation }) => {
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: Colors.white }}>
-            <StatusBar barStyle="dark-content" backgroundColor="black"/>
+            <StatusBar barStyle="dark-content" backgroundColor="white"/>
             <ImageBackground source={require("../assets/images/wallpaper.png")} style={styles.screen}>
                 <View style={styles.card}>
                     <Text style={styles.title}>LiLo App</Text>
