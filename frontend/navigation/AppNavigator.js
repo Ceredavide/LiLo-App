@@ -17,12 +17,12 @@ const AppNavigator = ({ user }) => {
     dispatch({ type: SAVE_USER_CREDENTIALS, user: user })
   }
 
-  const { email } = useSelector(state => state.user)
+  const storedUser = useSelector(state => state.user)
 
   return (
     <NavigationContainer>
       <Navigator screenOptions={_screenOptions} mode="modal">
-        {email === "" ?
+        {!storedUser.id ?
           <>
             <Screen name="Auth" component={AuthStack} />
           </> :
