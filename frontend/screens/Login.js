@@ -1,78 +1,114 @@
 import React from "react";
-import { StyleSheet, TouchableWithoutFeedback, Keyboard, View, StatusBar, Image, Text } from "react-native";
+import { StyleSheet, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, View, Image, TextInput } from "react-native";
 
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 
-import FormLogin from "../components/login/Form";
-import TouchableText from "../components/shared/TouchableText";
+import { AntDesign } from "@expo/vector-icons";
 
-const LoginScreen = ({ navigation }) => {
+import LoadingButton from "../components/shared/LoadingButton"
+import ErrorText from "../components/shared/ErrorText"
+
+import useLogin from "../hooks/useLogin";
+
+import Colors from "../constants/colors"
+
+const LoginScreen = () => {
+
+  const { isLoading, formikLogin } = useLogin()
+
+  const { values, handleChange, handleBlur, handleSubmit, errors, touched } = formikLogin
+
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} style={styles.screen}>
-      <View style={{flex: 1}}>
-        <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Text style={styles.title}>LiLo App</Text>
-        <Image
-          style={styles.image}
-          source={require("../assets/images/scuola.jpeg")}
-        />
-        <FormLogin />
-        <View style={styles.buttons}>
-          <Text style={styles.textFooter}>Non hai ancora un account?</Text>
-          <TouchableText
-            action={() => navigation.navigate("SignUp")}
-            text="Registrati"
-            textStyle={styles.signUp}
+    <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS == "ios" ? "padding" : "height"} >
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <View style={styles.screen}>
+          <Image
+            source={require("../assets/images/login-illustration.png")}
+            style={styles.image}
+          />
+          <View style={styles.containerTextInput}>
+            <AntDesign
+              name="user"
+              size={32}
+              color={Colors.secondary}
+              style={styles.icon}
+            />
+            <TextInput
+              autoCapitalize="none"
+              placeholder="e-mail"
+              placeholderTextColor={Colors.secondary}
+              keyboardType="email-address"
+              style={styles.textInput}
+              onChangeText={handleChange("email")}
+              onBlur={handleBlur("email")}
+              value={values.email}
+              returnKeyType="next"
+            />
+          </View>
+          <ErrorText error={errors.email} touched={touched.email} />
+          <View style={{ ...styles.containerTextInput}}>
+            <AntDesign
+              name="lock"
+              size={32}
+              color={Colors.secondary}
+              style={styles.icon}
+            />
+            <TextInput
+              placeholder="password"
+              secureTextEntry={true}
+              placeholderTextColor={Colors.secondary}
+              style={styles.textInput}
+              onChangeText={handleChange("password")}
+              onBlur={handleBlur("password")}
+              value={values.password}
+              returnKeyType="next"
+            />
+          </View>
+          <ErrorText error={errors.password} touched={touched.password} />
+          <LoadingButton
+            text="Login"
+            color={Object.entries(errors).length === 0 ? Colors.green : Colors.red}
+            handleSubmit={handleSubmit}
+            loading={isLoading}
           />
         </View>
-      </View>
-    </TouchableWithoutFeedback>
+      </TouchableWithoutFeedback >
+    </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
   screen: {
-    flex: 1
-  },
-  header: {
-    width: wp("100%"),
-    height: hp("35%"),
-    paddingTop: hp("5%"),
-    paddingBottom: hp("5%"),
-    borderBottomLeftRadius: 25,
-    borderBottomRightRadius: 25
-  },
-  title: {
-    fontSize: hp("7%"),
-    alignSelf: "center",
-    color: "#009fff",
-    paddingTop: hp("8%"),
-    marginBottom: hp("3%"),
-    fontFamily: "open-sans-regular"
+    flex: 1,
+    backgroundColor: Colors.main
   },
   image: {
-    height: hp("13%"),
-    width: wp("85%"),
-    marginTop: hp("3%"),
+    marginTop: hp("5%"),
+    height: wp("50%"),
+    width: wp("52"),
     alignSelf: "center"
   },
-  buttons: {
-    flex: 1,
-    justifyContent: "flex-end",
-    alignItems: "center",
-    paddingBottom: hp("5%")
+  containerTextInput: {
+    marginTop: hp("5%"),
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center"
   },
-  signUp: {
-    fontSize: 20,
-    color: "#009fff",
+  icon: {
+    paddingEnd: 10
+  },
+  textInput: {
+    height: hp("5%"),
+    width: wp("60%"),
+    color: Colors.white,
+    paddingLeft: wp("3%"),
+    fontSize: hp("2%"),
     fontFamily: "open-sans-regular",
-    textDecorationLine: "underline"
-  },
-  textFooter: {
-    fontFamily: "open-sans-regular"
+    borderBottomWidth: 1.5,
+    borderBottomColor: Colors.secondary
   }
 });
 
