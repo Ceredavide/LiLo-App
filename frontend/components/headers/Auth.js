@@ -1,5 +1,5 @@
 import React from "react"
-import { StyleSheet, StatusBar, SafeAreaView, Text } from "react-native"
+import { StyleSheet, StatusBar, TouchableWithoutFeedback, Keyboard, SafeAreaView, Text } from "react-native"
 
 import {
     widthPercentageToDP as wp,
@@ -12,16 +12,18 @@ import Colors from "../../constants/colors"
 
 const AuthHeader = (props) => {
 
-    console.log(props)
-
     const { navigation } = props
 
+    let options = props.scene.descriptor.options
+
     return (
-        <SafeAreaView style={styles.header}>
-            <StatusBar barStyle="light-content" backgroundColor={Colors.main}/>
-            <Icon name="arrow-back" color={Colors.secondary} size={hp("4")} onPress={() => navigation.goBack()} style={styles.icon} />
-            <Text style={styles.title}>Registrazione</Text>
-        </SafeAreaView>
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+            <SafeAreaView style={styles.header}>
+                <StatusBar barStyle="light-content" backgroundColor={Colors.main} />
+                <Icon name="arrow-back" color={Colors.secondary} size={hp("4%")} onPress={() => navigation.goBack()} style={styles.icon} />
+                <Text style={styles.title}>{options.title}</Text>
+            </SafeAreaView>
+        </TouchableWithoutFeedback>
     )
 }
 
