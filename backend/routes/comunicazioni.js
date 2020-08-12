@@ -2,8 +2,12 @@ const express = require("express")
 
 const comunicazioniController = require("../controllers/comunicazioni");
 
-const checkAuth = require("../middlewares/auth-check")
+const checkAuth = require("../middlewares/checkAuth")
+const checkRole = require("../middlewares/checkRole")
+
 const fileUpload = require("../middlewares/file-upload")
+
+const ROLES = require("../constants/ROLES")
 
 const {
     getComunicazioni,
@@ -21,7 +25,7 @@ router.get('/', getComunicazioni);
 
 router.get('/:id', getComunicazioniById)
 
-router.post('/', fileUpload.single("image"), createComunicazione)
+router.post('/', checkRole([ROLES.ADMIN, ROLES.EDITOR]), fileUpload.single("image"), createComunicazione)
 
 router.patch('/:id', updateComunicazione)
 
