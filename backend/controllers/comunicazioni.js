@@ -125,7 +125,11 @@ const deleteComunicazione = async (req, res, next) => {
     try {
         comunicazione = await Comunicazione.findById(id)
     } catch (err) {
-        return next(new HttpError("Errore nella eliminazione della comunicazione, riprovare.", 500))
+        return next(new HttpError("Errore nella eliminazione della comunicazione, id non valido.", 500))
+    }
+
+    if (!comunicazione) {
+        return next(new HttpError("Non è stata trovata una comunicazione con questo id, riprovare.", 404))
     }
 
     const imagePath = comunicazione.immagine
