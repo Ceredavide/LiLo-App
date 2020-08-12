@@ -2,7 +2,7 @@ const express = require("express")
 
 const proposteController = require("../controllers/proposte")
 
-const checkAuth = require("../middlewares/auth-check")
+const checkAuth = require("../middlewares/checkAuth")
 
 const { getProposte, getPropostaById, createProposta } = proposteController
 
