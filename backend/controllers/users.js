@@ -4,18 +4,20 @@ const jwt = require('jsonwebtoken');
 const User = require("../models/User")
 const HttpError = require("../models/http-error")
 
-// const getUsers = async (req, res, next) => {
+const ROLES = require("../constants/ROLES")
 
-//     let users
+const getUsers = async (req, res, next) => {
 
-//     try {
-//         users = await User.find({}, '-password')
-//     } catch (err) {
-//         return next(new HttpError("Qualcosa è andato storto, riprova più tardi."))
-//     }
+    let users
 
-//     res.status(200).json({ users: users.map(user => user.toObject({ getters: true })) })
-// }
+    try {
+        users = await User.find({}, '-password')
+    } catch (err) {
+        return next(new HttpError("Qualcosa è andato storto, riprova più tardi."))
+    }
+
+    res.status(200).json({ users: users.map(user => user.toObject({ getters: true })) })
+}
 
 const signup = async (req, res, next) => {
 
@@ -47,6 +49,7 @@ const signup = async (req, res, next) => {
         cognome,
         classe,
         email,
+        role: ROLES.STUDENT,
         password: hashedPassword,
         proposte: [],
     })
@@ -108,6 +111,34 @@ const login = async (req, res, next) => {
     res.status(200).json({ user: existingUser.toObject({ getters: true }), token: token })
 }
 
-// exports.getUsers = getUsers;
+//TODO: fare API eliminazione utente
+
+// const deleteUser = async (req, res, next) => {
+
+//     const id = req.params.id
+
+//     let user;
+
+//     try {
+//         user = await User.findById(id)
+//     } catch (err) {
+//         return next(new HttpError("Errore nella eliminazione del utente, id non valido.", 500))
+//     }
+
+//     if (!user) {
+//         return next(new HttpError("Non è stata trovato un utente con questo id, riprovare.", 404))
+//     }
+
+//     try {
+//         await user.remove()
+//     } catch (err) {
+
+//     }
+
+
+// }
+
+exports.getUsers = getUsers;
 exports.signup = signup;
 exports.login = login;
+// exports.deleteUser = deleteUser
