@@ -3,7 +3,10 @@ const path = require("path")
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose")
 
-const HttpError = require("./models/http-error")
+const HttpError = require("./models/HttpError")
+
+// importazione verifica autenticazione
+const checkAuth = require("./middlewares/checkAuth")
 
 // importazione gestore errori
 const errorHandler = require("./controllers/error")
@@ -17,7 +20,7 @@ const usersRouter = require("./routes/user")
 const app = express();
 
 // utilizzo parser che fa in modo che le risposte siano JSON
-app.use(bodyParser.json({limit: '50mb'}))
+app.use(bodyParser.json({ limit: '50mb' }))
 
 // rende disponibile l'accesso statico alle immagini
 app.use('uploads/images', express.static(path.join("uploads", "images")))
@@ -34,10 +37,15 @@ app.use((req, res, next) => {
     next()
 })
 
+// utilizzo API senza auth
+app.use('/api/users', usersRouter)
+
+// utilizzo middleware checkLogin
+app.use(checkAuth)
+
 // utilizzo API routes 
 app.use('/api/comunicazioni', comunicazioniRouter)
 app.use('/api/proposte', proposteRouter)
-app.use('/api/users', usersRouter)
 
 // route chiamata se si prova ad andare in un url senza routes
 app.use((req, res, next) => {
