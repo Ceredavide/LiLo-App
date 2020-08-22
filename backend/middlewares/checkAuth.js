@@ -17,7 +17,7 @@ module.exports = async (req, res, next) => {
             throw new Error("Token non valido.")
         }
 
-        decodedToken = jwt.verify(token, "Y4rb1i@&r4#r")
+        decodedToken = jwt.verify(token, process.env.JWT_KEY_AUTH)
 
     } catch (err) {
         return next(new HttpError("Autenticazione Fallita.", 401))
