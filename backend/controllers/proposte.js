@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const HttpError = require("../models/http-error")
+const HttpError = require("../models/HttpError")
 const Proposta = require("../models/Proposta")
 const User = require("../models/User")
 

@@ -1,6 +1,6 @@
 const fs = require("fs")
 
-const HttpError = require("../models/http-error")
+const HttpError = require("../models/HttpError")
 const Comunicazione = require("../models/Comunicazione")
 const User = require("../models/User")
 
