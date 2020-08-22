@@ -1,10 +1,13 @@
 const bcrypt = require("bcryptjs")
 const jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
 
 const User = require("../models/User")
-const HttpError = require("../models/http-error")
+const HttpError = require("../models/HttpError")
 
 const ROLES = require("../constants/ROLES")
+
+const renderEmailBody = require('../utils/renderHtmlEmail')
 
 const getUsers = async (req, res, next) => {
 
@@ -51,6 +54,7 @@ const signup = async (req, res, next) => {
         email,
         role: ROLES.STUDENT,
         password: hashedPassword,
+        activated: false,
         proposte: [],
     })
 
@@ -60,15 +64,52 @@ const signup = async (req, res, next) => {
         return next(new HttpError("Registrazione fallita, riprova più tardi.", 500))
     }
 
+    let transport = nodemailer.createTransport({
+            host: 'smtp.office365.com',
+            secureConnection: false,
+            port: 587,
+            requireTLS: true,//this parameter solved problem for me
+            auth: {
+                user: process.env.EMAIL,
+                pass: process.env.PASSWORD
+            },
+            tls: {
+                ciphers: 'SSLv3',
+                rejectUnauthorized: false
+            }
+        });
+        // service: "Outlook365",
+        // auth: {
+        //     user: process.env.EMAIL,
+        //     pass: process.env.PASSWORD
+        // }
+    // })
+
     let token;
 
     try {
-        token = await jwt.sign({ id: newUser.id }, "Y4rb1i@&r4#r", { expiresIn: "310d" })
+        token = await jwt.sign({ id: newUser.id }, process.env.JWT_KEY_EMAIL, { expiresIn: "1d" })
     } catch (err) {
+        console.log(err)
         return next(new HttpError("Registrazione fallita, riprova più tardi.", 500))
     }
 
-    res.status(201).json({ user: newUser.toObject({ getters: true }), token: token })
+    const message = {
+        from: process.env.EMAIL, // Sender address
+        to: newUser.email,         // List of recipients
+        subject: 'Conferma la tua email', // Subject line
+        html: renderEmailBody(newUser.nome, newUser.cognome, process.env.BACKEND_URL + `/users//email-activation/${token}`, process.env.EMAIL) // Plain text body
+    };
+
+    transport.sendMail(message, function (err, info) {
+        if (err) {
+            console.log(err)
+        } else {
+            console.log(info);
+        }
+    });
+
+    res.status(201).json({ user: newUser.toObject({ getters: true }) })
 }
 
 const login = async (req, res, next) => {
@@ -103,9 +144,9 @@ const login = async (req, res, next) => {
     let token;
 
     try {
-        token = await jwt.sign({ id: existingUser.id }, "Y4rb1i@&r4#r", { expiresIn: "310d" })
+        token = await jwt.sign({ id: existingUser.id }, process.env.JWT_KEY_AUTH, { expiresIn: "310d" })
     } catch (err) {
-        return next(new HttpError("Registrazione fallita, riprova più tardi.", 500))
+        return next(new HttpError("Login fallito, riprova più tardi.", 500))
     }
 
     res.status(200).json({ user: existingUser.toObject({ getters: true }), token: token })
