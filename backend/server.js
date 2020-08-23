@@ -1,4 +1,5 @@
 const express = require("express")
+const cors = require('cors')
 const path = require("path")
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose")
@@ -16,14 +17,16 @@ const comunicazioniRouter = require("./routes/comunicazioni")
 const proposteRouter = require("./routes/proposte")
 const usersRouter = require("./routes/user")
 
+// start env variables
+require('dotenv').config()
+
 // inizializzo app
 const app = express();
 
-// utilizzo parser che fa in modo che le risposte siano JSON
-app.use(bodyParser.json({ limit: '50mb' }))
+// app.use(cors())
 
-// rende disponibile l'accesso statico alle immagini
-app.use('uploads/images', express.static(path.join("uploads", "images")))
+// utilizzo parser che fa in modo che le risposte siano JSON
+app.use(bodyParser.json())
 
 // settato header response
 app.use((req, res, next) => {
@@ -43,6 +46,9 @@ app.use('/api/users', usersRouter)
 // utilizzo middleware checkLogin
 app.use(checkAuth)
 
+// rende disponibile l'accesso statico alle immagini
+app.use('uploads/images', express.static(path.join("uploads", "images")))
+
 // utilizzo API routes 
 app.use('/api/comunicazioni', comunicazioniRouter)
 app.use('/api/proposte', proposteRouter)
@@ -55,12 +61,15 @@ app.use((req, res, next) => {
 // utilizzo gestore errori
 app.use(errorHandler)
 
-mongoose.connect("mongodb://localhost:27017/ProvaLiLo",
+mongoose.connect(process.env.DB_URL,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true,
         replicaSet: "rs"
     })
-    .then(() => app.listen(5000))
+    .then(() => {
+        app.listen(process.env.PORT)
+        console.log(`server running on port :${process.env.PORT}`)
+    })
     .catch(err => console.log(err))
