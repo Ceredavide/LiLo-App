@@ -1,41 +1,62 @@
-import React from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { NavigationContainer } from "@react-navigation/native"
-import { createStackNavigator } from "@react-navigation/stack"
+import React from "react";
 
-import AuthStack from "./stacks/Auth";
-import TabNavigator from "./TabNavigator";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { SAVE_USER_CREDENTIALS } from "../store/actionTypes"
+import { MaterialIcons } from "@expo/vector-icons";
 
-const { Navigator, Screen } = createStackNavigator()
+import HomeStack from "./stacks/Home";
+import AssenzeStack from "./stacks/Assenze"
+import AutogestiteStack from "./stacks/Autogestite";
+import SettingsStack from "./stacks/Settings"
 
-const AppNavigator = ({ user }) => {
-  const dispatch = useDispatch()
+import Colors from "../constants/colors"
 
-  if (user) {
-    dispatch({ type: SAVE_USER_CREDENTIALS, user: user })
-  }
+const { Navigator, Screen } = createBottomTabNavigator()
 
-  const storedUser = useSelector(state => state.user)
-
+const AppNavigator = () => {
   return (
-    <NavigationContainer>
-      <Navigator screenOptions={_screenOptions} mode="modal">
-        {!storedUser.id ?
-          <>
-            <Screen name="Auth" component={AuthStack} />
-          </> :
-          <>
-            <Screen name="App" component={TabNavigator} />
-          </>}
-      </Navigator>
-    </NavigationContainer>
+    <Navigator screenOptions={_screenOptions} tabBarOptions={_tabBarOptions}>
+      <Screen name="Home" component={HomeStack} />
+      <Screen name="Assenze" component={AssenzeStack} />
+      <Screen name="Autogestite" component={AutogestiteStack} />
+      <Screen name="Impostazioni" component={SettingsStack} />
+    </Navigator>
   )
 }
 
-const _screenOptions = {
-  headerShown: false
+const _tabBarOptions = {
+  style: {
+    backgroundColor: Colors.main,
+    borderTopColor: "transparent"
+  },
+  activeTintColor: Colors.secondary,
+  inactiveTintColor: "#FFFF",
 }
 
-export default AppNavigator
+const _screenOptions = ({ route }) => ({
+  tabBarIcon: ({ color }) => {
+    let iconName;
+
+    switch (route.name) {
+      case "Home": {
+        iconName = "home";
+        break;
+      }
+      case "Assenze": {
+        iconName = "people";
+        break;
+      }
+      case "Autogestite": {
+        iconName = "casino";
+        break;
+      }
+      case "Impostazioni": {
+        iconName = "settings";
+        break;
+      }
+    }
+    return <MaterialIcons name={iconName} size={30} color={color} />;
+  },
+})
+
+export default AppNavigator;
