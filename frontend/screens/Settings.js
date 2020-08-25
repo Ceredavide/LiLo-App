@@ -14,12 +14,14 @@ import Screen from "../components/shared/Screen"
 import MyButton from "../components/shared/MyButton";
 import UserInfo from "../components/settings/UserInfo"
 
+import { SIGN_OUT } from "../store/actionTypes"
+
 const SettingsScreen = () => {
   const dispatch = useDispatch()
   const user = useSelector(state => state.user)
 
   const handleLogout = async () => {
-    dispatch({ type: "DELETE_USER_CREDENTIALS" })
+    dispatch({ type: SIGN_OUT })
     await SecureStore.deleteItemAsync("user")
   };
 
@@ -42,7 +44,7 @@ const SettingsScreen = () => {
       >
         contatto in caso di problemi
         </Chip>
-      <UserInfo user={user}/>
+      <UserInfo user={user} />
       <View style={styles.bottoniContainer}>
         <MyButton
           action={handleTermini}
