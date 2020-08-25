@@ -2,7 +2,7 @@ import React from "react"
 import { Provider } from "react-redux"
 
 import store from "./store/store"
-import AppNavigator from "./navigation/AppNavigator"
+import AuthNavigator from "./navigation/AuthNavigator"
 
 import useCachedResources from "./hooks/useCachedResources"
 
@@ -15,7 +15,7 @@ const App = () => {
 
     else return (
         <Provider store={store}>
-            <AppNavigator user={user} />
+            <AuthNavigator user={user} />
         </Provider>
     )
 
