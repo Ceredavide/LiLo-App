@@ -1,17 +1,17 @@
 import React, { useEffect } from "react";
-import { View, FlatList, TouchableOpacity } from "react-native";
+import { View, FlatList, TouchableOpacity, ActivityIndicator } from "react-native";
 import { useSelector, useDispatch } from "react-redux"
 
 import { fetchComunicazioni, refreshComunicazioni } from "../store/actions/comunicazioni"
 
 import Screen from "../components/shared/Screen"
+import TransitionView from "../components/shared/TransitionView"
 import Card from "../components/home/Card";
 import FloatingButton from "../components/home/FloatingButton";
 import ComunicazioniHolder from "../components/home/ComunicazioniHolder"
 
 const HomeScreen = ({ navigation }) => {
   const dispatch = useDispatch()
-  const isAdmin = useSelector(state => state.user.isAdmin)
   const { comunicazioni, isLoading, isRefreshing } = useSelector(state => state.comunicazioni)
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <Screen>
-      <View>
+      <TransitionView style={{ flex: 1 }}>
         <FlatList
           data={comunicazioni}
           keyExtractor={item => item._id}
@@ -39,14 +39,14 @@ const HomeScreen = ({ navigation }) => {
             </TouchableOpacity>
           )}
         />
-        {isAdmin ? (
+      </TransitionView>
+      {/* {isAdmin ? (
           <FloatingButton
             name="edit"
             action={() => navigation.navigate("Comunicazioni")}
             color="white"
           />
-        ) : null}
-      </View>
+        ) : null} */}
     </Screen>
   );
 };
