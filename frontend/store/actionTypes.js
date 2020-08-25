@@ -1,6 +1,7 @@
 //user
-export const SAVE_USER_CREDENTIALS = "SAVE_USER_CREDENTIALS";
-export const DELETE_USER_CREDENTIALS = "DELETE_USER_CREDENTIALS";
+export const RESTORE_AUTH = "RESTORE_AUTH";
+export const SIGN_IN = "SIGN_IN";
+export const SIGN_OUT = "SIGN_OUT";
 
 //comunicazioni
 export const FETCH_COMUNICAZIONI_START = "FETCH_COMUNICAZIONI_START";
