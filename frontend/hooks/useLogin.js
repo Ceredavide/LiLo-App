@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 
 import loginSchema from "../validation/loginSchema"
 
-import { SAVE_USER_CREDENTIALS } from "../store/actionTypes"
+import { SIGN_IN } from "../store/actionTypes"
 
 import tryLogin from "../utils/tryLogin"
 
@@ -19,7 +19,7 @@ const useLogin = () => {
         try {
             const user = await tryLogin(email, password)
             if (!!user) {
-                dispatch({ type: SAVE_USER_CREDENTIALS, user: user })
+                dispatch({ type: SIGN_IN, user: user })
             }
         } catch (error) {
             console.log(error)
