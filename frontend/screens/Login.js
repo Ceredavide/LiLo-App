@@ -1,10 +1,11 @@
 import React from "react";
-import { StyleSheet, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, View, Image, TextInput } from "react-native";
+import { StyleSheet, TouchableWithoutFeedback, Keyboard, View, Image, TextInput } from "react-native";
 
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import { AntDesign } from "@expo/vector-icons";
 
@@ -22,7 +23,7 @@ const LoginScreen = () => {
   const { values, handleChange, handleBlur, handleSubmit, errors, touched } = formikLogin
 
   return (
-    <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS == "ios" ? "padding" : "height"} >
+    <KeyboardAwareScrollView style={styles.screen}>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.screen}>
           <Image
@@ -76,7 +77,7 @@ const LoginScreen = () => {
           />
         </View>
       </TouchableWithoutFeedback >
-    </KeyboardAvoidingView>
+    </KeyboardAwareScrollView>
   );
 };
 
