@@ -1,6 +1,8 @@
 import React from "react"
 import { StyleSheet, View } from "react-native"
 
+import Colors from "../../constants/colors"
+
 const Screen = ({ children, style }) => {
     return (
         <View style={{ ...styles.screen, ...style }}>
@@ -12,7 +14,7 @@ const Screen = ({ children, style }) => {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        backgroundColor: "#F1F5F9",
+        backgroundColor: Colors.main,
         alignItems: "center",
         justifyContent: "center",
     }
