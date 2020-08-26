@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, ScrollView, View, Image, Text } from "react-native"
+import { StyleSheet, SafeAreaView, ScrollView, View, ImageBackground, Text } from "react-native"
 
 import {
     widthPercentageToDP as wp,
@@ -8,8 +8,13 @@ import {
 
 import axios from "axios"
 
-const Comunicazione = ({ route }) => {
-    const {comunicazione} = route.params
+import TransitionView from "../components/shared/TransitionView"
+import FloatingButton from "../components/shared/FloatingButton"
+
+import Colors from "../constants/colors"
+
+const Comunicazione = ({ route, navigation }) => {
+    const { comunicazione } = route.params
     const { titolo, sottotitolo, paragrafo, immagine } = comunicazione
     const [image, setImage] = useState(null)
 
@@ -20,38 +25,47 @@ const Comunicazione = ({ route }) => {
                 setImage(response.data.uri)
             }).catch(error => setImage(null))
     }, [])
-    
+
     return (
-        <ScrollView style={styles.container}>
-            <View style={styles.containerImage}>
-                {!image ? null : <Image style={styles.image} source={{ uri: image }} />}
-            </View>
-            <View style={styles.containerTitle}>
-                <Text style={styles.title}>{titolo}</Text>
-                <Text style={styles.subtitle}>{sottotitolo}</Text>
-            </View>
-            <View style={styles.containerParagraph}>
-                <Text style={styles.paragraph}>{paragrafo}</Text>
-            </View>
-        </ScrollView>
+        <SafeAreaView style={{ flex: 1, backgroundColor: Colors.main }}>
+            <ScrollView style={styles.container}>
+                <View style={styles.containerImage}>
+                    {!image ? null :
+                        <TransitionView>
+                            <ImageBackground style={styles.image} source={{ uri: image }} >
+                                <FloatingButton
+                                    iconName="arrowleft"
+                                    action={navigation.goBack}
+                                    style={styles.floatingButton}
+                                    color={Colors.white}
+                                />
+                            </ImageBackground>
+                        </TransitionView>
+                    }
+                </View>
+                <View style={styles.containerText}>
+                    <Text style={styles.title}>{titolo}</Text>
+                    <Text style={styles.subtitle}>{sottotitolo}</Text>
+                    <Text style={styles.paragraph}>{paragrafo}</Text>
+                </View>
+            </ScrollView>
+        </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "white",
+        backgroundColor: Colors.main,
     },
     containerImage: {
-        marginTop: hp("2%"),
         alignSelf: "center",
-        width: wp("85%"),
-        height: wp("85%"),
+        width: wp("100%"),
+        height: wp("100%"),
     },
     image: {
-        width: wp("85%"),
-        height: wp("85%"),
-        borderRadius: 20,
+        width: wp("100%"),
+        height: wp("100%"),
         alignSelf: "center",
         backgroundColor: "#F1F5F9",
         shadowColor: "#000",
@@ -62,20 +76,18 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.20,
         shadowRadius: 1.41,
     },
-    containerTitle: {
-        marginTop: hp("2%"),
-        marginLeft: wp("12%"),
-        width: wp("75%"),
-    },
     title: {
         fontFamily: "open-sans-bold",
         fontSize: hp("4%"),
+        color: Colors.white
     },
     subtitle: {
         fontFamily: "open-sans-regular",
-        fontSize: hp("2.5%")
+        fontSize: hp("2.5%"),
+        marginBottom: hp("3%"),
+        color: Colors.white
     },
-    containerParagraph: {
+    containerText: {
         paddingTop: hp("3%"),
         paddingBottom: hp("5%"),
         width: wp("85%"),
@@ -84,7 +96,8 @@ const styles = StyleSheet.create({
     paragraph: {
         fontFamily: "open-sans-regular",
         fontSize: hp("2%"),
-        textAlign: "justify"
+        textAlign: "justify",
+        color: Colors.white
     }
 })
 
