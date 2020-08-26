@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, FlatList, TouchableOpacity, ActivityIndicator } from "react-native";
+import { FlatList, TouchableOpacity, ActivityIndicator, RefreshControl } from "react-native";
 import { useSelector, useDispatch } from "react-redux"
 
 import { fetchComunicazioni, refreshComunicazioni } from "../store/actions/comunicazioni"
@@ -7,8 +7,6 @@ import { fetchComunicazioni, refreshComunicazioni } from "../store/actions/comun
 import Screen from "../components/shared/Screen"
 import TransitionView from "../components/shared/TransitionView"
 import Card from "../components/home/Card";
-import FloatingButton from "../components/home/FloatingButton";
-import ComunicazioniHolder from "../components/home/ComunicazioniHolder"
 
 const HomeScreen = ({ navigation }) => {
   const dispatch = useDispatch()
@@ -18,35 +16,34 @@ const HomeScreen = ({ navigation }) => {
     dispatch(fetchComunicazioni())
   }, []);
 
-  if (isLoading) {
-    return <ComunicazioniHolder />
+  function renderItem({ item, index }) {
+    return (
+      <TransitionView index={index}>
+        <TouchableOpacity onPress={() => navigation.navigate("Comunicazione", { comunicazione: item })}>
+          <Card comunicazione={item} />
+        </TouchableOpacity>
+      </TransitionView>
+    )
   }
 
   return (
     <Screen>
-      <TransitionView style={{ flex: 1 }}>
-        <FlatList
-          data={comunicazioni}
-          keyExtractor={item => item._id}
-          refreshing={isRefreshing}
-          onRefresh={() => dispatch(refreshComunicazioni())}
-          showsVerticalScrollIndicator={false}
-          renderItem={({ item }) => (
-            < TouchableOpacity
-              onPress={() => navigation.navigate("Comunicazione", { comunicazione: item })}
-            >
-              <Card comunicazione={item} />
-            </TouchableOpacity>
-          )}
-        />
-      </TransitionView>
-      {/* {isAdmin ? (
-          <FloatingButton
-            name="edit"
-            action={() => navigation.navigate("Comunicazioni")}
-            color="white"
+      {isLoading ? <ActivityIndicator /> :
+        <TransitionView>
+          <FlatList
+            data={comunicazioni}
+            keyExtractor={item => item._id}
+            showsVerticalScrollIndicator={false}
+            renderItem={renderItem}
+            refreshControl={
+              <RefreshControl
+                refreshing={isRefreshing}
+                onRefresh={() => dispatch(refreshComunicazioni())}
+                tintColor="#fff"
+              />
+            }
           />
-        ) : null} */}
+        </TransitionView>}
     </Screen>
   );
 };
