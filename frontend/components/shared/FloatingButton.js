@@ -2,30 +2,29 @@ import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 
 import {
-  widthPercentageToDP as wp,
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 import { AntDesign } from "@expo/vector-icons";
 
-const FloatingButton = ({ name, action, color }) => {
+import Colors from "../../constants/colors"
+
+const FloatingButton = ({ iconName, action, color, propStyles = {} }) => {
   return (
-    <TouchableOpacity onPress={action} style={styles.container}>
-      <AntDesign name={name} size={hp("4%")} color={color} />
+    <TouchableOpacity onPress={action} style={{ ...styles.container, ...propStyles }}>
+      <AntDesign name={iconName} size={hp("2%")} color={color} />
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    height: hp("7%"),
-    width: hp("7%"),
-    borderRadius: 200,
-    position: "absolute",
-    bottom: hp("1%"),
-    right: wp("2%"),
+    height: hp("5%"),
+    width: hp("5%"),
+    borderRadius: 20,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#009fff"
+    backgroundColor: Colors.main,
+    margin: 10
   }
 });
 
