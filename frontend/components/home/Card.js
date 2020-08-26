@@ -9,50 +9,62 @@ import {
 import LoadableImage from "../home/LoadableImage"
 
 const HomeCard = ({ comunicazione }) => {
+
   const { titolo, sottotitolo, immagine } = comunicazione
+
   return (
-    <View style={styles.card}>
-      <LoadableImage immagine={immagine}/>
-      <View style={styles.containerText}>
-        <Text style={styles.title}>{titolo}</Text>
-        <Text style={styles.subtitle}>{sottotitolo}</Text>
+    <View style={styles.container}>
+      <View style={styles.card}>
+        <View style={styles.containerText}>
+          <Text style={styles.title}>{titolo}</Text>
+          <Text style={styles.subtitle}>{sottotitolo}</Text>
+        </View>
+        <LoadableImage immagine={immagine} />
       </View>
     </View>
+
   );
 };
 
 const styles = StyleSheet.create({
+  container:{
+    width: wp("100%"),
+    alignItems: "center",
+    padding: hp("1%"),
+    marginTop: hp("0.5%")
+  },
   card: {
-    width: wp("92%"),
-    marginTop: hp("1.5%"),
+    width: wp("90%"),
     flex: 1,
     alignItems: "center",
     flexDirection: "row",
     borderRadius: 20,
     backgroundColor: "#FFF",
-    shadowColor: "#000",
+    shadowColor: "#FFF",
     shadowOffset: {
       width: 0,
-      height: 1,
+      height: 5,
     },
-    shadowOpacity: 0.20,
-    shadowRadius: 1.41,
-    elevation: 2,
+    shadowOpacity: 0.34,
+    shadowRadius: 6.27,
+    
+    elevation: 10,
   },
   image: {
-    height: hp("12%"),
-    width: hp("12%"),
+    height: hp("8%"),
+    width: hp("8%"),
     borderRadius: 20,
+    marginRight: wp("3%")
   },
   containerText: {
-    marginTop: wp("4%"),
-    marginBottom: wp("4%"),
-    marginRight: wp("4%"),
-    width: wp("50%")
+    marginHorizontal: hp("4%"),
+    marginLeft: wp("4%"),
+    width: wp("47%")
   },
   title: {
     fontFamily: "open-sans-bold",
-    fontSize: hp("2%"),
+    marginBottom: hp("1%"),
+    fontSize: hp("2.3%"),
   },
   subtitle: {
     fontFamily: "open-sans-regular",
