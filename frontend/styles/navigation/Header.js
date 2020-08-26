@@ -1,19 +1,22 @@
-import { heightPercentageToDP as hp } from "react-native-responsive-screen";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from "react-native-responsive-screen";
+
+import Colors from "../../constants/colors"
 
 export default styles = {
   headerStyle: {
-    backgroundColor: "#009fff",
-    height: hp("12%"),
+    backgroundColor: Colors.main,
+    height: hp("15%"),
+    shadowColor: 'transparent'
   },
+  headerTitleAlign: "left",
   headerTitleStyle: {
-    justifyContent: "center",
-    color: "white",
+    alignSelf: "flex-start",
+    color: Colors.white,
     fontFamily: "System",
-    fontSize: hp("5%"),
-    marginBottom: hp("1%")
-  },
-  headerTintColor: "#fff",
-  headerBackTitleStyle: {
-    color: "#fff"
+    fontSize: hp("5.2%"),
+    marginLeft: wp("3%")
   }
 }
