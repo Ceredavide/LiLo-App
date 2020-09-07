@@ -6,7 +6,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 
 import HomeStack from "./stacks/Home";
 import AssenzeStack from "./stacks/Assenze"
-import AutogestiteStack from "./stacks/Autogestite";
+import UtilitiesStack from "./stacks/Utilities";
 import SettingsStack from "./stacks/Settings"
 
 import Colors from "../constants/colors"
@@ -18,7 +18,7 @@ const AppNavigator = () => {
     <Navigator screenOptions={_screenOptions} tabBarOptions={_tabBarOptions}>
       <Screen name="Home" component={HomeStack} />
       <Screen name="Assenze" component={AssenzeStack} />
-      <Screen name="Autogestite" component={AutogestiteStack} />
+      <Screen name="Utilities" component={UtilitiesStack} />
       <Screen name="Impostazioni" component={SettingsStack} />
     </Navigator>
   )
@@ -46,8 +46,8 @@ const _screenOptions = ({ route }) => ({
         iconName = "people";
         break;
       }
-      case "Autogestite": {
-        iconName = "casino";
+      case "Utilities": {
+        iconName = "dashboard";
         break;
       }
       case "Impostazioni": {
