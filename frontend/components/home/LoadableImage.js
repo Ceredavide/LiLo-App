@@ -30,18 +30,17 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         alignItems: "center",
         justifyContent: "center",
-        height: hp("11%"),
-        width: hp("11%"),
-        margin: wp("4%"),
-        borderRadius: 20,
-        backgroundColor: "#F2F2F2"
+        height: hp("8%"),
+        width: hp("8%"),
+        marginLeft: wp("2%"),
+        backgroundColor: "#FFF",
+        minHeight: hp("10%")
     },
     image: {
         alignSelf: "center",
-        height: hp("11%"),
-        width: hp("11%"),
-        borderRadius: 20,
-        backgroundColor: "#F2F2F2"
+        height: hp("8%"),
+        width: hp("8%"),
+        backgroundColor: "#FFF"
     },
 })
 export default LoadableImage
