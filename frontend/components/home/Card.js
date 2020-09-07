@@ -7,6 +7,9 @@ import {
 } from "react-native-responsive-screen";
 
 import LoadableImage from "../home/LoadableImage"
+import IconWithText from "../shared/IconWithText"
+
+import Colors from "../../constants/colors"
 
 const HomeCard = ({ comunicazione }) => {
 
@@ -18,6 +21,12 @@ const HomeCard = ({ comunicazione }) => {
         <View style={styles.containerText}>
           <Text style={styles.title}>{titolo}</Text>
           <Text style={styles.subtitle}>{sottotitolo}</Text>
+          <IconWithText
+            iconName="calendar"
+            text="15/08"
+            iconSize={hp("2%")}
+            fontSize={hp("1.6%")}
+          />
         </View>
         <LoadableImage immagine={immagine} />
       </View>
@@ -27,7 +36,7 @@ const HomeCard = ({ comunicazione }) => {
 };
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     width: wp("100%"),
     alignItems: "center",
     padding: hp("1%"),
@@ -38,16 +47,17 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     flexDirection: "row",
+    padding: wp("2%"),
     borderRadius: 20,
-    backgroundColor: "#FFF",
-    shadowColor: "#FFF",
+    backgroundColor: Colors.white,
+    shadowColor: Colors.white,
     shadowOffset: {
       width: 0,
       height: 5,
     },
     shadowOpacity: 0.34,
     shadowRadius: 6.27,
-    
+
     elevation: 10,
   },
   image: {
@@ -59,11 +69,11 @@ const styles = StyleSheet.create({
   containerText: {
     marginHorizontal: hp("4%"),
     marginLeft: wp("4%"),
-    width: wp("47%")
+    width: wp("52%")
   },
   title: {
     fontFamily: "open-sans-bold",
-    marginBottom: hp("1%"),
+    marginBottom: hp("0.5%"),
     fontSize: hp("2.3%"),
   },
   subtitle: {
