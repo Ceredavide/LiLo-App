@@ -1,3 +1,5 @@
+import { Platform } from "react-native"
+
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
@@ -7,8 +9,9 @@ import Colors from "../../constants/colors"
 
 export default styles = {
   headerStyle: {
+    elevation: 0,
     backgroundColor: Colors.main,
-    height: hp("15%"),
+    height: Platform.OS === "ios" ? hp("15%"): hp("10%"),
     shadowColor: 'transparent'
   },
   headerTitleAlign: "left",
