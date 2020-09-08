@@ -1,52 +1,57 @@
 import React from "react"
-import { StyleSheet, View, TouchableOpacity, Text } from "react-native"
+import { StyleSheet, View, TouchableOpacity, Text, Alert } from "react-native"
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 
+import * as WebBrowser from 'expo-web-browser';
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 
 import Screen from "../components/shared/Screen"
+import TransitionView from "../components/shared/TransitionView"
 
+import Constants from "../constants/app"
 import Colors from "../constants/colors"
 
 const Utilities = ({ navigation }) => {
 
     return (
         <Screen style={styles.screen}>
-            <View style={styles.row}>
-                <Button
-                    text="Autogestite"
-                    iconName="star"
-                    action={() => navigation.navigate("Autogestite")}
-                />
-                <Button
-                    text="Mappa"
-                    iconName="map"
-                    action={() => navigation.navigate("Mappa")}
-                />
-            </View>
-
-            <View style={styles.row}>
-                <Button
-                    text="Risorse"
-                    iconName="format-list-checkbox"
-                    action={() => navigation.navigate("Autogestite")}
-                />
-                <Button
-                    text="Lettore QR"
-                    iconName="qrcode"
-                    action={() => navigation.navigate("Mappa")}
-                />
-            </View>
+            <TransitionView>
+                <View style={styles.row}>
+                    <Button
+                        text="Autogestite"
+                        iconName="star"
+                        action={() => Alert.alert('Coming Soon.')}
+                    />
+                    <Button
+                        text="Mappa"
+                        iconName="map"
+                        action={() => WebBrowser.openBrowserAsync(Constants.URL_MAP)}
+                    />
+                </View>
+            </TransitionView>
+            <TransitionView index={1}>
+                <View style={styles.row}>
+                    <Button
+                        text="Risorse"
+                        iconName="format-list-checkbox"
+                        action={() => navigation.navigate("Autogestite")}
+                    />
+                    <Button
+                        text="Lettore QR"
+                        iconName="qrcode"
+                        action={() => navigation.navigate("Scanner")}
+                    />
+                </View>
+            </TransitionView>
         </Screen>
     )
 
 }
 
 const Button = ({ text, iconName, action }) => {
-
     return (
         <TouchableOpacity onPress={action}>
             <View style={styles.button}>
