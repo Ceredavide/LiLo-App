@@ -8,6 +8,7 @@ import {
 
 import LoadableImage from "../home/LoadableImage"
 import IconWithText from "../shared/IconWithText"
+import Tag from "./Tag"
 
 import Colors from "../../constants/colors"
 
@@ -15,18 +16,36 @@ const HomeCard = ({ comunicazione }) => {
 
   const { titolo, sottotitolo, immagine } = comunicazione
 
+  let tags = [
+    {
+      text: "Scuola",
+      iconName: "school",
+      color: "#70CCBD"
+    },
+    {
+      text: "Ambiente",
+      iconName: "leaf",
+      color: "#5FBC51"
+    }
+  ]
+
   return (
     <View style={styles.container}>
-      <View style={styles.card}>
-        <View style={styles.containerText}>
-          <Text style={styles.title}>{titolo}</Text>
-          <Text style={styles.subtitle}>{sottotitolo}</Text>
-          <IconWithText
-            iconName="calendar"
-            text="15/08"
-            iconSize={hp("2%")}
-            fontSize={hp("1.6%")}
-          />
+      <View ew style={styles.card}>
+        <View>
+          <View style={styles.textRow}>
+            <Text style={styles.title}>{titolo}</Text>
+            <Text style={styles.subtitle}>{sottotitolo}</Text>
+          </View>
+          <View style={styles.tagRow}>
+            <IconWithText
+              iconName="calendar"
+              text="15/08"
+              iconSize={hp("2%")}
+              fontSize={hp("1.6%")}
+            />
+            {tags.map(tag => <Tag tag={tag} />)}
+          </View>
         </View>
         <LoadableImage immagine={immagine} />
       </View>
@@ -57,7 +76,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.34,
     shadowRadius: 6.27,
-
     elevation: 10,
   },
   image: {
@@ -66,10 +84,17 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginRight: wp("3%")
   },
-  containerText: {
+  textRow: {
     marginHorizontal: hp("4%"),
     marginLeft: wp("4%"),
     width: wp("52%")
+  },
+  tagRow: {
+    height: hp('4.5%'),
+    flexDirection: "row",
+    alignItems: 'center',
+    justifyContent: "center",
+    paddingHorizontal: wp("4%")
   },
   title: {
     fontFamily: "open-sans-bold",
@@ -79,7 +104,8 @@ const styles = StyleSheet.create({
   subtitle: {
     fontFamily: "open-sans-regular",
     width: wp("55%")
-  }
+  },
+
 });
 
 export default HomeCard;
