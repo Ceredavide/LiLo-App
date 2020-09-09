@@ -37,7 +37,7 @@ const Utilities = ({ navigation }) => {
                     <Button
                         text="Risorse"
                         iconName="format-list-checkbox"
-                        action={() => navigation.navigate("Autogestite")}
+                        action={() => navigation.navigate("Risorse")}
                     />
                     <Button
                         text="Lettore QR"
