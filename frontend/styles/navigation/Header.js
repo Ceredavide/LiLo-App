@@ -11,7 +11,7 @@ export default styles = {
   headerStyle: {
     elevation: 0,
     backgroundColor: Colors.main,
-    height: Platform.OS === "ios" ? hp("15%"): hp("10%"),
+    height: Platform.OS === "ios" ? hp("15%") : hp("10%"),
     shadowColor: 'transparent'
   },
   headerTitleAlign: "left",
@@ -21,5 +21,7 @@ export default styles = {
     fontFamily: "System",
     fontSize: hp("5.2%"),
     marginLeft: wp("3%")
-  }
+  },
+  headerBackTitleVisible: false,
+  headerTintColor: Colors.white
 }
