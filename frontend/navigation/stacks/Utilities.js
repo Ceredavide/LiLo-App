@@ -3,7 +3,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import AutogestiteStack from "./Autogestite"
 import UtilitiesScreen from "../../screens/Utilities"
-import MappaScreen from '../../screens/Mappa'
+import RisorseScreen from "../../screens/Risorse"
+import ScannerScreen from "../../screens/Scanner"
 
 import headerStyle from "../../styles/navigation/Header";
 
@@ -13,8 +14,9 @@ const UtilitiesStack = () => {
     return (
         <Navigator screenOptions={headerStyle}>
             <Screen name="Utilities" component={UtilitiesScreen} />
-            <Screen name="Mappa" component={MappaScreen} options={mappaOptions} />
             <Screen name="Autogestite" component={AutogestiteStack} />
+            <Screen name="Risorse" component={RisorseScreen} />
+            <Screen name="Scanner" component={ScannerScreen} />
         </Navigator>
     )
 }
