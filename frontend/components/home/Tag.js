@@ -6,6 +6,8 @@ import {
     heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 
+import getContrastColor from "../../utils/getContrastColor"
+
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 
 const Tag = ({ tag }) => {
@@ -14,8 +16,8 @@ const Tag = ({ tag }) => {
 
     return (
         <View style={{ ...styles.tag, backgroundColor: color }}>
-            <Icon name={iconName} size={hp("1.2%")} color="black" />
-            <Text style={styles.text}>{text}</Text>
+            <Icon name={iconName} size={hp("1.2%")} color={getContrastColor(color)} />
+            <Text style={{...styles.text, color: getContrastColor(color)}}>{text}</Text>
         </View>
     )
 }
