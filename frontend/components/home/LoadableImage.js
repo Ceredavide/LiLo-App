@@ -33,14 +33,15 @@ const styles = StyleSheet.create({
         height: hp("8%"),
         width: hp("8%"),
         marginLeft: wp("2%"),
-        backgroundColor: "#FFF",
+        backgroundColor: "#4a86ff",
         minHeight: hp("10%")
     },
     image: {
         alignSelf: "center",
-        height: hp("8%"),
-        width: hp("8%"),
-        backgroundColor: "#FFF"
+        height: hp("10%"),
+        width: hp("10%"),
+        backgroundColor: "#FFF",
+        borderRadius: 10
     },
 })
 export default LoadableImage
