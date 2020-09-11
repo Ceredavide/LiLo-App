@@ -3,11 +3,11 @@ import { StyleSheet, View, Text } from "react-native"
 
 import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons"
 
-const IconWithText = ({ iconName, text, iconSize, fontSize }) => {
+const IconWithText = ({ iconName, text, iconSize, fontSize, color = "black" }) => {
     return (
         <View style={styles.container}>
-            <MaterialIcon name={iconName} color="black" size={iconSize} />
-            <Text style={{ ...styles.text, fontSize: fontSize }}>{text}</Text>
+            <MaterialIcon name={iconName} color={color} size={iconSize} />
+            <Text style={{ ...styles.text, fontSize: fontSize, color: color }}>{text}</Text>
         </View>
     )
 }
