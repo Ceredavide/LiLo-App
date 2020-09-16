@@ -1,5 +1,4 @@
 const express = require("express")
-const cors = require('cors')
 const path = require("path")
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose")
@@ -23,11 +22,11 @@ require('dotenv').config()
 // inizializzo app
 const app = express();
 
-// app.use(cors())
-
 // utilizzo parser che fa in modo che le risposte siano JSON
-app.use(bodyParser.json({ limit: '50mb' }));
-app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
+app.use(bodyParser.json());
+
+// rende disponibile l'accesso statico alle immagini
+app.use('/uploads/images', express.static(path.join("uploads", "images")))
 
 // settato header response
 app.use((req, res, next) => {
@@ -46,9 +45,6 @@ app.use('/api/users', usersRouter)
 
 // utilizzo middleware checkLogin
 app.use(checkAuth)
-
-// rende disponibile l'accesso statico alle immagini
-app.use('uploads/images', express.static(path.join("uploads", "images")))
 
 // utilizzo API routes 
 app.use('/api/comunicazioni', comunicazioniRouter)
