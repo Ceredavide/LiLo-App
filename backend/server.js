@@ -26,7 +26,8 @@ const app = express();
 // app.use(cors())
 
 // utilizzo parser che fa in modo che le risposte siano JSON
-app.use(bodyParser.json())
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 
 // settato header response
 app.use((req, res, next) => {
