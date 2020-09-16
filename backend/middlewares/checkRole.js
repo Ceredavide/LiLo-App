@@ -6,8 +6,10 @@ module.exports = roles => {
 
         const userRole = req.userData.role
 
+        console.log(roles.findIndex(role => role === userRole))
+
         if (roles.findIndex(role => role === userRole) === -1) {
-            return new HttpError("Non hai i permessi per eseguire questa API.", 403)
+            return next(new HttpError("Non hai i permessi per eseguire questa API.", 403))
         }
 
         next()
