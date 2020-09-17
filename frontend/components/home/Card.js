@@ -1,12 +1,11 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Image } from "react-native";
 
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 
-import LoadableImage from "../home/LoadableImage"
 import IconWithText from "../shared/IconWithText"
 import Tag from "./Tag"
 
@@ -14,20 +13,7 @@ import Colors from "../../constants/colors"
 
 const HomeCard = ({ comunicazione }) => {
 
-  const { titolo, sottotitolo, immagine } = comunicazione
-
-  let tags = [
-    {
-      text: "Scuola",
-      iconName: "school",
-      color: "#70CCBD"
-    },
-    {
-      text: "Ambiente",
-      iconName: "leaf",
-      color: "#5FBC51"
-    }
-  ]
+  const { titolo, sottotitolo, tags, immagine, createdAt } = comunicazione
 
   return (
     <View style={styles.container}>
@@ -40,14 +26,15 @@ const HomeCard = ({ comunicazione }) => {
           <View style={styles.tagRow}>
             <IconWithText
               iconName="calendar"
-              text="15/08"
+              text={createdAt}
               iconSize={hp("2%")}
               fontSize={hp("1.6%")}
+              color={Colors.white}
             />
-            {tags.map(tag => <Tag tag={tag} />)}
+            {tags.map((tag, index) => <Tag tag={tag} key={index} />)}
           </View>
         </View>
-        <LoadableImage immagine={immagine} />
+        <Image style={styles.image} source={{ uri: immagine }} />
       </View>
     </View>
 
@@ -59,7 +46,8 @@ const styles = StyleSheet.create({
     width: wp("100%"),
     alignItems: "center",
     padding: hp("1%"),
-    marginTop: hp("0.5%")
+    marginTop: hp("0.5%"),
+    minHeight: hp("18%")
   },
   card: {
     width: wp("90%"),
@@ -68,7 +56,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     padding: wp("2%"),
     borderRadius: 20,
-    backgroundColor: Colors.white,
+    backgroundColor: "#4a86ff",
     shadowColor: Colors.white,
     shadowOffset: {
       width: 0,
@@ -90,20 +78,29 @@ const styles = StyleSheet.create({
     width: wp("52%")
   },
   tagRow: {
-    height: hp('4.5%'),
+    height: hp('4%'),
     flexDirection: "row",
     alignItems: 'center',
     justifyContent: "center",
     paddingHorizontal: wp("4%")
   },
   title: {
+    color: Colors.white,
     fontFamily: "open-sans-bold",
     marginBottom: hp("0.5%"),
     fontSize: hp("2.3%"),
   },
   subtitle: {
+    color: Colors.white,
     fontFamily: "open-sans-regular",
     width: wp("55%")
+  },
+  image: {
+    alignSelf: "center",
+    height: hp("10%"),
+    width: hp("10%"),
+    backgroundColor: "#FFF",
+    borderRadius: 10
   },
 
 });
