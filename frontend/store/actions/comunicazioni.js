@@ -9,14 +9,14 @@ export const fetchComunicazioni = () => {
         dispatch({ type: actionTypes.FETCH_COMUNICAZIONI_START });
         try {
             const user = await JSON.parse(await SecureStore.getItemAsync("user"))
-            const response = await axios.get("https://cere.dev/comunicazioni", {
+            const response = await axios.get("http://localhost:5000/api/comunicazioni", {
                 headers: {
                     Authorization: "Bearer " + user.accessToken
                 }
             })
             dispatch({
                 type: actionTypes.FETCH_COMUNICAZIONI_SUCCESS,
-                comunicazioni: response.data.data
+                comunicazioni: response.data.comunicazioni
             });
         } catch (error) {
             dispatch({
@@ -32,14 +32,14 @@ export const refreshComunicazioni = () => {
         dispatch({ type: actionTypes.REFRESH_COMUNICAZIONI_START });
         try {
             const user = await JSON.parse(await SecureStore.getItemAsync("user"))
-            const response = await axios.get("https://cere.dev/comunicazioni", {
+            const response = await axios.get("http://localhost:5000/api/comunicazioni", {
                 headers: {
                     Authorization: "Bearer " + user.accessToken
                 }
             })
             dispatch({
                 type: actionTypes.REFRESH_COMUNICAZIONI_SUCCESS,
-                comunicazioni: response.data.data
+                comunicazioni: response.data.comunicazioni
             });
         } catch (error) {
             dispatch({
