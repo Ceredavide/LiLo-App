@@ -14,7 +14,7 @@ const getComunicazioni = async (req, res, next) => {
     let comunicazioni
 
     try {
-        comunicazioni = await Comunicazione.find()
+        comunicazioni = await Comunicazione.find().populate('tags')
     } catch (err) {
         return next(new HttpError("Errore nel reperire la lista delle comunicazioni, riprovare.", 500))
     }
@@ -54,6 +54,10 @@ const createComunicazione = async (req, res, next) => {
         paragrafo,
         tags
     } = req.body
+
+    if (!req.file){
+        return next(new HttpError("Errore nel salvataggio dell' immagine, riprovare."))
+    }
 
     let user;
 
