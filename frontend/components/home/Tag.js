@@ -12,12 +12,12 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 
 const Tag = ({ tag }) => {
 
-    const { text, iconName, color } = tag
+    const { nome, iconName, colore } = tag
 
     return (
-        <View style={{ ...styles.tag, backgroundColor: color }}>
-            <Icon name={iconName} size={hp("1.2%")} color={getContrastColor(color)} />
-            <Text style={{...styles.text, color: getContrastColor(color)}}>{text}</Text>
+        <View style={{ ...styles.tag, backgroundColor: colore }}>
+            <Icon name={iconName} size={hp("1.2%")} color={getContrastColor(colore)} />
+            <Text style={{...styles.text, color: getContrastColor(colore)}}>{nome}</Text>
         </View>
     )
 }
