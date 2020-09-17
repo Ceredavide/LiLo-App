@@ -46,9 +46,14 @@ const getComunicazioniById = async (req, res, next) => {
 //
 const createComunicazione = async (req, res, next) => {
 
-    const { userId } = req.userData
+    const { _id: userId } = req.userData
 
-    const { titolo, sottotitolo, paragrafo } = req.body
+    const {
+        titolo,
+        sottotitolo,
+        paragrafo,
+        tags
+    } = req.body
 
     let user;
 
@@ -68,7 +73,8 @@ const createComunicazione = async (req, res, next) => {
         sottotitolo,
         paragrafo,
         immagine: req.file.path,
-        creator: userId,
+        tags,
+        editors: [userId]
     })
 
     try {
@@ -77,7 +83,11 @@ const createComunicazione = async (req, res, next) => {
         return next(new HttpError("Errore nel salvataggio della comunicazione, riprovare.", 500))
     }
 
-    res.status(201).json({ comunicazione: createdComunicazione })
+    let comunicazioneView = await createdComunicazione.execPopulate('tags')
+
+    res.status(201).json({
+        comunicazione: comunicazioneView
+    })
 }
 
 //
@@ -85,18 +95,19 @@ const createComunicazione = async (req, res, next) => {
 //
 const updateComunicazione = async (req, res, next) => {
 
-    const id = req.params.id
+    const { _id: userId } = req.userData
 
     const {
         titolo,
         sottotitolo,
-        paragrafo
+        paragrafo,
+        tags
     } = req.body
 
     let comunicazione;
 
     try {
-        comunicazione = await Comunicazione.findById(id)
+        comunicazione = await Comunicazione.findById(userId)
     } catch (err) {
         return next(new HttpError("Errore nella modifica della comunicazione, riprovare.", 500))
     }
@@ -104,6 +115,8 @@ const updateComunicazione = async (req, res, next) => {
     comunicazione.titolo = titolo
     comunicazione.sottotitolo = sottotitolo
     comunicazione.paragrafo = paragrafo
+    comunicazione.tags = tags
+    comunicazione.editors = [...comunicazione.editors, userId]
 
     try {
         await comunicazione.save()
@@ -111,7 +124,7 @@ const updateComunicazione = async (req, res, next) => {
         return next(new HttpError("Errore nel salvataggio della comunicazione modificata.", 500))
     }
 
-    res.status(200).json({ comunicazione: comunicazione.toObject({ getters: true }) })
+    res.status(200).json({ comunicazione: comunicazione.populate() })
 }
 
 //
