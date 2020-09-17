@@ -12,6 +12,7 @@ const checkAuth = require("./middlewares/checkAuth")
 const errorHandler = require("./controllers/error")
 
 // importazioni routes api
+const tagsRouter = require("./routes/tags")
 const comunicazioniRouter = require("./routes/comunicazioni")
 const proposteRouter = require("./routes/proposte")
 const usersRouter = require("./routes/user")
@@ -47,6 +48,7 @@ app.use('/api/users', usersRouter)
 app.use(checkAuth)
 
 // utilizzo API routes 
+app.use('/api/tags', tagsRouter)
 app.use('/api/comunicazioni', comunicazioniRouter)
 app.use('/api/proposte', proposteRouter)
 
