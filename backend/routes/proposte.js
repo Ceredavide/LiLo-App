@@ -2,13 +2,9 @@ const express = require("express")
 
 const proposteController = require("../controllers/proposte")
 
-const checkAuth = require("../middlewares/checkAuth")
-
 const { getProposte, getPropostaById, createProposta } = proposteController
 
 const router = express.Router();
-
-router.use(checkAuth)
 
 router.get('/', getProposte);
 
