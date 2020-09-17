@@ -1,7 +1,8 @@
-import * as actionTypes from "../actionTypes"
-
 import { Alert } from "react-native"
 
+import moment from "moment"
+
+import * as actionTypes from "../actionTypes"
 import handleError from "../../utils/handleError"
 
 const initialState = {
@@ -21,7 +22,13 @@ const comunicazioniReducer = (state = initialState, action) => {
     case actionTypes.FETCH_COMUNICAZIONI_SUCCESS:
       return {
         ...state,
-        comunicazioni: action.comunicazioni,
+        comunicazioni: action.comunicazioni.map(item => {
+          return {
+            ...item,
+            immagine: `http://localhost:5000/${item.immagine}`,
+            createdAt: moment(item.createdAt).format("DD/MM")
+          }
+        }),
         isLoading: false
       };
     case actionTypes.FETCH_COMUNICAZIONI_ERROR:
@@ -38,8 +45,14 @@ const comunicazioniReducer = (state = initialState, action) => {
     case actionTypes.REFRESH_COMUNICAZIONI_SUCCESS:
       return {
         ...state,
-        isRefreshing: false,
-        comunicazioni: action.comunicazioni
+        comunicazioni: action.comunicazioni.map(item => {
+          return {
+            ...item,
+            immagine: `http://localhost:5000/${item.immagine}`,
+            createdAt: moment(item.createdAt).format("DD/MM")
+          }
+        }),
+        isRefreshing: false
       }
     case actionTypes.REFRESH_COMUNICAZIONI_ERROR:
       handleError(action.error)
