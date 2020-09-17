@@ -14,12 +14,12 @@ const getComunicazioni = async (req, res, next) => {
     let comunicazioni
 
     try {
-        comunicazioni = await Comunicazione.find().populate('tags')
+        comunicazioni = await Comunicazione.find({}, '-editors').populate('tags')
     } catch (err) {
         return next(new HttpError("Errore nel reperire la lista delle comunicazioni, riprovare.", 500))
     }
 
-    res.status(200).json({ comunicazioni: comunicazioni.map(item => item.toObject({ getters: true })) })
+    res.status(200).json({ comunicazioni })
 }
 
 const getComunicazioniById = async (req, res, next) => {
@@ -38,7 +38,7 @@ const getComunicazioniById = async (req, res, next) => {
         return next(new HttpError("Ct non hai trovato nessuna comunicazione", 404))
     }
 
-    res.status(200).json({ comunicazione: comunicazione.toObject({ getters: true }) })
+    res.status(200).json({ comunicazione })
 }
 
 //
@@ -55,7 +55,7 @@ const createComunicazione = async (req, res, next) => {
         tags
     } = req.body
 
-    if (!req.file){
+    if (!req.file) {
         return next(new HttpError("Errore nel salvataggio dell' immagine, riprovare."))
     }
 
