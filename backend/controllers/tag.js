@@ -9,12 +9,12 @@ const getTags = async (req, res, next) => {
     let tags;
 
     try {
-        tags = await Tag.find();
+        tags = await Tag.find({},"-createdAt -updatedAt -__v");
     } catch (err) {
         return next(new HttpError("Errore nel reperire le proposte, riprova più tardi", 500))
     }
 
-    res.status(200).json({ proposte: Tag.map(tag => tag.toObject({ getters: true })) })
+    res.status(200).json({ tags })
 }
 
 //
