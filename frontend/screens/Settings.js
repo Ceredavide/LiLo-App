@@ -18,11 +18,11 @@ import { SIGN_OUT } from "../store/actionTypes"
 
 const SettingsScreen = () => {
   const dispatch = useDispatch()
-  const user = useSelector(state => state.user)
+  const user = useSelector(state => state.auth.user)
 
   const handleLogout = async () => {
-    dispatch({ type: SIGN_OUT })
     await SecureStore.deleteItemAsync("user")
+    dispatch({ type: SIGN_OUT })
   };
 
   const handleTermini = () => {
