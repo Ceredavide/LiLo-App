@@ -4,13 +4,15 @@ import { useSelector, useDispatch } from "react-redux"
 
 import { fetchComunicazioni, refreshComunicazioni } from "../store/actions/comunicazioni"
 
+import ErrorScreen from "../screens/Error"
+
 import Screen from "../components/shared/Screen"
 import TransitionView from "../components/shared/TransitionView"
 import Card from "../components/home/Card";
 
 const HomeScreen = ({ navigation }) => {
   const dispatch = useDispatch()
-  const { comunicazioni, isLoading, isRefreshing } = useSelector(state => state.comunicazioni)
+  const { comunicazioni, isLoading, isRefreshing, error } = useSelector(state => state.comunicazioni)
 
   useEffect(() => {
     dispatch(fetchComunicazioni())
@@ -28,22 +30,29 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <Screen>
-      {isLoading ? <ActivityIndicator /> :
-        <TransitionView>
-          <FlatList
-            data={comunicazioni}
-            keyExtractor={item => item._id}
-            showsVerticalScrollIndicator={false}
-            renderItem={renderItem}
-            refreshControl={
-              <RefreshControl
-                refreshing={isRefreshing}
-                onRefresh={() => dispatch(refreshComunicazioni())}
-                tintColor="#fff"
-              />
-            }
+      {
+        isLoading ? <ActivityIndicator /> : error ?
+          <ErrorScreen
+            reload={() => dispatch(fetchComunicazioni())}
+            text={error.response.data}
           />
-        </TransitionView>}
+          :
+          <TransitionView>
+            <FlatList
+              data={comunicazioni}
+              keyExtractor={item => item._id}
+              showsVerticalScrollIndicator={false}
+              renderItem={renderItem}
+              refreshControl={
+                <RefreshControl
+                  refreshing={isRefreshing}
+                  onRefresh={() => dispatch(refreshComunicazioni())}
+                  tintColor="#fff"
+                />
+              }
+            />
+          </TransitionView>
+      }
     </Screen>
   );
 };
