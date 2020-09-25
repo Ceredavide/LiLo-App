@@ -9,62 +9,75 @@ const initialState = {
   comunicazioni: [],
   isLoading: false,
   isRefreshing: false,
-  isLoadingPost: false
+  isLoadingPost: false,
+  error: null
 };
 
 const comunicazioniReducer = (state = initialState, action) => {
   switch (action.type) {
+
     case actionTypes.FETCH_COMUNICAZIONI_START:
       return {
         ...state,
         isLoading: true
       };
+
     case actionTypes.FETCH_COMUNICAZIONI_SUCCESS:
       return {
         ...state,
         comunicazioni: action.comunicazioni.map(item => {
           return {
             ...item,
-            immagine: `http://localhost:5000/${item.immagine}`,
+            immagine: `http://10.3.141.190:5000/${item.immagine}`,
             createdAt: moment(item.createdAt).format("DD/MM")
           }
         }),
-        isLoading: false
+        isLoading: false,
+        error: null
       };
+
     case actionTypes.FETCH_COMUNICAZIONI_ERROR:
       handleError(action.error)
       return {
         ...state,
-        isLoading: false
+        isLoading: false,
+        error: action.error
       };
+
     case actionTypes.REFRESH_COMUNICAZIONI_START:
       return {
         ...state,
         isRefreshing: true,
       }
+
     case actionTypes.REFRESH_COMUNICAZIONI_SUCCESS:
       return {
         ...state,
         comunicazioni: action.comunicazioni.map(item => {
           return {
             ...item,
-            immagine: `http://localhost:5000/${item.immagine}`,
+            immagine: `http://10.3.141.190:5000/${item.immagine}`,
             createdAt: moment(item.createdAt).format("DD/MM")
           }
         }),
-        isRefreshing: false
+        isRefreshing: false,
+        error: null
       }
+
     case actionTypes.REFRESH_COMUNICAZIONI_ERROR:
       handleError(action.error)
       return {
         ...state,
-        isRefreshing: false
+        isRefreshing: false,
+        error: action.error
       }
+
     case actionTypes.POST_COMUNICAZIONE_START:
       return {
         ...state,
         isLoadingPost: true
       };
+
     case actionTypes.POST_COMUNICAZIONE_SUCCESS:
       Alert.alert("Comunicazione inviata con successo!")
       return {
@@ -72,18 +85,21 @@ const comunicazioniReducer = (state = initialState, action) => {
         comunicazioni: [...state.comunicazioni, action.comunicazione],
         isLoadingPost: false
       };
+
     case actionTypes.POST_COMUNICAZIONE_ERROR:
       handleError(action.error)
       return {
         ...state,
         isLoadingPost: false
       };
+
     case actionTypes.REMOVE_ONE_COMUNICAZIONE:
       const newComunicazioni = state.comunicazioni.filter(item => item._id !== action.id)
       return {
         ...state,
         comunicazioni: newComunicazioni
       };
+
     default:
       return state;
   }
