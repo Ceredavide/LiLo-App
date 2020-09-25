@@ -1,28 +1,29 @@
-import React from "react"
+import React, { useState } from "react"
 import { StatusBar } from "react-native"
 import { Provider } from "react-redux"
 
 import store from "./store/store"
-import AuthNavigator from "./navigation/AuthNavigator"
 
-import useCachedResources from "./hooks/useCachedResources"
+import AuthNavigator from "./navigation/AuthNavigator"
+import LoadingScreen from "./screens/Loading"
 
 import Colors from "./constants/colors"
 
 const App = () => {
-    const { isLoadingComplete, user } = useCachedResources()
+    const [isLoading, setIsLoading] = useState(true)
 
-    if (!isLoadingComplete) {
-        return null
-    }
-
-    else return (
+    return (
         <Provider store={store}>
-            <StatusBar backgroundColor={Colors.main} barStyle="light-content" />
-            <AuthNavigator user={user} />
+
+            {isLoading ? <LoadingScreen setIsLoading={setIsLoading} /> :
+                <>
+                    <StatusBar backgroundColor={Colors.main} barStyle="light-content" />
+                    <AuthNavigator />
+                </>
+            }
+
         </Provider>
     )
-
 }
 
 export default App;
