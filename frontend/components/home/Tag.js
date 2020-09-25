@@ -16,7 +16,7 @@ const Tag = ({ tag }) => {
 
     return (
         <View style={{ ...styles.tag, backgroundColor: colore }}>
-            <Icon name={iconName} size={hp("1.2%")} color={getContrastColor(colore)} />
+            <Icon name={iconName} size={hp("1.4%")} color={getContrastColor(colore)} />
             <Text style={{...styles.text, color: getContrastColor(colore)}}>{nome}</Text>
         </View>
     )
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         backgroundColor: "black"
     },
     text: {
-        fontSize: hp('1%'),
+        fontSize: hp('1.4%'),
         marginLeft: wp("1%"),
         fontFamily: "open-sans-regular",
     }
