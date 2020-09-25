@@ -50,11 +50,12 @@ const styles = StyleSheet.create({
     minHeight: hp("18%")
   },
   card: {
+    alignSelf: 'center',
     width: wp("90%"),
+    height: hp("15%"),
     flex: 1,
     alignItems: "center",
     flexDirection: "row",
-    padding: wp("2%"),
     borderRadius: 20,
     backgroundColor: "#4a86ff",
     shadowColor: Colors.white,
@@ -66,14 +67,8 @@ const styles = StyleSheet.create({
     shadowRadius: 6.27,
     elevation: 10,
   },
-  image: {
-    height: hp("8%"),
-    width: hp("8%"),
-    borderRadius: 20,
-    marginRight: wp("3%")
-  },
   textRow: {
-    marginHorizontal: hp("4%"),
+    marginHorizontal: hp("3%"),
     marginLeft: wp("4%"),
     width: wp("52%")
   },
@@ -96,11 +91,11 @@ const styles = StyleSheet.create({
     width: wp("55%")
   },
   image: {
-    alignSelf: "center",
-    height: hp("10%"),
-    width: hp("10%"),
+    height: hp("16%"),
+    width: hp("16%"),
     backgroundColor: "#FFF",
-    borderRadius: 10
+    borderTopRightRadius: 20,
+    borderBottomRightRadius: 20
   },
 
 });
