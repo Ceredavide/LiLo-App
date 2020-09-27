@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, View, Image, Linking } from "react-native";
-import { useDispatch, useSelector } from "react-redux"
 
 import * as SecureStore from 'expo-secure-store';
+import { AuthContext } from "../Context"
 
 import {
   widthPercentageToDP as wp,
@@ -14,15 +14,12 @@ import Screen from "../components/shared/Screen"
 import MyButton from "../components/shared/MyButton";
 import UserInfo from "../components/settings/UserInfo"
 
-import { SIGN_OUT } from "../store/actionTypes"
-
 const SettingsScreen = () => {
-  const dispatch = useDispatch()
-  const user = useSelector(state => state.auth.user)
+  const { auth, setAuth } = useContext(AuthContext)
 
   const handleLogout = async () => {
     await SecureStore.deleteItemAsync("user")
-    dispatch({ type: SIGN_OUT })
+    setAuth({})
   };
 
   const handleTermini = () => {
@@ -44,7 +41,7 @@ const SettingsScreen = () => {
       >
         contatto in caso di problemi
         </Chip>
-      <UserInfo user={user} />
+      <UserInfo user={auth.user} />
       <View style={styles.bottoniContainer}>
         <MyButton
           action={handleTermini}
