@@ -1,8 +1,3 @@
-//user
-export const RESTORE_AUTH = "RESTORE_AUTH";
-export const SIGN_IN = "SIGN_IN";
-export const SIGN_OUT = "SIGN_OUT";
-
 //comunicazioni
 export const FETCH_COMUNICAZIONI_START = "FETCH_COMUNICAZIONI_START";
 export const FETCH_COMUNICAZIONI_SUCCESS = "FETCH_COMUNICAZIONI_SUCCESS";
