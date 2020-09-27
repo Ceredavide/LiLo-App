@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, SafeAreaView, ScrollView, View, ImageBackground, Text } from "react-native"
+import { StyleSheet, SafeAreaView, ScrollView, View, ImageBackground, Text, TouchableOpacity } from "react-native"
 
 import {
     widthPercentageToDP as wp,
@@ -18,7 +18,9 @@ const Comunicazione = ({ route, navigation }) => {
 
     function renderTags(tags) {
         return tags.map((tag, index) => (
-            <Tag tag={tag} key={index} />
+            <TouchableOpacity key={index} onPress={() => navigation.navigate("ComunicazioniByTag", { tag })}>
+                <Tag tag={tag} />
+            </TouchableOpacity>
         ))
     }
 
