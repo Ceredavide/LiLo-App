@@ -11,6 +11,7 @@ const ROLES = require("../constants/ROLES")
 const {
     getComunicazioni,
     getComunicazioniById,
+    getComunicazioniByTagId,
     createComunicazione,
     updateComunicazione,
     deleteComunicazione
@@ -21,6 +22,8 @@ const router = express.Router();
 router.get('/', getComunicazioni);
 
 router.get('/:id', getComunicazioniById)
+
+router.get('/tag/:id', getComunicazioniByTagId)
 
 router.post('/', checkRole([ROLES.ADMIN, ROLES.EDITOR]), fileUpload.single("image"), createComunicazione)
 

@@ -41,6 +41,22 @@ const getComunicazioniById = async (req, res, next) => {
     res.status(200).json({ comunicazione })
 }
 
+const getComunicazioniByTagId = async (req, res, next) => {
+
+    const id = req.params.id
+
+    let comunicazioni
+
+    try {
+        comunicazioni = await Comunicazione.find({ tags: { $in: [id] } }, '-editors').populate('tags')
+    } catch (err) {
+        return next(new HttpError("Errore nel reperire la lista delle comunicazioni, riprovare.", 500))
+    }
+
+    res.status(200).json({ comunicazioni })
+
+}
+
 //
 //POST
 //
@@ -164,6 +180,7 @@ const deleteComunicazione = async (req, res, next) => {
 
 exports.getComunicazioni = getComunicazioni
 exports.getComunicazioniById = getComunicazioniById
+exports.getComunicazioniByTagId = getComunicazioniByTagId
 
 exports.createComunicazione = createComunicazione
 
