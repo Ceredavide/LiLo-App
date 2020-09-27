@@ -1,4 +1,5 @@
 import React from "react";
+import { StatusBar } from "react-native"
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -15,18 +16,22 @@ const { Navigator, Screen } = createBottomTabNavigator()
 
 const AppNavigator = () => {
   return (
-    <Navigator screenOptions={_screenOptions} tabBarOptions={_tabBarOptions}>
-      <Screen name="Home" component={HomeStack} />
-      <Screen name="Assenze" component={AssenzeStack} />
-      <Screen name="Utilities" component={UtilitiesStack} />
-      <Screen name="Impostazioni" component={SettingsStack} />
-    </Navigator>
+    <>
+      <StatusBar backgroundColor={Colors.main} barStyle="light-content" />
+      <Navigator screenOptions={_screenOptions} tabBarOptions={_tabBarOptions}>
+        <Screen name="Home" component={HomeStack} />
+        <Screen name="Assenze" component={AssenzeStack} />
+        <Screen name="Utilities" component={UtilitiesStack} />
+        <Screen name="Impostazioni" component={SettingsStack} />
+      </Navigator>
+    </>
   )
 }
 
 const _tabBarOptions = {
   style: {
     backgroundColor: Colors.main,
+    paddingBottom: 7,
     borderTopColor: "transparent"
   },
   activeTintColor: Colors.secondary,
