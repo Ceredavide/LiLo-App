@@ -1,16 +1,11 @@
 import React from "react"
-import { useDispatch } from "react-redux"
 import { AppLoading } from 'expo';
 import * as SecureStore from 'expo-secure-store';
 import { Asset } from "expo-asset";
-import * as Font from 'expo-font';
+import * as Font from 'expo-font'
 
-import { RESTORE_AUTH } from "../store/actionTypes"
-
-const Loading = ({ setIsLoading }) => {
-
-    const dispatch = useDispatch()
-
+const Loading = ({ setIsLoading, setAuth }) => {
+    
     async function cacheResourcesAsync() {
         try {
             // Load user data
@@ -18,7 +13,8 @@ const Loading = ({ setIsLoading }) => {
 
             if (cachedData) {
                 const parsedData = await JSON.parse(cachedData)
-                dispatch({ type: RESTORE_AUTH, user: parsedData.user })
+                setAuth(parsedData)
+                // dispatch({ type: RESTORE_AUTH, user: parsedData.user })
             }
 
             return Promise.all(
