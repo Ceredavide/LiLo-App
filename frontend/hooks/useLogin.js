@@ -1,28 +1,29 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { Alert } from 'react-native'
-import { useDispatch } from "react-redux"
 import * as SecureStore from 'expo-secure-store';
 import { useFormik } from "formik";
 
-import loginSchema from "../validation/loginSchema"
+import { AuthContext } from '../Context'
 
-import { SIGN_IN } from "../store/actionTypes"
+import loginSchema from "../validation/loginSchema"
 
 import axios from "axios";
 
 import checkConnection from "../utils/checkConnection"
 
 const useLogin = () => {
-    const dispatch = useDispatch()
+
+    const { setAuth } = useContext(AuthContext)
 
     const [isLoading, setIsLoading] = useState(false);
 
     async function handleLogin({ email, password }) {
         setIsLoading(true);
         try {
-            const user = await tryLogin(email, password)
-            if (!!user) {
-                dispatch({ type: SIGN_IN, user: user })
+            const data = await tryLogin(email, password)
+            if (!!data) {
+                console.log(data)
+                setAuth(data)
             }
         } catch (error) {
             Alert.alert(error.response.data)
@@ -33,7 +34,7 @@ const useLogin = () => {
 
     async function tryLogin(email, password) {
 
-        let user
+        let data
 
         await checkConnection()
         const response = await axios.post("http://10.3.141.190:5000/api/users/login", {
@@ -41,10 +42,10 @@ const useLogin = () => {
             password: password
         })
 
-        user = response.data.user
+        data = response.data
         await SecureStore.setItemAsync("user", JSON.stringify(response.data))
 
-        return user
+        return data
 
     }
 
