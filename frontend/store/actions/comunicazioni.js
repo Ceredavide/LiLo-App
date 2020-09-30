@@ -1,17 +1,24 @@
 import * as actionTypes from "../actionTypes";
 import * as SecureStore from 'expo-secure-store';
+
+import * as FileSystem from 'expo-file-system';
+import { FileSystemUploadType } from "expo-file-system";
+
 import axios from "axios";
 
+import { Alert, Platform } from "react-native"
+
+import checkConnection from "../../utils/checkConnection"
 import handleError from "../../utils/handleError"
 
-export const fetchComunicazioni = () => {
+export const fetchComunicazioni = (token) => {
     return async dispatch => {
         dispatch({ type: actionTypes.FETCH_COMUNICAZIONI_START });
         try {
-            const user = await JSON.parse(await SecureStore.getItemAsync("user"))
+            await checkConnection()
             const response = await axios.get("http://localhost:5000/api/comunicazioni", {
                 headers: {
-                    Authorization: "Bearer " + user.accessToken
+                    Authorization: "Bearer " + token
                 }
             })
             dispatch({
@@ -27,14 +34,13 @@ export const fetchComunicazioni = () => {
     };
 };
 
-export const refreshComunicazioni = () => {
+export const refreshComunicazioni = (token) => {
     return async dispatch => {
         dispatch({ type: actionTypes.REFRESH_COMUNICAZIONI_START });
         try {
-            const user = await JSON.parse(await SecureStore.getItemAsync("user"))
-            const response = await axios.get("http://localhost:5000/api/comunicazioni", {
+            const response = await axios.get("http://10.3.141.190:5000/api/comunicazioni", {
                 headers: {
-                    Authorization: "Bearer " + user.accessToken
+                    Authorization: "Bearer " + token
                 }
             })
             dispatch({
@@ -50,61 +56,65 @@ export const refreshComunicazioni = () => {
     };
 }
 
-export const postComunicazione = ({ titolo, sottotitolo, paragrafo, image }, navigation) => {
+export const postComunicazione = ({ titolo, sottotitolo, paragrafo, immagine }, navigation, token) => {
+
     return async dispatch => {
-        const user = await JSON.parse(await SecureStore.getItemAsync("user"))
+
         dispatch({ type: actionTypes.POST_COMUNICAZIONE_START });
-        const data = { "uri": "data:image/jpeg;base64," + image }
-        axios.post("https://cere.dev/uploads", data, {
-            headers: {
-                Authorization: "Bearer " + user.accessToken
-            }
-        }).then(response => {
-            const comunicazione = {
-                titolo: titolo,
-                sottotitolo: sottotitolo,
-                paragrafo: paragrafo,
-                immagine: response.data.id
-            }
-            axios.post("https://cere.dev/comunicazioni", comunicazione, {
-                headers: {
-                    Authorization: "Bearer " + user.accessToken
-                }
-            }).then(response => {
-                dispatch({
-                    type: actionTypes.POST_COMUNICAZIONE_SUCCESS,
-                    comunicazione: response.data
-                })
-                navigation.goBack()
+
+        try {
+
+            const response = await FileSystem.uploadAsync('http://10.3.141.190:5000/api/comunicazioni',
+                immagine,
+                {
+                    uploadType: FileSystemUploadType.MULTIPART,
+                    httpMethod: "POST",
+                    headers: {
+                        Authorization: "Bearer " + token,
+                        Accept: 'application/json',
+                        'Content-Type': 'multipart/form-data',
+                    },
+                    fieldName: "image",
+                    mimeType: "image/jpg",
+                    parameters: {
+                        titolo,
+                        sottotitolo,
+                        paragrafo
+                    }
+                });
+
+            console.log(comunicazione)
+
+            dispatch({
+                type: actionTypes.POST_COMUNICAZIONE_SUCCESS,
+                comunicazione: response.data.comunicazione
             })
-                .catch(error => {
-                    dispatch({
-                        type: actionTypes.POST_COMUNICAZIONE_ERROR,
-                        error: error
-                    })
-                })
-        }).catch(error => {
+
+            navigation.goBack()
+
+        } catch (error) {
+            console.log(error)
+            Alert.alert(error.response.data)
             dispatch({
                 type: actionTypes.POST_COMUNICAZIONE_ERROR,
                 error: error
             })
-        })
+        }
     };
 };
 
-export const deleteComunicazione = (id, immagine) => {
+export const deleteComunicazione = (id, token) => {
     return async dispatch => {
-        const user = await JSON.parse(await SecureStore.getItemAsync("user"))
-        axios.delete(`https://cere.dev/uploads/${immagine}`)
-            .then(() => {
-                axios.delete(`https://cere.dev/comunicazioni/${id}`, {
-                    headers: {
-                        Authorization: "Bearer " + user.accessToken
-                    }
-                })
-                dispatch({ type: actionTypes.REMOVE_ONE_COMUNICAZIONE, id: id })
-            }).catch(error => {
-                handleError(error)
+
+        try {
+            const response = await axios.delete(`http://10.3.141.190:5000/api/comunicazioni/${id}`, {
+                headers: {
+                    Authorization: "Bearer " + token
+                }
             })
+            dispatch({ type: actionTypes.REMOVE_ONE_COMUNICAZIONE, id: response.data.id })
+        } catch (error) {
+            Alert.alert(error.response.data)
+        }
     }
 }
