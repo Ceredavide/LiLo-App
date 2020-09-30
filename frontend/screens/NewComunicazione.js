@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { StyleSheet, ScrollView, TextInput } from "react-native";
 import { useDispatch, useSelector } from "react-redux"
 
@@ -14,32 +14,38 @@ import ImagePicker from "../components/newComunicazione/ImagePicker";
 import LoadingButton from "../components/shared/LoadingButton"
 import ErrorText from "../components/shared/ErrorText"
 
-import validateComunicazione from "../utils/validateComunicazione"
+import comunicazioneSchema from "../validation/comunicazioneSchema"
+
+import { AuthContext } from "../Context"
+
+import Colors from "../constants/colors"
 
 const NewComunicazioneScreen = ({ navigation }) => {
-  const [errors, setErrors] = useState({})
+
+  const { auth } = useContext(AuthContext)
+
   const dispatch = useDispatch()
   const isLoading = useSelector(state => state.comunicazioni.isLoadingPost)
 
-  const tryPostComunicazione = values => {
-    const errors = validateComunicazione(values)
-    if (Object.entries(errors).length === 0) {
-      dispatch(postComunicazione(values, navigation))
-    }
-    setErrors(errors)
-  }
-
   const formikNuovaComunicazione = useFormik({
-    initialValues: { titolo: null, sottotitolo: null, paragrafo: null, image: null },
-    onSubmit: tryPostComunicazione
+    initialValues: {
+      titolo: "",
+      sottotitolo: "",
+      paragrafo: "",
+      // tags: [],
+      immagine: "gnegne",
+    },
+    validationSchema: comunicazioneSchema,
+    onSubmit: values => dispatch(postComunicazione(values, navigation, auth.token))
   })
 
-  const { values, handleChange, setFieldValue, handleSubmit } = formikNuovaComunicazione
+  const { values, handleChange, setFieldValue, errors, handleSubmit } = formikNuovaComunicazione
 
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
-      style={styles.screen}>
+      style={styles.screen}
+    >
       <TextInput
         placeholder="Titolo"
         style={{ ...styles.textInput, marginTop: hp("5%"), }}
@@ -66,7 +72,10 @@ const NewComunicazioneScreen = ({ navigation }) => {
         returnKeyType="next"
       />
       <ErrorText error={errors.paragrafo} />
-      <ImagePicker image={values.image} setFieldValue={setFieldValue} />
+      <ImagePicker
+      immagine={values.immagine}
+        setFieldValue={setFieldValue}
+      />
       <ErrorText error={errors.image} />
       <LoadingButton
         text="avanti"
@@ -82,8 +91,7 @@ const NewComunicazioneScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    width: wp("100%"),
-    backgroundColor: "#F1F5F9",
+    backgroundColor: Colors.main,
   },
   textInput: {
     alignSelf: "center",
