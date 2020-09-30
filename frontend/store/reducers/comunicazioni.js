@@ -56,7 +56,7 @@ const comunicazioniReducer = (state = initialState, action) => {
         comunicazioni: action.comunicazioni.map(item => {
           return {
             ...item,
-            immagine: `http://10.3.141.190:5000/${item.immagine}`,
+            immagine: `http://localhost:5000/${item.immagine}`,
             createdAt: moment(item.createdAt).format("DD/MM")
           }
         }),
