@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useContext } from "react"
 import { StyleSheet, View, Alert, Text, Button } from "react-native"
 import { useDispatch } from "react-redux"
 
@@ -7,10 +7,34 @@ import {
     heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 
+import { AuthContext } from "../../Context"
+
 import { deleteComunicazione } from "../../store/actions/comunicazioni"
 
-const CardComunicazione = ({ id, titolo, sottotitolo, immagine }) => {
+const CardComunicazione = ({ id, titolo, sottotitolo, immagine, navigation }) => {
+
+    const { auth } = useContext(AuthContext)
+
+    function handleDelete() {
+        Alert.alert(
+            'Attenzione:',
+            'Sei sicuro di voler cancellare la comunicazione?',
+            [
+                {
+                    text: 'Annulla',
+                    onPress: () => { },
+                    style: 'cancel',
+                },
+                {
+                    text: 'Sì',
+                    onPress: () => dispatch(deleteComunicazione(id, auth.token))
+                },
+            ],
+        )
+    }
+
     const dispatch = useDispatch()
+
     return (
         <View style={styles.card}>
             <Text style={styles.title}>{titolo}</Text>
@@ -19,24 +43,13 @@ const CardComunicazione = ({ id, titolo, sottotitolo, immagine }) => {
                 <Button
                     title="elimina"
                     color="red"
-                    onPress={() => Alert.alert(
-                        'Attenzione:',
-                        'Sei sicuro di voler cancellare la comunicazione?',
-                        [
-                            {
-                                text: 'Annulla',
-                                onPress: () => { },
-                                style: 'cancel',
-                            },
-                            {
-                                text: 'Sì',
-                                onPress: () => dispatch(deleteComunicazione(id, immagine))
-                            },
-                        ],
-                    )
-                    } />
-                {/* TODO: Aggiungere opzione modifica assenza */}
-                {/* <Button title="modifica" onPress={() => alert("coming soon")} color="#F2AA3E" /> */}
+                    onPress={handleDelete}
+                />
+                <Button
+                    title="modifica"
+                    onPress={() => navigation.navigate("cd")}
+                    color="#F2AA3E"
+                />
             </View>
         </View>
     )
