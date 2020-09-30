@@ -1,6 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { FlatList, TouchableOpacity, ActivityIndicator, RefreshControl } from "react-native";
 import { useSelector, useDispatch } from "react-redux"
+
+import { AuthContext } from "../Context"
 
 import { fetchComunicazioni, refreshComunicazioni } from "../store/actions/comunicazioni"
 
@@ -13,9 +15,10 @@ import Card from "../components/home/Card";
 const HomeScreen = ({ navigation }) => {
   const dispatch = useDispatch()
   const { comunicazioni, isLoading, isRefreshing, error } = useSelector(state => state.comunicazioni)
+  const { auth } = useContext(AuthContext)
 
   useEffect(() => {
-    dispatch(fetchComunicazioni())
+    dispatch(fetchComunicazioni(auth.token))
   }, []);
 
   function renderItem({ item, index }) {
@@ -46,7 +49,7 @@ const HomeScreen = ({ navigation }) => {
               refreshControl={
                 <RefreshControl
                   refreshing={isRefreshing}
-                  onRefresh={() => dispatch(refreshComunicazioni())}
+                  onRefresh={() => dispatch(refreshComunicazioni(auth.token))}
                   tintColor="#fff"
                 />
               }
