@@ -68,6 +68,7 @@ const createComunicazione = async (req, res, next) => {
         titolo,
         sottotitolo,
         paragrafo,
+        image,
         tags
     } = req.body
 
@@ -175,7 +176,7 @@ const deleteComunicazione = async (req, res, next) => {
 
     fs.unlink(imagePath, err => console.log(err))
 
-    res.status(200).json({ id: comunicazione.toObject({ getters: true }).id })
+    res.status(200).json({ id: comunicazione._id })
 }
 
 exports.getComunicazioni = getComunicazioni
