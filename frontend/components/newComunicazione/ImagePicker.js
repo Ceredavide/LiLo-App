@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Image, View, StyleSheet } from "react-native";
-import * as ImagePicker from "expo-image-picker";
+import * as ImgPicker from "expo-image-picker";
 import Constants from "expo-constants";
 import * as Permissions from "expo-permissions";
 
@@ -9,44 +9,40 @@ import {
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 
-const ImagePickerExample = ({ setFieldValue }) => {
-  const [imgUri, setImgUri] = useState("mamacita")
+const ImagePicker = ({ immagine, setFieldValue }) => {
   useEffect(() => {
+    const getPermissionAsync = async () => {
+      if (Constants.platform.ios) {
+        const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+        if (status !== "granted") {
+          alert("Devi accettare i permessi per accedere alla tua fotocamera per poter caricare delle foto.");
+        }
+      }
+    };
+
     getPermissionAsync();
   }, []);
 
-  getPermissionAsync = async () => {
-    if (Constants.platform.ios) {
-      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-      if (status !== "granted") {
-        alert("Devi accettare i permessi per accedere alla tua fotocamera per poter caricare delle foto.");
-      }
-    }
-  };
-
-  _pickImage = async () => {
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+  async function _pickImage() {
+    const result = await ImgPicker.launchImageLibraryAsync({
+      mediaTypes: ImgPicker.MediaTypeOptions.Images,
       base64: true,
       aspect: [16, 9],
       quality: 1,
       allowsEditing: true
     });
     if (!result.cancelled) {
-      setFieldValue("image", result.base64);
-      setImgUri(result.uri)
+      setFieldValue("immagine", result.uri);
     }
   };
 
   return (
     <View style={styles.container}>
       <Button title="Seleziona un'immagine" onPress={_pickImage} />
-      {
-        <Image
-          source={{ uri: imgUri }}
-          style={styles.image}
-        />
-      }
+      <Image
+        source={{ uri: immagine }}
+        style={styles.image}
+      />
     </View>
   );
 };
@@ -74,8 +70,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     backgroundColor: "white",
     width: wp("80%"),
-    height: hp("35%")
+    height: wp("80%")
   }
 })
 
-export default ImagePickerExample;
+export default ImagePicker;
