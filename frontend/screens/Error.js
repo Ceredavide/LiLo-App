@@ -25,7 +25,7 @@ const Error = ({ reload, text }) => {
                 style={styles.lottie}
                 source={require('../assets/lottie/error.json')}
             />
-            <Text style={styles.text}>{text}</Text>
+            <Text style={styles.text}>{text || "Qualcosa è andato storto."}</Text>
             <Button text="Riprova" action={reload} color="red" />
         </View>
     )
