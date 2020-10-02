@@ -1,18 +1,17 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, Text } from "react-native";
+import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
 
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 
-const MyButton = ({ action, text, color}) => {
+const MyButton = ({ action, text, color, style = {} }) => {
   return (
-    <TouchableOpacity
-      style={{ ...styles.button, backgroundColor: color }}
-      onPress={action}
-    >
-      <Text style={styles.text}>{text}</Text>
+    <TouchableOpacity onPress={action}>
+      <View style={{ ...styles.button, backgroundColor: color, ...style }}>
+        <Text style={styles.text}>{text}</Text>
+      </View>
     </TouchableOpacity>
   );
 };
