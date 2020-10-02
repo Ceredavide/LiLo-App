@@ -11,15 +11,15 @@ import Colors from "../../constants/colors"
 const FloatingButton = ({ iconName, action, color, propStyles = {} }) => {
   return (
     <TouchableOpacity onPress={action} style={{ ...styles.container, ...propStyles }}>
-      <AntDesign name={iconName} size={hp("2%")} color={color} />
+      <AntDesign name={iconName} size={hp("3.5%")} color={color} />
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    height: hp("5%"),
-    width: hp("5%"),
+    height: hp("5.5%"),
+    width: hp("5.5%"),
     borderRadius: 20,
     justifyContent: "center",
     alignItems: "center",
