@@ -11,7 +11,9 @@ import { AuthContext } from "../../Context"
 
 import { deleteComunicazione } from "../../store/actions/comunicazioni"
 
-const CardComunicazione = ({ id, titolo, sottotitolo, immagine, navigation }) => {
+const CardComunicazione = ({ comunicazione, navigation }) => {
+
+    const { id, titolo, sottotitolo } = comunicazione
 
     const { auth } = useContext(AuthContext)
 
@@ -47,7 +49,7 @@ const CardComunicazione = ({ id, titolo, sottotitolo, immagine, navigation }) =>
                 />
                 <Button
                     title="modifica"
-                    onPress={() => navigation.navigate("cd")}
+                    onPress={() => navigation.navigate("FormComunicazione", { comunicazione })}
                     color="#F2AA3E"
                 />
             </View>
