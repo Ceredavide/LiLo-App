@@ -1,12 +1,18 @@
 import React from "react"
-import { StyleSheet, SafeAreaView } from "react-native"
+import { StyleSheet, SafeAreaView, ScrollView } from "react-native"
 
 import Colors from "../../constants/colors"
 
-const Screen = ({ children, style }) => {
+const Screen = ({ children, style, scrollable = false }) => {
+
     return (
         <SafeAreaView style={{ ...styles.screen, ...style }}>
-            {children}
+            {scrollable ?
+                <ScrollView showsVerticalScrollIndicator = {false}>
+                    {children}
+                </ScrollView> :
+                children
+            }
         </SafeAreaView>
     )
 }
