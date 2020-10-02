@@ -7,6 +7,7 @@ import handleError from "../../utils/handleError"
 
 const initialState = {
   comunicazioni: [],
+  tags: [],
   isLoading: false,
   isRefreshing: false,
   isLoadingPost: false,
@@ -22,19 +23,24 @@ const comunicazioniReducer = (state = initialState, action) => {
         isLoading: true
       };
 
-    case actionTypes.FETCH_COMUNICAZIONI_SUCCESS:
+    case actionTypes.FETCH_COMUNICAZIONI_SUCCESS: {
+
+      const { comunicazioni, tags } = action.payload
+
       return {
         ...state,
-        comunicazioni: action.comunicazioni.map(item => {
+        comunicazioni: comunicazioni.map(item => {
           return {
             ...item,
-            immagine: `http://10.3.141.190:5000/${item.immagine}`,
+            immagine: `http://localhost:5000/${item.immagine}`,
             createdAt: moment(item.createdAt).format("DD/MM")
           }
         }),
+        tags: tags,
         isLoading: false,
         error: null
-      };
+      }
+    }
 
     case actionTypes.FETCH_COMUNICAZIONI_ERROR:
       handleError(action.error)
@@ -50,20 +56,24 @@ const comunicazioniReducer = (state = initialState, action) => {
         isRefreshing: true,
       }
 
-    case actionTypes.REFRESH_COMUNICAZIONI_SUCCESS:
+    case actionTypes.REFRESH_COMUNICAZIONI_SUCCESS: {
+
+      const { comunicazioni, tags } = action.payload
+
       return {
         ...state,
-        comunicazioni: action.comunicazioni.map(item => {
+        comunicazioni: comunicazioni.map(item => {
           return {
             ...item,
             immagine: `http://localhost:5000/${item.immagine}`,
             createdAt: moment(item.createdAt).format("DD/MM")
           }
         }),
+        tags: tags,
         isRefreshing: false,
         error: null
       }
-
+    }
     case actionTypes.REFRESH_COMUNICAZIONI_ERROR:
       handleError(action.error)
       return {
