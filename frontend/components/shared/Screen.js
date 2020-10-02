@@ -1,13 +1,13 @@
 import React from "react"
-import { StyleSheet, View } from "react-native"
+import { StyleSheet, SafeAreaView } from "react-native"
 
 import Colors from "../../constants/colors"
 
 const Screen = ({ children, style }) => {
     return (
-        <View style={{ ...styles.screen, ...style }}>
+        <SafeAreaView style={{ ...styles.screen, ...style }}>
             {children}
-        </View>
+        </SafeAreaView>
     )
 }
 
