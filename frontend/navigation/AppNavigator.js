@@ -3,6 +3,10 @@ import { StatusBar } from "react-native"
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import {
+  heightPercentageToDP as hp
+} from "react-native-responsive-screen";
+
 import { MaterialIcons } from "@expo/vector-icons";
 
 import HomeStack from "./stacks/Home";
@@ -31,7 +35,6 @@ const AppNavigator = () => {
 const _tabBarOptions = {
   style: {
     backgroundColor: Colors.main,
-    paddingBottom: 7,
     borderTopColor: "transparent"
   },
   activeTintColor: Colors.secondary,
@@ -60,7 +63,7 @@ const _screenOptions = ({ route }) => ({
         break;
       }
     }
-    return <MaterialIcons name={iconName} size={30} color={color} />;
+    return <MaterialIcons name={iconName} size={hp("4.3%")} color={color} />;
   },
 })
 
