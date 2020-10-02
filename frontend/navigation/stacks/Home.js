@@ -24,44 +24,45 @@ const { Navigator, Screen } = createStackNavigator()
 
 import Colors from "../../constants/colors"
 
+function renderHeaderButton({ navigation }, user) {
+  if (user.role === "administrator" || "editor") {
+    return {
+      headerRight: () => (
+        <TouchableIcon
+          name="edit"
+          action={() => navigation.navigate("EditComunicazioni")}
+          style={styles.headerButton}
+          color={Colors.white}
+        />
+      )
+    }
+  } else return {}
+}
+
+function getHeaderTitle({ route }) {
+  const { tag } = route.params
+  return { title: tag.nome }
+}
+
 const HomeStack = () => {
 
   const { auth } = useContext(AuthContext)
-
-  function renderHeaderButton({ navigation }, user) {
-    if (user.role === "administrator" || "editor") {
-      return {
-        headerRight: () => (
-          <TouchableIcon
-            name="edit"
-            action={() => navigation.navigate("EditComunicazioni")}
-            style={styles.headerButton}
-            color={Colors.white}
-          />
-        )
-      }
-    } else return {}
-  }
 
   return (
     <ComunicazioniContext.Provider value="bella">
       <Navigator screenOptions={headerStyle} headerMode="screen">
         <Screen name="Home" component={HomeScreen} options={props => renderHeaderButton(props, auth.user)} />
         <Screen name="Comunicazione" component={ComunicazioneScreen} options={comunicazioneOptions} />
-        <Screen name="ComunicazioniByTag" component={ComunicazioniByTagScreen} options={comunicazioneOptions} />
-        <Screen name="EditComunicazioni" component={ComunicazioniScreen} options={comunicazioniOptions} />
+        <Screen name="ComunicazioniByTag" component={ComunicazioniByTagScreen} options={props => getHeaderTitle(props)} />
+        <Screen name="EditComunicazioni" component={ComunicazioniScreen} options={comunicazioneOptions} />
         <Screen name="Nuova Comunicazione" component={NewComunicazioneScreen} options={newComunicazioneOptions} />
       </Navigator>
     </ComunicazioniContext.Provider>
   )
 }
 
+
 const comunicazioneOptions = {
-  headerShown: false
-}
-
-
-const comunicazioniOptions = {
   headerShown: false
 }
 

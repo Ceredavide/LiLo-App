@@ -18,7 +18,7 @@ const HomeCard = ({ comunicazione }) => {
   return (
     <View style={styles.container}>
       <View ew style={styles.card}>
-        <View>
+        <View style={styles.row}>
           <View style={styles.textRow}>
             <Text style={styles.title}>{titolo}</Text>
             <Text style={styles.subtitle}>{sottotitolo}</Text>
@@ -46,7 +46,6 @@ const styles = StyleSheet.create({
     width: wp("100%"),
     alignItems: "center",
     padding: hp("1%"),
-    marginTop: hp("0.5%"),
     minHeight: hp("18%")
   },
   card: {
@@ -67,17 +66,18 @@ const styles = StyleSheet.create({
     shadowRadius: 6.27,
     elevation: 10,
   },
+  row: {
+    paddingHorizontal: wp("4%"),
+    width: wp("62%")
+  },
   textRow: {
-    marginHorizontal: hp("3%"),
-    marginLeft: wp("4%"),
-    width: wp("52%")
+    width: wp("65%")
   },
   tagRow: {
     height: hp('4%'),
     flexDirection: "row",
     alignItems: 'center',
-    justifyContent: "center",
-    paddingHorizontal: wp("4%")
+    justifyContent: "center"
   },
   title: {
     color: Colors.white,
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   },
   image: {
     height: hp("16%"),
-    width: hp("16%"),
+    width: wp("28%"),
     backgroundColor: "#FFF",
     borderTopRightRadius: 20,
     borderBottomRightRadius: 20

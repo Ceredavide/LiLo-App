@@ -3,8 +3,7 @@ import { StyleSheet, View, FlatList } from "react-native";
 import { useSelector } from "react-redux"
 
 import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp
+  widthPercentageToDP as wp
 } from "react-native-responsive-screen";
 
 import Screen from "../components/shared/Screen"
@@ -64,7 +63,7 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start"
   },
   button: {
-    marginLeft: wp("5%")
+    marginLeft: wp("3.5%")
   }
 });
 

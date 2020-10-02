@@ -11,6 +11,7 @@ import {
 import { postComunicazione } from "../store/actions/comunicazioni"
 
 import ImagePicker from "../components/newComunicazione/ImagePicker";
+import TagSelector from '../components/newComunicazione/TagSelector'
 import LoadingButton from "../components/shared/LoadingButton"
 import ErrorText from "../components/shared/ErrorText"
 
@@ -26,14 +27,15 @@ const NewComunicazioneScreen = ({ navigation }) => {
 
   const dispatch = useDispatch()
   const isLoading = useSelector(state => state.comunicazioni.isLoadingPost)
+  const tags = useSelector(state => state.comunicazioni.tags)
 
   const formikNuovaComunicazione = useFormik({
     initialValues: {
       titolo: "",
       sottotitolo: "",
       paragrafo: "",
-      // tags: [],
-      immagine: "gnegne",
+      tags: [],
+      immagine: null,
     },
     validationSchema: comunicazioneSchema,
     onSubmit: values => dispatch(postComunicazione(values, navigation, auth.token))
@@ -47,33 +49,41 @@ const NewComunicazioneScreen = ({ navigation }) => {
       style={styles.screen}
     >
       <TextInput
-        placeholder="Titolo"
+        placeholder="Titolo:"
         style={{ ...styles.textInput, marginTop: hp("5%"), }}
+        placeholderTextColor={Colors.main}
         onChangeText={handleChange("titolo")}
         value={values.titolo}
         returnKeyType="next"
       />
       <ErrorText error={errors.titolo} />
       <TextInput
-        placeholder="Sottotitolo"
+        placeholder="Sottotitolo:"
         style={styles.textInput}
+        placeholderTextColor={Colors.main}
         onChangeText={handleChange("sottotitolo")}
         value={values.sottotitolo}
         returnKeyType="next"
       />
       <ErrorText error={errors.sottotitolo} />
       <TextInput
-        placeholder="Paragrafo"
+        placeholder="Paragrafo:"
         multiline={true}
         numberOfLines={5}
         style={styles.textArea}
+        placeholderTextColor={Colors.main}
         onChangeText={handleChange("paragrafo")}
         value={values.paragrafo}
         returnKeyType="next"
       />
       <ErrorText error={errors.paragrafo} />
+      <TagSelector
+        tags={tags}
+        setFieldValue={setFieldValue}
+        selectedTags={values.tags}
+      />
       <ImagePicker
-      immagine={values.immagine}
+        immagine={values.immagine}
         setFieldValue={setFieldValue}
       />
       <ErrorText error={errors.image} />
