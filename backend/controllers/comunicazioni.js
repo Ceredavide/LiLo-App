@@ -2,6 +2,7 @@ const fs = require("fs")
 
 const HttpError = require("../models/HttpError")
 const Comunicazione = require("../models/Comunicazione")
+const Tag = require("../models/Tag")
 const User = require("../models/User")
 
 //TODO: Aggiungere ruoli per modifica e eliminazione comunicazioni
@@ -19,7 +20,15 @@ const getComunicazioni = async (req, res, next) => {
         return next(new HttpError("Errore nel reperire la lista delle comunicazioni, riprovare.", 500))
     }
 
-    res.status(200).json({ comunicazioni })
+    let tags
+
+    try {
+        tags = await Tag.find()
+    } catch (err) {
+        return next(new HttpError("Errore nel reperire la lista dei tags, riprovare.", 500))
+    }
+
+    res.status(200).json({ comunicazioni, tags })
 }
 
 const getComunicazioniById = async (req, res, next) => {
