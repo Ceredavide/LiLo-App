@@ -62,9 +62,7 @@ const comunicazioneOptions = {
 
 
 const comunicazioniOptions = {
-  headerTitleStyle: {
-    fontSize: hp("3.7%"),
-  }
+  headerShown: false
 }
 
 const newComunicazioneOptions = {
