@@ -19,10 +19,7 @@ const ComunicazioniScreen = ({ navigation }) => {
   function renderItem({ item }) {
     return (
       <CardComunicazione
-        id={item._id}
-        titolo={item.titolo}
-        sottotitolo={item.sottotitolo}
-        immagine={item.immagine}
+        comunicazione={item}
         navigation={navigation}
       />
     )
@@ -37,7 +34,7 @@ const ComunicazioniScreen = ({ navigation }) => {
           color={Colors.white}
         />
         <MyButton
-          action={() => navigation.navigate("Nuova Comunicazione")}
+          action={() => navigation.navigate("FormComunicazione")}
           text="Nuova Comunicazione"
           color="#1ed15a"
           style={styles.button}
@@ -54,7 +51,7 @@ const ComunicazioniScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  header:{
+  header: {
     width: wp("100%"),
     flexDirection: "row",
     alignItems: "center"
