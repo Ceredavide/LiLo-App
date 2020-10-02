@@ -2,9 +2,17 @@ import React from "react";
 import { StyleSheet, View, FlatList } from "react-native";
 import { useSelector } from "react-redux"
 
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from "react-native-responsive-screen";
+
 import Screen from "../components/shared/Screen"
 import MyButton from "../components/shared/MyButton";
+import FloatingButton from "../components/shared/FloatingButton"
 import CardComunicazione from "../components/comunicazioni/CardComunicazione"
+
+import Colors from "../constants/colors"
 
 const ComunicazioniScreen = ({ navigation }) => {
   const comunicazioni = useSelector(state => state.comunicazioni.comunicazioni)
@@ -23,11 +31,19 @@ const ComunicazioniScreen = ({ navigation }) => {
 
   return (
     <Screen>
-      <MyButton
-        action={() => navigation.navigate("Nuova Comunicazione")}
-        text="Nuova Comunicazione"
-        color="#1ed15a"
-      />
+      <View style={styles.header}>
+        <FloatingButton
+          iconName="arrowleft"
+          action={navigation.goBack}
+          color={Colors.white}
+        />
+        <MyButton
+          action={() => navigation.navigate("Nuova Comunicazione")}
+          text="Nuova Comunicazione"
+          color="#1ed15a"
+          style={styles.button}
+        />
+      </View>
       <FlatList
         data={comunicazioni}
         keyExtractor={item => item._id}
@@ -39,11 +55,16 @@ const ComunicazioniScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    padding: 5,
-    alignItems: "center",
-    backgroundColor: "#F1F5F9"
+  header:{
+    width: wp("100%"),
+    flexDirection: "row",
+    alignItems: "center"
+  },
+  floatingButton: {
+    alignSelf: "flex-start"
+  },
+  button: {
+    marginLeft: wp("5%")
   }
 });
 
