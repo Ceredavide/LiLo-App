@@ -12,7 +12,7 @@ import HomeScreen from "../../screens/Home";
 import ComunicazioneScreen from "../../screens/Comunicazione";
 import ComunicazioniByTagScreen from '../../screens/ComunicazioniByTag'
 import ComunicazioniScreen from "../../screens/Comunicazioni";
-import NewComunicazioneScreen from "../../screens/NewComunicazione";
+import FormComunicazioneScreen from "../../screens/FormComunicazione";
 
 import TouchableIcon from "../../components/shared/TouchableIcon"
 
@@ -55,7 +55,7 @@ const HomeStack = () => {
         <Screen name="Comunicazione" component={ComunicazioneScreen} options={comunicazioneOptions} />
         <Screen name="ComunicazioniByTag" component={ComunicazioniByTagScreen} options={props => getHeaderTitle(props)} />
         <Screen name="EditComunicazioni" component={ComunicazioniScreen} options={comunicazioneOptions} />
-        <Screen name="Nuova Comunicazione" component={NewComunicazioneScreen} options={newComunicazioneOptions} />
+        <Screen name="FormComunicazione" component={FormComunicazioneScreen} options={fromComunicazioneOptions} />
       </Navigator>
     </ComunicazioniContext.Provider>
   )
@@ -66,7 +66,8 @@ const comunicazioneOptions = {
   headerShown: false
 }
 
-const newComunicazioneOptions = {
+const fromComunicazioneOptions = {
+  title: "",
   headerTitleStyle: {
     fontSize: hp("2.7%")
   }
