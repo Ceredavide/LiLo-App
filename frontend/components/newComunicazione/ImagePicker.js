@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Button, Image, View, StyleSheet } from "react-native";
 import * as ImgPicker from "expo-image-picker";
 import Constants from "expo-constants";
@@ -38,11 +38,16 @@ const ImagePicker = ({ immagine, setFieldValue }) => {
 
   return (
     <View style={styles.container}>
-      <Button title="Seleziona un'immagine" onPress={_pickImage} />
-      <Image
-        source={{ uri: immagine }}
-        style={styles.image}
-      />
+      <Button title="Seleziona un'immagine" onPress={_pickImage} color="#FFFF" />
+      { immagine &&
+        <>
+          < Image
+            source={{ uri: immagine }}
+            style={styles.image}
+          />
+             <Button title="Rimuovi" onPress={() => setFieldValue("immagine", null)} color="red" />
+        </>
+      }
     </View>
   );
 };
