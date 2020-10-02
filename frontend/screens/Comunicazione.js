@@ -27,17 +27,15 @@ const Comunicazione = ({ route, navigation }) => {
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: Colors.main }}>
             <ScrollView style={styles.container}>
-                <View style={styles.containerImage}>
-                    <TransitionView>
-                        <ImageBackground style={styles.image} source={{ uri: immagine }} >
-                            <FloatingButton
-                                iconName="arrowleft"
-                                action={navigation.goBack}
-                                color={Colors.white}
-                            />
-                        </ImageBackground>
-                    </TransitionView>
-                </View>
+                <TransitionView>
+                    <ImageBackground style={styles.image} source={{ uri: immagine }} >
+                        <FloatingButton
+                            iconName="arrowleft"
+                            action={navigation.goBack}
+                            color={Colors.white}
+                        />
+                    </ImageBackground>
+                </TransitionView>
                 <View style={styles.containerText}>
                     <Text style={styles.title}>{titolo}</Text>
                     <Text style={styles.subtitle}>{sottotitolo}</Text>
@@ -70,16 +68,9 @@ const styles = StyleSheet.create({
     },
     image: {
         width: wp("100%"),
-        height: wp("100%"),
+        height: wp("70%"),
         alignSelf: "center",
-        backgroundColor: "#F1F5F9",
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 1,
-        },
-        shadowOpacity: 0.20,
-        shadowRadius: 1.41,
+        borderRadius: 30
     },
     title: {
         fontFamily: "open-sans-bold",
@@ -99,7 +90,7 @@ const styles = StyleSheet.create({
     },
     paragraph: {
         fontFamily: "open-sans-regular",
-        fontSize: hp("2%"),
+        fontSize: hp("2.2%"),
         textAlign: "justify",
         color: Colors.white
     }
