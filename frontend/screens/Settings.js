@@ -37,7 +37,7 @@ const SettingsScreen = () => {
       <Chip
         style={{ marginTop: 10 }}
         icon="error"
-        onPress={() => Linking.openURL("mailto:ceredavide@live.it")}
+        onPress={() => Linking.openURL("mailto:davide@cere.dev")}
       >
         contatto in caso di problemi
         </Chip>
@@ -61,11 +61,12 @@ const SettingsScreen = () => {
 const styles = StyleSheet.create({
   screen: {
     alignItems: "center",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
   },
   image: {
-    width: wp("70%"),
-    height: wp("70%"),
+    marginTop: hp("2"),
+    width: wp("65%"),
+    height: wp("65%"),
     borderRadius: 20
   },
   bottoniContainer: {
