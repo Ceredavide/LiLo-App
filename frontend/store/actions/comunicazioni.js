@@ -1,12 +1,11 @@
 import * as actionTypes from "../actionTypes";
-import * as SecureStore from 'expo-secure-store';
 
 import * as FileSystem from 'expo-file-system';
 import { FileSystemUploadType } from "expo-file-system";
 
 import axios from "axios";
 
-import { Alert, Platform } from "react-native"
+import { Alert } from "react-native"
 
 import checkConnection from "../../utils/checkConnection"
 import handleError from "../../utils/handleError"
@@ -23,7 +22,10 @@ export const fetchComunicazioni = (token) => {
             })
             dispatch({
                 type: actionTypes.FETCH_COMUNICAZIONI_SUCCESS,
-                comunicazioni: response.data.comunicazioni
+                payload: {
+                    comunicazioni: response.data.comunicazioni,
+                    tags: response.data.tags
+                }
             });
         } catch (error) {
             dispatch({
@@ -38,14 +40,17 @@ export const refreshComunicazioni = (token) => {
     return async dispatch => {
         dispatch({ type: actionTypes.REFRESH_COMUNICAZIONI_START });
         try {
-            const response = await axios.get("http://10.3.141.190:5000/api/comunicazioni", {
+            const response = await axios.get("http://localhost:5000/api/comunicazioni", {
                 headers: {
                     Authorization: "Bearer " + token
                 }
             })
             dispatch({
                 type: actionTypes.REFRESH_COMUNICAZIONI_SUCCESS,
-                comunicazioni: response.data.comunicazioni
+                payload: {
+                    comunicazioni: response.data.comunicazioni,
+                    tags: response.data.tags
+                }
             });
         } catch (error) {
             dispatch({
