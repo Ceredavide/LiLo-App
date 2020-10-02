@@ -33,7 +33,6 @@ const Comunicazione = ({ route, navigation }) => {
                             <FloatingButton
                                 iconName="arrowleft"
                                 action={navigation.goBack}
-                                style={styles.floatingButton}
                                 color={Colors.white}
                             />
                         </ImageBackground>
