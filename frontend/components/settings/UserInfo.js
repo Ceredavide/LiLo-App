@@ -5,6 +5,8 @@ import {
     heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 
+import Colors from "../../constants/colors"
+
 const UserInfo = ({ user = {} }) => {
     return (
         <View style={styles.container}>
@@ -22,7 +24,8 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: hp("2%"),
-        fontFamily: "open-sans-regular"
+        fontFamily: "open-sans-regular",
+        color: Colors.white
     }
 })
 
