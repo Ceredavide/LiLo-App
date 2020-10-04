@@ -27,7 +27,7 @@ const LoginScreen = () => {
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.screen}>
           <Image
-            source={require("../assets/images/login-illustration.png")}
+            source={require("../assets/images/illustrations/login.png")}
             style={styles.image}
           />
           <View style={styles.containerTextInput}>
