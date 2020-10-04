@@ -6,7 +6,8 @@ import {
     heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 
-import Icon from "react-native-vector-icons/MaterialIcons"
+import { AntDesign } from "@expo/vector-icons";
+
 
 import Colors from "../../constants/colors"
 
@@ -20,7 +21,7 @@ const AuthHeader = (props) => {
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <SafeAreaView style={styles.header}>
                 <StatusBar barStyle="light-content" backgroundColor={Colors.main} />
-                <Icon name="arrow-back" color={Colors.secondary} size={hp("4%")} onPress={() => navigation.goBack()} style={styles.icon} />
+                <AntDesign name="arrowleft" color={Colors.secondary} size={hp("4%")} onPress={() => navigation.goBack()} style={styles.icon} />
                 <Text style={styles.title}>{options.title}</Text>
             </SafeAreaView>
         </TouchableWithoutFeedback>
