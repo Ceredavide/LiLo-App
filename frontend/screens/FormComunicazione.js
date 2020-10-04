@@ -1,49 +1,35 @@
-import React, { useContext } from "react";
+import React from "react";
 import { StyleSheet, ScrollView, TextInput } from "react-native";
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 
-import { useFormik } from "formik";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 
-import { postComunicazione } from "../store/actions/comunicazioni"
+import useFormComunicazione from '../hooks/useFormComunicazione'
 
 import ImagePicker from "../components/formComunicazione/ImagePicker";
-import TagSelector from '../components/formComunicazione/TagSelector'
+import TagSelector from '../components/comunicazioni/form/TagSelector'
 import LoadingButton from "../components/shared/LoadingButton"
 import ErrorText from "../components/shared/ErrorText"
-
-import comunicazioneSchema from "../validation/comunicazioneSchema"
-
-import { AuthContext } from "../Context"
 
 import Colors from "../constants/colors"
 
 const NewComunicazioneScreen = ({ navigation, route }) => {
 
-  const { comunicazione } = route.params
+  const comunicazione = route.params?.comunicazione
 
-  const { auth } = useContext(AuthContext)
+  const {
+    values,
+    handleChange,
+    setFieldValue,
+    errors,
+    handleSubmit
+  } = useFormComunicazione(comunicazione, navigation)
 
-  const dispatch = useDispatch()
   const isLoading = useSelector(state => state.comunicazioni.isLoadingPost)
   const tags = useSelector(state => state.comunicazioni.tags)
-
-  const formikNuovaComunicazione = useFormik({
-    initialValues: comunicazione || {
-      titolo: "",
-      sottotitolo: "",
-      paragrafo: "",
-      tags: [],
-      immagine: null,
-    },
-    validationSchema: comunicazioneSchema,
-    onSubmit: values => dispatch(postComunicazione(values, navigation, auth.token))
-  })
-
-  const { values, handleChange, setFieldValue, errors, handleSubmit } = formikNuovaComunicazione
 
   return (
     <ScrollView
@@ -52,7 +38,7 @@ const NewComunicazioneScreen = ({ navigation, route }) => {
     >
       <TextInput
         placeholder="Titolo:"
-        style={{ ...styles.textInput, marginTop: hp("5%"), }}
+        style={{ ...styles.textInput, marginTop: hp("1%"), }}
         placeholderTextColor={Colors.main}
         onChangeText={handleChange("titolo")}
         value={values.titolo}
