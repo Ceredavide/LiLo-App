@@ -44,6 +44,18 @@ function getHeaderTitle({ route }) {
   return { title: tag.nome }
 }
 
+function getFormHeaderTitle({ route }) {
+  const comunicazione = route.params?.comunicazione
+
+  return {
+    title: comunicazione ? "Modifica Comunicazione" : "Nuova Comunicazione",
+    headerTitleAlign: "center",
+    headerTitleStyle: {
+      fontSize: hp("3.4%")
+    }
+  }
+}
+
 const HomeStack = () => {
 
   const { auth } = useContext(AuthContext)
@@ -55,7 +67,7 @@ const HomeStack = () => {
         <Screen name="Comunicazione" component={ComunicazioneScreen} options={comunicazioneOptions} />
         <Screen name="ComunicazioniByTag" component={ComunicazioniByTagScreen} options={props => getHeaderTitle(props)} />
         <Screen name="EditComunicazioni" component={ComunicazioniScreen} options={comunicazioneOptions} />
-        <Screen name="FormComunicazione" component={FormComunicazioneScreen} options={fromComunicazioneOptions} />
+        <Screen name="FormComunicazione" component={FormComunicazioneScreen} options={props => getFormHeaderTitle(props)} />
       </Navigator>
     </ComunicazioniContext.Provider>
   )
@@ -64,13 +76,6 @@ const HomeStack = () => {
 
 const comunicazioneOptions = {
   headerShown: false
-}
-
-const fromComunicazioneOptions = {
-  title: "",
-  headerTitleStyle: {
-    fontSize: hp("2.7%")
-  }
 }
 
 const styles = StyleSheet.create({
