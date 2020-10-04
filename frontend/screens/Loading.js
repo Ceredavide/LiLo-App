@@ -25,7 +25,11 @@ const Loading = ({ setIsLoading, setAuth }) => {
                     require("../assets/images/scuola.jpeg"),
                     require("../assets/images/student-hat.png"),
                     require("../assets/images/wallpaper.png"),
-                    require("../assets/images/login-illustration.png")
+                    require("../assets/images/illustrations/autogestite.jpg"),
+                    require("../assets/images/illustrations/login.png"),
+                    require("../assets/images/illustrations/mappa.jpg"),
+                    require("../assets/images/illustrations/qr.jpg"),
+                    require("../assets/images/illustrations/risorse.jpg"),
                 ]),
                 // Load fonts
                 await Font.loadAsync({
