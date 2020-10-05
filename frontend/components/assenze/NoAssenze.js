@@ -9,9 +9,11 @@ import {
 
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 
+import Colors from "../../constants/colors"
+
 const NoAssenze = ({ isLoading, loadAssenze }) => {
   return (
-    <ScrollView style={styles.container} refreshControl={<RefreshControl refreshing={isLoading} onRefresh={loadAssenze} />}>
+    <ScrollView style={styles.container} refreshControl={<RefreshControl refreshing={isLoading} onRefresh={loadAssenze} tintColor={Colors.white} />}>
       <View style={styles.card}>
         <Text style={styles.emoji}>🤷🏻‍♂️</Text>
         <Text style={styles.text}>Non sono previste assenze</Text>
@@ -31,7 +33,8 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: "open-sans-regular",
-    fontSize: hp("3%")
+    fontSize: hp("3%"),
+    color: Colors.white
   },
   emoji: {
     fontSize: hp("20%")
