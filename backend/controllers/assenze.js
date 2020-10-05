@@ -35,15 +35,15 @@ const getAssenze = async (req, res, next) => {
         rows.splice(0, 2)
 
         let tmp = {
-            data: "",
-            assenze: []
+            title: "",
+            data: []
         };
 
         rows.forEach((tr, idx) => {
             if (tr.children.length === 1) {
                 tmp = {
                     ...tmp,
-                    data: tr.children[0].children[1].children[0].data
+                    title: tr.children[0].children[1].children[0].data
                 }
             } else if (tr.children.length === 3) {
 
@@ -54,22 +54,21 @@ const getAssenze = async (req, res, next) => {
                 }
                 tmp = {
                     ...tmp,
-                    assenze: [...tmp.assenze, assenza]
+                    data: [...tmp.data, assenza]
                 }
 
                 if (idx === rows.length - 1) {
                     assenze.push(tmp)
                     tmp = {
-                        data: "",
-                        assenze: []
+                        title: "",
+                        data: []
                     }
-                    console.log(assenze)
                 }
             } else {
                 assenze.push(tmp)
                 tmp = {
-                    data: "",
-                    assenze: []
+                    title: "",
+                    data: []
                 }
             }
         });
@@ -80,7 +79,7 @@ const getAssenze = async (req, res, next) => {
         return next(new HttpError("Errore nel reperire le assenze.", 500))
     }
 
-    res.status(200).json({assenze: assenze})
+    res.status(200).json({ assenze })
 
 }
 
