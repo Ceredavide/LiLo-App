@@ -6,6 +6,8 @@ import {
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 
+import Colors from "../../constants/colors"
+
 const CardAssenza = ({ nome, descrizione }) => {
   return (
     <View style={styles.card}>
@@ -17,10 +19,11 @@ const CardAssenza = ({ nome, descrizione }) => {
 
 const styles = StyleSheet.create({
   card: {
+    width: wp("90%"),
     margin: wp("2%"),
     padding: hp("1%"),
     borderRadius: 10,
-    backgroundColor: "#FFF",
+    backgroundColor: Colors.white,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
