@@ -10,14 +10,14 @@ import getContrastColor from "../../utils/getContrastColor"
 
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 
-const Tag = ({ tag }) => {
+const Tag = ({ tag, style = {} }) => {
 
     const { nome, iconName, colore } = tag
 
     return (
-        <View style={{ ...styles.tag, backgroundColor: colore }}>
+        <View style={{ ...styles.tag, backgroundColor: colore, ...style }}>
             <Icon name={iconName} size={hp("1.4%")} color={getContrastColor(colore)} />
-            <Text style={{...styles.text, color: getContrastColor(colore)}}>{nome}</Text>
+            <Text style={{ ...styles.text, color: getContrastColor(colore) }}>{nome}</Text>
         </View>
     )
 }
@@ -39,5 +39,21 @@ const styles = StyleSheet.create({
         fontFamily: "open-sans-regular",
     }
 })
+
+// tag: {
+//     justifyContent: "center",
+//     alignItems: "center",
+//     flexDirection: "row",
+//     paddingHorizontal: wp("2%"),
+//     height: hp("4%"),
+//     width: wp("40%"),
+//     borderRadius: 20,
+//     backgroundColor: "black"
+// },
+// text: {
+//     fontSize: hp('2%'),
+//     marginLeft: wp("1%"),
+//     fontFamily: "open-sans-regular",
+// }
 
 export default Tag

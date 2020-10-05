@@ -16,45 +16,33 @@ const HomeCard = ({ comunicazione }) => {
   const { titolo, sottotitolo, tags, immagine, createdAt } = comunicazione
 
   return (
-    <View style={styles.container}>
-      <View ew style={styles.card}>
-        <View style={styles.row}>
-          <View style={styles.textRow}>
-            <Text style={styles.title}>{titolo}</Text>
-            <Text style={styles.subtitle}>{sottotitolo}</Text>
-          </View>
-          <View style={styles.tagRow}>
-            <IconWithText
-              iconName="calendar"
-              text={createdAt}
-              iconSize={hp("2%")}
-              fontSize={hp("1.6%")}
-              color={Colors.white}
-            />
-            {tags.map((tag, index) => <Tag tag={tag} key={index} />)}
-          </View>
+    <View ew style={styles.card}>
+      <Image style={styles.image} source={{ uri: immagine }} />
+      <View style={styles.row}>
+        <Text style={styles.title}>{titolo}</Text>
+        <Text style={styles.subtitle}>{sottotitolo}</Text>
+        <View style={styles.tagRow}>
+          <IconWithText
+            iconName="calendar"
+            text={createdAt}
+            iconSize={hp("2%")}
+            fontSize={hp("1.6%")}
+            color={Colors.white}
+          />
+          {tags.map((tag, index) => <Tag tag={tag} key={index} />)}
         </View>
-        <Image style={styles.image} source={{ uri: immagine }} />
       </View>
     </View>
-
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: wp("100%"),
-    alignItems: "center",
-    padding: hp("1%"),
-    minHeight: hp("18%")
-  },
   card: {
     alignSelf: 'center',
     width: wp("90%"),
-    height: hp("15%"),
+    height: hp("30%"),
     flex: 1,
     alignItems: "center",
-    flexDirection: "row",
     borderRadius: 20,
     backgroundColor: "#4a86ff",
     shadowColor: Colors.white,
@@ -67,8 +55,7 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   row: {
-    paddingHorizontal: wp("4%"),
-    width: wp("62%")
+    // paddingHorizontal: wp("4%")
   },
   textRow: {
     width: wp("65%")
@@ -95,7 +82,7 @@ const styles = StyleSheet.create({
     width: wp("28%"),
     backgroundColor: "#FFF",
     borderTopRightRadius: 20,
-    borderBottomRightRadius: 20
+    borderTopRightRadius: 20
   },
 
 });
