@@ -15,13 +15,13 @@ const useAssenze = () => {
     const [assenze, setAssenze] = useState([])
     const [isLoading, setIsloading] = useState(false)
     const [isRefreshing, setIsRefreshing] = useState(false)
+    const [error, setError] = useState(null)
 
     useEffect(() => {
         handleFetch()
     }, [])
 
     async function fetchAssenze() {
-        let assenze = []
         try {
             await checkConnection()
             const response = await axios.get(URL_ASSENZE, {
@@ -29,14 +29,11 @@ const useAssenze = () => {
                     Authorization: "Bearer " + auth.token
                 }
             })
-            assenze = response.data.assenze
-            console.log(assenze)
+
+            setAssenze(response.data.assenze)
+
         } catch (error) {
-            console.log(error)
-            assenze = "error"
-            // handleError(error)
-        } finally {
-            return assenze
+            setError(error)
         }
     }
 
@@ -54,9 +51,11 @@ const useAssenze = () => {
 
     return {
         assenze,
+        error,
         isLoading,
         isRefreshing,
-        handleRefresh
+        handleRefresh,
+        handleFetch
     }
 
 }

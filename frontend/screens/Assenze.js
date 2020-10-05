@@ -14,9 +14,11 @@ const AssenzeScreen = () => {
 
   const {
     assenze,
+    error,
     isLoading,
     isRefreshing,
-    handleRefresh
+    handleRefresh,
+    handleFetch
   } = useAssenze()
 
   function renderItem({ item, index }) {
@@ -38,8 +40,8 @@ const AssenzeScreen = () => {
         <ActivityIndicator />
         : assenze.length === 0 ?
           <NoAssenze isLoading={isLoading} loadAssenze={handleRefresh} />
-          : assenze === "error" ?
-            <Error />
+          : error ?
+            <Error text={error.response.data || "Qualcosa è andato storto"} reload={handleFetch} />
             : <SectionList
               refreshing={isRefreshing}
               showsVerticalScrollIndicator={false}
@@ -48,10 +50,10 @@ const AssenzeScreen = () => {
               )}
               refreshControl={
                 <RefreshControl
-                refreshing={isRefreshing}
-                onRefresh={handleRefresh}
-                tintColor="#fff"
-              />
+                  refreshing={isRefreshing}
+                  onRefresh={handleRefresh}
+                  tintColor="#fff"
+                />
               }
               renderItem={renderItem}
               sections={assenze}
