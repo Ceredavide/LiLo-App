@@ -69,11 +69,12 @@ const styles = StyleSheet.create({
     color: Colors.white,
     fontFamily: "open-sans-bold",
     marginBottom: hp("0.5%"),
-    fontSize: hp("2.3%"),
+    fontSize: hp("2.6%"),
   },
   subtitle: {
     color: Colors.white,
-    fontFamily: "open-sans-regular"
+    fontFamily: "open-sans-regular",
+    fontSize: hp("1.8%"),
   },
   image: {
     height: wp("50%"),
