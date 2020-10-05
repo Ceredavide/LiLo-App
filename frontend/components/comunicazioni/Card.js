@@ -39,22 +39,14 @@ const HomeCard = ({ comunicazione }) => {
 const styles = StyleSheet.create({
   card: {
     alignSelf: 'center',
-    width: wp("90%"),
+    width: wp("85%"),
     flex: 1,
     alignItems: "center",
     borderRadius: 20,
-    backgroundColor: "#4a86ff",
-    shadowColor: Colors.white,
-    shadowOffset: {
-      width: 0,
-      height: 5,
-    },
-    shadowOpacity: 0.34,
-    shadowRadius: 6.27,
-    elevation: 10,
+    backgroundColor: "#4a86ff"
   },
   row: {
-    paddingHorizontal: wp("5%"),
+    paddingHorizontal: wp("9%"),
     paddingVertical: hp("2%"),
     width: wp("90%"),
     justifyContent: "space-evenly"
@@ -77,8 +69,8 @@ const styles = StyleSheet.create({
     fontSize: hp("1.8%"),
   },
   image: {
-    height: wp("50%"),
-    width: wp("90%"),
+    height: wp("42%"),
+    width: wp("85%"),
     backgroundColor: "#FFF",
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20
