@@ -16,6 +16,7 @@ const tagsRouter = require("./routes/tags")
 const comunicazioniRouter = require("./routes/comunicazioni")
 const proposteRouter = require("./routes/proposte")
 const usersRouter = require("./routes/user")
+const getAssenze = require("./controllers/assenze")
 
 // start env variables
 require('dotenv').config()
@@ -51,6 +52,9 @@ app.use(checkAuth)
 app.use('/api/tags', tagsRouter)
 app.use('/api/comunicazioni', comunicazioniRouter)
 app.use('/api/proposte', proposteRouter)
+
+//chiamate a controller assenze docenti
+app.use('/api/assenze', getAssenze)
 
 // route chiamata se si prova ad andare in un url senza routes
 app.use((req, res, next) => {
