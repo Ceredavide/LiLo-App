@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
   card: {
     alignSelf: 'center',
     width: wp("90%"),
-    height: hp("30%"),
     flex: 1,
     alignItems: "center",
     borderRadius: 20,
@@ -55,10 +54,10 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   row: {
-    // paddingHorizontal: wp("4%")
-  },
-  textRow: {
-    width: wp("65%")
+    paddingHorizontal: wp("5%"),
+    paddingVertical: hp("2%"),
+    width: wp("90%"),
+    justifyContent: "space-evenly"
   },
   tagRow: {
     height: hp('4%'),
@@ -74,15 +73,14 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     color: Colors.white,
-    fontFamily: "open-sans-regular",
-    width: wp("55%")
+    fontFamily: "open-sans-regular"
   },
   image: {
-    height: hp("16%"),
-    width: wp("28%"),
+    height: wp("50%"),
+    width: wp("90%"),
     backgroundColor: "#FFF",
     borderTopRightRadius: 20,
-    borderTopRightRadius: 20
+    borderTopLeftRadius: 20
   },
 
 });
