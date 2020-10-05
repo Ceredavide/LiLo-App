@@ -10,7 +10,7 @@ import ErrorScreen from "../screens/Error"
 
 import Screen from "../components/shared/Screen"
 import TransitionView from "../components/shared/TransitionView"
-import Card from "../components/home/Card";
+import Card from "../components/comunicazioni/Card";
 
 const HomeScreen = ({ navigation }) => {
   const dispatch = useDispatch()
