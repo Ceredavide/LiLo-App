@@ -6,6 +6,8 @@ import {
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 
+import Colors from "../../constants/colors"
+
 const Header = ({title}) => {
   return (
     <View style={styles.container}>
@@ -20,7 +22,7 @@ const styles = StyleSheet.create({
     paddingTop: hp("1.5%"),
     paddingLeft: wp("3%"),
     borderRadius: 5,
-    backgroundColor: "#F1F5F9"
+    backgroundColor: Colors.main
   },
   title: {
     fontFamily: "open-sans-bold",
