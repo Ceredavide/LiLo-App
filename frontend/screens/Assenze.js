@@ -5,6 +5,7 @@ import useAssenze from "../hooks/useAssenze"
 
 import Error from "./Error"
 import Screen from "../components/shared/Screen"
+import TransitionView from "../components/shared/TransitionView"
 import Header from "../components/assenze/Header";
 import CardAssenza from "../components/assenze/CardAssenza";
 import NoAssenze from "../components/assenze/NoAssenze";
@@ -18,11 +19,24 @@ const AssenzeScreen = () => {
     handleRefresh
   } = useAssenze()
 
+  function renderItem({ item, index }) {
+    console.log(item)
+    return (
+      <TransitionView index={index} >
+        <CardAssenza
+          key={index}
+          nome={item.nome + " " + item.cognome}
+          descrizione={item.motivo}
+        />
+      </TransitionView>
+    )
+  }
+
   return (
     <Screen>
       {isLoading ?
         <ActivityIndicator />
-        : assenze === "" ?
+        : assenze.length === 0 ?
           <NoAssenze isLoading={isLoading} loadAssenze={handleRefresh} />
           : assenze === "error" ?
             <Error />
@@ -33,13 +47,7 @@ const AssenzeScreen = () => {
               renderSectionHeader={({ section: { title } }) => (
                 <Header title={title} />
               )}
-              renderItem={({ item, index }) => (
-                <CardAssenza
-                  key={index}
-                  nome={item.name}
-                  descrizione={item.description}
-                />
-              )}
+              renderItem={renderItem}
               sections={assenze}
               keyExtractor={(item, index) => item + index}
             />
