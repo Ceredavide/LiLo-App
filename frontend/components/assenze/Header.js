@@ -8,10 +8,14 @@ import {
 
 import Colors from "../../constants/colors"
 
+function capitalizeString(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
 const Header = ({title}) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.title}>{capitalizeString(title)}</Text>
     </View>
   );
 };
