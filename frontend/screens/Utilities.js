@@ -18,40 +18,42 @@ const Utilities = ({ navigation }) => {
     return (
         <Screen style={styles.screen} scrollable={true}>
             <TransitionView>
-                <View style={styles.row}>
-                    <Button
-                        text="Mappa"
-                        action={() => WebBrowser.openBrowserAsync(Constants.URL_MAP)}
-                        image={require("../assets/images/illustrations/mappa.jpg")}
-                    />
-                </View>
-            </TransitionView>
-            <TransitionView index={1}>
-                <View style={styles.row}>
-                    <Button
-                        text="Risorse"
-                        action={() => navigation.navigate("Risorse")}
-                        image={require("../assets/images/illustrations/risorse.jpg")}
-                    />
-                </View>
-            </TransitionView>
-            <TransitionView index={2}>
-                <View style={styles.row}>
-                    <Button
-                        text="Lettore QR"
-                        action={() => navigation.navigate("Scanner")}
-                        image={require("../assets/images/illustrations/qr.jpg")}
-                    />
-                </View>
-            </TransitionView>
-            <TransitionView index={3}>
-                <View style={styles.row}>
-                    <Button
-                        text="Autogestite"
-                        action={() => Alert.alert('Coming Soon.')}
-                        image={require("../assets/images/illustrations/autogestite.jpg")}
-                    />
-                </View>
+                <TransitionView>
+                    <View style={styles.row}>
+                        <Button
+                            text="Mappa"
+                            action={() => WebBrowser.openBrowserAsync(Constants.URL_MAP)}
+                            image={require("../assets/images/illustrations/mappa.jpg")}
+                        />
+                    </View>
+                </TransitionView>
+                <TransitionView index={1}>
+                    <View style={styles.row}>
+                        <Button
+                            text="Risorse"
+                            action={() => navigation.navigate("Risorse")}
+                            image={require("../assets/images/illustrations/risorse.jpg")}
+                        />
+                    </View>
+                </TransitionView>
+                <TransitionView index={2}>
+                    <View style={styles.row}>
+                        <Button
+                            text="Lettore QR"
+                            action={() => navigation.navigate("Scanner")}
+                            image={require("../assets/images/illustrations/qr.jpg")}
+                        />
+                    </View>
+                </TransitionView>
+                <TransitionView index={3}>
+                    <View style={styles.row}>
+                        <Button
+                            text="Autogestite"
+                            action={() => Alert.alert('Coming Soon.')}
+                            image={require("../assets/images/illustrations/autogestite.jpg")}
+                        />
+                    </View>
+                </TransitionView>
             </TransitionView>
         </Screen>
     )
