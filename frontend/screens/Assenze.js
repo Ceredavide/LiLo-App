@@ -10,6 +10,8 @@ import Header from "../components/assenze/Header";
 import CardAssenza from "../components/assenze/CardAssenza";
 import NoAssenze from "../components/assenze/NoAssenze";
 
+import Colors from "../constants/colors"
+
 const AssenzeScreen = () => {
 
   const {
@@ -22,7 +24,6 @@ const AssenzeScreen = () => {
   } = useAssenze()
 
   function renderItem({ item, index }) {
-    console.log(item)
     return (
       <TransitionView index={index} >
         <CardAssenza
@@ -37,7 +38,7 @@ const AssenzeScreen = () => {
   return (
     <Screen>
       {isLoading ?
-        <ActivityIndicator />
+        <ActivityIndicator color={Colors.white}/>
         : assenze.length === 0 ?
           <NoAssenze isLoading={isLoading} loadAssenze={handleRefresh} />
           : error ?
@@ -52,7 +53,7 @@ const AssenzeScreen = () => {
                 <RefreshControl
                   refreshing={isRefreshing}
                   onRefresh={handleRefresh}
-                  tintColor="#fff"
+                  tintColor={Colors.white}
                 />
               }
               renderItem={renderItem}
