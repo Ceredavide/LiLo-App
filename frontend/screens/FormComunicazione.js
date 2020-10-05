@@ -9,7 +9,8 @@ import {
 
 import useFormComunicazione from '../hooks/useFormComunicazione'
 
-import ImagePicker from "../components/formComunicazione/ImagePicker";
+import Screen from "../components/shared/Screen"
+import ImagePicker from "../components/comunicazioni/form/ImagePicker";
 import TagSelector from '../components/comunicazioni/form/TagSelector'
 import LoadingButton from "../components/shared/LoadingButton"
 import ErrorText from "../components/shared/ErrorText"
@@ -20,22 +21,21 @@ const NewComunicazioneScreen = ({ navigation, route }) => {
 
   const comunicazione = route.params?.comunicazione
 
+  const { formikComunicazione } = useFormComunicazione(comunicazione, navigation)
+
   const {
     values,
     handleChange,
     setFieldValue,
     errors,
     handleSubmit
-  } = useFormComunicazione(comunicazione, navigation)
+  } = formikComunicazione
 
   const isLoading = useSelector(state => state.comunicazioni.isLoadingPost)
   const tags = useSelector(state => state.comunicazioni.tags)
 
   return (
-    <ScrollView
-      showsVerticalScrollIndicator={false}
-      style={styles.screen}
-    >
+    <Screen scrollable={true} >
       <TextInput
         placeholder="Titolo:"
         style={{ ...styles.textInput, marginTop: hp("1%"), }}
@@ -79,18 +79,14 @@ const NewComunicazioneScreen = ({ navigation, route }) => {
         text="avanti"
         color="red"
         loading={isLoading}
-        handleSubmit={() => handleSubmit()}
+        handleSubmit={handleSubmit}
         style={{ marginBottom: hp("5%") }}
       />
-    </ScrollView>
+    </Screen>
   );
 };
 
 const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    backgroundColor: Colors.main,
-  },
   textInput: {
     alignSelf: "center",
     height: hp("8%"),
