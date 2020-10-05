@@ -33,13 +33,13 @@ const Error = ({ reload, text }) => {
 
 const styles = StyleSheet.create({
     lottie: {
-        width: hp('50%'),
-        height: hp('50%')
+        width: hp('45%'),
+        height: hp('45%')
     },
     text: {
         color: Colors.white,
         fontFamily: 'open-sans-regular',
-        fontSize: hp('3.5%'),
+        fontSize: hp('3%'),
         alignSelf: "center",
         textAlign: 'center',
         width: wp('80%'),
