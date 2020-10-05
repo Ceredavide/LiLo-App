@@ -39,13 +39,13 @@ const useAssenze = () => {
 
     const handleFetch = async () => {
         setIsloading(true)
-        setAssenze(await fetchAssenze())
+        await fetchAssenze()
         setIsloading(false)
     }
 
     const handleRefresh = async () => {
         setIsRefreshing(true)
-        setAssenze(await fetchAssenze())
+        await fetchAssenze()
         setIsRefreshing(false)
     }
 
