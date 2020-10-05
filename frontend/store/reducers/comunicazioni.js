@@ -43,7 +43,6 @@ const comunicazioniReducer = (state = initialState, action) => {
     }
 
     case actionTypes.FETCH_COMUNICAZIONI_ERROR:
-      handleError(action.error)
       return {
         ...state,
         isLoading: false,
@@ -97,7 +96,6 @@ const comunicazioniReducer = (state = initialState, action) => {
       };
 
     case actionTypes.POST_COMUNICAZIONE_ERROR:
-      handleError(action.error)
       return {
         ...state,
         isLoadingPost: false
