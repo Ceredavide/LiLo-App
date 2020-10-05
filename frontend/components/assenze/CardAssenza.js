@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   card: {
     width: wp("90%"),
     margin: wp("2%"),
-    padding: hp("1%"),
+    padding: wp("4%"),
     borderRadius: 10,
     backgroundColor: Colors.white,
     shadowColor: "#000",
