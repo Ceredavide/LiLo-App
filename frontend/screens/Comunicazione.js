@@ -8,7 +8,7 @@ import {
 
 import TransitionView from "../components/shared/TransitionView"
 import FloatingButton from "../components/shared/FloatingButton"
-import Tag from "../components/comunicazione/Tag"
+import Tag from "../components/comunicazioni/Tag"
 
 import Colors from "../constants/colors"
 
