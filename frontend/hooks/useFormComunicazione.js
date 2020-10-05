@@ -16,25 +16,34 @@ export default function useFormComunicazione(comunicazione, navigation) {
     const { auth } = useContext(AuthContext)
 
     function handleSubmit(values) {
-        if (comunicazione) {
-
+        if (!!comunicazione) {
         } else {
             dispatch(postComunicazione(values, navigation, auth.token))
         }
     }
 
-    const formikNuovaComunicazione = useFormik({
-        initialValues: comunicazione || {
+    function getInitialValues(comunicazione) {
+        if (comunicazione) {
+            //restituisco un array con solo id
+            return {
+                ...comunicazione,
+                tags: comunicazione.tags.map(tag => tag._id)
+            }
+        } else return {
             titolo: "",
             sottotitolo: "",
             paragrafo: "",
             tags: [],
             immagine: null,
-        },
+        }
+    }
+
+    const formikComunicazione = useFormik({
+        initialValues: getInitialValues(comunicazione),
         validationSchema: comunicazioneSchema,
         onSubmit: handleSubmit
     })
 
-    return { ...formikNuovaComunicazione }
+    return { formikComunicazione }
 
 }
