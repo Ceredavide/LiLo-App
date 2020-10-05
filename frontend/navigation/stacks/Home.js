@@ -80,7 +80,7 @@ const comunicazioneOptions = {
 
 const styles = StyleSheet.create({
   headerButton: {
-    marginTop: hp("3.9%"),
+    marginTop: hp("3.5%"),
     marginRight: wp("8%")
   }
 })
