@@ -19,7 +19,7 @@ export default styles = {
     alignSelf: "flex-start",
     color: Colors.white,
     fontFamily: "System",
-    fontSize: hp("5.2%"),
+    fontSize: hp("6%"),
     marginLeft: wp("3%")
   },
   headerBackTitleVisible: false,
