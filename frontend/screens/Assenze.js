@@ -1,5 +1,5 @@
 import React from "react";
-import { SectionList, ActivityIndicator } from "react-native";
+import { SectionList, ActivityIndicator, RefreshControl } from "react-native";
 
 import useAssenze from "../hooks/useAssenze"
 
@@ -42,11 +42,17 @@ const AssenzeScreen = () => {
             <Error />
             : <SectionList
               refreshing={isRefreshing}
-              onRefresh={handleRefresh}
               showsVerticalScrollIndicator={false}
               renderSectionHeader={({ section: { title } }) => (
                 <Header title={title} />
               )}
+              refreshControl={
+                <RefreshControl
+                refreshing={isRefreshing}
+                onRefresh={handleRefresh}
+                tintColor="#fff"
+              />
+              }
               renderItem={renderItem}
               sections={assenze}
               keyExtractor={(item, index) => item + index}
