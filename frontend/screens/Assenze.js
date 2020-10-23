@@ -38,11 +38,11 @@ const AssenzeScreen = () => {
   return (
     <Screen>
       {isLoading ?
-        <ActivityIndicator color={Colors.white}/>
-        : assenze.length === 0 ?
-          <NoAssenze isLoading={isLoading} loadAssenze={handleRefresh} />
-          : error ?
-            <Error text={error.response.data || "Qualcosa è andato storto"} reload={handleFetch} />
+        <ActivityIndicator color={Colors.white} />
+        : error ?
+          <Error text={error.response.data || "Qualcosa è andato storto"} reload={handleFetch} />
+          : assenze.length === 0 ?
+            <NoAssenze isLoading={isLoading} loadAssenze={handleRefresh} />
             : <SectionList
               refreshing={isRefreshing}
               showsVerticalScrollIndicator={false}
