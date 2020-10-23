@@ -3,7 +3,7 @@ const cheerio = require("cheerio")
 
 const HttpError = require("../models/HttpError")
 
-const ASSENZE_URL = "http://www.liceolocarno.ch/Liceo_di_Locarno/intranetutenti/Siti_docenti/momi_test.php"
+const ASSENZE_URL = "https://www.liceolocarno.ch/Liceo_di_Locarno/intranetutenti/Siti_docenti/momi_test.php"
 
 const getAssenze = async (req, res, next) => {
 
@@ -24,7 +24,6 @@ const getAssenze = async (req, res, next) => {
 
         // trovato tr contententi dati
         let rows = result("tbody")["1"].children.filter(item => item.name === "tr" && item.type === "tag")
-
 
         // controllo se ci sono assenze
         if (rows.length <= 3) {
