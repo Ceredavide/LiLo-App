@@ -6,12 +6,12 @@ export default handleError = error => {
          * The request was made and the server responded with a
          * status code that falls out of the range of 2xx
          */
-        Alert.alert(
-            `Errore ${error.response.status}:`,
-            error.response.data.message,
-            [
-                { text: 'OK', onPress: () => { } },
-            ])
+        // Alert.alert(
+        //     `Errore ${error.response.status}:`,
+        //     error.response.data.message,
+        //     [
+        //         { text: 'OK', onPress: () => { } },
+        //     ])
         console.log(error.response.data);
         console.log(error.response.status);
         console.log(error.response.headers);
