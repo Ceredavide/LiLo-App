@@ -8,9 +8,8 @@ import axios from "axios";
 import { Alert } from "react-native"
 
 import checkConnection from "../../utils/checkConnection"
-import handleError from "../../utils/handleError"
 
-export const fetchComunicazioni = (token) => {
+export function fetchComunicazioni(token) {
     return async dispatch => {
         dispatch({ type: actionTypes.FETCH_COMUNICAZIONI_START });
         try {
@@ -28,6 +27,7 @@ export const fetchComunicazioni = (token) => {
                 }
             });
         } catch (error) {
+            console.log(error)
             dispatch({
                 type: actionTypes.FETCH_COMUNICAZIONI_ERROR,
                 error: error
@@ -36,7 +36,7 @@ export const fetchComunicazioni = (token) => {
     };
 };
 
-export const refreshComunicazioni = (token) => {
+export function refreshComunicazioni(token) {
     return async dispatch => {
         dispatch({ type: actionTypes.REFRESH_COMUNICAZIONI_START });
         try {
@@ -61,58 +61,98 @@ export const refreshComunicazioni = (token) => {
     };
 }
 
-export const postComunicazione = ({ titolo, sottotitolo, paragrafo, immagine }, navigation, token) => {
+export function postComunicazione(comunicazione, navigation, token) {
+
+    const { titolo, sottotitolo, paragrafo, tags, immagine } = comunicazione
 
     return async dispatch => {
 
         dispatch({ type: actionTypes.POST_COMUNICAZIONE_START });
 
-        try {
+        const response = await FileSystem.uploadAsync('http://localhost:5000/api/comunicazioni',
+            immagine,
+            {
+                uploadType: FileSystemUploadType.MULTIPART,
+                httpMethod: "POST",
+                headers: {
+                    Authorization: "Bearer " + token,
+                    Accept: 'application/json',
+                    'Content-Type': 'multipart/form-data',
+                },
+                fieldName: "image",
+                mimeType: "image/jpg",
+                parameters: {
+                    titolo,
+                    sottotitolo,
+                    paragrafo,
+                    tags
+                }
+            });
 
-            const response = await FileSystem.uploadAsync('http://10.3.141.190:5000/api/comunicazioni',
-                immagine,
-                {
-                    uploadType: FileSystemUploadType.MULTIPART,
-                    httpMethod: "POST",
-                    headers: {
-                        Authorization: "Bearer " + token,
-                        Accept: 'application/json',
-                        'Content-Type': 'multipart/form-data',
-                    },
-                    fieldName: "image",
-                    mimeType: "image/jpg",
-                    parameters: {
-                        titolo,
-                        sottotitolo,
-                        paragrafo
-                    }
-                });
-
-            console.log(comunicazione)
-
+        if (response.status !== 201) {
+            Alert.alert(response.body)
+            dispatch({
+                type: actionTypes.POST_COMUNICAZIONE_ERROR,
+                error: response.body
+            })
+        } else {
             dispatch({
                 type: actionTypes.POST_COMUNICAZIONE_SUCCESS,
                 comunicazione: response.data.comunicazione
             })
-
             navigation.goBack()
-
-        } catch (error) {
-            console.log(error)
-            Alert.alert(error.response.data)
-            dispatch({
-                type: actionTypes.POST_COMUNICAZIONE_ERROR,
-                error: error
-            })
         }
-    };
-};
+    }
+}
 
-export const deleteComunicazione = (id, token) => {
+export function editComunicazione(comunicazione, navigation, token) {
+
+    const { titolo, sottotitolo, paragrafo, tags, immagine } = comunicazione
+
     return async dispatch => {
 
+        dispatch({ type: actionTypes.EDIT_COMUNICAZIONE_START });
+
+        const response = await FileSystem.uploadAsync('http://localhost:5000/api/comunicazioni',
+            immagine,
+            {
+                uploadType: FileSystemUploadType.MULTIPART,
+                httpMethod: "POST",
+                headers: {
+                    Authorization: "Bearer " + token,
+                    Accept: 'application/json',
+                    'Content-Type': 'multipart/form-data',
+                },
+                fieldName: "image",
+                mimeType: "image/jpg",
+                parameters: {
+                    titolo,
+                    sottotitolo,
+                    paragrafo,
+                    tags
+                }
+            });
+
+        if (response.status !== 201) {
+            Alert.alert(response.body)
+            dispatch({
+                type: actionTypes.EDIT_COMUNICAZIONE_ERROR,
+                error: response.body
+            })
+        } else {
+            dispatch({
+                type: actionTypes.EDIT_COMUNICAZIONE_SUCCESS,
+                comunicazione: response.data.comunicazione
+            })
+            navigation.goBack()
+        }
+    }
+}
+
+export function deleteComunicazione(id, token) {
+    return async dispatch => {
         try {
-            const response = await axios.delete(`http://10.3.141.190:5000/api/comunicazioni/${id}`, {
+            const response = await axios.delete(`http://localhost:5000/api/comunicazioni/${id}`, {
                 headers: {
                     Authorization: "Bearer " + token
                 }
