@@ -31,14 +31,18 @@ const Scanner = () => {
 
   function renderContent() {
     if (hasPermission === null) {
-      return <Text style={styles.text}>
-        Accetta la richiesta di accesso alla fotocamera
-        </Text>;
+      return (
+        <Text style={styles.text}>
+          Accetta la richiesta di accesso alla fotocamera
+        </Text>
+      );
     }
     if (hasPermission === false) {
-      return <Text style={styles.text}>
-        Lo scanner non può essere utilizzato poiché non si hanno i permessi per accedere alla fotocamera
-        </Text>;
+      return (
+        <Text style={styles.text}>
+          Lo scanner non può essere utilizzato poiché non si hanno i permessi per accedere alla fotocamera
+        </Text>
+      );
     }
     return <BarCodeScanner
       onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
@@ -63,6 +67,10 @@ const styles = StyleSheet.create({
     height: hp("60%"),
     width: wp("80%"),
     marginBottom: hp("5%")
+  },
+  text: {
+    color: Colors.white,
+    fontFamily: "open-sans-regular"
   }
 })
 
