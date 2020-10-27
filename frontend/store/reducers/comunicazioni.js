@@ -11,6 +11,7 @@ const initialState = {
   isLoading: false,
   isRefreshing: false,
   isLoadingPost: false,
+  isLoadingEdit: false,
   error: null
 };
 
@@ -100,6 +101,30 @@ const comunicazioniReducer = (state = initialState, action) => {
         ...state,
         isLoadingPost: false
       };
+
+    case actionTypes.EDIT_COMUNICAZIONE_START:
+      return {
+        ...state,
+        isLoadingEdit: true
+      }
+      
+    case actionTypes.EDIT_COMUNICAZIONE_SUCCESS:
+
+      const comunicazioneIdx = state.comunicazioni.findIndex(item => item._id === action.comunicazione._id)
+
+      const newArray = state.comunicazioni.splice(comunicazioneIdx, 1, action.comunicazione)
+
+      return {
+        ...state,
+        comunicazioni: newArray,
+        isLoadingEdit: false
+      }
+
+    case actionTypes.EDIT_COMUNICAZIONE_ERROR:
+      return {
+        ...state,
+        isLoadingEdit: false
+      }
 
     case actionTypes.REMOVE_ONE_COMUNICAZIONE:
       const newComunicazioni = state.comunicazioni.filter(item => item._id !== action.id)
