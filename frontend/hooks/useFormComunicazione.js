@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 
 import { AuthContext } from "../Context"
 
-import { postComunicazione } from '../store/actions/comunicazioni'
+import { editComunicazione, postComunicazione } from '../store/actions/comunicazioni'
 
 import comunicazioneSchema from '../validation/comunicazioneSchema'
 
@@ -17,6 +17,7 @@ export default function useFormComunicazione(comunicazione, navigation) {
 
     function handleSubmit(values) {
         if (!!comunicazione) {
+            dispatch(editComunicazione(values, navigation, auth.token))
         } else {
             dispatch(postComunicazione(values, navigation, auth.token))
         }
