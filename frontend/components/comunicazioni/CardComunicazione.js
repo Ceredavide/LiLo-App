@@ -43,12 +43,12 @@ const CardComunicazione = ({ comunicazione, navigation }) => {
             <Text style={styles.subititle}>{sottotitolo}</Text>
             <View style={styles.buttonContainer}>
                 <Button
-                    title="elimina"
+                    title="Elimina"
                     color="red"
                     onPress={handleDelete}
                 />
                 <Button
-                    title="modifica"
+                    title="Modifica"
                     onPress={() => navigation.navigate("FormComunicazione", { comunicazione })}
                     color="#F2AA3E"
                 />
