@@ -27,7 +27,7 @@ router.get('/tag/:id', getComunicazioniByTagId)
 
 router.post('/', checkRole([ROLES.ADMIN, ROLES.EDITOR]), fileUpload.single("image"), createComunicazione)
 
-router.patch('/:id', updateComunicazione)
+router.put('/:id', checkRole([ROLES.ADMIN, ROLES.EDITOR]), fileUpload.single("image"), updateComunicazione)
 
 router.delete('/:id', deleteComunicazione)
 
