@@ -116,13 +116,19 @@ const comunicazioniReducer = (state = initialState, action) => {
 
     case actionTypes.EDIT_COMUNICAZIONE_SUCCESS:
 
-      const comunicazioneIdx = state.comunicazioni.findIndex(item => item._id === action.comunicazione._id)
+      Alert.alert("Comunicazione modificata con successo!")
 
-      const newArray = state.comunicazioni.splice(comunicazioneIdx, 1, action.comunicazione)
+      const editedComunicazione = {
+        ...action.comunicazione,
+        immagine: `http://localhost:5000/${action.comunicazione.immagine}`,
+        createdAt: moment(action.comunicazione.createdAt).format("DD/MM")
+      }
 
       return {
         ...state,
-        comunicazioni: newArray,
+        comunicazioni: [...state.comunicazioni.map(item =>
+          item._id === action.comunicazione._id ? editedComunicazione : item
+        )],
         isLoadingEdit: false
       }
 
@@ -133,10 +139,9 @@ const comunicazioniReducer = (state = initialState, action) => {
       }
 
     case actionTypes.REMOVE_ONE_COMUNICAZIONE:
-      const newComunicazioni = state.comunicazioni.filter(item => item._id !== action.id)
       return {
         ...state,
-        comunicazioni: newComunicazioni
+        comunicazioni: [...state.comunicazioni.filter(item => item._id !== action.id)]
       };
 
     default:
