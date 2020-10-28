@@ -96,9 +96,12 @@ export function postComunicazione(comunicazione, navigation, token) {
                 error: response.body
             })
         } else {
+
+            const parsedRes = JSON.parse(response.body)
+
             dispatch({
                 type: actionTypes.POST_COMUNICAZIONE_SUCCESS,
-                comunicazione: response.data.comunicazione
+                comunicazione: parsedRes.comunicazione
             })
             navigation.goBack()
         }
@@ -107,17 +110,19 @@ export function postComunicazione(comunicazione, navigation, token) {
 
 export function editComunicazione(comunicazione, navigation, token) {
 
-    const { titolo, sottotitolo, paragrafo, tags, immagine } = comunicazione
+    const { _id, titolo, sottotitolo, paragrafo, tags, immagine } = comunicazione
+
+    console.log(_id)
 
     return async dispatch => {
 
         dispatch({ type: actionTypes.EDIT_COMUNICAZIONE_START });
 
-        const response = await FileSystem.uploadAsync('http://localhost:5000/api/comunicazioni',
+        const response = await FileSystem.uploadAsync(`http://localhost:5000/api/comunicazioni/${_id}`,
             immagine,
             {
                 uploadType: FileSystemUploadType.MULTIPART,
-                httpMethod: "POST",
+                httpMethod: "PUT",
                 headers: {
                     Authorization: "Bearer " + token,
                     Accept: 'application/json',
@@ -157,7 +162,10 @@ export function deleteComunicazione(id, token) {
                     Authorization: "Bearer " + token
                 }
             })
-            dispatch({ type: actionTypes.REMOVE_ONE_COMUNICAZIONE, id: response.data.id })
+            dispatch({
+                type: actionTypes.REMOVE_ONE_COMUNICAZIONE,
+                id: response.data.id
+            })
         } catch (error) {
             Alert.alert(error.response.data)
         }
