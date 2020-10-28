@@ -92,7 +92,13 @@ const comunicazioniReducer = (state = initialState, action) => {
       Alert.alert("Comunicazione inviata con successo!")
       return {
         ...state,
-        comunicazioni: [...state.comunicazioni, action.comunicazione],
+        comunicazioni: [
+          ...state.comunicazioni,
+          {
+            ...action.comunicazione,
+            immagine: `http://localhost:5000/${action.comunicazione.immagine}`,
+            createdAt: moment(action.comunicazione.createdAt).format("DD/MM")
+          }],
         isLoadingPost: false
       };
 
@@ -107,7 +113,7 @@ const comunicazioniReducer = (state = initialState, action) => {
         ...state,
         isLoadingEdit: true
       }
-      
+
     case actionTypes.EDIT_COMUNICAZIONE_SUCCESS:
 
       const comunicazioneIdx = state.comunicazioni.findIndex(item => item._id === action.comunicazione._id)
