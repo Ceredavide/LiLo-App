@@ -13,7 +13,7 @@ import { deleteComunicazione } from "../../store/actions/comunicazioni"
 
 const CardComunicazione = ({ comunicazione, navigation }) => {
 
-    const { id, titolo, sottotitolo } = comunicazione
+    const { _id, titolo, sottotitolo } = comunicazione
 
     const { auth } = useContext(AuthContext)
 
@@ -29,7 +29,7 @@ const CardComunicazione = ({ comunicazione, navigation }) => {
                 },
                 {
                     text: 'Sì',
-                    onPress: () => dispatch(deleteComunicazione(id, auth.token))
+                    onPress: () => dispatch(deleteComunicazione(_id, auth.token))
                 },
             ],
         )
