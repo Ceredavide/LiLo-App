@@ -112,8 +112,6 @@ export function editComunicazione(comunicazione, navigation, token) {
 
     const { _id, titolo, sottotitolo, paragrafo, tags, immagine } = comunicazione
 
-    console.log(_id)
-
     return async dispatch => {
 
         dispatch({ type: actionTypes.EDIT_COMUNICAZIONE_START });
@@ -131,6 +129,7 @@ export function editComunicazione(comunicazione, navigation, token) {
                 fieldName: "image",
                 mimeType: "image/jpg",
                 parameters: {
+                    _id,
                     titolo,
                     sottotitolo,
                     paragrafo,
@@ -138,16 +137,19 @@ export function editComunicazione(comunicazione, navigation, token) {
                 }
             });
 
-        if (response.status !== 201) {
+        if (response.status !== 200) {
             Alert.alert(response.body)
             dispatch({
                 type: actionTypes.EDIT_COMUNICAZIONE_ERROR,
                 error: response.body
             })
         } else {
+
+            const parsedRes = JSON.parse(response.body)
+
             dispatch({
                 type: actionTypes.EDIT_COMUNICAZIONE_SUCCESS,
-                comunicazione: response.data.comunicazione
+                comunicazione: parsedRes.comunicazione
             })
             navigation.goBack()
         }
