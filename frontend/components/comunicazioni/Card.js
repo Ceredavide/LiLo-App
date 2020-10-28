@@ -39,11 +39,12 @@ const HomeCard = ({ comunicazione }) => {
 const styles = StyleSheet.create({
   card: {
     alignSelf: 'center',
-    width: wp("85%"),
+    width: wp("90%"),
     flex: 1,
     alignItems: "center",
     borderRadius: 20,
-    backgroundColor: "#4a86ff"
+    backgroundColor: "#4a86ff",
+    marginBottom: hp("2.5%")
   },
   row: {
     paddingHorizontal: wp("9%"),
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
   },
   image: {
     height: wp("42%"),
-    width: wp("85%"),
+    width: wp("90%"),
     backgroundColor: "#FFF",
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20
