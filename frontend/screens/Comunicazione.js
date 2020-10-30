@@ -19,7 +19,7 @@ const Comunicazione = ({ route, navigation }) => {
     function renderTags(tags) {
         return tags.map((tag, index) => (
             <TouchableOpacity key={index} onPress={() => navigation.navigate("ComunicazioniByTag", { tag })}>
-                <Tag tag={tag} />
+                <Tag tag={tag} style={styles.tag} textStyle={styles.tagText} />
             </TouchableOpacity>
         ))
     }
@@ -65,6 +65,20 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         marginVertical: hp("2%"),
+    },
+    tag: {
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "row",
+        paddingHorizontal: wp("2%"),
+        height: hp("4%"),
+        width: wp("40%"),
+        borderRadius: 20
+    },
+    tagText: {
+        fontSize: hp('2%'),
+        marginLeft: wp("1%"),
+        fontFamily: "open-sans-regular",
     },
     image: {
         width: wp("100%"),
