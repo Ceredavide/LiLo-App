@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import * as FileSystem from 'expo-file-system';
 import { useDispatch } from "react-redux"
 
 import { useFormik } from "formik";
@@ -15,10 +16,16 @@ export default function useFormComunicazione(comunicazione, navigation) {
 
     const { auth } = useContext(AuthContext)
 
-    function handleSubmit(values) {
+    async function handleSubmit(values) {
         if (!!comunicazione) {
-            dispatch(editComunicazione(values, navigation, auth.token))
-        } else {
+            if (comunicazione.immagine === values.immagine) {
+                const image = await FileSystem.downloadAsync(values.immagine, FileSystem.documentDirectory + `${values.titolo + Math.random() * 10}.jpeg`)
+                dispatch(editComunicazione({ ...values, immagine: image.uri }, navigation, auth.token))
+            } else {
+                dispatch(editComunicazione(values, navigation, auth.token))
+            }
+        }
+        else {
             dispatch(postComunicazione(values, navigation, auth.token))
         }
     }
