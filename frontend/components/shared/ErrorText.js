@@ -9,13 +9,16 @@ import {
 import Colors from "../../constants/colors"
 
 const ErrorText = ({ error, touched = false, style = null }) => {
-    return <Text style={{ ...styles.errorText, ...style }}>
-        {touched ? error : null}
-    </Text>
+    return (
+        <Text style={{ ...styles.errorText, ...style }}>
+            {touched ? error : null}
+        </Text>
+    )
 }
 
 const styles = StyleSheet.create({
     errorText: {
+        fontSize: hp("1.5%"),
         textAlign: "center",
         width: wp("75%"),
         marginTop: hp("0.5%"),
