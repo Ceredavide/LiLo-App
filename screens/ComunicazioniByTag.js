@@ -5,6 +5,7 @@ import { AuthContext } from "../Context"
 
 import axios from "axios"
 import checkConnection from "../utils/checkConnection"
+import renderComunicazioni from "../utils/renderComunicazioni"
 
 import ErrorScreen from "../screens/Error"
 
@@ -25,14 +26,13 @@ const ComunicazioniByTag = ({ navigation, route }) => {
     async function fetchComunicazioniByTagId(type = "") {
         type === "loading" ? setIsLoading(true) : setIsRefreshing(true)
         try {
-            // await checkConnection()
+            await checkConnection()
             const response = await axios.get(`http://localhost:5000/api/comunicazioni/tag/${tag._id}`, {
                 headers: {
                     Authorization: "Bearer " + auth.token
                 }
             })
-            console.log(response)
-            setComunicazioniData({ comunicazioni: response.data.comunicazioni, error: null })
+            setComunicazioniData({ comunicazioni:  renderComunicazioni(response.data.comunicazioni), error: null })
         } catch (error) {
             setComunicazioniData({ comunicazioni: {}, error: error })
         } finally {
@@ -45,8 +45,6 @@ const ComunicazioniByTag = ({ navigation, route }) => {
     }, []);
 
     const { comunicazioni, error } = comunicazioniData
-
-    console.log(error)
 
     function renderItem({ item, index }) {
         return (

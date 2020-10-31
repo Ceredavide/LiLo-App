@@ -1,8 +1,7 @@
 import { Alert } from "react-native"
 
-import moment from "moment"
-
 import * as actionTypes from "../actionTypes"
+import renderComunicazioni from "../../utils/renderComunicazioni"
 import handleError from "../../utils/handleError"
 
 const initialState = {
@@ -30,13 +29,7 @@ const comunicazioniReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        comunicazioni: comunicazioni.map(item => {
-          return {
-            ...item,
-            immagine: `http://localhost:5000/${item.immagine}`,
-            createdAt: moment(item.createdAt).format("DD/MM")
-          }
-        }),
+        comunicazioni: renderComunicazioni(comunicazioni),
         tags: tags,
         isLoading: false,
         error: null
@@ -62,13 +55,7 @@ const comunicazioniReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        comunicazioni: comunicazioni.map(item => {
-          return {
-            ...item,
-            immagine: `http://localhost:5000/${item.immagine}`,
-            createdAt: moment(item.createdAt).format("DD/MM")
-          }
-        }),
+        comunicazioni: renderComunicazioni(comunicazioni),
         tags: tags,
         isRefreshing: false,
         error: null

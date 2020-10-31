@@ -1,7 +1,7 @@
 import React from "react"
 import { StyleSheet, View, TouchableOpacity, Image, Text, Alert } from "react-native"
 
-import * as WebBrowser from 'expo-web-browser';
+// import * as WebBrowser from 'expo-web-browser';
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp
@@ -18,7 +18,7 @@ const Utilities = ({ navigation }) => {
     return (
         <Screen style={styles.screen} scrollable={true}>
             <TransitionView>
-                <TransitionView>
+                {/* <TransitionView>
                     <View style={styles.row}>
                         <Button
                             text="Mappa"
@@ -26,8 +26,8 @@ const Utilities = ({ navigation }) => {
                             image={require("../assets/images/illustrations/mappa.jpg")}
                         />
                     </View>
-                </TransitionView>
-                <TransitionView index={1}>
+                </TransitionView> */}
+                <TransitionView index={0}>
                     <View style={styles.row}>
                         <Button
                             text="Risorse"
@@ -36,7 +36,7 @@ const Utilities = ({ navigation }) => {
                         />
                     </View>
                 </TransitionView>
-                <TransitionView index={2}>
+                <TransitionView index={1}>
                     <View style={styles.row}>
                         <Button
                             text="Lettore QR"
@@ -45,7 +45,7 @@ const Utilities = ({ navigation }) => {
                         />
                     </View>
                 </TransitionView>
-                <TransitionView index={3}>
+                <TransitionView index={2}>
                     <View style={styles.row}>
                         <Button
                             text="Autogestite"

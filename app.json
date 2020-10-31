@@ -12,7 +12,8 @@
     },
     "android": {
       "package": "com.ceredavide.liloapp",
-      "versionCode": 6
+      "versionCode": 6,
+      "useNextNotificationsApi": true
     },
     "version": "2.2.0",
     "orientation": "portrait",
@@ -25,13 +26,8 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "platforms": [
-      "android",
-      "ios"
-    ],
+    "assetBundlePatterns": ["**/*"],
+    "platforms": ["android", "ios"],
     "description": "liam sucks"
   }
 }
