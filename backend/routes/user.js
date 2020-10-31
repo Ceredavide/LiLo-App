@@ -2,11 +2,12 @@ const express = require("express")
 
 const usersController = require("../controllers/users")
 
-const checkRole = require("../middlewares/checkRole")
+const checkAuth = require('../middlewares/checkAuth')
+// const checkRole = require("../middlewares/checkRole")
 
-const ROLES = require("../constants/ROLES")
+// const ROLES = require("../constants/ROLES")
 
-const { signup, login } = usersController
+const { signup, login, addNotificationToken } = usersController
 
 const router = express.Router()
 
@@ -15,5 +16,7 @@ const router = express.Router()
 router.post('/signup', signup)
 
 router.post('/login', login)
+
+router.put('/notification-token', checkAuth, addNotificationToken)
 
 module.exports = router

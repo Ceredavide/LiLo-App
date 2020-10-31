@@ -7,7 +7,7 @@ const HttpError = require("../models/HttpError")
 
 const ROLES = require("../constants/ROLES")
 
-const renderEmailBody = require('../utils/renderHtmlEmail')
+const renderEmailBody = require('../utils/renderHtmlEmail');
 
 const getUsers = async (req, res, next) => {
 
@@ -54,7 +54,7 @@ const signup = async (req, res, next) => {
         email,
         role: ROLES.STUDENT,
         password: hashedPassword,
-        activated: false,
+        activated: true,
         proposte: [],
     })
 
@@ -64,50 +64,89 @@ const signup = async (req, res, next) => {
         return next(new HttpError("Registrazione fallita, riprova più tardi.", 500))
     }
 
-    let transport = nodemailer.createTransport({
-            host: 'smtp.office365.com',
-            secureConnection: false,
-            port: 587,
-            requireTLS: true,//this parameter solved problem for me
-            auth: {
-                user: process.env.EMAIL,
-                pass: process.env.PASSWORD
-            },
-            tls: {
-                ciphers: 'SSLv3',
-                rejectUnauthorized: false
-            }
-        });
-        // service: "Outlook365",
-        // auth: {
-        //     user: process.env.EMAIL,
-        //     pass: process.env.PASSWORD
-        // }
-    // })
+    // console.log(process.env.EMAIL, process.env.PASSWORD)
 
-    let token;
+    // let transport = nodemailer.createTransport({
+    //     // host: 'smtp.office365.com',
+    //     // port: '587',
+    //     // auth: { user: process.env.EMAIL, pass: process.env.PASSWORD },
+    //     // secureConnection: false,
+    //     // requireTLS: false,
+    //     // tls: {
+    //     //     ciphers: 'SSLv3',
+    //     //     rejectUnauthorized: false
+    //     // }
+    //     host: "smtp.office365.com", // hostname
+    //     secure: false, // TLS requires secureConnection to be false
+    //     port: 587, // port for secure SMTP
+    //     auth: {
+    //         user: process.env.EMAIL,
+    //         pass: process.env.PASSWORD
+    //     },
+    //     tls: {
+    //         rejectUnauthorized: false,
+    //         ciphers:'SSLv3'
+    //     }
+    // });
+    //     // host: 'smtp.office365.com',
+    //     // secureConnection: false,
+    //     // port: 587,
+    //     // auth: {
+    //     //     user: process.env.EMAIL,
+    //     //     pass: process.env.PASSWORD
+    //     // }
+    //     // ,
+    //     // tls: {
+    //     //     ciphers: 'SSLv3'
+    //     // }
+    // // });
 
-    try {
-        token = await jwt.sign({ id: newUser.id }, process.env.JWT_KEY_EMAIL, { expiresIn: "1d" })
-    } catch (err) {
-        console.log(err)
-        return next(new HttpError("Registrazione fallita, riprova più tardi.", 500))
-    }
 
-    const message = {
-        from: process.env.EMAIL, // Sender address
-        to: newUser.email,         // List of recipients
-        subject: 'Conferma la tua email', // Subject line
-        html: renderEmailBody(newUser.nome, newUser.cognome, process.env.BACKEND_URL + `/users//email-activation/${token}`, process.env.EMAIL) // Plain text body
-    };
+    // // verifico connessione con il server
+    // transport.verify(function (error, success) {
+    //     if (error) {
+    //         console.log(error);
+    //         try {
+    //             newUser.remove()
+    //             return next(new HttpError("Registrazione fallita, riprova più tardi.", 500))
+    //         } catch (err) {
+    //             throw new Error("Registrazione fallita, riprova più tardi.")
+    //         } 
+    //     }
+    //     if (success) {
+    //         console.log(success)
+    //     }
+    // });
 
-    transport.sendMail(message, function (err, info) {
-        if (err) {
-            console.log(err)
-        } else {
-            console.log(info);
-        }
-    });
+    // let token;
+
+    // try {
+    //     token = await jwt.sign({ id: newUser.id }, process.env.JWT_KEY_EMAIL, { expiresIn: "300d" })
+    // } catch (err) {
+    //     console.log(err)
+    //     return next(new HttpError("Registrazione fallita, riprova più tardi.", 500))
+    // }
+
+    // const message = {
+    //     from: process.env.EMAIL, // Sender address
+    //     to: newUser.email,         // List of recipients
+    //     subject: 'Conferma la tua email', // Subject line
+    //     html: renderEmailBody(newUser.nome, newUser.cognome, process.env.BACKEND_URL + `/users//email-activation/${token}`, process.env.EMAIL) // Plain text body
+    // };
+
+    // transport.sendMail(message, function (err, info) {
+    //     if (err) {
+    //         console.log(err)
+
+    //     } else {
+    //         console.log(info);
+    //     }
+    // });
+
+    // send the message and get a callback with an error or details of the message that was sent
+    // client.send(message, (err, message) => {
+    //     console.log(err || message);
+    // });
 
     res.status(201).json({ user: newUser.toObject({ getters: true }) })
 }
@@ -118,13 +157,17 @@ const login = async (req, res, next) => {
     let existingUser
 
     try {
-        existingUser = await User.findOne({ email: email })
+        existingUser = await User.findOne({ email }).select("-createdAt -updatedAt -__v")
     } catch (err) {
         return next(new HttpError("Login fallito, riprova più tardi.", 500))
     }
 
     if (!existingUser) {
-        return next(new HttpError("User not found.", 401))
+        return next(new HttpError("L' email é sbagliata, riprovare.", 401))
+    }
+
+    if (!existingUser.activated) {
+        return next(new HttpError('Devi prima confermare la tua mail, controlla la tua posta elettronica.', 403))
     }
 
     let isValidPassword;
@@ -136,10 +179,8 @@ const login = async (req, res, next) => {
     }
 
     if (!isValidPassword) {
-        return next(new HttpError("Wrong password, try again.", 401))
+        return next(new HttpError("La password è sbagliata, riprovare.", 401))
     }
-
-    delete existingUser.password
 
     let token;
 
@@ -149,7 +190,71 @@ const login = async (req, res, next) => {
         return next(new HttpError("Login fallito, riprova più tardi.", 500))
     }
 
-    res.status(200).json({ user: existingUser.toObject({ getters: true }), token: token })
+    res.status(200).json({ user: existingUser, token: token })
+}
+
+const activateUser = async (req, res, next) => {
+
+    const jwt = req.params.jwt
+
+    let decodedToken;
+
+    let user;
+
+    // Decoda il token con la private key.
+
+    try {
+        decodedToken = jwt.verify(jwt, process.env.JWT_KEY_EMAIL)
+    } catch (err) {
+        return next(new HttpError("Attivazione utente fallita.", 401))
+    }
+
+    try {
+        user = User.findById(decodedToken.id)
+    } catch (err) {
+        return next(new HttpError('Attivazione utente fallita', 500))
+    }
+
+    user.activated = true
+
+    try {
+        user.save()
+    } catch (err) {
+        return next(new HttpError('Attivazione utente fallita', 500))
+    }
+
+    res.status(200).json({ message: 'Attivazione effettuata con successo!' })
+
+}
+
+const addNotificationToken = async (req, res, next) => {
+
+    const { notificationToken } = req.body
+
+    const { _id: userId } = req.userData
+
+    let user;
+
+    try {
+        user = await User.findById(userId)
+    } catch (error) {
+        return next(new HttpError("Qualcosa è andato storto, riprovare.", 500))
+    }
+
+    if (!user) {
+        return next(new HttpError("Utente non trovato.", 401))
+    }
+
+    user.notificationToken = notificationToken
+
+    try {
+        await user.save();
+    } catch (error) {
+        return next(new HttpError("Errore nel salvataggio del utente, riprovare."))
+    }
+
+    res.status(200).json({ notificationToken })
+
 }
 
 //TODO: fare API eliminazione utente
@@ -182,4 +287,7 @@ const login = async (req, res, next) => {
 exports.getUsers = getUsers;
 exports.signup = signup;
 exports.login = login;
+
+exports.addNotificationToken = addNotificationToken;
 // exports.deleteUser = deleteUser
+exports.activateUser = activateUser
