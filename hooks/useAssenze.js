@@ -6,9 +6,11 @@ import { AuthContext } from "../Context"
 
 import checkConnection from "../utils/checkConnection"
 
+import { apiUrl } from "../configuration"
+
 const useAssenze = () => {
 
-    const URL_ASSENZE = "http://localhost:5000/api/assenze"
+    const URL_ASSENZE = `${apiUrl}/api/assenze`
 
     const { auth } = useContext(AuthContext)
 

@@ -9,12 +9,14 @@ import { Alert } from "react-native"
 
 import checkConnection from "../../utils/checkConnection"
 
+import { apiUrl } from "../../configuration"
+
 export function fetchComunicazioni(token) {
     return async dispatch => {
         dispatch({ type: actionTypes.FETCH_COMUNICAZIONI_START });
         try {
             await checkConnection()
-            const response = await axios.get("http://localhost:5000/api/comunicazioni", {
+            const response = await axios.get(`${apiUrl}/api/comunicazioni`, {
                 headers: {
                     Authorization: "Bearer " + token
                 }
@@ -40,7 +42,7 @@ export function refreshComunicazioni(token) {
     return async dispatch => {
         dispatch({ type: actionTypes.REFRESH_COMUNICAZIONI_START });
         try {
-            const response = await axios.get("http://localhost:5000/api/comunicazioni", {
+            const response = await axios.get(`${apiUrl}/api/comunicazioni`, {
                 headers: {
                     Authorization: "Bearer " + token
                 }
@@ -69,7 +71,7 @@ export function postComunicazione(comunicazione, navigation, token) {
 
         dispatch({ type: actionTypes.POST_COMUNICAZIONE_START });
 
-        const response = await FileSystem.uploadAsync('http://localhost:5000/api/comunicazioni',
+        const response = await FileSystem.uploadAsync(`${apiUrl}/api/comunicazioni`,
             immagine,
             {
                 uploadType: FileSystemUploadType.MULTIPART,
@@ -116,7 +118,7 @@ export function editComunicazione(comunicazione, navigation, token) {
 
         dispatch({ type: actionTypes.EDIT_COMUNICAZIONE_START });
 
-        const response = await FileSystem.uploadAsync(`http://localhost:5000/api/comunicazioni/${_id}`,
+        const response = await FileSystem.uploadAsync(`${apiUrl}/api/comunicazioni/${_id}`,
             immagine,
             {
                 uploadType: FileSystemUploadType.MULTIPART,
@@ -159,7 +161,7 @@ export function editComunicazione(comunicazione, navigation, token) {
 export function deleteComunicazione(id, token) {
     return async dispatch => {
         try {
-            const response = await axios.delete(`http://localhost:5000/api/comunicazioni/${id}`, {
+            const response = await axios.delete(`${apiUrl}/api/comunicazioni/${id}`, {
                 headers: {
                     Authorization: "Bearer " + token
                 }

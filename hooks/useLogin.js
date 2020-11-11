@@ -11,6 +11,8 @@ import axios from "axios";
 
 import checkConnection from "../utils/checkConnection"
 
+import { apiUrl } from "../configuration"
+
 const useLogin = () => {
 
     const { setAuth } = useContext(AuthContext)
@@ -37,7 +39,7 @@ const useLogin = () => {
         let data
 
         await checkConnection()
-        const response = await axios.post("http://10.3.141.190:5000/api/users/login", {
+        const response = await axios.post(`${apiUrl}/api/users/login`, {
             email: email,
             password: password
         })
