@@ -50,21 +50,6 @@ const SignUp = ({ navigation }) => {
       />
       <ErrorText error={errors.cognome} touched={touched.cognome} />
       <TextInput
-        label="Classe"
-        error={errors.classe && touched.classe}
-        mode="outlined"
-        theme={formTheme}
-        style={styles.textInput}
-        onChangeText={value => {
-          value = value.replace(/\s+/g, "").toUpperCase();
-          setFieldValue("classe", value);
-        }}
-        onBlur={handleBlur("classe")}
-        value={values.classe}
-        returnKeyType="next"
-      />
-      <ErrorText error={errors.classe} touched={touched.classe} />
-      <TextInput
         label="Email"
         keyboardType="email-address"
         error={errors.email && touched.email}
