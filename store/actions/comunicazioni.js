@@ -9,7 +9,8 @@ import { Alert } from "react-native"
 
 import checkConnection from "../../utils/checkConnection"
 
-import { apiUrl } from "../../configuration"
+import getEnvVars from "../../configuration"
+const { apiUrl } = getEnvVars()
 
 export function fetchComunicazioni(token) {
     return async dispatch => {
