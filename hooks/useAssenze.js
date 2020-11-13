@@ -6,7 +6,8 @@ import { AuthContext } from "../Context"
 
 import checkConnection from "../utils/checkConnection"
 
-import { apiUrl } from "../configuration"
+import useEnvVars from "../configuration"
+const { apiUrl } = useEnvVars()
 
 const useAssenze = () => {
 

@@ -1,8 +1,12 @@
 import { Alert } from "react-native"
+import moment from "moment"
 
 import * as actionTypes from "../actionTypes"
 import renderComunicazioni from "../../utils/renderComunicazioni"
 import handleError from "../../utils/handleError"
+
+import getEnvVars from "../../configuration"
+const { apiUrl } = getEnvVars()
 
 const initialState = {
   comunicazioni: [],
@@ -83,7 +87,7 @@ const comunicazioniReducer = (state = initialState, action) => {
           ...state.comunicazioni,
           {
             ...action.comunicazione,
-            immagine: `http://localhost:5000/${action.comunicazione.immagine}`,
+            immagine: `${apiUrl}/${action.comunicazione.immagine}`,
             createdAt: moment(action.comunicazione.createdAt).format("DD/MM")
           }],
         isLoadingPost: false
@@ -107,7 +111,7 @@ const comunicazioniReducer = (state = initialState, action) => {
 
       const editedComunicazione = {
         ...action.comunicazione,
-        immagine: `http://localhost:5000/${action.comunicazione.immagine}`,
+        immagine: `${apiUrl}/${action.comunicazione.immagine}`,
         createdAt: moment(action.comunicazione.createdAt).format("DD/MM")
       }
 
