@@ -40,7 +40,7 @@ const AssenzeScreen = () => {
       {isLoading ?
         <ActivityIndicator color={Colors.white} />
         : error ?
-          <Error text={error.response.data || "Qualcosa è andato storto"} reload={handleFetch} />
+          <Error text={error.response?.data || "Qualcosa è andato storto."} reload={handleFetch} />
           : assenze.length === 0 ?
             <NoAssenze isLoading={isLoading} loadAssenze={handleRefresh} />
             : <SectionList

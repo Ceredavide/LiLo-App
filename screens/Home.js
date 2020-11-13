@@ -37,7 +37,7 @@ const HomeScreen = ({ navigation }) => {
         isLoading ? <ActivityIndicator /> : error ?
           <ErrorScreen
             reload={() => dispatch(fetchComunicazioni())}
-            text={error.response.data || "Qualcosa è andato storto."}
+            text={error.response?.data || "Qualcosa è andato storto."}
           />
           :
           <TransitionView>
