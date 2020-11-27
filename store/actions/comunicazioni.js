@@ -1,8 +1,5 @@
 import * as actionTypes from "../actionTypes";
 
-import * as FileSystem from 'expo-file-system';
-import { FileSystemUploadType } from "expo-file-system";
-
 import axios from "axios";
 
 import { Alert } from "react-native"
@@ -66,95 +63,63 @@ export function refreshComunicazioni(token) {
 
 export function postComunicazione(comunicazione, navigation, token) {
 
-    const { titolo, sottotitolo, paragrafo, tags, immagine } = comunicazione
-
     return async dispatch => {
 
         dispatch({ type: actionTypes.POST_COMUNICAZIONE_START });
 
-        const response = await FileSystem.uploadAsync(`${apiUrl}/api/comunicazioni`,
-            immagine,
-            {
-                uploadType: FileSystemUploadType.MULTIPART,
-                httpMethod: "POST",
+        try {
+
+            const response = await axios.post(`${apiUrl}/api/comunicazioni`, comunicazione, {
                 headers: {
-                    Authorization: "Bearer " + token,
-                    Accept: 'application/json',
-                    'Content-Type': 'multipart/form-data',
-                },
-                fieldName: "image",
-                mimeType: "image/jpg",
-                parameters: {
-                    titolo,
-                    sottotitolo,
-                    paragrafo,
-                    tags
+                    Authorization: "Bearer " + token
                 }
-            });
-
-        if (response.status !== 201) {
-            Alert.alert(response.body)
-            dispatch({
-                type: actionTypes.POST_COMUNICAZIONE_ERROR,
-                error: response.body
             })
-        } else {
-
-            const parsedRes = JSON.parse(response.body)
 
             dispatch({
                 type: actionTypes.POST_COMUNICAZIONE_SUCCESS,
-                comunicazione: parsedRes.comunicazione
+                comunicazione: response.data.comunicazione
             })
+
             navigation.goBack()
+
+        } catch (error) {
+            dispatch({
+                type: actionTypes.POST_COMUNICAZIONE_ERROR,
+                error: error
+            })
         }
     }
 }
 
 export function editComunicazione(comunicazione, navigation, token) {
 
-    const { _id, titolo, sottotitolo, paragrafo, tags, immagine } = comunicazione
+    const { _id } = comunicazione
 
     return async dispatch => {
 
         dispatch({ type: actionTypes.EDIT_COMUNICAZIONE_START });
 
-        const response = await FileSystem.uploadAsync(`${apiUrl}/api/comunicazioni/${_id}`,
-            immagine,
-            {
-                uploadType: FileSystemUploadType.MULTIPART,
-                httpMethod: "PUT",
+
+        try {
+
+            const response = await axios.put(`${apiUrl}/api/comunicazioni/${_id}`, comunicazione, {
                 headers: {
-                    Authorization: "Bearer " + token,
-                    Accept: 'application/json',
-                    'Content-Type': 'multipart/form-data',
-                },
-                fieldName: "image",
-                mimeType: "image/jpg",
-                parameters: {
-                    _id,
-                    titolo,
-                    sottotitolo,
-                    paragrafo,
-                    tags
+                    Authorization: "Bearer " + token
                 }
-            });
-
-        if (response.status !== 200) {
-            Alert.alert(response.body)
-            dispatch({
-                type: actionTypes.EDIT_COMUNICAZIONE_ERROR,
-                error: response.body
             })
-        } else {
-
-            const parsedRes = JSON.parse(response.body)
 
             dispatch({
                 type: actionTypes.EDIT_COMUNICAZIONE_SUCCESS,
-                comunicazione: parsedRes.comunicazione
+                comunicazione: response.data.comunicazione
             })
+
             navigation.goBack()
+
+        } catch (error) {
+            dispatch({
+                type: actionTypes.EDIT_COMUNICAZIONE_ERROR,
+                error: error
+            })
         }
     }
 }
