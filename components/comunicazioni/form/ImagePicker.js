@@ -11,6 +11,7 @@ import {
 
 const ImagePicker = ({ immagine, setFieldValue }) => {
   useEffect(() => {
+    // Richiedo i permessi per accedere alla galleria e fare foto
     const getPermissionAsync = async () => {
       if (Constants.platform.ios) {
         const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
@@ -32,7 +33,7 @@ const ImagePicker = ({ immagine, setFieldValue }) => {
       allowsEditing: true
     });
     if (!result.cancelled) {
-      setFieldValue("immagine", result.uri);
+      setFieldValue("immagine", 'data:image/jpeg;base64,' + result.base64);
     }
   };
 
@@ -45,7 +46,7 @@ const ImagePicker = ({ immagine, setFieldValue }) => {
             source={{ uri: immagine }}
             style={styles.image}
           />
-             <Button title="Rimuovi" onPress={() => setFieldValue("immagine", null)} color="red" />
+          <Button title="Rimuovi" onPress={() => setFieldValue("immagine", null)} color="red" />
         </>
       }
     </View>
