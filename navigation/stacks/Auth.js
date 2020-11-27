@@ -7,6 +7,7 @@ import Header from "../../components/headers/Auth"
 import WelcomeScreen from "../../screens/Welcome"
 import LoginScreen from "../../screens/Login";
 import SignUpScreen from "../../screens/SignUp";
+import EmailConfirmationScreen from "../../screens/EmailConfirmation"
 
 const { Navigator, Screen } = createStackNavigator()
 
@@ -14,8 +15,9 @@ const AuthStack = () => {
   return (
     <Navigator screenOptions={screenOptions} headerMode="screen">
       <Screen name="Welcome" component={WelcomeScreen} options={welcomeOptions} />
-      <Screen name="Login" component={LoginScreen} options={LogInOptions}/>
-      <Screen name="SignUp" component={SignUpScreen} options={SignUpOptions}/>
+      <Screen name="Login" component={LoginScreen} options={LogInOptions} />
+      <Screen name="SignUp" component={SignUpScreen} options={SignUpOptions} />
+      <Screen name="EmailConfirmation" component={EmailConfirmationScreen} options={welcomeOptions} />
     </Navigator>
   )
 }
