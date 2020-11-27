@@ -13,6 +13,9 @@ import Screen from '../components/shared/Screen'
 import TransitionView from '../components/shared/TransitionView'
 import Card from '../components/comunicazioni/Card'
 
+import useEnvVars from "../configuration"
+const { apiUrl } = useEnvVars()
+
 const ComunicazioniByTag = ({ navigation, route }) => {
 
     const { auth } = useContext(AuthContext)
@@ -27,12 +30,12 @@ const ComunicazioniByTag = ({ navigation, route }) => {
         type === "loading" ? setIsLoading(true) : setIsRefreshing(true)
         try {
             await checkConnection()
-            const response = await axios.get(`http://localhost:5000/api/comunicazioni/tag/${tag._id}`, {
+            const response = await axios.get(`${apiUrl}/api/comunicazioni/tag/${tag._id}`, {
                 headers: {
                     Authorization: "Bearer " + auth.token
                 }
             })
-            setComunicazioniData({ comunicazioni:  renderComunicazioni(response.data.comunicazioni), error: null })
+            setComunicazioniData({ comunicazioni: renderComunicazioni(response.data.comunicazioni), error: null })
         } catch (error) {
             setComunicazioniData({ comunicazioni: {}, error: error })
         } finally {
