@@ -11,7 +11,8 @@ import axios from "axios";
 
 import checkConnection from "../utils/checkConnection"
 
-import { apiUrl } from "../configuration"
+import useEnvVars from "../configuration"
+const { apiUrl } = useEnvVars()
 
 const useLogin = () => {
 
@@ -19,42 +20,28 @@ const useLogin = () => {
 
     const [isLoading, setIsLoading] = useState(false);
 
-    async function handleLogin({ email, password }) {
+    async function tryLogin({ email, password }) {
         setIsLoading(true);
         try {
-            const data = await tryLogin(email, password)
-            if (!!data) {
-                console.log(data)
-                setAuth(data)
-            }
+            await checkConnection()
+            const response = await axios.post(`${apiUrl}/api/users/login`, {
+                email: email,
+                password: password
+            })
+            await SecureStore.setItemAsync("user", JSON.stringify(response.data))
+            setAuth(response.data)
         } catch (error) {
-            Alert.alert(error.response.data)
+            console.log(error)
+            Alert.alert(error.response?.data || "Qualcosa è andato storto.")
         } finally {
             setIsLoading(false)
         }
     }
 
-    async function tryLogin(email, password) {
-
-        let data
-
-        await checkConnection()
-        const response = await axios.post(`${apiUrl}/api/users/login`, {
-            email: email,
-            password: password
-        })
-
-        data = response.data
-        await SecureStore.setItemAsync("user", JSON.stringify(response.data))
-
-        return data
-
-    }
-
     const formikLogin = useFormik({
         initialValues: { email: "", password: "" },
         validationSchema: loginSchema,
-        onSubmit: handleLogin
+        onSubmit: tryLogin
     })
 
     return { isLoading, formikLogin }
