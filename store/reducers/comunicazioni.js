@@ -94,6 +94,7 @@ const comunicazioniReducer = (state = initialState, action) => {
       };
 
     case actionTypes.POST_COMUNICAZIONE_ERROR:
+      Alert.alert(action.error.response?.data || "Qualcosa é andato storto, riprova.")
       return {
         ...state,
         isLoadingPost: false
@@ -124,6 +125,7 @@ const comunicazioniReducer = (state = initialState, action) => {
       }
 
     case actionTypes.EDIT_COMUNICAZIONE_ERROR:
+      Alert.alert(action.error.response?.data || "Qualcosa é andato storto, riprova.")
       return {
         ...state,
         isLoadingEdit: false
