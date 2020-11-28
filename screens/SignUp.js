@@ -2,7 +2,8 @@ import React from "react";
 import { StyleSheet, Text } from "react-native";
 
 import {
-  widthPercentageToDP as wp
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 
 import { TextInput } from "react-native-paper"
@@ -19,7 +20,7 @@ const SignUp = ({ navigation }) => {
 
   const { isLoading, formikSignUp } = useSignUp(navigation)
 
-  const { values, handleChange, handleBlur, handleSubmit, setFieldValue, errors, touched } = formikSignUp
+  const { values, handleChange, handleBlur, handleSubmit, errors, touched } = formikSignUp
 
   const formTheme = { colors: { text: Colors.white, primary: Colors.secondary, placeholder: Colors.white, background: Colors.main } }
 
@@ -107,7 +108,7 @@ const styles = StyleSheet.create({
   form: {
     flex: 1,
     backgroundColor: Colors.main,
-    paddingBottom: 10
+    paddingVertical: hp("5%")
   },
   textInput: {
     width: wp("65%"),
