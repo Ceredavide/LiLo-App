@@ -9,14 +9,14 @@ import checkConnection from "../utils/checkConnection"
 import useEnvVars from "../configuration"
 const { apiUrl } = useEnvVars()
 
-const useAssenze = () => {
+export default function useAssenze() {
 
     const URL_ASSENZE = `${apiUrl}/api/assenze`
 
     const { auth } = useContext(AuthContext)
 
     const [assenze, setAssenze] = useState([])
-    const [isLoading, setIsloading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
     const [isRefreshing, setIsRefreshing] = useState(false)
     const [error, setError] = useState(null)
 
@@ -41,9 +41,9 @@ const useAssenze = () => {
     }
 
     const handleFetch = async () => {
-        setIsloading(true)
+        setIsLoading(true)
         await fetchAssenze()
-        setIsloading(false)
+        setIsLoading(false)
     }
 
     const handleRefresh = async () => {
@@ -62,5 +62,3 @@ const useAssenze = () => {
     }
 
 }
-
-export default useAssenze
