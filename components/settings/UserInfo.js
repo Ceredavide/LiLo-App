@@ -11,7 +11,7 @@ const UserInfo = ({ user = {} }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.text}>Hai effettuato l'accesso come</Text>
-            <Text style={styles.text}>{user.nome || ""} {user.cognome || ""}, classe: {user.classe || ""}</Text>
+            <Text style={styles.text}>{user.nome || ""} {user.cognome || ""}</Text>
         </View>
     )
 }
