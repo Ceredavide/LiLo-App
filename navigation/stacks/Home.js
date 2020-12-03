@@ -25,7 +25,7 @@ const { Navigator, Screen } = createStackNavigator()
 import Colors from "../../constants/colors"
 
 function renderHeaderButton({ navigation }, user) {
-  if (user?.role === "administrator" || "editor") {
+  if (user?.role === "administrator" && "editor") {
     return {
       headerRight: () => (
         <TouchableIcon
@@ -61,13 +61,13 @@ const HomeStack = () => {
   const { auth } = useContext(AuthContext)
 
   return (
-      <Navigator screenOptions={headerStyle} headerMode="screen">
-        <Screen name="Home" component={HomeScreen} options={props => renderHeaderButton(props, auth?.user)} />
-        <Screen name="Comunicazione" component={ComunicazioneScreen} options={comunicazioneOptions} />
-        <Screen name="ComunicazioniByTag" component={ComunicazioniByTagScreen} options={props => getHeaderTitle(props)} />
-        <Screen name="EditComunicazioni" component={ComunicazioniScreen} options={comunicazioneOptions} />
-        <Screen name="FormComunicazione" component={FormComunicazioneScreen} options={props => getFormHeaderTitle(props)} />
-      </Navigator>
+    <Navigator screenOptions={headerStyle} headerMode="screen">
+      <Screen name="Home" component={HomeScreen} options={props => renderHeaderButton(props, auth?.user)} />
+      <Screen name="Comunicazione" component={ComunicazioneScreen} options={comunicazioneOptions} />
+      <Screen name="ComunicazioniByTag" component={ComunicazioniByTagScreen} options={props => getHeaderTitle(props)} />
+      <Screen name="EditComunicazioni" component={ComunicazioniScreen} options={comunicazioneOptions} />
+      <Screen name="FormComunicazione" component={FormComunicazioneScreen} options={props => getFormHeaderTitle(props)} />
+    </Navigator>
   )
 }
 
