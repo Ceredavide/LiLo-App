@@ -16,7 +16,7 @@ export default function useAssenze() {
     const { auth } = useContext(AuthContext)
 
     const [assenze, setAssenze] = useState([])
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
     const [isRefreshing, setIsRefreshing] = useState(false)
     const [error, setError] = useState(null)
 
