@@ -62,11 +62,7 @@ const SignUp = ({ navigation }) => {
         value={values.email}
         returnKeyType="next"
       />
-      {
-        errors.email && touched.email ?
-          <ErrorText error={errors.email} touched={touched.email} /> :
-          <Text style={styles.emailText}>Quella inserita nella iscrizione al Liceo</Text>
-      }
+      <ErrorText error={errors.email} touched={touched.email} />
       <TextInput
         label="Password"
         secureTextEntry={true}
