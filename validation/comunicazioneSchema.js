@@ -11,7 +11,7 @@ const comunicazioneSchema = Yup.object().shape({
     paragrafo: Yup.string()
         .required("Scrivi qualcosa dai."),
 
-    // tags: [],
+    tags: Yup.array().max(2,"Al massimo 2 categorie."),
 
     immagine: Yup.string()
         .required("Devi mettercela una immagine.")
