@@ -1,13 +1,12 @@
 import React from "react"
 import { ActivityIndicator, FlatList, RefreshControl } from "react-native"
-import * as WebBrowser from 'expo-web-browser';
 
 import useRisorse from "../hooks/useRisorse"
 
 import Error from "./Error"
 import Screen from "../components/shared/Screen"
 import TransitionView from "../components/shared/TransitionView"
-import IconButton from "../components/shared/IconButton"
+import CardRisorse from "../components/risorse/CardRisorse"
 
 import Colors from "../constants/colors"
 
@@ -25,13 +24,7 @@ const RisorseScreen = () => {
     function renderItem({ item, index }) {
         return (
             <TransitionView index={index}>
-                <IconButton
-                    action={() => WebBrowser.openBrowserAsync(item.url)}
-                    iconName={item.iconName}
-                    text={item.nome}
-                    primaryColor={Colors.main}
-                    backgroundColor={Colors.white}
-                />
+                <CardRisorse risorsa={item} />
             </TransitionView>
         )
     }
