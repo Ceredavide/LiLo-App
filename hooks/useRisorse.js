@@ -1,5 +1,7 @@
 import { useEffect, useState, useContext } from "react"
 
+import axios from "axios"
+
 import { AuthContext } from "../Context"
 
 import checkConnection from "../utils/checkConnection"
@@ -14,10 +16,12 @@ export default function useRisorse() {
     const [isLoading, setIsLoading] = useState(false)
     const [isRefreshing, setIsRefreshing] = useState(false)
     const [risorse, setRisorse] = useState()
-    const [error, setError] = useState()
+    const [error, setError] = useState(null)
 
 
-    useEffect(() => { }, [])
+    useEffect(() => {
+        fetchRisorse()
+    }, [])
 
     async function fetchRisorse() {
         try {
@@ -27,13 +31,11 @@ export default function useRisorse() {
                     Authorization: "Bearer " + auth.token
                 }
             })
-
             setRisorse(response.data.risorse)
-
         } catch (error) {
             setError(error)
         }
-    }
+    };
 
     const handleFetch = async () => {
         setIsLoading(true)
