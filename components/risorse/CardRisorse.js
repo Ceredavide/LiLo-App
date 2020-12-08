@@ -25,6 +25,7 @@ const CardRisorse = ({ risorsa }) => {
 
 const styles = StyleSheet.create({
     container: {
+        marginTop: hp("2%"),
         backgroundColor: Colors.white,
         height: hp("10%"),
         width: wp("80%"),
