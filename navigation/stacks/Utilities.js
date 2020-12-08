@@ -13,7 +13,7 @@ const { Navigator, Screen } = createStackNavigator()
 const UtilitiesStack = () => {
     return (
         <Navigator screenOptions={headerStyle} headerMode="screen">
-            <Screen name="Utilities" component={UtilitiesScreen} />
+            <Screen name="Utilità" component={UtilitiesScreen} />
             <Screen name="Autogestite" component={AutogestiteStack} />
             <Screen name="Risorse" component={RisorseScreen} />
             <Screen name="Scanner" component={ScannerScreen} />

@@ -25,7 +25,7 @@ const AppNavigator = () => {
       <Navigator screenOptions={_screenOptions} tabBarOptions={_tabBarOptions}>
         <Screen name="Home" component={HomeStack} />
         <Screen name="Assenze" component={AssenzeStack} />
-        <Screen name="Utilities" component={UtilitiesStack} />
+        <Screen name="Utilità" component={UtilitiesStack} />
         <Screen name="Impostazioni" component={SettingsStack} />
       </Navigator>
     </>
@@ -34,11 +34,11 @@ const AppNavigator = () => {
 
 const _tabBarOptions = {
   style: {
-    backgroundColor: Colors.main,
-    borderTopColor: "transparent"
+    height: hp("9.5%"),
+    backgroundColor: Colors.secondary,
   },
-  activeTintColor: Colors.secondary,
-  inactiveTintColor: "#FFFF",
+  activeTintColor: Colors.black,
+  inactiveTintColor: Colors.fourth,
 }
 
 const _screenOptions = ({ route }) => ({
@@ -54,7 +54,7 @@ const _screenOptions = ({ route }) => ({
         iconName = "people";
         break;
       }
-      case "Utilities": {
+      case "Utilità": {
         iconName = "dashboard";
         break;
       }
@@ -63,7 +63,7 @@ const _screenOptions = ({ route }) => ({
         break;
       }
     }
-    return <MaterialIcons name={iconName} size={hp("4.3%")} color={color} />;
+    return <MaterialIcons name={iconName} size={hp("3%")} color={color} />;
   },
 })
 
