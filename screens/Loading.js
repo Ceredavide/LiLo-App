@@ -35,7 +35,8 @@ const Loading = ({ setIsLoading, setAuth }) => {
                 await Font.loadAsync({
                     "open-sans-light": require("../assets/fonts/OpenSans-Light.ttf"),
                     "open-sans-regular": require("../assets/fonts/OpenSans-Regular.ttf"),
-                    "open-sans-bold": require("../assets/fonts/OpenSans-Bold.ttf")
+                    "open-sans-bold": require("../assets/fonts/OpenSans-Bold.ttf"),
+                    "PlayFair-SemiBold": require("../assets/fonts/PlayfairDisplay-SemiBold.ttf")
                 })
             )
         } catch (e) {
