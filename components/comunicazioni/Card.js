@@ -27,7 +27,7 @@ const HomeCard = ({ comunicazione }) => {
             text={createdAt}
             iconSize={hp("2%")}
             fontSize={hp("1.6%")}
-            color={Colors.white}
+            color={Colors.black}
           />
           {tags.map((tag, index) => <Tag tag={tag} key={index} />)}
         </View>
@@ -39,12 +39,12 @@ const HomeCard = ({ comunicazione }) => {
 const styles = StyleSheet.create({
   card: {
     alignSelf: 'center',
-    width: wp("90%"),
+    width: wp("85%"),
     flex: 1,
     alignItems: "center",
     borderRadius: 20,
-    backgroundColor: "#4a86ff",
-    marginBottom: hp("2.5%")
+    backgroundColor: Colors.secondary,
+    marginTop: hp("2%")
   },
   row: {
     paddingHorizontal: wp("9%"),
@@ -59,19 +59,19 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   title: {
-    color: Colors.white,
+    color: Colors.black,
     fontFamily: "open-sans-bold",
     marginBottom: hp("0.5%"),
     fontSize: hp("2.6%"),
   },
   subtitle: {
-    color: Colors.white,
+    color: Colors.black,
     fontFamily: "open-sans-regular",
     fontSize: hp("1.8%"),
   },
   image: {
-    height: wp("42%"),
-    width: wp("90%"),
+    height: wp("40%"),
+    width: wp("85%"),
     backgroundColor: "#FFF",
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20
