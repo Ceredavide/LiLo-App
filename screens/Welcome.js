@@ -26,13 +26,13 @@ const Welcome = ({ navigation }) => {
                         <IconButton
                             action={() => navigation.navigate("Login")}
                             text="Login"
-                            primaryColor={Colors.white}
+                            primaryColor={Colors.black}
                             backgroundColor={Colors.secondary}
                         />
                         <IconButton
                             action={() => navigation.navigate("SignUp")}
                             text="Registrati"
-                            primaryColor={Colors.white}
+                            primaryColor={Colors.black}
                             backgroundColor={Colors.secondary}
                         />
                     </View>
