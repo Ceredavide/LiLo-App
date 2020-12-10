@@ -8,7 +8,7 @@ import {
 
 import getContrastColor from "../../utils/getContrastColor"
 
-import Icon from "react-native-vector-icons/MaterialCommunityIcons"
+import { MaterialCommunityIcons as Icon } from '@expo/vector-icons'
 
 const Tag = ({ tag, style = {}, textStyle = {} }) => {
 

@@ -1,7 +1,7 @@
 import React from "react"
 import { StyleSheet, View, Text } from "react-native"
 
-import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons"
+import { MaterialCommunityIcons as MaterialIcon} from '@expo/vector-icons'
 
 const IconWithText = ({ iconName, text, iconSize, fontSize, color = "black" }) => {
     return (

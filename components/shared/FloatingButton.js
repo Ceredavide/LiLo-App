@@ -4,6 +4,7 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 import {
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
+
 import { AntDesign } from "@expo/vector-icons";
 
 import Colors from "../../constants/colors"

@@ -5,7 +5,7 @@ import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-nat
 
 import * as WebBrowser from 'expo-web-browser';
 
-import Icon from "react-native-vector-icons/MaterialIcons"
+import {MaterialIcons as Icon} from '@expo/vector-icons'
 
 import Colors from "../../constants/colors"
 
