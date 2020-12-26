@@ -1,5 +1,5 @@
 import React from "react"
-import { AppLoading } from 'expo';
+import AppLoading from 'expo-app-loading';
 import * as SecureStore from 'expo-secure-store';
 import { Asset } from "expo-asset";
 import * as Font from 'expo-font'
@@ -14,7 +14,6 @@ const Loading = ({ setIsLoading, setAuth }) => {
             if (cachedData) {
                 const parsedData = await JSON.parse(cachedData)
                 setAuth(parsedData)
-                // dispatch({ type: RESTORE_AUTH, user: parsedData.user })
             }
 
             return Promise.all(
