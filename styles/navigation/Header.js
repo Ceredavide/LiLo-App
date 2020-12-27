@@ -18,7 +18,7 @@ export default styles = {
   headerTitleStyle: {
     alignSelf: "flex-start",
     color: Colors.white,
-    fontFamily: "System",
+    fontFamily: "PlayFair-SemiBold",
     fontSize: hp("6%"),
     marginLeft: wp("3%")
   },
