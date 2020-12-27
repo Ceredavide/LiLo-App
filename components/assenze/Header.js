@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: "open-sans-bold",
-    color: "#009fff",
+    color: Colors.third,
     fontSize: hp("3.2%")
   },
 });

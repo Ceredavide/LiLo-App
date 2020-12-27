@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         justifyContent: "space-between",
         alignItems: "center",
-        backgroundColor: Colors.white
+        backgroundColor: "#FFFF"
     },
     buttonText: {
         color: Colors.main,
