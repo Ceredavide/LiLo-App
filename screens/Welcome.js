@@ -13,7 +13,7 @@ import Colors from "../constants/colors"
 
 const Welcome = ({ navigation }) => {
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: Colors.white }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: "#FFFF" }}>
             <StatusBar barStyle="dark-content" backgroundColor="white"/>
             <ImageBackground source={require("../assets/images/wallpaper.png")} style={styles.screen}>
                 <View style={styles.card}>
