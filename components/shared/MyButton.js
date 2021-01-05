@@ -6,11 +6,11 @@ import {
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 
-const MyButton = ({ action, text, color, style = {} }) => {
+const MyButton = ({ action, text, color, style = {}, textStyle = {} }) => {
   return (
     <TouchableOpacity onPress={action}>
       <View style={{ ...styles.button, backgroundColor: color, ...style }}>
-        <Text style={styles.text}>{text}</Text>
+        <Text style={{...styles.text, ...textStyle}}>{text}</Text>
       </View>
     </TouchableOpacity>
   );
