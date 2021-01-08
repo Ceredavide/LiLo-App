@@ -31,7 +31,6 @@ const useLogin = () => {
             await SecureStore.setItemAsync("user", JSON.stringify(response.data))
             setAuth(response.data)
         } catch (error) {
-            console.log(error)
             Alert.alert(error.response?.data || "Qualcosa è andato storto.")
         } finally {
             setIsLoading(false)

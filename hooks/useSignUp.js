@@ -22,7 +22,6 @@ const useSignUp = (navigation) => {
             await axios.post(`${apiUrl}/api/users/signup`, user)
             navigation.navigate("EmailConfirmation")
         } catch (error) {
-            console.log(error)
             Alert.alert(error.response?.data || "Qualcosa è andato storto.")
         } finally {
             setIsLoading(false)
