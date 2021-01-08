@@ -34,7 +34,6 @@ const AppNavigator = () => {
 
 const _tabBarOptions = {
   style: {
-    height: hp("9.5%"),
     backgroundColor: Colors.secondary,
   },
   activeTintColor: Colors.black,
