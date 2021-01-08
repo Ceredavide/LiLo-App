@@ -41,7 +41,13 @@ function renderHeaderButton({ navigation }, user) {
 
 function getHeaderTitle({ route }) {
   const { tag } = route.params
-  return { title: tag.nome }
+  return {
+    headerTitleStyle: { alignSelf: 'flex-start' },
+    title: tag.nome,
+    headerTitleStyle: {
+      fontSize: hp("5%")
+    }
+  }
 }
 
 function getFormHeaderTitle({ route }) {
