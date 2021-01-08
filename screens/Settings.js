@@ -36,7 +36,7 @@ const SettingsScreen = () => {
       />
       <Chip
         style={{ marginTop: 10 }}
-        icon="error"
+        icon="account"
         onPress={() => Linking.openURL("mailto:davide@cere.dev")}
       >
         contatto in caso di problemi
