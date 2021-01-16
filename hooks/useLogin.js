@@ -24,7 +24,7 @@ const useLogin = () => {
         setIsLoading(true);
         try {
             await checkConnection()
-            const response = await axios.post(`${apiUrl}/api/users/login`, {
+            const response = await axios.post(`${apiUrl}/auth/login`, {
                 email: email,
                 password: password
             })
