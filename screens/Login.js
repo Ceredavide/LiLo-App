@@ -25,7 +25,7 @@ const LoginScreen = () => {
   return (
     <KeyboardAwareScrollView style={styles.screen}>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-        <View style={styles.screen}>
+        <>
           <Image
             source={require("../assets/images/illustrations/login.png")}
             style={styles.image}
@@ -50,7 +50,7 @@ const LoginScreen = () => {
             />
           </View>
           <ErrorText error={errors.email} touched={touched.email} />
-          <View style={{ ...styles.containerTextInput}}>
+          <View style={{ ...styles.containerTextInput }}>
             <AntDesign
               name="lock"
               size={32}
@@ -75,7 +75,7 @@ const LoginScreen = () => {
             handleSubmit={handleSubmit}
             loading={isLoading}
           />
-        </View>
+        </>
       </TouchableWithoutFeedback >
     </KeyboardAwareScrollView>
   );
