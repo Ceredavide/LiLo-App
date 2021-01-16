@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     card: {
         flex: 1,
         marginTop: hp("3%"),
-        width: wp("90%"),
+        width: wp("80%"),
         padding: 10,
         borderRadius: 10,
         backgroundColor: "#FFF",
