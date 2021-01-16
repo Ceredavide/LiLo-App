@@ -1,11 +1,12 @@
 import React from "react";
-import { StyleSheet, TouchableWithoutFeedback, TextInput, Keyboard } from "react-native";
+import { StyleSheet, TouchableWithoutFeedback, TextInput, Keyboard, View } from "react-native";
 import { useSelector } from "react-redux"
 
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import useFormComunicazione from '../hooks/useFormComunicazione'
 
@@ -39,8 +40,8 @@ const NewComunicazioneScreen = ({ navigation, route }) => {
   const tags = useSelector(state => state.comunicazioni.tags)
 
   return (
-    <Screen scrollable={true} >
-      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    <KeyboardAwareScrollView style={styles.screen}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <>
           <TextInput
             placeholder="Titolo:"
@@ -93,15 +94,20 @@ const NewComunicazioneScreen = ({ navigation, route }) => {
           />
         </>
       </TouchableWithoutFeedback>
-    </Screen>
+    </KeyboardAwareScrollView>
+
   );
 };
 
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    backgroundColor: Colors.main
+  },
   textInput: {
     alignSelf: "center",
     height: hp("8%"),
-    width: wp("80%"),
+    width: wp("70%"),
     padding: wp("3%"),
     backgroundColor: "white",
     borderRadius: 10,
@@ -117,7 +123,7 @@ const styles = StyleSheet.create({
   textArea: {
     alignSelf: "center",
     height: hp("20%"),
-    width: wp("80%"),
+    width: wp("70%"),
     padding: wp("3%"),
     backgroundColor: "white",
     borderRadius: 10,
