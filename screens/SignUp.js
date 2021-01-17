@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, TouchableWithoutFeedback, Alert, Linking } from "react-native";
+import { StyleSheet, Platform, TouchableWithoutFeedback, Alert, Linking } from "react-native";
 
 import {
   widthPercentageToDP as wp,
@@ -9,7 +9,6 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 import { TextInput } from "react-native-paper"
 
-import Screen from "../components/shared/Screen"
 import LoadingButton from "../components/shared/LoadingButton"
 import Button from "../components/shared/MyButton"
 import ErrorText from "../components/shared/ErrorText"
@@ -56,6 +55,7 @@ const SignUp = ({ navigation }) => {
           <ErrorText error={errors.cognome} touched={touched.cognome} />
           <TextInput
             label="Email:"
+            autoCapitalize="none"
             keyboardType="email-address"
             error={errors.email && touched.email}
             mode="outlined"
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     backgroundColor: Colors.main,
-    paddingTop: hp("4%")
+    paddingTop: Platform.OS === 'ios' ? hp("2%") : null
   },
   textInput: {
     width: wp("65%"),
