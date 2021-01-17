@@ -39,7 +39,7 @@ const HomeCard = ({ comunicazione }) => {
 const styles = StyleSheet.create({
   card: {
     alignSelf: 'center',
-    width: wp("85%"),
+    width: wp("87%"),
     flex: 1,
     alignItems: "center",
     borderRadius: 20,
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   },
   row: {
     paddingHorizontal: wp("9%"),
-    paddingVertical: hp("2%"),
+    paddingVertical: hp("1%"),
     width: wp("90%"),
     justifyContent: "space-evenly"
   },
@@ -61,17 +61,18 @@ const styles = StyleSheet.create({
   title: {
     color: Colors.black,
     fontFamily: "open-sans-bold",
-    marginBottom: hp("0.5%"),
+    marginBottom: hp("0.2%"),
     fontSize: hp("2.6%"),
   },
   subtitle: {
     color: Colors.black,
     fontFamily: "open-sans-regular",
+    marginBottom: hp("0.7%"),
     fontSize: hp("1.8%"),
   },
   image: {
     height: wp("40%"),
-    width: wp("85%"),
+    width: wp("87%"),
     backgroundColor: "#FFF",
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20
