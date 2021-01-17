@@ -11,7 +11,7 @@ import { AuthContext } from "../../Context"
 
 import { deleteComunicazione } from "../../store/actions/comunicazioni"
 
-const CardComunicazione = ({ comunicazione, navigation }) => {
+const CardComunicazione = ({ comunicazione, navigation }) => { 
 
     const { _id, titolo, sottotitolo } = comunicazione
 
