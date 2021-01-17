@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Button, Image, View, StyleSheet } from "react-native";
+import { Image, View, StyleSheet } from "react-native";
 import * as ImgPicker from "expo-image-picker";
 import Constants from "expo-constants";
 import * as Permissions from "expo-permissions";
@@ -8,6 +8,8 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
+
+import Button from "../../shared/MyButton"
 
 const ImagePicker = ({ immagine, setFieldValue }) => {
   useEffect(() => {
@@ -39,14 +41,14 @@ const ImagePicker = ({ immagine, setFieldValue }) => {
 
   return (
     <View style={styles.container}>
-      <Button title="Seleziona un'immagine" onPress={_pickImage} color="#FFFF" />
+      <Button text="Seleziona immagine" action={_pickImage} color="#5dade2"/>
       { immagine &&
         <>
           < Image
             source={{ uri: immagine }}
             style={styles.image}
           />
-          <Button title="Rimuovi" onPress={() => setFieldValue("immagine", null)} color="red" />
+          <Button text="Rimuovi" action={() => setFieldValue("immagine", null)} color="red" />
         </>
       }
     </View>
