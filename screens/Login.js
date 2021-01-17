@@ -30,45 +30,47 @@ const LoginScreen = () => {
             source={require("../assets/images/illustrations/login.png")}
             style={styles.image}
           />
-          <View style={styles.containerTextInput}>
-            <AntDesign
-              name="user"
-              size={32}
-              color={Colors.secondary}
-              style={styles.icon}
-            />
-            <TextInput
-              autoCapitalize="none"
-              placeholder="e-mail"
-              placeholderTextColor={Colors.secondary}
-              keyboardType="email-address"
-              style={styles.textInput}
-              onChangeText={handleChange("email")}
-              onBlur={handleBlur("email")}
-              value={values.email}
-              returnKeyType="next"
-            />
+          <View style={styles.form}>
+            <View style={styles.containerTextInput}>
+              <AntDesign
+                name="user"
+                size={32}
+                color={Colors.secondary}
+                style={styles.icon}
+              />
+              <TextInput
+                autoCapitalize="none"
+                placeholder="e-mail"
+                placeholderTextColor={Colors.secondary}
+                keyboardType="email-address"
+                style={styles.textInput}
+                onChangeText={handleChange("email")}
+                onBlur={handleBlur("email")}
+                value={values.email}
+                returnKeyType="next"
+              />
+            </View>
+            <ErrorText error={errors.email} touched={touched.email} />
+            <View style={styles.containerTextInput}>
+              <AntDesign
+                name="lock"
+                size={32}
+                color={Colors.secondary}
+                style={styles.icon}
+              />
+              <TextInput
+                placeholder="password"
+                secureTextEntry={true}
+                placeholderTextColor={Colors.secondary}
+                style={styles.textInput}
+                onChangeText={handleChange("password")}
+                onBlur={handleBlur("password")}
+                value={values.password}
+                returnKeyType="next"
+              />
+            </View>
+            <ErrorText error={errors.password} touched={touched.password} />
           </View>
-          <ErrorText error={errors.email} touched={touched.email} />
-          <View style={{ ...styles.containerTextInput }}>
-            <AntDesign
-              name="lock"
-              size={32}
-              color={Colors.secondary}
-              style={styles.icon}
-            />
-            <TextInput
-              placeholder="password"
-              secureTextEntry={true}
-              placeholderTextColor={Colors.secondary}
-              style={styles.textInput}
-              onChangeText={handleChange("password")}
-              onBlur={handleBlur("password")}
-              value={values.password}
-              returnKeyType="next"
-            />
-          </View>
-          <ErrorText error={errors.password} touched={touched.password} />
           <LoadingButton
             text="Login"
             color={Object.entries(errors).length === 0 ? Colors.green : Colors.red}
@@ -92,8 +94,12 @@ const styles = StyleSheet.create({
     width: wp("52"),
     alignSelf: "center"
   },
+  form: {
+    marginTop: hp("8%"),
+    marginBottom: hp("3%")
+  },
   containerTextInput: {
-    marginTop: hp("5%"),
+    marginTop: hp("2%"),
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center"
