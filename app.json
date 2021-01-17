@@ -6,16 +6,16 @@
     "ios": {
       "bundleIdentifier": "com.ceredavide.liloapp",
       "infoPlist": {
-        "NSCameraUsageDescription": "This app uses the camera to take photos that can be used to be attached on an article that can be posted with the app.",
+        "NSCameraUsageDescription": "This app uses the camera to take photos that can be used to be attached on an article that can be posted with the app. And also to scan qr codes and launch urls found in Qr Codes.",
         "NSPhotoLibraryUsageDescription": "This app uses the photos in the library to attach them on an article that can be posted with the app"
       }
     },
     "android": {
       "package": "com.ceredavide.liloapp",
-      "versionCode": 6,
+      "versionCode": 7,
       "useNextNotificationsApi": true
     },
-    "version": "2.2.0",
+    "version": "3.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "splash": {
