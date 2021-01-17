@@ -5,7 +5,7 @@ import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-nat
 
 import * as WebBrowser from 'expo-web-browser';
 
-import {MaterialIcons as Icon} from '@expo/vector-icons'
+import { MaterialIcons as Icon } from '@expo/vector-icons'
 
 import Colors from "../../constants/colors"
 
@@ -14,7 +14,7 @@ const CardRisorse = ({ risorsa }) => {
     const { nome, iconName, url } = risorsa
 
     return (
-        <TouchableOpacity onPress={() => WebBrowser.openBrowserAsync(url)}>
+        <TouchableOpacity onPress={async () => await WebBrowser.openBrowserAsync(url)}>
             <View style={styles.container}>
                 <Text style={styles.text}>{nome}</Text>
                 <Icon name={iconName} color={Colors.main} size={hp("5%")} />
@@ -26,11 +26,12 @@ const CardRisorse = ({ risorsa }) => {
 const styles = StyleSheet.create({
     container: {
         marginTop: hp("2%"),
+        paddingHorizontal: wp("5%"),
         backgroundColor: Colors.white,
         height: hp("10%"),
         width: wp("80%"),
         flexDirection: "row",
-        justifyContent: "space-evenly",
+        justifyContent: "space-between",
         alignItems: "center",
         borderRadius: 20
     },
