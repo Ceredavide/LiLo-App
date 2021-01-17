@@ -8,7 +8,7 @@ import {
 
 import getContrastColor from "../../utils/getContrastColor"
 
-import { MaterialCommunityIcons as Icon } from '@expo/vector-icons'
+import { MaterialIcons as Icon } from '@expo/vector-icons'
 
 const Tag = ({ tag, style = {}, textStyle = {} }) => {
 

@@ -6,7 +6,7 @@ import {
     heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 
-import {MaterialCommunityIcons as Icon} from '@expo/vector-icons'
+import { MaterialIcons as Icon } from '@expo/vector-icons'
 
 import Colors from "../../../constants/colors"
 
@@ -24,7 +24,6 @@ const TagSelector = ({ tags, setFieldValue, selectedTags }) => {
         }
     }
 
-
     return (
         <View style={styles.container}>
 
@@ -33,11 +32,13 @@ const TagSelector = ({ tags, setFieldValue, selectedTags }) => {
 
                 const { _id, nome, iconName, colore } = tag
 
+                const isSelected = selectedTags.includes(_id)
+
                 return (
                     <TouchableOpacity onPress={() => handlePress(_id)} key={_id}>
-                        <View style={{ ...styles.tag, backgroundColor: selectedTags.includes(_id) ? colore : "#FFFF" }}>
-                            <Icon name={iconName} color={selectedTags.includes(_id) ? "#000" : Colors.main} />
-                            <Text style={{ ...styles.text, color: selectedTags.includes(_id) ? "#000" : Colors.main }}>{nome}</Text>
+                        <View style={{ ...styles.tag, backgroundColor: isSelected ? colore : "#FFFF" }}>
+                            <Icon name={iconName} color={isSelected ? "#000" : Colors.main} />
+                            <Text style={{ ...styles.text, color: isSelected ? "#000" : Colors.main }}>{nome}</Text>
                         </View>
                     </TouchableOpacity>
                 )
@@ -50,6 +51,7 @@ const TagSelector = ({ tags, setFieldValue, selectedTags }) => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
+        marginHorizontal: wp("15%"),
         marginBottom: hp("5%")
     },
     tag: {
