@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, TouchableWithoutFeedback, TextInput, Keyboard, View } from "react-native";
+import { StyleSheet, TouchableWithoutFeedback, TextInput, Keyboard } from "react-native";
 import { useSelector } from "react-redux"
 
 import {
@@ -10,7 +10,6 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 import useFormComunicazione from '../hooks/useFormComunicazione'
 
-import Screen from "../components/shared/Screen"
 import ImagePicker from "../components/comunicazioni/form/ImagePicker";
 import TagSelector from '../components/comunicazioni/form/TagSelector'
 import LoadingButton from "../components/shared/LoadingButton"
@@ -78,7 +77,7 @@ const NewComunicazioneScreen = ({ navigation, route }) => {
           <TagSelector
             tags={tags}
             setFieldValue={setFieldValue}
-            selectedTags={values.tags}
+            selectedTags={[...values.tags]}
           />
           <ImagePicker
             immagine={values.immagine}
