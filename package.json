@@ -4,6 +4,8 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
+    "build-ios": "expo build:ios -t archive --release-channel lilo",
+    "build-android": "expo build:android -t app-bundle --release-channel lilo",
     "eject": "expo eject",
     "test": "node ./node_modules/jest/bin/jest.js --watchAll"
   },
