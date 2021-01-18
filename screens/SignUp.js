@@ -125,15 +125,15 @@ function toggleAlert() {
       },
       {
         text: 'Invia Mail',
-        onPress: () => openMailer()
+        onPress: async () => await openMailer()
       }
     ],
     { cancelable: false }
   );
 }
 
-function openMailer() {
-  Linking.openURL('mailto:support@example.com')
+async function openMailer() {
+  await Linking.openURL('mailto:davide@cere.dev')
 }
 
 const styles = StyleSheet.create({
