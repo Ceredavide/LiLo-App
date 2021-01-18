@@ -4,6 +4,8 @@
     "slug": "lilo_definitivo",
     "privacy": "public",
     "ios": {
+      "buildNumber": "2",
+      "supportsTablet": false,
       "bundleIdentifier": "com.ceredavide.liloapp",
       "infoPlist": {
         "NSCameraUsageDescription": "This app uses the camera to take photos that can be used to be attached on an article that can be posted with the app. And also to scan qr codes and launch urls found in Qr Codes.",
