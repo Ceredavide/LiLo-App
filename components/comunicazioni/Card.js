@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   image: {
     height: wp("40%"),
     width: wp("87%"),
-    backgroundColor: "#FFF",
+    backgroundColor: "#323232",
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20
   },
