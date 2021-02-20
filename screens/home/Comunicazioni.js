@@ -6,12 +6,12 @@ import {
   widthPercentageToDP as wp
 } from "react-native-responsive-screen";
 
-import Screen from "../components/shared/Screen"
-import MyButton from "../components/shared/MyButton";
-import FloatingButton from "../components/shared/FloatingButton"
-import CardComunicazione from "../components/comunicazioni/CardComunicazione"
+import Screen from "../../components/shared/Screen"
+import MyButton from "../../components/shared/MyButton";
+import FloatingButton from "../../components/shared/FloatingButton"
+import CardComunicazione from "../../components/comunicazioni/CardComunicazione"
 
-import Colors from "../constants/colors"
+import Colors from "../../constants/colors"
 
 const ComunicazioniScreen = ({ navigation }) => {
   const comunicazioni = useSelector(state => state.comunicazioni.comunicazioni)

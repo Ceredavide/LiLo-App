@@ -7,20 +7,20 @@ import {
     heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 
-import IconButton from "../components/shared/IconButton"
+import IconButton from "../../components/shared/IconButton"
 
-import Colors from "../constants/colors"
+import Colors from "../../constants/colors"
 
 const Welcome = ({ navigation }) => {
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "#FFFF" }}>
             <StatusBar barStyle="dark-content" backgroundColor="white"/>
-            <ImageBackground source={require("../assets/images/wallpaper.png")} style={styles.screen}>
+            <ImageBackground source={require("../../assets/images/wallpaper.png")} style={styles.screen}>
                 <View style={styles.card}>
                     <Text style={styles.title}>LiLo App</Text>
                     <Image
                         style={styles.image}
-                        source={require("../assets/images/scuola.jpeg")}
+                        source={require("../../assets/images/scuola.jpeg")}
                     />
                     <View style={styles.containerButtons}>
                         <IconButton

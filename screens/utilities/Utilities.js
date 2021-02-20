@@ -1,56 +1,45 @@
 import React from "react"
-import { StyleSheet, View, TouchableOpacity, Image, Text, Alert } from "react-native"
+import { StyleSheet, View, TouchableOpacity, Image, Text } from "react-native"
 
-// import * as WebBrowser from 'expo-web-browser';
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 
-import Screen from "../components/shared/Screen"
-import TransitionView from "../components/shared/TransitionView"
+import Screen from "../../components/shared/Screen"
+import TransitionView from "../../components/shared/TransitionView"
 
-import Constants from "../constants/app"
-import Colors from "../constants/colors"
+import Colors from "../../constants/colors"
 
 const Utilities = ({ navigation }) => {
 
     return (
         <Screen style={styles.screen} scrollable={true}>
             <TransitionView>
-                {/* <TransitionView>
-                    <View style={styles.row}>
-                        <Button
-                            text="Mappa"
-                            action={() => WebBrowser.openBrowserAsync(Constants.URL_MAP)}
-                            image={require("../assets/images/illustrations/mappa.jpg")}
-                        />
-                    </View>
-                </TransitionView> */}
                 <TransitionView index={0}>
                     <View style={styles.row}>
                         <Button
-                            text="Risorse"
-                            action={() => navigation.navigate("Risorse")}
-                            image={require("../assets/images/illustrations/risorse.jpg")}
+                            text="Autogestite"
+                            action={() => navigation.navigate("Autogestite")}
+                            image={require("../../assets/images/illustrations/autogestite.jpg")}
                         />
                     </View>
                 </TransitionView>
                 <TransitionView index={1}>
                     <View style={styles.row}>
                         <Button
-                            text="Lettore QR"
-                            action={() => navigation.navigate("Scanner")}
-                            image={require("../assets/images/illustrations/qr.jpg")}
+                            text="Risorse"
+                            action={() => navigation.navigate("Risorse")}
+                            image={require("../../assets/images/illustrations/risorse.jpg")}
                         />
                     </View>
                 </TransitionView>
                 <TransitionView index={2}>
                     <View style={styles.row}>
                         <Button
-                            text="Autogestite"
-                            action={() => Alert.alert('Coming Soon.')}
-                            image={require("../assets/images/illustrations/autogestite.jpg")}
+                            text="Lettore QR"
+                            action={() => navigation.navigate("Scanner")}
+                            image={require("../../assets/images/illustrations/qr.jpg")}
                         />
                     </View>
                 </TransitionView>

@@ -8,14 +8,14 @@ import {
 } from "react-native-responsive-screen";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-import useFormComunicazione from '../hooks/useFormComunicazione'
+import useFormComunicazione from '../../hooks/useFormComunicazione'
 
-import ImagePicker from "../components/comunicazioni/form/ImagePicker";
-import TagSelector from '../components/comunicazioni/form/TagSelector'
-import LoadingButton from "../components/shared/LoadingButton"
-import ErrorText from "../components/shared/ErrorText"
+import ImagePicker from "../../components/comunicazioni/form/ImagePicker";
+import TagSelector from '../../components/comunicazioni/form/TagSelector'
+import LoadingButton from "../../components/shared/LoadingButton"
+import ErrorText from "../../components/shared/ErrorText"
 
-import Colors from "../constants/colors"
+import Colors from "../../constants/colors"
 
 const NewComunicazioneScreen = ({ navigation, route }) => {
 

@@ -9,13 +9,13 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 import { TextInput } from "react-native-paper"
 
-import LoadingButton from "../components/shared/LoadingButton"
-import Button from "../components/shared/MyButton"
-import ErrorText from "../components/shared/ErrorText"
+import LoadingButton from "../../components/shared/LoadingButton"
+import Button from "../../components/shared/MyButton"
+import ErrorText from "../../components/shared/ErrorText"
 
-import useSignUp from "../hooks/useSignUp";
+import useSignUp from "../../hooks/useSignUp";
 
-import Colors from "../constants/colors"
+import Colors from "../../constants/colors"
 
 const SignUp = ({ navigation }) => {
 

@@ -8,9 +8,9 @@ import {
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 
-import Screen from "../components/shared/Screen"
+import Screen from "../../components/shared/Screen"
 
-import Colors from "../constants/colors"
+import Colors from "../../constants/colors"
 
 const Scanner = () => {
   const [hasPermission, setHasPermission] = useState(null);

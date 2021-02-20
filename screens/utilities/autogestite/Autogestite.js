@@ -7,10 +7,12 @@ import {
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 
-import { fetchProposte } from "../store/actions/proposte"
+import { fetchProposte } from "../../../store/actions/proposte"
 
-import ChartProposte from "../components/autogestite/ChartProposte";
-import UltimeProposte from "../components/autogestite/UltimeProposte";
+import ChartProposte from "../../../components/autogestite/ChartProposte";
+import UltimeProposte from "../../../components/autogestite/UltimeProposte";
+
+import Colors from "../../../constants/colors"
 
 const AutogestiteScreen = () => {
   const dispatch = useDispatch()
@@ -53,7 +55,7 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     padding: 5,
-    backgroundColor: "#F1F5F9"
+    backgroundColor: Colors.main
   },
   title: {
     marginTop: hp("2%"),

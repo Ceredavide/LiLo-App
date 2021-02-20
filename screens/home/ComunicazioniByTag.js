@@ -1,19 +1,19 @@
 import React, { useState, useEffect, useContext } from "react";
 import { FlatList, TouchableOpacity, ActivityIndicator, RefreshControl } from "react-native";
 
-import { AuthContext } from "../Context"
+import { AuthContext } from "../../Context"
 
 import axios from "axios"
-import checkConnection from "../utils/checkConnection"
-import renderComunicazioni from "../utils/renderComunicazioni"
+import checkConnection from "../../utils/checkConnection"
+import renderComunicazioni from "../../utils/renderComunicazioni"
 
-import ErrorScreen from "../screens/Error"
+import ErrorScreen from "../Error"
 
-import Screen from '../components/shared/Screen'
-import TransitionView from '../components/shared/TransitionView'
-import Card from '../components/comunicazioni/Card'
+import Screen from '../../components/shared/Screen'
+import TransitionView from '../../components/shared/TransitionView'
+import Card from '../../components/comunicazioni/Card'
 
-import useEnvVars from "../configuration"
+import useEnvVars from "../../configuration"
 const { apiUrl } = useEnvVars()
 
 const ComunicazioniByTag = ({ navigation, route }) => {

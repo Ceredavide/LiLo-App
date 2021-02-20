@@ -8,10 +8,10 @@ import {
     widthPercentageToDP as wp
 } from "react-native-responsive-screen";
 
-import Screen from "../components/shared/Screen"
-import Button from "../components/shared/MyButton"
+import Screen from "../../components/shared/Screen"
+import Button from "../../components/shared/MyButton"
 
-import Colors from "../constants/colors"
+import Colors from "../../constants/colors"
 
 const EmailConfirmation = ({ navigation }) => {
 
@@ -22,7 +22,7 @@ const EmailConfirmation = ({ navigation }) => {
                 autoPlay
                 loop={true}
                 style={styles.lottie}
-                source={require('../assets/lottie/email.json')}
+                source={require('../../assets/lottie/email.json')}
             />
             <Text style={styles.text}>Controlla la tua posta elettronica per attivare il tuo account.</Text>
             <Text style={styles.smallText}>(anche la posta indesiderata mi racc)</Text>

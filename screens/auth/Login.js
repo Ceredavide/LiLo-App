@@ -9,12 +9,12 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 import { AntDesign } from "@expo/vector-icons";
 
-import LoadingButton from "../components/shared/LoadingButton"
-import ErrorText from "../components/shared/ErrorText"
+import LoadingButton from "../../components/shared/LoadingButton"
+import ErrorText from "../../components/shared/ErrorText"
 
-import useLogin from "../hooks/useLogin";
+import useLogin from "../../hooks/useLogin";
 
-import Colors from "../constants/colors"
+import Colors from "../../constants/colors"
 
 const LoginScreen = () => {
 
@@ -27,7 +27,7 @@ const LoginScreen = () => {
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <>
           <Image
-            source={require("../assets/images/illustrations/login.png")}
+            source={require("../../assets/images/illustrations/login.png")}
             style={styles.image}
           />
           <View style={styles.form}>

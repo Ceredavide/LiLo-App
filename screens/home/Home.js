@@ -2,15 +2,15 @@ import React, { useEffect, useContext } from "react";
 import { FlatList, TouchableOpacity, ActivityIndicator, RefreshControl } from "react-native";
 import { useSelector, useDispatch } from "react-redux"
 
-import { AuthContext } from "../Context"
+import { AuthContext } from "../../Context"
 
-import { fetchComunicazioni, refreshComunicazioni } from "../store/actions/comunicazioni"
+import { fetchComunicazioni, refreshComunicazioni } from "../../store/actions/comunicazioni"
 
-import ErrorScreen from "../screens/Error"
+import ErrorScreen from "../Error"
 
-import Screen from "../components/shared/Screen"
-import TransitionView from "../components/shared/TransitionView"
-import Card from "../components/comunicazioni/Card";
+import Screen from "../../components/shared/Screen"
+import TransitionView from "../../components/shared/TransitionView"
+import Card from "../../components/comunicazioni/Card";
 
 const HomeScreen = ({ navigation }) => {
   const dispatch = useDispatch()

@@ -1,14 +1,14 @@
 import React from "react"
 import { ActivityIndicator, FlatList, RefreshControl } from "react-native"
 
-import useRisorse from "../hooks/useRisorse"
+import useRisorse from "../../hooks/useRisorse"
 
-import Error from "./Error"
-import Screen from "../components/shared/Screen"
-import TransitionView from "../components/shared/TransitionView"
-import CardRisorse from "../components/risorse/CardRisorse"
+import Error from "../Error"
+import Screen from "../../components/shared/Screen"
+import TransitionView from "../../components/shared/TransitionView"
+import CardRisorse from "../../components/risorse/CardRisorse"
 
-import Colors from "../constants/colors"
+import Colors from "../../constants/colors"
 
 const RisorseScreen = () => {
 
