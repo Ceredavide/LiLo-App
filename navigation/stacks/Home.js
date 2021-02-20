@@ -8,11 +8,11 @@ import {
   widthPercentageToDP as wp
 } from "react-native-responsive-screen";
 
-import HomeScreen from "../../screens/Home";
-import ComunicazioneScreen from "../../screens/Comunicazione";
-import ComunicazioniByTagScreen from '../../screens/ComunicazioniByTag'
-import ComunicazioniScreen from "../../screens/Comunicazioni";
-import FormComunicazioneScreen from "../../screens/FormComunicazione";
+import HomeScreen from "../../screens/home/Home";
+import ComunicazioneScreen from "../../screens/home/Comunicazione";
+import ComunicazioniByTagScreen from '../../screens/home/ComunicazioniByTag'
+import ComunicazioniScreen from "../../screens/home/Comunicazioni";
+import FormComunicazioneScreen from "../../screens/home/FormComunicazione";
 
 import TouchableIcon from "../../components/shared/TouchableIcon"
 

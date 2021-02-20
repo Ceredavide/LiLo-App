@@ -4,10 +4,10 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import Header from "../../components/headers/Auth"
 
-import WelcomeScreen from "../../screens/Welcome"
-import LoginScreen from "../../screens/Login";
-import SignUpScreen from "../../screens/SignUp";
-import EmailConfirmationScreen from "../../screens/EmailConfirmation"
+import WelcomeScreen from "../../screens/auth/Welcome"
+import LoginScreen from "../../screens/auth/Login";
+import SignUpScreen from "../../screens/auth/SignUp";
+import EmailConfirmationScreen from "../../screens/auth/EmailConfirmation"
 
 const { Navigator, Screen } = createStackNavigator()
 
