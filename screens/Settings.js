@@ -24,7 +24,7 @@ const SettingsScreen = () => {
 
   const handleTermini = () => {
     Linking.openURL(
-      "http://liloautogestito.ch/API/files/termini_e_condizioni.html"
+      "https://cere.dev/lilo/termini-condizioni"
     );
   };
 
