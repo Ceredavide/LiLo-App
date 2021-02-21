@@ -14,7 +14,7 @@ const Button = ({ text, iconName, color, action }) => {
 
     return (
         <TouchableOpacity onPress={action} style={buttonStyle}>
-            <Icon name={iconName} size={hp("5%")} color="#FFF" />
+            <Icon name={iconName} size={hp("6%")} color="#FFF" />
             <Text style={styles.text}>{text}</Text>
         </TouchableOpacity>
     )
@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     text: {
         color: "#FFFF",
         marginTop: hp("1%"),
+        fontSize: hp("1.8%"),
         fontFamily: "open-sans-regular",
     }
 })
