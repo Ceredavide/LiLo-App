@@ -9,15 +9,19 @@ import {
 
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 
+import TransitionView from "../shared/TransitionView"
+
 import Colors from "../../constants/colors"
 
 const NoAssenze = ({ isLoading, loadAssenze }) => {
   return (
     <ScrollView style={styles.container} refreshControl={<RefreshControl refreshing={isLoading} onRefresh={loadAssenze} tintColor={Colors.white} />}>
-      <View style={styles.card}>
-        <Text style={styles.emoji}>🤷🏻‍♂️</Text>
-        <Text style={styles.text}>Non sono previste assenze</Text>
-      </View>
+      <TransitionView>
+        <View style={styles.card}>
+          <Text style={styles.emoji}>🤷🏻‍♂️</Text>
+          <Text style={styles.text}>Non sono previste assenze</Text>
+        </View>
+      </TransitionView>
     </ScrollView>
   );
 };
