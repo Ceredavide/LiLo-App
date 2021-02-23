@@ -10,7 +10,7 @@ import Header from "../components/assenze/Header";
 import CardAssenza from "../components/assenze/CardAssenza";
 import NoAssenze from "../components/assenze/NoAssenze";
 
-import Colors from "../constants/colors"
+import COLORS from "../constants/colors"
 
 const AssenzeScreen = () => {
 
@@ -38,7 +38,7 @@ const AssenzeScreen = () => {
   return (
     <Screen>
       {isLoading ?
-        <ActivityIndicator color={Colors.white} />
+        <ActivityIndicator color={COLORS.white} />
         : error ?
           <Error text={error.response?.data || "Qualcosa è andato storto."} reload={handleFetch} />
           : assenze.length === 0 ?
@@ -53,7 +53,7 @@ const AssenzeScreen = () => {
                 <RefreshControl
                   refreshing={isRefreshing}
                   onRefresh={handleRefresh}
-                  tintColor={Colors.white}
+                  tintColor={COLORS.white}
                 />
               }
               renderItem={renderItem}
