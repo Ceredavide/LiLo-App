@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { StyleSheet, View, ScrollView, RefreshControl, Text } from "react-native";
 import { useDispatch, useSelector } from "react-redux"
 
@@ -7,7 +7,10 @@ import {
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 
+import { AuthContext } from '../../../Context'
+
 import Button from "../../../components/autogestite/Button"
+import EditorButton from "../../../components/autogestite/EditorButton"
 
 import { fetchProposte } from "../../../store/actions/proposte"
 
@@ -18,6 +21,8 @@ import COLORS from "../../../constants/COLORS"
 const AutogestiteScreen = ({ navigation }) => {
   const dispatch = useDispatch()
   const [isRefreshing, setIsRefreshing] = useState(false)
+
+  const { auth } = useContext(AuthContext)
 
   const nProposte = useSelector(state => state.proposte.nProposte)
 
@@ -53,6 +58,7 @@ const AutogestiteScreen = ({ navigation }) => {
           action={() => navigation.navigate("ListProposte")}
         />
       </View>
+      {auth.user?.role === "administrator" && "editor" ? <EditorButton navigation={navigation}/> : null}
       <View style={styles.numberContainer}>
         <Text style={styles.title}>Numero di proposte fatte:</Text>
         <Text style={styles.number}>{nProposte}</Text>
