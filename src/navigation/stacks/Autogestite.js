@@ -9,9 +9,18 @@ import headerstyle from "../../styles/navigation/Header";
 
 const { Navigator, Screen } = createStackNavigator()
 
+const customHeaderStyle = {
+  ...headerstyle,
+  headerTitleAlign: "center",
+  headerTitleStyle: {
+    ...headerstyle.headerTitleStyle,
+    marginLeft: 0
+  },
+}
+
 const AutogestiteStack = () => {
   return (
-    <Navigator screenOptions={headerstyle} headerMode="screen">
+    <Navigator screenOptions={customHeaderStyle} headerMode="screen">
       <Screen name="Autogestite" component={AutogestiteScreen} />
       <Screen name="Form" component={FormPropostaScreen} />
       <Screen name="ListProposte" component={ListProposteScreen} />
