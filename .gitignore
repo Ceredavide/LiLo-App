@@ -6,3 +6,6 @@ npm-debug.*
 *.key
 *.mobileprovision
 data/**/*
+src/screens/.DS_Store
+src/store/.DS_Store
+src/components/.DS_Store
