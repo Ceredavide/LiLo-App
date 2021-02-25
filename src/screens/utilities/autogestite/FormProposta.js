@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     text: {
         marginBottom: hp("1%"),
         alignSelf: "flex-start",
-        fontSize: hp("3%"),
+        fontSize: hp("2.5%"),
         fontFamily: "open-sans-regular",
         marginLeft: wp("10%"),
         color: COLORS.white
