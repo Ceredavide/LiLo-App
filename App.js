@@ -4,14 +4,14 @@ import { Provider } from "react-redux"
 import { NavigationContainer } from "@react-navigation/native"
 import { createStackNavigator } from "@react-navigation/stack"
 
-import AuthStack from "./navigation/stacks/Auth";
-import AppNavigator from "./navigation/AppNavigator";
+import AuthStack from "./src/navigation/stacks/Auth";
+import AppNavigator from "./src/navigation/AppNavigator";
 
-import store from "./store/store"
+import store from "./src/store/store"
 
-import { AuthContext } from "./Context"
+import { AuthContext } from "./src/Context"
 
-import Loading from "./screens/Loading";
+import Loading from "./src/screens/Loading";
 
 const { Navigator, Screen } = createStackNavigator()
 
