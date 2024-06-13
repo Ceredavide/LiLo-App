@@ -14,7 +14,7 @@ const ENV = {
 
 const getEnvVars = () => {
 
-  const env = Constants.manifest.releaseChannel;
+  const env = Constants.expoConfig?.extra?.env
 
   if (!__DEV__ && env) {
     switch (env) {
