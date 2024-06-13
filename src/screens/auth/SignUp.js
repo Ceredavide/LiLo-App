@@ -103,7 +103,7 @@ const SignUp = ({ navigation }) => {
           <LoadingButton
             handleSubmit={handleSubmit}
             loading={isLoading}
-            color={Object.entries(errors).length === 0 ? Colors.green : Colors.red}
+            color={Object.entries(errors).length === 0 ? COLORS.green : COLORS.red}
             text="Invia"
             style={{ marginBottom: hp("1%") }}
           />
@@ -112,7 +112,7 @@ const SignUp = ({ navigation }) => {
             color={null}
             action={toggleAlert}
             style={{ width: wp("50%"), height: hp("3.5%") }}
-            textStyle={{ fontSize: hp("1.7%"), color: Colors.warning }}
+            textStyle={{ fontSize: hp("1.7%"), color: COLORS.warning }}
           />
         </>
       </TouchableWithoutFeedback>
