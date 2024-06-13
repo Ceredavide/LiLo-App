@@ -20,7 +20,7 @@
     "@react-navigation/stack": "^5.0.9",
     "@react-navigation/tabs": "0.0.0-alpha.12",
     "axios": "1.6.0",
-    "babel-preset-expo": "^9.3.0",
+    "babel-preset-expo": "^11.0.10",
     "core-js": "^3.6.4",
     "expo": "^51.0.14",
     "expo-asset": "~10.0.9",
