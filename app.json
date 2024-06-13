@@ -31,8 +31,28 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
-    "platforms": ["android", "ios"],
-    "description": "liam sucks"
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "platforms": [
+      "android",
+      "ios"
+    ],
+    "description": "liam sucks",
+    "plugins": [
+      "expo-secure-store",
+      "expo-asset",
+     [
+       "expo-font",
+      {
+        "fonts": [
+          "./assets/fonts/OpenSans-Light.ttf",
+          "./assets/fonts/OpenSans-Regular.ttf",
+          "./assets/fonts/OpenSans-Bold.ttf",
+          "./assets/fonts/PlayfairDisplay-SemiBold.ttf"
+        ]
+      }
+     ]
+    ]
   }
 }
