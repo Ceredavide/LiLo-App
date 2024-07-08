@@ -25,18 +25,87 @@ export default function useAssenze() {
     }, [])
 
     async function fetchAssenze() {
-        try {
-            await checkConnection()
-            const response = await axios.get(URL_ASSENZE, {
-                headers: {
-                    Authorization: "Bearer " + auth.token
+
+        const {token} = auth
+
+        if(token === "123456789"){
+            const dummyAssenze = [
+                {
+                    title: "15.09.2021",
+                    data: [
+                        {
+                            nome: "Mario",
+                            cognome: "Rossi",
+                            motivo: "Malattia"
+                        },
+                        {
+                            nome: "Luca",
+                            cognome: "Bianchi",
+                            motivo: "Malattia"
+                        },
+                        {
+                            nome: "Paolo",
+                            cognome: "Verdi",
+                            motivo: "Malattia"
+                        }
+                    ]
+                },
+                {
+                    title: "17.09.2021",
+                    data: [
+                        {
+                            nome: "Mario",
+                            cognome: "Rossi",
+                            motivo: "Malattia"
+                        },
+                        {
+                            nome: "Luca",
+                            cognome: "Bianchi",
+                            motivo: "Malattia"
+                        },
+                        {
+                            nome: "Paolo",
+                            cognome: "Verdi",
+                            motivo: "Malattia"
+                        }
+                    ]
+                },
+                {
+                    title: "20.09.2021",
+                    data: [
+                        {
+                            nome: "Mario",
+                            cognome: "Rossi",
+                            motivo: "Malattia"
+                        },
+                        {
+                            nome: "Luca",
+                            cognome: "Bianchi",
+                            motivo: "Malattia"
+                        },
+                        {
+                            nome: "Paolo",
+                            cognome: "Verdi",
+                            motivo: "Malattia"
+                        }
+                    ]
                 }
-            })
+            ]
+            setAssenze(dummyAssenze)
+        }else{
+            try {
+                await checkConnection()
+                const response = await axios.get(URL_ASSENZE, {
+                    headers: {
+                        Authorization: "Bearer " + token
+                    }
+                })
 
-            setAssenze(response.data.assenze)
+                setAssenze(response.data.assenze)
 
-        } catch (error) {
-            setError(error)
+            } catch (error) {
+                setError(error)
+            }
         }
     }
 
