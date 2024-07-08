@@ -77,7 +77,7 @@ const App = () => {
             <Provider store={store}>
                 <AuthContext.Provider value={providerAuth}>
                     <NavigationContainer>
-                        <Navigator screenOptions={_screenOptions} mode="modal">
+                        <Navigator screenOptions={_screenOptions}>
                             {!auth.token ?
                                 <Screen name="Auth" component={AuthStack}/> :
                                 <Screen name="App" component={AppNavigator}/>
@@ -91,7 +91,8 @@ const App = () => {
 }
 
 const _screenOptions = {
-    headerShown: false
+    headerShown: false,
+    presentation: "modal"
 }
 
 
