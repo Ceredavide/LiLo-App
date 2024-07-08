@@ -1,5 +1,5 @@
-import React from "react"
-import { StyleSheet, SafeAreaView, StatusBar, View, Text, ImageBackground, Image } from "react-native"
+import React, {useContext, useEffect} from "react"
+import { StyleSheet, SafeAreaView, StatusBar, View, Text, ImageBackground, Image, Alert } from "react-native"
 
 
 import {
@@ -10,8 +10,32 @@ import {
 import IconButton from "../../components/shared/IconButton"
 
 import COLORS from "../../constants/COLORS"
+import * as SecureStore from "expo-secure-store";
+import {AuthContext} from "../../Context";
 
 const Welcome = ({ navigation }) => {
+
+    const { setAuth } = useContext(AuthContext)
+
+    useEffect(() => {
+        Alert.alert(
+            "Welcome to the Demo of LiLo App!",
+            "This version is intended to present the main features of the app, there are no requests with backend services.",
+        )
+    }, [])
+
+    const fakeLogin = async ()=> {
+        const fakeUser = {
+            user: {
+              nome: "Davide",
+              cognome: "Ceresa"
+            },
+            token: "123456789"
+        }
+        await SecureStore.setItemAsync("user", JSON.stringify(fakeUser))
+        setAuth(fakeUser)
+    }
+
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "#FFFF" }}>
             <StatusBar barStyle="dark-content" backgroundColor="white"/>
@@ -23,6 +47,12 @@ const Welcome = ({ navigation }) => {
                         source={require("../../../assets/images/scuola.jpeg")}
                     />
                     <View style={styles.containerButtons}>
+                        <IconButton
+                            action={() => fakeLogin()}
+                            text="Go to Home"
+                            primaryColor={COLORS.black}
+                            backgroundColor={COLORS.secondary}
+                        />
                         <IconButton
                             action={() => navigation.navigate("Login")}
                             text="Login"
@@ -50,7 +80,7 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     card: {
-        height: hp("45%"),
+        height: hp("50%"),
         width: wp("85%"),
         backgroundColor: COLORS.main,
         borderRadius: 40,
