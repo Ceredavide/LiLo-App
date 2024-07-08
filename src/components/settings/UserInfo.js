@@ -19,7 +19,7 @@ const UserInfo = ({ user = {} }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: hp("5%"),
+        paddingTop: hp("2%"),
         alignItems: "center"
     },
     text: {
