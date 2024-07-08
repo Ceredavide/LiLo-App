@@ -13,45 +13,126 @@ export function fetchComunicazioni(token) {
     return async dispatch => {
         dispatch({ type: actionTypes.FETCH_COMUNICAZIONI_START });
         try {
-            await checkConnection()
-            const response = await axios.get(`${apiUrl}/api/comunicazioni`, {
-                headers: {
-                    Authorization: "Bearer " + token
-                }
-            })
-            dispatch({
-                type: actionTypes.FETCH_COMUNICAZIONI_SUCCESS,
-                payload: {
-                    comunicazioni: response.data.comunicazioni,
-                    tags: response.data.tags
-                }
-            });
+            await checkConnection();
+
+            if (token === "123456789") {
+                // Popola le comunicazioni con dati dummy
+                const dummyData = {
+                    comunicazioni: [
+                        {
+                            _id: 1,
+                            titolo: "Dummy Comunicazione 1",
+                            sottotitolo: "Sottotitolo della dummy comunicazione 1",
+                            tags: [
+                                { nome: "tag1", iconName: "star", colore: "#ff7954" },
+                                { nome: "tag2", iconName: "sync", colore: "#7ddc1f" }
+                            ],
+                            immagine: "https://science.nasa.gov/wp-content/uploads/2024/06/stsci-01hzmfyq7k9gr4za93kyn0egsj-annotated-4k.jpg?w=2560&format=webp",
+                            createdAt: "2024-01-01T12:00:00Z"
+                        },
+                        {
+                            _id: 2,
+                            titolo: "Dummy Comunicazione 2",
+                            sottotitolo: "Sottotitolo della dummy comunicazione 2",
+                            tags: [
+                                { nome: "tag3", iconName: "check", colore: "#f4e604" },
+                                { nome: "tag4", iconName: "redo", colore: "#8400ff" }
+                            ],
+                            immagine: "https://dummyimage.com/600x400/000/fff&text=Dummy2",
+                            createdAt: "2024-01-02T12:00:00Z"
+                        }
+                    ],
+                    tags: [
+                        { nome: "tag1", iconName: "icon1", colore: "#ff7954" },
+                        { nome: "tag2", iconName: "icon2", colore: "#7ddc1f" },
+                        { nome: "tag3", iconName: "icon3", colore: "#f4e604" },
+                        { nome: "tag4", iconName: "icon4", colore: "#8400ff" }
+                    ]
+                };
+                dispatch({
+                    type: actionTypes.FETCH_COMUNICAZIONI_SUCCESS,
+                    payload: dummyData
+                });
+            } else {
+                const response = await axios.get(`${apiUrl}/api/comunicazioni`, {
+                    headers: {
+                        Authorization: "Bearer " + token
+                    }
+                });
+                dispatch({
+                    type: actionTypes.FETCH_COMUNICAZIONI_SUCCESS,
+                    payload: {
+                        comunicazioni: response.data.comunicazioni,
+                        tags: response.data.tags
+                    }
+                });
+            }
         } catch (error) {
-            console.log(error)
+            console.log(error);
             dispatch({
                 type: actionTypes.FETCH_COMUNICAZIONI_ERROR,
                 error: error
             });
         }
     };
-};
+}
 
 export function refreshComunicazioni(token) {
     return async dispatch => {
         dispatch({ type: actionTypes.REFRESH_COMUNICAZIONI_START });
         try {
-            const response = await axios.get(`${apiUrl}/api/comunicazioni`, {
-                headers: {
-                    Authorization: "Bearer " + token
-                }
-            })
-            dispatch({
-                type: actionTypes.REFRESH_COMUNICAZIONI_SUCCESS,
-                payload: {
-                    comunicazioni: response.data.comunicazioni,
-                    tags: response.data.tags
-                }
-            });
+            if (token === "123456789") {
+                // Popola le comunicazioni con dati dummy
+                const dummyData = {
+                    comunicazioni: [
+                        {
+                            _id: 1,
+                            titolo: "Dummy Comunicazione 1",
+                            sottotitolo: "Sottotitolo della dummy comunicazione 1",
+                            tags: [
+                                { nome: "tag1", iconName: "star", colore: "#ff7954" },
+                                { nome: "tag2", iconName: "sync", colore: "#7ddc1f" }
+                            ],
+                            immagine: "https://science.nasa.gov/wp-content/uploads/2024/06/stsci-01hzmfyq7k9gr4za93kyn0egsj-annotated-4k.jpg?w=2560&format=webp",
+                            createdAt: "2024-01-01T12:00:00Z"
+                        },
+                        {
+                            _id: 2,
+                            titolo: "Dummy Comunicazione 2",
+                            sottotitolo: "Sottotitolo della dummy comunicazione 2",
+                            tags: [
+                                { nome: "tag3", iconName: "check", colore: "#f4e604" },
+                                { nome: "tag4", iconName: "redo", colore: "#8400ff" }
+                            ],
+                            immagine: "https://dummyimage.com/600x400/000/fff&text=Dummy2",
+                            createdAt: "2024-01-02T12:00:00Z"
+                        }
+                    ],
+                    tags: [
+                        { nome: "tag1", iconName: "icon1", colore: "#ff7954" },
+                        { nome: "tag2", iconName: "icon2", colore: "#7ddc1f" },
+                        { nome: "tag3", iconName: "icon3", colore: "#f4e604" },
+                        { nome: "tag4", iconName: "icon4", colore: "#8400ff" }
+                    ]
+                };
+                dispatch({
+                    type: actionTypes.REFRESH_COMUNICAZIONI_SUCCESS,
+                    payload: dummyData
+                });
+            } else {
+                const response = await axios.get(`${apiUrl}/api/comunicazioni`, {
+                    headers: {
+                        Authorization: "Bearer " + token
+                    }
+                });
+                dispatch({
+                    type: actionTypes.REFRESH_COMUNICAZIONI_SUCCESS,
+                    payload: {
+                        comunicazioni: response.data.comunicazioni,
+                        tags: response.data.tags
+                    }
+                });
+            }
         } catch (error) {
             dispatch({
                 type: actionTypes.REFRESH_COMUNICAZIONI_ERROR,
@@ -60,6 +141,7 @@ export function refreshComunicazioni(token) {
         }
     };
 }
+
 
 export function postComunicazione(comunicazione, navigation, token) {
 
