@@ -12,9 +12,10 @@ import axios from "axios";
 import checkConnection from "../utils/checkConnection"
 
 import useEnvVars from "../Configuration"
-const { apiUrl } = useEnvVars()
 
 const useLogin = () => {
+
+    const { apiUrl } = useEnvVars()
 
     const { setAuth } = useContext(AuthContext)
 
