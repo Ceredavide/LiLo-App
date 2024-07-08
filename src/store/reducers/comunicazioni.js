@@ -5,9 +5,6 @@ import * as actionTypes from "../actionTypes"
 import renderComunicazioni from "../../utils/renderComunicazioni"
 import handleError from "../../utils/handleError"
 
-import getEnvVars from "../../Configuration"
-const { apiUrl } = getEnvVars()
-
 const initialState = {
   comunicazioni: [],
   tags: [],
