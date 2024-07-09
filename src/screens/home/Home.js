@@ -1,10 +1,6 @@
-import React, { useEffect, useContext } from "react";
 import { FlatList, TouchableOpacity, ActivityIndicator, RefreshControl } from "react-native";
-import { useSelector, useDispatch } from "react-redux"
 
-import { AuthContext } from "../../Context"
-
-import { fetchComunicazioni, refreshComunicazioni } from "../../store/actions/comunicazioni"
+import useCommunications  from "../../hooks/useCommunications";
 
 import ErrorScreen from "../Error"
 
@@ -13,13 +9,15 @@ import TransitionView from "../../components/shared/TransitionView"
 import Card from "../../components/comunicazioni/Card";
 
 const HomeScreen = ({ navigation }) => {
-  const dispatch = useDispatch()
-  const { comunicazioni, isLoading, isRefreshing, error } = useSelector(state => state.comunicazioni)
-  const { auth } = useContext(AuthContext)
 
-  useEffect(() => {
-    dispatch(fetchComunicazioni(auth.token))
-  }, []);
+  const {
+    communications,
+    error,
+    isLoading,
+    isRefreshing,
+    handleRefresh,
+    handleFetch
+  } = useCommunications()
 
   function renderItem({ item, index }) {
     return (
@@ -32,31 +30,32 @@ const HomeScreen = ({ navigation }) => {
   }
 
   return (
-    <Screen>
-      {
-        isLoading ? <ActivityIndicator /> : error ?
-          <ErrorScreen
-            reload={() => dispatch(fetchComunicazioni())}
-            text={error.response?.data || "Qualcosa è andato storto."}
-          />
-          :
-          <TransitionView>
-            <FlatList
-              data={comunicazioni}
-              keyExtractor={item => item._id}
-              showsVerticalScrollIndicator={false}
-              renderItem={renderItem}
-              refreshControl={
-                <RefreshControl
-                  refreshing={isRefreshing}
-                  onRefresh={() => dispatch(refreshComunicazioni(auth.token))}
-                  tintColor="#fff"
-                />
-              }
+      <Screen>
+        {isLoading ? (
+            <ActivityIndicator />
+        ) : error ? (
+            <ErrorScreen
+                reload={handleFetch}
+                text={error.response?.data || "Qualcosa è andato storto."}
             />
-          </TransitionView>
-      }
-    </Screen>
+        ) : (
+            <TransitionView>
+              <FlatList
+                  data={communications}
+                  keyExtractor={(item) => item._id}
+                  showsVerticalScrollIndicator={false}
+                  renderItem={renderItem}
+                  refreshControl={
+                    <RefreshControl
+                        refreshing={isRefreshing}
+                        onRefresh={handleRefresh}
+                        tintColor="#fff"
+                    />
+                  }
+              />
+            </TransitionView>
+        )}
+      </Screen>
   );
 };
 
