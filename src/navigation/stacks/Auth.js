@@ -2,8 +2,6 @@ import React from "react"
 
 import { createStackNavigator } from "@react-navigation/stack";
 
-import Header from "../../components/headers/Auth"
-
 import WelcomeScreen from "../../screens/auth/Welcome"
 import LoginScreen from "../../screens/auth/Login";
 import SignUpScreen from "../../screens/auth/SignUp";
@@ -13,7 +11,7 @@ const { Navigator, Screen } = createStackNavigator()
 
 const AuthStack = () => {
   return (
-    <Navigator screenOptions={screenOptions} headerMode="screen">
+    <Navigator screenOptions={screenOptions}>
       <Screen name="Welcome" component={WelcomeScreen} options={welcomeOptions} />
       <Screen name="Login" component={LoginScreen} options={LogInOptions} />
       <Screen name="SignUp" component={SignUpScreen} options={SignUpOptions} />
@@ -23,7 +21,7 @@ const AuthStack = () => {
 }
 
 const screenOptions = {
-  header: props => <Header {...props} />
+    headerShown: false,
 }
 
 const welcomeOptions = {
