@@ -5,21 +5,19 @@ import AutogestiteStack from "./Autogestite"
 import UtilitiesScreen from "../../screens/utilities/Utilities"
 import RisorseScreen from "../../screens/utilities/Risorse"
 
-import headerStyle from "../../styles/navigation/Header";
-
 const { Navigator, Screen } = createStackNavigator()
 
 const UtilitiesStack = () => {
     return (
-        <Navigator screenOptions={headerStyle} headerMode="screen">
+        <Navigator screenOptions={_screenOptions}>
             <Screen name="Utilità" component={UtilitiesScreen} />
-            <Screen name="Autogestite" component={AutogestiteStack} options={autogestiteOptions} />
+            <Screen name="Autogestite" component={AutogestiteStack} />
             <Screen name="Risorse" component={RisorseScreen} />
         </Navigator>
     )
 }
 
-const autogestiteOptions = {
+const _screenOptions = {
     headerShown: false
 }
 

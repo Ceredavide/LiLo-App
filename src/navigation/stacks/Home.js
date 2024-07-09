@@ -42,9 +42,9 @@ function renderHeaderButton({ navigation }, user) {
 function getHeaderTitle({ route }) {
   const { tag } = route.params
   return {
-    headerTitleStyle: { alignSelf: 'flex-start' },
     title: tag.nome,
     headerTitleStyle: {
+      alignSelf: 'flex-start',
       fontSize: hp("5%")
     }
   }
@@ -67,7 +67,7 @@ const HomeStack = () => {
   const { auth } = useContext(AuthContext)
 
   return (
-    <Navigator screenOptions={headerStyle} headerMode="screen">
+    <Navigator screenOptions={headerStyle}>
       <Screen name="Home" component={HomeScreen} options={props => renderHeaderButton(props, auth?.user)} />
       <Screen name="Comunicazione" component={ComunicazioneScreen} options={comunicazioneOptions} />
       <Screen name="ComunicazioniByTag" component={ComunicazioniByTagScreen} options={props => getHeaderTitle(props)} />
@@ -76,7 +76,6 @@ const HomeStack = () => {
     </Navigator>
   )
 }
-
 
 const comunicazioneOptions = {
   headerShown: false

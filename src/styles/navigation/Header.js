@@ -7,7 +7,8 @@ import {
 
 import COLORS from "../../constants/COLORS"
 
-export default styles = {
+const styles = {
+  headerMode: "screen",
   headerStyle: {
     elevation: 0,
     backgroundColor: COLORS.main,
@@ -25,3 +26,5 @@ export default styles = {
   headerBackTitleVisible: false,
   headerTintColor: COLORS.white
 }
+
+export default styles;

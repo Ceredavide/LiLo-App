@@ -5,9 +5,6 @@ import * as actionTypes from "../actionTypes"
 import renderComunicazioni from "../../utils/renderComunicazioni"
 import handleError from "../../utils/handleError"
 
-import getEnvVars from "../../Configuration"
-const { apiUrl } = getEnvVars()
-
 const initialState = {
   comunicazioni: [],
   tags: [],
@@ -87,7 +84,7 @@ const comunicazioniReducer = (state = initialState, action) => {
           ...state.comunicazioni,
           {
             ...action.comunicazione,
-            immagine: `${apiUrl}/${action.comunicazione.immagine}`,
+            immagine: `${action.comunicazione.immagine}`,
             createdAt: moment(action.comunicazione.createdAt).format("DD/MM")
           }],
         isLoadingPost: false
@@ -112,7 +109,7 @@ const comunicazioniReducer = (state = initialState, action) => {
 
       const editedComunicazione = {
         ...action.comunicazione,
-        immagine: `${apiUrl}/${action.comunicazione.immagine}`,
+        immagine: `${action.comunicazione.immagine}`,
         createdAt: moment(action.comunicazione.createdAt).format("DD/MM")
       }
 
