@@ -24,10 +24,10 @@ const AppNavigator = () => {
     <>
       <StatusBar backgroundColor={COLORS.main} barStyle="light-content" />
       <Navigator screenOptions={_screenOptions} initialRouteName={"Comunicazioni"}>
-        <Screen name="Comunicazioni" component={HomeStack} options={{headerShown: false}} />
-        <Screen name="Assenze" options={headerStyle} component={AssenzeScreen}/>
+        <Screen name="Comunications" component={HomeStack} options={{headerShown: false}} />
+        <Screen name="Absences" options={headerStyle} component={AssenzeScreen}/>
         <Screen name="Utilities" component={UtilitiesStack} />
-        <Screen name="Impostazioni" options={headerStyle} component={SettingsScreen} />
+        <Screen name="Settings" options={headerStyle} component={SettingsScreen} />
       </Navigator>
     </>
   )
@@ -43,11 +43,11 @@ const _screenOptions = ({ route }) => ({
   tabBarIcon: ({ color }) => {
     let iconName;
     switch (route.name) {
-      case "Comunicazioni": {
+      case "Comunications": {
         iconName = "home";
         break;
       }
-      case "Assenze": {
+      case "Absences": {
         iconName = "people";
         break;
       }
@@ -55,7 +55,7 @@ const _screenOptions = ({ route }) => ({
         iconName = "dashboard";
         break;
       }
-      case "Impostazioni": {
+      case "Settings": {
         iconName = "settings";
         break;
       }
