@@ -98,7 +98,7 @@ One of the key challenges encountered during the development of the LiLo-APP was
 
 This necessity to integrate external libraries led to the realization of the immense and vibrant community surrounding React Native. The availability of numerous third-party libraries and the active participation of developers globally provided a wealth of resources and support. This community-driven ecosystem was instrumental in overcoming various development hurdles and implementing needed features.
 
-### Overreliance on External Libraries
+### Over-reliance on External Libraries
 
 However, relying heavily on external libraries also posed its own set of challenges. In hindsight, I may have overused external libraries, sometimes opting for them without thoroughly evaluating their maintenance status and community support. On a few occasions, I encountered issues with unmaintained libraries, which delayed the development process. These instances highlighted the importance of carefully selecting external dependencies, ensuring they are well-supported and actively maintained to avoid potential setbacks.
 
@@ -106,19 +106,56 @@ However, relying heavily on external libraries also posed its own set of challen
 
 # 5. Deployment View
 
-# 6. Quality Requirements
+#### Prerequisites
 
-# 7. Risks and Technical Debt
+Ensure you have the following tools installed:
+
+1. **Node.js** and **npm**: You can download and install them from the [Node.js official website](https://nodejs.org/).
+2. **Git**: If not already installed, download and install it from the [Git official website](https://git-scm.com/).
+
+#### Cloning the Repository
+
+1. Open a terminal.
+2. Clone the project repository:
+   ```bash
+   git clone https://github.com/Ceredavide/LiLo-APP.git
+   ```
+3. Navigate to the project directory:
+   ```bash
+   cd LiLo-APP
+   ```
+
+#### Installing Dependencies
+
+1. Install the project dependencies using npm:
+   ```bash
+   npm install
+   ```
+
+#### Running the App on a Physical Device
+
+1. Start the application in development mode with Expo:
+   ```bash
+   npx expo start
+   ```
+2. This command will open a new browser window with the Expo DevTools. From here, you can choose to launch the app on an Android/iOS emulator or a physical device by scanning the QR code with the Expo Go app (available on the [Google Play Store](https://play.google.com/store/apps/details?id=host.exp.exponent) and [Apple App Store](https://apps.apple.com/app/expo-go/id982107779)).
+
+#### Running the App on an Emulator
+
+- **Android Emulator**: Ensure you have Android Studio installed and configured with an Android emulator. Then press `a` in the Expo DevTools to start the app on the Android emulator.
+- **iOS Emulator**: Ensure you have Xcode installed. Then press `i` in the Expo DevTools to start the app on the iOS emulator.
+
+# 6. Risks and Technical Debt
 | Title:   | Description:                                                                                                                               | Estimated Time: |
 |----------|--------------------------------------------------------------------------------------------------------------------------------------------|-----------------|
 | Tests    | Part not covered during the development of the project (Yikes!!), it would be great to increase the code coverage of the project (60-80%). | 20h             |  
 | Refactor | During the last years I gained more experience about Clean Code and Best Practices, it would be great to implement them.                   | 10h             |
 |          | **Total:**                                                                                                                                 | **30h**         |
 
-# 8. Reflection
+# 7. Reflection
 The decision to develop the LiLo-APP was rooted in a personal desire to create a meaningful tool that would benefit the student community at Liceo di Locarno. This project provided an excellent opportunity to apply theoretical knowledge in a practical context and to experience the full lifecycle of software development firsthand.
 
-## 8.1 Learning and Skill Development
+## 7.1 Learning and Skill Development
 
 Embarking on this project allowed me to gain a comprehensive understanding of the software development process. I improved my technical skills in areas such as:
 
@@ -126,7 +163,7 @@ Embarking on this project allowed me to gain a comprehensive understanding of th
 - **Mobile Development:** Gained hands-on experience with mobile application development, understanding the nuances of creating apps for both Android and iOS platforms.
 - **Backend Development:** Collaborated on the backend development, which was initially managed by a colleague, and later contributed to its enhancement using Node.js.
 
-## 8.2 Non-Technical Skills
+## 7.2 Non-Technical Skills
 
 Beyond technical skills, the project helped me develop important non-technical skills, including:
 
@@ -134,7 +171,7 @@ Beyond technical skills, the project helped me develop important non-technical s
 - **Problem-Solving:** Improved my ability to identify, analyze, and solve problems efficiently, whether they were related to code bugs or design challenges.
 - **Communication and Collaboration:** Enhanced my communication skills through frequent meetings with the student committee, ensuring their requirements were met and their feedback was incorporated.
 
-## 8.3 Preparation for Future Challenges
+## 7.3 Preparation for Future Challenges
 
 This project also served as a preparatory step for future professional endeavors. The skills and experience gained from developing the LiLo-APP have equipped me to tackle more complex projects, including those within the SAP ecosystem. The familiarity with React Native and the broader React framework will be particularly beneficial in any future SAP development initiatives.
 
