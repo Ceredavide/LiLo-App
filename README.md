@@ -1,7 +1,7 @@
 # LiLo APP
 ### Davide Ceresa - 2018 - 2021
 
-![app_logo](./assets/images/icon.png)
+![app_logo](./documentation/App_Infos.png)
 
 # 1. Introduction and Goals
 
@@ -103,6 +103,7 @@ This necessity to integrate external libraries led to the realization of the imm
 However, relying heavily on external libraries also posed its own set of challenges. In hindsight, I may have overused external libraries, sometimes opting for them without thoroughly evaluating their maintenance status and community support. On a few occasions, I encountered issues with unmaintained libraries, which delayed the development process. These instances highlighted the importance of carefully selecting external dependencies, ensuring they are well-supported and actively maintained to avoid potential setbacks.
 
 # 4. Building Block View
+TODO: DIAGRAMM 4+1
 
 # 5. Deployment View
 
