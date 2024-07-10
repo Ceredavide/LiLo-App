@@ -28,8 +28,8 @@ const AssenzeScreen = () => {
       <TransitionView index={index} >
         <CardAssenza
           key={index}
-          nome={item.nome + " " + item.cognome}
-          descrizione={item.motivo}
+          nome={item.name + " " + item.surname}
+          descrizione={item.reason}
         />
       </TransitionView>
     )

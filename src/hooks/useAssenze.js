@@ -34,19 +34,19 @@ export default function useAssenze() {
                     title: "15.09.2021",
                     data: [
                         {
-                            nome: "Mario",
-                            cognome: "Rossi",
-                            motivo: "Malattia"
+                            name: "Mario",
+                            surname: "Rossi",
+                            reason: "Sick leave"
                         },
                         {
-                            nome: "Luca",
-                            cognome: "Bianchi",
-                            motivo: "Malattia"
+                            name: "Luca",
+                            surname: "Bianchi",
+                            reason: "Conference"
                         },
                         {
-                            nome: "Paolo",
-                            cognome: "Verdi",
-                            motivo: "Malattia"
+                            name: "Paolo",
+                            surname: "Verdi",
+                            reason: "Personal reasons"
                         }
                     ]
                 },
@@ -54,19 +54,19 @@ export default function useAssenze() {
                     title: "17.09.2021",
                     data: [
                         {
-                            nome: "Mario",
-                            cognome: "Rossi",
-                            motivo: "Malattia"
+                            name: "Mario",
+                            surname: "Rossi",
+                            reason: "Family emergency"
                         },
                         {
-                            nome: "Luca",
-                            cognome: "Bianchi",
-                            motivo: "Malattia"
+                            name: "Luca",
+                            surname: "Bianchi",
+                            reason: "Professional training"
                         },
                         {
-                            nome: "Paolo",
-                            cognome: "Verdi",
-                            motivo: "Malattia"
+                            name: "Paolo",
+                            surname: "Verdi",
+                            reason: "Medical appointment"
                         }
                     ]
                 },
@@ -74,19 +74,19 @@ export default function useAssenze() {
                     title: "20.09.2021",
                     data: [
                         {
-                            nome: "Mario",
-                            cognome: "Rossi",
-                            motivo: "Malattia"
+                            name: "Mario",
+                            surname: "Rossi",
+                            reason: "Sick leave"
                         },
                         {
-                            nome: "Luca",
-                            cognome: "Bianchi",
-                            motivo: "Malattia"
+                            name: "Luca",
+                            surname: "Bianchi",
+                            reason: "Class canceled"
                         },
                         {
-                            nome: "Paolo",
-                            cognome: "Verdi",
-                            motivo: "Malattia"
+                            name: "Paolo",
+                            surname: "Verdi",
+                            reason: "Field trip supervision"
                         }
                     ]
                 }
