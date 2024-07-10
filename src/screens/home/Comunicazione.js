@@ -14,7 +14,7 @@ import COLORS from "../../constants/COLORS"
 
 const Comunicazione = ({ route, navigation }) => {
     const { comunicazione } = route.params
-    const { titolo, sottotitolo, paragrafo, immagine, tags } = comunicazione
+    const { title, subtitle, paragraph, image, tags } = comunicazione
 
     function renderTags(tags) {
         return tags.map((tag, index) => (
@@ -28,7 +28,7 @@ const Comunicazione = ({ route, navigation }) => {
         <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.main }}>
             <ScrollView style={styles.container}>
                 <TransitionView>
-                    <ImageBackground style={styles.image} source={{ uri: immagine }} >
+                    <ImageBackground style={styles.image} source={{ uri: image }} >
                         <FloatingButton
                             iconName="arrowleft"
                             action={navigation.goBack}
@@ -37,12 +37,12 @@ const Comunicazione = ({ route, navigation }) => {
                     </ImageBackground>
                 </TransitionView>
                 <View style={styles.containerText}>
-                    <Text style={styles.title}>{titolo}</Text>
-                    <Text style={styles.subtitle}>{sottotitolo}</Text>
+                    <Text style={styles.title}>{title}</Text>
+                    <Text style={styles.subtitle}>{subtitle}</Text>
                     <View style={styles.containerTags}>
                         {renderTags(tags)}
                     </View>
-                    <Text style={styles.paragraph}>{paragrafo}</Text>
+                    <Text style={styles.paragraph}>{paragraph}</Text>
                 </View>
             </ScrollView>
         </SafeAreaView>

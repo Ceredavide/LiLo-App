@@ -13,14 +13,14 @@ import COLORS from "../../constants/COLORS"
 
 const HomeCard = ({ comunicazione }) => {
 
-  const { titolo, sottotitolo, tags, immagine, createdAt } = comunicazione
+  const { title, subtitle, tags, image, createdAt } = comunicazione
 
   return (
     <View ew style={styles.card}>
-      <Image style={styles.image} source={{ uri: immagine }} />
+      <Image style={styles.image} source={{ uri: image }} />
       <View style={styles.row}>
-        <Text style={styles.title}>{titolo}</Text>
-        <Text style={styles.subtitle}>{sottotitolo}</Text>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.subtitle}>{subtitle}</Text>
         <View style={styles.tagRow}>
           <IconWithText
             iconName="calendar"
@@ -62,13 +62,13 @@ const styles = StyleSheet.create({
     color: COLORS.black,
     fontFamily: "open-sans-bold",
     marginBottom: hp("0.2%"),
-    fontSize: hp("2.6%"),
+    fontSize: hp("2.3%"),
   },
   subtitle: {
     color: COLORS.black,
     fontFamily: "open-sans-regular",
     marginBottom: hp("0.7%"),
-    fontSize: hp("1.8%"),
+    fontSize: hp("1.5%"),
   },
   image: {
     height: wp("40%"),
