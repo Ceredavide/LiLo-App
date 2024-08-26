@@ -49,7 +49,7 @@
     "react-redux": "^7.2.2",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "webpack": "^4.41.6",
+    "webpack": "^5.94.0",
     "yup": "^0.32.6"
   },
   "devDependencies": {
